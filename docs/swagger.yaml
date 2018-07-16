@@ -1,370 +1,575 @@
-swagger: '2.0'
+---
+swagger: "2.0"
 info:
-  description: |-
-    Vipps PSP API gives PSP ability to process Vipps payment as a part of their payment offerings. By using PSP API, PSP’s still have full transactional control for payments initiated in their payment terminals. 
-
-    Vipps PSP API allows PSP’s to initiate payments for end users to accept with the Vipps mobile app. After customer confirms the payment, Vipps enrich payment data with encrypted credit card details and hand over payment processing to PSP
-  version: '1.0'
-  title: PSP API V2
+  description: "Vipps PSP API gives PSP ability to process Vipps payment as a part\
+    \ of their payment offerings. By using PSP API, PSP’s still have full transactional\
+    \ control for payments initiated in their payment terminals.\nVipps PSP API allows\
+    \ PSP’s to initiate payments for end users to accept with the Vipps mobile app.\
+    \ After customer confirms the payment,Vipps enrich payment data with encrypted\
+    \ credit card details and hand over payment processing to PSP"
+  version: "1.0"
+  title: "PSP API V2"
+basePath: "/dwo-api-application"
+tags:
+- name: "dwo-merchant-query-controller"
+  description: "DWO Merchant Query Controller"
+- name: "psp-payment-controller"
+  description: "PSP Payment Controller"
+- name: "psp-initiate-payment-controller"
+  description: "PSP Initiate Payment Controller"
 paths:
   /v2/psppayments/init:
     post:
       tags:
-        - psp-initiate-payment-controller
-      summary: Initiate a PSP Payment
-      operationId: initiatePaymentV2UsingPOST
+      - "psp-initiate-payment-controller"
+      summary: "Initiate a PSP Payment"
+      operationId: "initiatePaymentV2UsingPOST"
       consumes:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - in: body
-          name: pspInitiatePaymentRequestDTO
-          description: pspInitiatePaymentRequestDTO
-          required: true
-          schema:
-            $ref: '#/definitions/PSPInitiatePaymentRequestV2DTO'
-        - name: PSP-ID
-          in: header
-          description: PSP ID as defined during PSP enrollment. PSP should share a public key to encrypt the card data from TSP via Vipps.
-          required: true
-          type: string
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant sales channel
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        description: "Bearer JWT-TOKEN"
+        required: true
+        type: "string"
+        default: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+      - name: "Ocp-Apim-Subscription-Key"
+        in: "header"
+        description: "Subscription key for PSP V2 product. This can be found in User\
+          \ Profile page on Merchant developer portal after PSP V2 profile is created"
+        required: true
+        type: "string"
+        default: "c1b1a8846ec56d09db39bd3b5403bf9"
+      - name: "PSP-ID"
+        in: "header"
+        description: "PSP ID as defined during PSP enrollment. PSP should share a\
+          \ public key to encrypt the card data from TSP via Vipps"
+        required: true
+        type: "string"
+        default: "C948DFD1546347568874C4DDC93A2E3C"
+      - name: "MERCHANT-SERIAL-NUMBER"
+        in: "header"
+        description: "Identifies a merchant sales channel"
+        required: true
+        type: "string"
+        default: "12345"
+      - in: "body"
+        name: "pspInitiatePaymentRequestDTO"
+        description: "pspInitiatePaymentRequestDTO"
+        required: true
+        schema:
+          $ref: "#/definitions/PSPInitiatePaymentRequestV2DTO"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/InitiatePaymentPspV2Representation'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/InitiatePaymentPspV2Representation"
+        400:
+          description: "Bad Request"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
+            $ref: "#/definitions/ErrorDetails"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
+            $ref: "#/definitions/ErrorDetails"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
+  /makePaymentURL:
+    post:
+      tags:
+      - "psp-initiate-payment-controller"
+      summary: "Service end-point exposed by PSP. Used to transfer credit card data\
+        \ from TSP to PSP to complete initialized transaction.  \nOutcome of transactional\
+        \ processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console\
+        \ but Vipps must be informed if payment is refused (credit card expired, not\
+        \ enough funds etc) or OK. \nCommunication security is established by using\
+        \ 1-way SSL and makePaymentToken (If exists in request body)"
+      operationId: "makePaymentSwaggerUsingPOST"
+      consumes:
+      - "application/json;charset=UTF-8"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Make payment token sent by PSP in Initiate API"
+        required: true
+        type: "string"
+        default: "uiop"
+      - in: "body"
+        name: "makePaymentRequest"
+        description: "makePaymentRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/MakePaymentRequestPSPV2"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MakePaymentResponsePSPV2"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
   /v2/psppayments/updateStatus:
     post:
       tags:
-        - psp-payment-controller
-      summary: 'Update the status of the PSP transaction.Since Vipps doesn’t process transactions, updates on payment status are required in order to deliver expected customer experience. That means that PSP has to inform Vipps about any psp payment status change through this service'
-      operationId: updateStatusUsingPOST
+      - "psp-payment-controller"
+      summary: "Update the status of the PSP transaction.Since Vipps doesn’t process\
+        \ transactions, updates on payment status are required in order to deliver\
+        \ expected customer experience. That means that PSP has to inform Vipps about\
+        \ any psp payment status change through this service"
+      operationId: "updateStatusUsingPOST"
       consumes:
-        - application/json
+      - "application/json"
       produces:
-        - '*/*'
+      - "*/*"
       parameters:
-        - in: body
-          name: pspPaymentStatusDTO
-          description: pspPaymentStatusDTO
-          required: true
-          schema:
-            $ref: '#/definitions/PSPV2PaymentStatusDTO'
-        - name: PSP-ID
-          in: header
-          description: PSP ID as defined during PSP enrollment. PSP should share a public key to encrypt the card data from TSP via Vipps.
-          required: true
-          type: string
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant sales channel
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        description: "Bearer JWT-TOKEN"
+        required: true
+        type: "string"
+        default: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+      - name: "Ocp-Apim-Subscription-Key"
+        in: "header"
+        description: "Subscription key for PSP V2 product. This can be found in User\
+          \ Profile page on Merchant developer portal after PSP V2 profile is created"
+        required: true
+        type: "string"
+        default: "c1b1a8846ec56d09db39bd3b5403bf9"
+      - name: "PSP-ID"
+        in: "header"
+        description: "PSP ID as defined during PSP enrollment. PSP should share a\
+          \ public key to encrypt the card data from TSP via Vipps"
+        required: true
+        type: "string"
+        default: "C948DFD1546347568874C4DDC93A2E3C"
+      - name: "MERCHANT-SERIAL-NUMBER"
+        in: "header"
+        description: "Identifies a merchant sales channel"
+        required: true
+        type: "string"
+        default: "12345"
+      - in: "body"
+        name: "pspPaymentStatusDTO"
+        description: "pspPaymentStatusDTO"
+        required: true
+        schema:
+          $ref: "#/definitions/PSPV2PaymentStatusDTO"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/ResponseInfo'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/ResponseInfo"
+        400:
+          description: "Bad Request"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
+            $ref: "#/definitions/ErrorDetails"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-  '/v2/psppayments/{pspTransactionId}/details':
+            $ref: "#/definitions/ErrorDetails"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
+  /v2/psppayments/{pspTransactionId}/details:
     get:
       tags:
-        - dwo-merchant-query-controller
-      summary: The details of PSP Payment
-      operationId: getPSPPaymentDetailsUsingGET
+      - "dwo-merchant-query-controller"
+      summary: "The details of PSP Payment"
+      operationId: "getPSPPaymentDetailsUsingGET"
       consumes:
-        - application/json
+      - "application/json"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - name: pspTransactionId
-          in: path
-          description: Used as a globally unique transaction reference for the PSP systems
-          required: true
-          type: string
-        - name: PSP-ID
-          in: header
-          description: PSP ID as defined during PSP enrollment. PSP should share a public key to encrypt the card data from TSP via Vipps.
-          required: true
-          type: string
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant sales channel
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        description: "Bearer JWT-TOKEN"
+        required: true
+        type: "string"
+        default: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+      - name: "Ocp-Apim-Subscription-Key"
+        in: "header"
+        description: "Subscription key for eCommerce product. This can be found in\
+          \ User Profile page on Merchant developer portal after merchant account\
+          \ is created"
+        required: true
+        type: "string"
+        default: "c1b1a8846ec56d09db39bd3b5403bf9"
+      - name: "pspTransactionId"
+        in: "path"
+        description: "pspTransactionId"
+        required: true
+        type: "string"
+      - name: "PSP-ID"
+        in: "header"
+        description: "PSP ID as defined during PSP enrollment. PSP should share a\
+          \ public key to encrypt the card data from TSP via Vipps"
+        required: true
+        type: "string"
+        default: "C948DFD1546347568874C4DDC93A2E3C"
+      - name: "MERCHANT-SERIAL-NUMBER"
+        in: "header"
+        description: "Identifies a merchant sales channel"
+        required: true
+        type: "string"
+        default: "12345"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/PSPPaymentDetailsRepresentation'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/PSPPaymentDetailsRepresentation"
+        400:
+          description: "Bad Request"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
+            $ref: "#/definitions/ErrorDetails"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
           schema:
-            $ref: '#/definitions/ErrorDetails'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
+            $ref: "#/definitions/ErrorDetails"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
 definitions:
   ErrorDetails:
-    type: object
+    type: "object"
     properties:
       errorCode:
-        type: string
+        type: "string"
       errorMessage:
-        type: string
+        type: "string"
+  ErrorMessage:
+    type: "object"
+    properties:
+      errorId:
+        type: "string"
+        example: "81"
+        description: "PSP native ID of the error"
+      errorText:
+        type: "string"
+        example: "No Such Issuer"
+        description: "PSP native textual representation of the error"
+    example:
+      errorText: "No Such Issuer"
+      errorId: "81"
   InitiatePaymentPspV2Representation:
-    type: object
+    type: "object"
     properties:
       merchantOrderId:
-        type: string
-        example: '1234'
-        description: Uniquely identifies a payment order for a merchant
+        type: "string"
+        example: "8874C4DDC93A2E3C"
+        description: "Uniquely identifies a payment order for a merchant"
       pspTransactionId:
-        type: string
-        example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        type: "string"
+        example: "7686f7788898767977"
+        description: "Used as a globally unique transaction reference for the PSP\
+          \ systems"
       vippsRedirectUrl:
-        type: string
-        example: 'https://api.test/v1/deeplink/vippsgateway?token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhdWQiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhenAiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhcHBUeXBlIjoiTEFORElOR1BBR0UiLCJtZXJjaGFudFNlcmlhbE51bWJlciI6IjEzOTUiLCJleHByZXNzQ2hlY2tPdXQiOiJOIiwiaXNzIjoiaHR0cHM6XC9cL3ZpcHBzLXRlc3QtY29uLWFnZW50LWlsYi50ZXN0LnRlY2gtMDIubmV0XC9zaXQzXC9kZWVwbGluay1vcGVuaWQtcHJvdmlkZXItYXBwbGljYXRpb25cLyIsImV4cCI6MTUzMDUyMzIyOSwidG9rZW5UeXBlIjoiREVFUExJTksiLCJpYXQiOjE1MzA1MjMxMDksInV1aWQiOiJmMzZjZGQ2Yi1kYzM5LTRjMGEtOGUyMy04NjVjZjQ2NDVjMzUiLCJqdGkiOiJmOGFmNTMxZi1mZjUzLTQ2ZTQtYjQ4YS1lMzc0ZmIzYzI5NzkifQ.JtkVlrgrBxqo90aDZyFzaFb73jekLHkIEzM9YbcusDpN8rlgIblHULo1GqSP9-wOAo5v_8XoYJvrWwu6UsQhZj_KBslLvZ65C7-N45-n7Oh_AS1Gawdeyfc-0c6G-vWVTQpsZMAw8VfF2XmIj0u8doPml1winNdMgCd9wbUMjhUtcFn9bwOKRpGWSFyi8NTYtZmabnq-P57NX1uyM5llLCPQRWD_y63OCMEB-59q8FlxCD5HnTriCMPV-g-H9iEKo2yiUk0fcMIi9'
-        description: Vipps URL to redirect the request to vipps gateway page in case request is trigger from web browser or deeplink url to open vipps app incase request is triggered from Merchant Mobile App
+        type: "string"
+        example: "https://vipps.io"
+        description: "Vipps URL where customer can enter their mobile number"
     example:
-      merchantOrderId: '1234'
-      pspTransactionId: 7686f7788898767977
-      vippsRedirectUrl: 'https://api.test/v1/deeplink/vippsgateway?token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhdWQiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhenAiOiJmMDE0MmIxYy02YjIwLTQ1M2MtYTlmMS1lMWUwZGFiNjkzOTciLCJhcHBUeXBlIjoiTEFORElOR1BBR0UiLCJtZXJjaGFudFNlcmlhbE51bWJlciI6IjEzOTUiLCJleHByZXNzQ2hlY2tPdXQiOiJOIiwiaXNzIjoiaHR0cHM6XC9cL3ZpcHBzLXRlc3QtY29uLWFnZW50LWlsYi50ZXN0LnRlY2gtMDIubmV0XC9zaXQzXC9kZWVwbGluay1vcGVuaWQtcHJvdmlkZXItYXBwbGljYXRpb25cLyIsImV4cCI6MTUzMDUyMzIyOSwidG9rZW5UeXBlIjoiREVFUExJTksiLCJpYXQiOjE1MzA1MjMxMDksInV1aWQiOiJmMzZjZGQ2Yi1kYzM5LTRjMGEtOGUyMy04NjVjZjQ2NDVjMzUiLCJqdGkiOiJmOGFmNTMxZi1mZjUzLTQ2ZTQtYjQ4YS1lMzc0ZmIzYzI5NzkifQ.JtkVlrgrBxqo90aDZyFzaFb73jekLHkIEzM9YbcusDpN8rlgIblHULo1GqSP9-wOAo5v_8XoYJvrWwu6UsQhZj_KBslLvZ65C7-N45-n7Oh_AS1Gawdeyfc-0c6G-vWVTQpsZMAw8VfF2XmIj0u8doPml1winNdMgCd9wbUMjhUtcFn9bwOKRpGWSFyi8NTYtZmabnq-P57NX1uyM5llLCPQRWD_y63OCMEB-59q8FlxCD5HnTriCMPV-g-H9iEKo2yiUk0fcMIi9'
+      merchantOrderId: "8874C4DDC93A2E3C"
+      pspTransactionId: "7686f7788898767977"
+      vippsRedirectUrl: "https://vipps.io"
+  MakePaymentRequestPSPV2:
+    type: "object"
+    properties:
+      pspTransactionId:
+        type: "string"
+        example: "7686f7788898767977"
+        description: "Used as a globally unique transaction reference for the PSP\
+          \ systems"
+      merchantSerialNumber:
+        type: "string"
+        example: "8874C4DDC93A2E3C"
+        description: "Uniquely identifies a payment order for a merchant"
+      cardData:
+        type: "string"
+        example: "f0a29801b4#d4ff30e221fa2980ff30e2"
+        description: "Encrypted credit card details"
+      confirmed:
+        type: "string"
+        example: "YES/NO/TIMEOUT/CANCEL"
+        description: "Credit Card Details Encryption Status"
+        enum:
+        - "YES"
+        - "NO"
+        - "TIMEOUT"
+        - "CANCEL"
+    example:
+      cardData: "f0a29801b4#d4ff30e221fa2980ff30e2"
+      merchantSerialNumber: "8874C4DDC93A2E3C"
+      pspTransactionId: "7686f7788898767977"
+      confirmed: "YES/NO/TIMEOUT/CANCEL"
+  MakePaymentResponsePSPV2:
+    type: "object"
+    properties:
+      errorMessage:
+        $ref: "#/definitions/ErrorMessage"
+      paymentInfo:
+        $ref: "#/definitions/PaymentInfoPSPV2"
+    example:
+      errorMessage:
+        errorText: "No Such Issuer"
+        errorId: "81"
+      paymentInfo:
+        pspTransactionId: "7686f7788898767977"
+        status: "RESERVE|CAPTURE|REJECT"
   PSPInitiatePaymentRequestV2DTO:
-    type: object
+    type: "object"
     properties:
+      merchantSerialNumber:
+        type: "string"
+      pspId:
+        type: "string"
       pspTransactionId:
-        type: string
-        example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        type: "string"
+        example: "7686f7788898767977"
+        description: "Used as a globally unique transaction reference for the PSP\
+          \ systems"
       merchantOrderId:
-        type: string
-        example: 8874C4DDC93A2E3C
-        description: Uniquely identifies a payment order for a merchant
+        type: "string"
+        example: "8874C4DDC93A2E3C"
+        description: "Uniquely identifies a payment order for a merchant"
       customerMobileNumber:
-        type: string
-        example: '92929292'
-        description: Mobile number of the user who has to pay for the transaction from Vipps
+        type: "string"
+        example: "92929292"
+        description: "Mobile number of the user who has to pay for the transaction\
+          \ from Vipps"
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 100
-        description: Amount should be specified in Øre. 100 Øre conversion 1.00 NOK
+        description: "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
       currency:
-        type: string
-        example: NOK
-        description: ISO 4217 defined currency code. Currently Vipps only supports NOK
+        type: "string"
+        example: "NOK"
+        description: "ISO 4217 defined currency code. Currently Vipps only supports\
+          \ NOK"
       pspRedirectUrl:
-        type: string
-        example: 'https://ecom.vipps.io'
-        description: Vipps will use this URL to redirect end user after payment confirmation
+        type: "string"
+        example: "https://psp.vipps.io"
+        description: "Vipps will use this URL to redirect end user after payment confirmation"
       makePaymentUrl:
-        type: string
-        example: 'https://ecom.vipps.io'
-        description: PSP URL used by Vipps to send the card data
+        type: "string"
+        example: "https://psp.vipps.io"
+        description: "PSP URL used by Vipps to send the card data"
       makePaymentToken:
-        type: string
-        example: ynuiu
-        description: Authorization header for MakePayment call
+        type: "string"
+        example: "ynuiu"
+        description: "Authorization header for MakePayment call"
       paymentText:
-        type: string
-        example: 'Order id : '
-        description: Text to be displayed to end user
+        type: "string"
+        example: "Order id : "
+        description: "Text to be displayed to end user"
       isApp:
-        type: boolean
+        type: "boolean"
         example: true
-        description: Indicates whether payment request is triggered from Mobile App or Web browser
+        description: "Indicates whether payment request is triggered from Mobile App\
+          \ or Web browser"
     example:
-      pspRedirectUrl: 'https://ecom.vipps.io'
+      pspRedirectUrl: "https://psp.vipps.io"
       amount: 100
-      makePaymentToken: ynuiu
-      makePaymentUrl: 'https://ecom.vipps.io'
-      customerMobileNumber: '92929292'
-      currency: NOK
-      merchantOrderId: 8874C4DDC93A2E3C
+      makePaymentToken: "ynuiu"
+      makePaymentUrl: "https://psp.vipps.io"
+      merchantSerialNumber: "merchantSerialNumber"
+      pspId: "pspId"
+      customerMobileNumber: "92929292"
+      currency: "NOK"
+      merchantOrderId: "8874C4DDC93A2E3C"
       isApp: true
-      pspTransactionId: 7686f7788898767977
-      paymentText: 'Order id : '
+      pspTransactionId: "7686f7788898767977"
+      paymentText: "Order id : "
   PSPPaymentDetailsRepresentation:
-    type: object
+    type: "object"
     properties:
       pspTransactionId:
-        type: string
-        example: '12345692'
-        description: Used as a globally unique transaction reference for the PSP systems
+        type: "string"
+        example: "12345692"
+        description: "PSP ID as defined in agreement with Netaxept TSP. PSP should\
+          \ have agreement with Netaxept to get the public key to encrypt the card\
+          \ data from NetAxept TSP via Vipps"
       merchantOrderId:
-        type: string
-        example: '56787837'
-        description: Id which uniquely identifies a payment
+        type: "string"
+        example: "56787837"
+        description: "Id which uniquely identifies a payment"
       transactionSummary:
-        $ref: '#/definitions/TransactionSummary'
+        $ref: "#/definitions/TransactionSummary"
       transactionLogHistory:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/PSPPaymentTransactionDetailsDVO'
+          $ref: "#/definitions/PSPPaymentTransactionDetailsDVO"
     example:
-      merchantOrderId: '56787837'
+      merchantOrderId: "56787837"
       transactionSummary:
         capturedAmount: 0
         remainingAmountToRefund: 0
         remainingAmountToCapture: 0
         refundedAmount: 1200
-      pspTransactionId: '12345692'
+      pspTransactionId: "12345692"
       transactionLogHistory:
-        - timeStamp: '2018-06-13T18:34:25-07:00'
-          amount: 100
-          paymentText: 'Betaling ordreid:'
-          operation: REFUNDED
-        - timeStamp: '2018-06-13T18:34:25-07:00'
-          amount: 100
-          paymentText: 'Betaling ordreid:'
-          operation: REFUNDED
+      - timeStamp: "2018-06-13T18:34:25-07:00"
+        amount: 100
+        paymentText: "Betaling ordreid:"
+        operation: "REFUNDED"
+        operationSuccess: false
+      - timeStamp: "2018-06-13T18:34:25-07:00"
+        amount: 100
+        paymentText: "Betaling ordreid:"
+        operation: "REFUNDED"
+        operationSuccess: false
   PSPPaymentTransactionDetailsDVO:
-    type: object
+    type: "object"
     properties:
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 100
-        description: Amount should be specified in Øre. 100 Øre conversion 1.00 NOK
+        description: "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
       paymentText:
-        type: string
-        example: 'Betaling ordreid:'
-        description: Transaction Note sent by PSP
+        type: "string"
+        example: "Betaling ordreid:"
+        description: "Transaction Note sent by PSP"
       timeStamp:
-        type: string
-        example: '2018-06-13T18:34:25-07:00'
-        description: Timestamp in ISO-8601 representing when Vipps did the payment
+        type: "string"
+        example: "2018-06-13T18:34:25-07:00"
+        description: "Timestamp in ISO-8601 representing when Vipps did the payment"
       operation:
-        type: string
-        example: REFUNDED
-        description: Transaction Status
+        type: "string"
+        example: "REFUNDED"
+        description: "Transaction Status"
+      operationSuccess:
+        type: "boolean"
+        example: false
+        description: "Success or failure for the given operation"
     example:
-      timeStamp: '2018-06-13T18:34:25-07:00'
+      timeStamp: "2018-06-13T18:34:25-07:00"
       amount: 100
-      paymentText: 'Betaling ordreid:'
-      operation: REFUNDED
+      paymentText: "Betaling ordreid:"
+      operation: "REFUNDED"
+      operationSuccess: false
   PSPV2PaymentStatusDTO:
-    type: object
+    type: "object"
     properties:
       transactions:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/PSPV2TransactionInfo'
+          $ref: "#/definitions/PSPV2TransactionInfo"
     example:
       transactions:
-        - amount: 100
-          currency: NOK
-          pspTransactionId: 7686f7788898767977
-          paymentText: 'Betaling ordreid: 893746'
-          status: CAPTURED
-        - amount: 100
-          currency: NOK
-          pspTransactionId: 7686f7788898767977
-          paymentText: 'Betaling ordreid: 893746'
-          status: CAPTURED
+      - amount: 100
+        currency: "NOK"
+        pspTransactionId: "7686f7788898767977"
+        paymentText: "Betaling ordreid: 893746"
+        status: "CAPTURED"
+      - amount: 100
+        currency: "NOK"
+        pspTransactionId: "7686f7788898767977"
+        paymentText: "Betaling ordreid: 893746"
+        status: "CAPTURED"
   PSPV2TransactionInfo:
-    type: object
+    type: "object"
     properties:
       pspTransactionId:
-        type: string
-        example: 7686f7788898767977
-        description: PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps
+        type: "string"
+        example: "7686f7788898767977"
+        description: "PSP ID as defined in agreement with Netaxept TSP. PSP should\
+          \ have agreement with Netaxept to get the public key to encrypt the card\
+          \ data from NetAxept TSP via Vipps"
       status:
-        type: string
-        example: CAPTURED
-        description: PSP Transaction Status to be updated in Vipps
+        type: "string"
+        example: "CAPTURED"
+        description: "PSP Transaction Status to be updated in Vipps"
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 100
-        description: Amount should be specified in Øre. 100 Øre conversion 1.00 NOK
+        description: "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
       currency:
-        type: string
-        example: NOK
-        description: ISO 4217 defined currency code. Currently Vipps only supports NOK
+        type: "string"
+        example: "NOK"
+        description: "ISO 4217 defined currency code. Currently Vipps only supports\
+          \ NOK"
       paymentText:
-        type: string
-        example: 'Betaling ordreid: 893746'
+        type: "string"
+        example: "Betaling ordreid: 893746"
     example:
       amount: 100
-      currency: NOK
-      pspTransactionId: 7686f7788898767977
-      paymentText: 'Betaling ordreid: 893746'
-      status: CAPTURED
-  ResponseInfo:
-    type: object
+      currency: "NOK"
+      pspTransactionId: "7686f7788898767977"
+      paymentText: "Betaling ordreid: 893746"
+      status: "CAPTURED"
+  PaymentInfoPSPV2:
+    type: "object"
     properties:
-      responseCode:
-        type: string
-      responseMessage:
-        type: string
+      pspTransactionId:
+        type: "string"
+        example: "7686f7788898767977"
+        description: "Used as a globally unique transaction reference for the PSP\
+          \ systems"
+      status:
+        type: "string"
+        example: "RESERVE|CAPTURE|REJECT"
+        description: "Status of the transaction"
+        enum:
+        - "OK"
+        - "FAIL"
+    example:
+      pspTransactionId: "7686f7788898767977"
+      status: "RESERVE|CAPTURE|REJECT"
   TransactionSummary:
-    type: object
+    type: "object"
     properties:
       capturedAmount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 0
-        description: Total amount captured
+        description: "Total amount captured"
       remainingAmountToCapture:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 0
-        description: Total remaining amount to capture
+        description: "Total remaining amount to capture"
       refundedAmount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 1200
-        description: Total refunded amount of the order
+        description: "Total refunded amount of the order"
       remainingAmountToRefund:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
         example: 0
-        description: Total remaining amount to refund
+        description: "Total remaining amount to refund"
     example:
       capturedAmount: 0
       remainingAmountToRefund: 0
       remainingAmountToCapture: 0
       refundedAmount: 1200
+  ResponseInfo:
+    type: "object"
+    properties:
+      responseCode:
+        type: "string"
+      responseMessage:
+        type: "string"
