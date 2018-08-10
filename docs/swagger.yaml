@@ -393,8 +393,8 @@ definitions:
       amount: 100
       makePaymentToken: "ynuiu"
       makePaymentUrl: "https://psp.vipps.io"
-      merchantSerialNumber: "merchantSerialNumber"
-      pspId: "pspId"
+      merchantSerialNumber: "12345"
+      pspId: "C948DFD1546347568874C4DDC93A2E3C"
       customerMobileNumber: "92929292"
       currency: "NOK"
       merchantOrderId: "8874C4DDC93A2E3C"
