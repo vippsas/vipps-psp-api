@@ -22,20 +22,20 @@ The PSP processes the payment transaction
 and provides feedback to merchant and Vipps of the payment transaction
 success or failure.
 
-# Differences from PSP API version 1
+## Differences from PSP API version 1
 
 * Added support for redirection of user after payment completion in Vipps app
 * Added support for providing the makePayment-URL in the initiate payment call
 * Improved authorization of the makePayment call by adding the authorization header value
 * Improved and more consistent parameter names in the API
 
+# Additional Documentation
+
 ## Swagger documentation
 
 Swagger/OAS API documentation is available at: https://github.com/vippsas/vipps-psp-api
 
 Documentation in Swagger UI format is available at: https://vippsas.github.io/vipps-psp-api/
-
-# External documentation
 
 ## Vipps eCommerce API
 
@@ -56,7 +56,7 @@ This is where you create keys to the API.
 
 Please see: https:  https://github.com/vippsas/developers
 
-# Payment sequence
+# PSP payment sequence
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
