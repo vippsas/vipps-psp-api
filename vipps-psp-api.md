@@ -2,7 +2,7 @@
 
 API version: 2.
 
-Document version 0.1.0.
+Document version 0.1.1.
 
 _**IMPORTANT:**_ This document is a work in progress.
 
@@ -29,11 +29,21 @@ success or failure.
 * Improved authorization of the makePayment call by adding the authorization header value
 * Improved and more consistent parameter names in the API
 
+## Swagger documentation
+
+Swagger/OAS API documentation is available at: https://github.com/vippsas/vipps-psp-api
+
+Documentation in Swagger UI format is available at: https://vippsas.github.io/vipps-psp-api/
+
 # External documentation
 
-## Technical details about the API
+## Vipps eCommerce API
 
-Swagger/OAS API documentation is available on GitHub: https://github.com/vippsas/vipps-psp-api
+Please see:
+
+* [Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md)
+* [FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md)
+* Full GitHub repo: https://github.com/vippsas/vipps-ecom-api
 
 ## Getting access to the Vipps Developer Portal
 
@@ -41,6 +51,10 @@ See the
 [Vipps Developer Portal Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
 guide general information about the Vipps Developer Portal.
 This is where you create keys to the API.
+
+## General documentation for Vipps developers
+
+Please see: https:  https://github.com/vippsas/developers
 
 # Payment sequence
 
