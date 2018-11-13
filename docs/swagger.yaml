@@ -538,3 +538,327 @@ definitions:
         example: 0
         description: Total remaining amount to refund
     title: TransactionSummary
+  Agreement:
+    type: object
+    required:
+      - interval
+      - intervalCount
+      - price
+      - productDescription
+      - productName
+      - status
+    properties:
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      id:
+        type: string
+        example: agr_5kSeqzFAMkfBbc
+        description: Uniquely identifies this agreement
+        readOnly: true
+      interval:
+        type: string
+        example: week
+        description: Interval for subscription
+        enum:
+          - day
+          - week
+          - month
+      intervalCount:
+        type: integer
+        format: int32
+        example: 2
+        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
+        minimum: 1
+        maximum: 31
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      price:
+        type: integer
+        format: int32
+        example: 7900
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      productDescription:
+        type: string
+        example: Fin abonnementspakke
+      productName:
+        type: string
+        example: Pluss-abonnement
+        description: Name of the product being subscribed to.
+      startDate:
+        type: string
+        example: '2018-10-22'
+        description: Date when agreement was started.
+        readOnly: true
+      status:
+        type: string
+        example: ACTIVE
+        description: Status of AgreementDto.
+        enum:
+          - PENDING
+          - ACTIVE
+          - STOPPED
+      stopDate:
+        type: string
+        example: '2019-10-22'
+        description: Date when agreement was stopped.
+        readOnly: true
+    title: Agreement
+  ChargeResponse:
+    type: object
+    required:
+      - amount
+      - amountRefunded
+      - dueDate
+      - id
+      - status
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      amountRefunded:
+        type: integer
+        format: int32
+        example: 0
+        description: |-
+          The total amount which has been refunded, in case of status refund/partial refund.
+          Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+      description:
+        type: string
+        example: Bla bla bla
+        readOnly: true
+      dueDate:
+        type: string
+        example: '2030-12-31T00:00:00Z'
+      id:
+        type: string
+        example: chg_WCVbcAbRCmu2zk
+        description: 'Unique identifier for this charge, up to 15 characters.'
+      status:
+        type: string
+        example: PENDING
+        enum:
+          - PENDING
+          - DUE
+          - CHARGED
+          - FAILED
+          - CANCELLED
+          - PARTIALLY_REFUNDED
+          - REFUNDED
+      transactionId:
+        type: string
+        example: '5001419121'
+        description: Contains null until the status has reached CHARGED
+        readOnly: true
+      type:
+        type: string
+        example: RECURRING
+        readOnly: true
+        enum:
+          - INITIAL
+          - RECURRING
+          - ONEOFF
+    title: ChargeResponse
+  CreateCharge:
+    type: object
+    required:
+      - amount
+      - description
+      - hasPriceChanged
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      dueDate:
+        type: string
+        example: '2030-12-31'
+        description: yyyy-MM-dd
+      hasPriceChanged:
+        type: boolean
+        example: false
+        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
+      retryDays:
+        type: integer
+        format: int32
+        example: 5
+        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
+      initPayment:
+        $ref: '#/definitions/PSPInitiatePaymentRequestV2DTO'
+    title: CreateCharge
+  DraftAgreement:
+    type: object
+    required:
+      - currency
+      - interval
+      - intervalCount
+      - isApp
+      - merchantAgreementUrl
+      - merchantRedirectUrl
+      - price
+      - productDescription
+      - productName
+    properties:
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      customerPhoneNumber:
+        type: string
+        example: '+4740000000'
+        description: Customers phone number (if available). Used to simplify the following Vipps interaction
+      initialCharge:
+        $ref: '#/definitions/InitialCharge'
+      interval:
+        type: string
+        example: WEEK
+        description: Interval for subscription
+        enum:
+          - YEAR
+          - MONTH
+          - WEEK
+          - DAY
+      intervalCount:
+        type: integer
+        format: int32
+        example: 2
+        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
+        minimum: 1
+        maximum: 31
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      isApp:
+        type: boolean
+        example: true
+        description: If merchant is redirecting user from an app.
+      merchantAgreementUrl:
+        type: string
+        example: 'https://www.merchant.no/subscriptions/1234/'
+        description: URL where Vipps can redirect the customer to view/administer their subscription.
+      merchantRedirectUrl:
+        type: string
+        example: 'https://api.merchant.no/landing'
+        description: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application.
+      oneOffCharge:
+        $ref: '#/definitions/OneOffCharge'
+      price:
+        type: integer
+        format: int32
+        example: 7900
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      productDescription:
+        type: string
+        example: Fin abonnementspakke
+      productName:
+        type: string
+        example: Pluss-abonnement
+        description: Name of the product being subscribed to.
+    title: DraftAgreement
+  DraftAgreementResponse:
+    type: object
+    properties:
+      agreementResource:
+        type: string
+        example: 'https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc'
+        description: 'Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+        readOnly: true
+      redirectToVipps:
+        type: string
+        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
+        description: Customer should be redirected to Vipps using this URL.
+        readOnly: true
+    title: DraftAgreementResponse
+  FieldErrorDto:
+    type: object
+    properties:
+      code:
+        type: string
+      field:
+        type: string
+      message:
+        type: string
+    title: FieldErrorDto
+  HealthCheckStatus:
+    type: object
+    properties:
+      application:
+        type: boolean
+      cosmosDb:
+        type: boolean
+      paymentDb:
+        type: boolean
+    title: HealthCheckStatus
+  InitialCharge:
+    type: object
+    required:
+      - amount
+      - currency
+      - description
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+    title: InitialCharge
+    description: An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement.
+  OneOffCharge:
+    type: object
+    required:
+      - amount
+      - currency
+      - description
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+    title: OneOffCharge
+    description: An one-off charge with this agreement. For example a bundles sale (product + subscription).
+  RefundRequestDto:
+    type: object
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 100
+        description: The amount to refund
+      description:
+        type: string
+        example: 'Forgot to apply discount, refunding 50%'
+        description: 'A textual description of the operation, which will be displayed in the users app.'
+    title: RefundRequestDto
