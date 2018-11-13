@@ -40,6 +40,8 @@ tags:
     description: PSP Initiate Payment Controller
   - name: psp-payment-controller
     description: PSP Payment Controller
+  - name: Calls-from-Vipps
+    description: Calls from Vipps to the PSP
 paths:
   /v2/psppayments/init:
     post:
@@ -106,10 +108,10 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
-  [makePayment]:
+  [makePaymentUrl]:
     post:
       tags:
-        - psp-initiate-payment-controller
+        - Calls-from-Vipps
       summary: |-
         Service end-point exposed by PSP. Used to transfer credit card data from TSP to PSP to complete initialized transaction.
         Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.
