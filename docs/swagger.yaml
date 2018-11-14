@@ -85,8 +85,8 @@ paths:
           schema:
             $ref: '#/definitions/PSPInitiatePaymentRequestV2DTO'
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
             $ref: '#/definitions/InitiatePaymentPspV2Representation'
         '400':
