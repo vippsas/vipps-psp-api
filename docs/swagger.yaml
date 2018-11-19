@@ -372,10 +372,6 @@ definitions:
   PSPInitiatePaymentRequestV2DTO:
     type: object
     properties:
-      merchantSerialNumber:
-        type: string
-      pspId:
-        type: string
       pspTransactionId:
         type: string
         example: 7686f7788898767977

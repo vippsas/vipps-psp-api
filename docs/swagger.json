@@ -19,6 +19,10 @@
     {
       "name": "psp-payment-controller",
       "description": "PSP Payment Controller"
+    },
+    {
+      "name": "Calls-from-Vipps",
+      "description": "Calls from Vipps to the PSP"
     }
   ],
   "paths": {
@@ -77,12 +81,12 @@
               "$ref": "#/definitions/PSPInitiatePaymentRequestV2DTO"
             }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/InitiatePaymentRepresentation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InitiatePaymentPspV2Representation"
             }
           },
           "400": {
@@ -94,8 +98,8 @@
               }
             }
           },
-          "401" : {
-            "description" : "Unauthorized"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -106,20 +110,20 @@
               }
             }
           },
-          "503" : {
-            "description" : "Service unavailable"
+          "503": {
+            "description": "Service unavailable"
           },
-          "504" : {
-            "description" : "Gateway Timeout"
+          "504": {
+            "description": "Gateway Timeout"
           }
         },
         "deprecated": false
       }
     },
-    "[\"makePayment\"]": {
+    "makePaymentUrl": {
       "post": {
         "tags": [
-          "psp-initiate-payment-controller"
+          "Calls-from-Vipps"
         ],
         "summary": "Service end-point exposed by PSP. Used to transfer credit card data from TSP to PSP to complete initialized transaction.\nOutcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.\n\nCommunication security is established by using 1-way SSL and makePaymentToken (If exists in request body)",
         "operationId": "makePaymentSwaggerUsingPOST",
@@ -171,12 +175,12 @@
               "$ref": "#/definitions/MakePaymentRequestPSPV2"
             }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/MakePaymentResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MakePaymentResponsePSPV2"
             }
           }
         },
@@ -238,12 +242,12 @@
               "$ref": "#/definitions/PSPV2PaymentStatusDTO"
             }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/ResponseInfo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseInfo"
             }
           },
           "400": {
@@ -255,8 +259,8 @@
               }
             }
           },
-          "401" : {
-            "description" : "Unauthorized"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error",
@@ -267,11 +271,11 @@
               }
             }
           },
-          "503" : {
-            "description" : "Service unavailable"
+          "503": {
+            "description": "Service unavailable"
           },
-          "504" : {
-            "description" : "Gateway Timeout"
+          "504": {
+            "description": "Gateway Timeout"
           }
         },
         "deprecated": false
@@ -347,11 +351,11 @@
               }
             }
           },
-          "503" : {
-            "description" : "Service unavailable"
+          "503": {
+            "description": "Service unavailable"
           },
-          "504" : {
-            "description" : "Gateway Timeout"
+          "504": {
+            "description": "Gateway Timeout"
           }
         },
         "deprecated": false
@@ -387,7 +391,6 @@
       },
       "title": "ErrorDetails"
     },
-<<<<<<< HEAD
     "ErrorMessage": {
       "type": "object",
       "properties": {
@@ -436,93 +439,49 @@
         }
       },
       "title": "InitiatePaymentPspV2Representation"
-=======
-    "ErrorMessage" : {
-      "type" : "object",
-      "properties" : {
-        "errorId" : {
-          "type" : "string",
-          "description" : "PSP native ID of the error",
-          "example" : "81"
-        },
-        "errorText" : {
-          "type" : "string",
-          "description" : "PSP native textual representation of the error",
-          "example" : "No Such Issuer"
-        }
-      },
-      "example" : {
-        "errorText" : "No Such Issuer",
-        "errorId" : "81"
-      }
     },
-    "InitiatePaymentRepresentation" : {
-      "type" : "object",
-      "required" : [ "merchantOrderId", "pspTransactionId", "vippsRedirectUrl" ],
-      "properties" : {
-        "merchantOrderId" : {
-          "type" : "string",
-          "description" : "Uniquely identifies a payment order for a merchant",
-          "example" : "8874C4DDC93A2E3C"
+    "MakePaymentRequestPSPV2": {
+      "type": "object",
+      "properties": {
+        "pspTransactionId": {
+          "type": "string",
+          "example": "7686f7788898767977",
+          "description": "Used as a globally unique transaction reference for the PSP systems"
         },
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "Used as a globally unique transaction reference for the PSP systems",
-          "example" : "7686f7788898767977"
+        "merchantSerialNumber": {
+          "type": "string",
+          "example": "8874C4DDC93A2E3C",
+          "description": "Uniquely identifies a payment order for a merchant"
         },
-        "vippsRedirectUrl" : {
-          "type" : "string",
-          "description" : "Vipps URL where customer can enter their mobile number",
-          "example" : "https://vipps.io"
+        "cardData": {
+          "type": "string",
+          "example": "f0a29801b4#d4ff30e221fa2980ff30e2",
+          "description": "Encrypted credit card details"
+        },
+        "confirmed": {
+          "type": "string",
+          "example": "YES/NO/TIMEOUT/CANCEL",
+          "description": "Credit Card Details Encryption Status",
+          "enum": [
+            "YES",
+            "NO",
+            "TIMEOUT",
+            "CANCEL"
+          ]
         }
       },
-      "example" : "{\n  \"merchantOrderId\": \"8874C4DDC93A2E3C\",\n  \"pspTransactionId\": \"7686f7788898767977\",\n  \"vippsRedirectUrl\": \"https://vipps.io\"\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
-    },
-    "MakePaymentRequest" : {
-      "type" : "object",
-      "required" : [ "cardData", "confirmed", "merchantSerialNumber", "pspTransactionId" ],
-      "properties" : {
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "Used as a globally unique transaction reference for the PSP systems",
-          "example" : "7686f7788898767977"
-        },
-        "merchantSerialNumber" : {
-          "type" : "string",
-          "description" : "Uniquely identifies a payment order for a merchant",
-          "example" : "8874C4DDC93A2E3C"
-        },
-        "cardData" : {
-          "type" : "string",
-          "description" : "Encrypted credit card details",
-          "example" : "f0a29801b4#d4ff30e221fa2980ff30e2"
-        },
-        "confirmed" : {
-          "type" : "string",
-          "description" : "Credit Card Details Encryption Status",
-          "enum" : [ "YES", "NO", "TIMEOUT", "CANCEL" ],
-          "example" : "YES"
-        }
-      },
-<<<<<<< HEAD
       "title": "MakePaymentRequestPSPV2"
-=======
-      "example" : "{\n  \"cardData\": \"f0a29801b4#d4ff30e221fa2980ff30e2\",\n  \"merchantSerialNumber\": \"8874C4DDC93A2E3C\",\n  \"pspTransactionId\": \"7686f7788898767977\",\n  \"confirmed\": \"YES/NO/TIMEOUT/CANCEL\"\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
     },
-    "MakePaymentResponse" : {
-      "type" : "object",
-      "required" : [ "errorMessage", "paymentInfo" ],
-      "properties" : {
-        "errorMessage" : {
-          "$ref" : "#/definitions/ErrorMessage"
+    "MakePaymentResponsePSPV2": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "$ref": "#/definitions/ErrorMessage"
         },
-        "paymentInfo" : {
-          "$ref" : "#/definitions/PaymentInfo"
+        "paymentInfo": {
+          "$ref": "#/definitions/PaymentInfoPSPV2"
         }
       },
-<<<<<<< HEAD
       "title": "MakePaymentResponsePSPV2"
     },
     "PSPInitiatePaymentRequestV2DTO": {
@@ -612,205 +571,100 @@
         }
       },
       "title": "PSPPaymentDetailsRepresentation"
-=======
-      "example" : "{\n  \"errorMessage\": {\n    \"errorText\": \"No Such Issuer\",\n    \"errorId\": \"81\"\n  },\n  \"paymentInfo\": {\n    \"pspTransactionId\": \"7686f7788898767977\",\n    \"status\": \"RESERVE|CAPTURE|REJECT\"\n  }\n}"
     },
-    "InitiatePaymentRequest" : {
-      "type" : "object",
-      "required" : [ "amount", "currency", "customerMobileNumber", "isApp", "makePaymentToken", "makePaymentUrl", "merchantOrderId", "merchantSerialNumber", "paymentText", "pspId", "pspRedirectUrl", "pspTransactionId" ],
-      "properties" : {
-        "merchantSerialNumber" : {
-          "type" : "string"
+    "PSPPaymentTransactionDetailsDVO": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 100,
+          "description": "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
         },
-        "pspId" : {
-          "type" : "string"
+        "paymentText": {
+          "type": "string",
+          "example": "Betaling ordreid:",
+          "description": "Transaction Note sent by PSP"
         },
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "Used as a globally unique transaction reference for the PSP systems",
-          "example" : "7686f7788898767977"
+        "timeStamp": {
+          "type": "string",
+          "example": "2018-06-13T18:34:25-07:00",
+          "description": "Timestamp in ISO-8601 representing when Vipps did the payment"
         },
-        "merchantOrderId" : {
-          "type" : "string",
-          "description" : "Uniquely identifies a payment order for a merchant",
-          "example" : "8874C4DDC93A2E3C"
+        "operation": {
+          "type": "string",
+          "example": "REFUNDED",
+          "description": "Transaction Status"
         },
-        "customerMobileNumber" : {
-          "type" : "string",
-          "description" : "Mobile number of the user who has to pay for the transaction from Vipps",
-          "example" : "92929292"
-        },
-        "amount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK",
-          "example" : 100
-        },
-        "currency" : {
-          "type" : "string",
-          "description" : "ISO 4217 defined currency code. Currently Vipps only supports NOK",
-          "example" : "NOK"
-        },
-        "pspRedirectUrl" : {
-          "type" : "string",
-          "description" : "Vipps will use this URL to redirect end user after payment confirmation",
-          "example" : "https://psp.vipps.io"
-        },
-        "makePaymentUrl" : {
-          "type" : "string",
-          "description" : "PSP URL used by Vipps to send the card data",
-          "example" : "https://psp.vipps.io"
-        },
-        "makePaymentToken" : {
-          "type" : "string",
-          "description" : "Authorization header for MakePayment call",
-          "example" : "ynuiu"
-        },
-        "paymentText" : {
-          "type" : "string",
-          "description" : "Text to be displayed to end user",
-          "example" : "Order id : "
-        },
-        "isApp" : {
-          "type" : "boolean",
-          "description" : "Indicates whether payment request is triggered from Mobile App or Web browser",
-          "example" : true
+        "operationSuccess": {
+          "type": "boolean",
+          "example": false,
+          "description": "Success or failure for the given operation"
         }
       },
-      "example" : "{\n  \"pspRedirectUrl\": \"https://psp.vipps.io\",\n  \"amount\": 100,\n  \"makePaymentToken\": \"ynuiu\",\n  \"makePaymentUrl\": \"https://psp.vipps.io\",\n  \"merchantSerialNumber\": \"12345\",\n  \"pspId\": \"C948DFD1546347568874C4DDC93A2E3C\",\n  \"customerMobileNumber\": \"92929292\",\n  \"currency\": \"NOK\",\n  \"merchantOrderId\": \"8874C4DDC93A2E3C\",\n  \"isApp\": true,\n  \"pspTransactionId\": \"7686f7788898767977\",\n  \"paymentText\": \"Order id : \"\n}"
-    },
-    "PaymentTransactionDetails" : {
-      "type" : "object",
-      "required" : [ "amount", "operation", "timeStamp" ],
-      "properties" : {
-        "amount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK",
-          "example" : 100
-        },
-        "paymentText" : {
-          "type" : "string",
-          "description" : "Transaction Note sent by PSP",
-          "example" : "Betaling ordreid:"
-        },
-        "timeStamp" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Timestamp in ISO-8601 representing when Vipps did the payment",
-          "example" : "2018-06-13T18:34:25-07:00"
-        },
-        "operation" : {
-          "type" : "string",
-          "description" : "Transaction Status",
-          "example" : "REFUNDED"
-        },
-        "operationSuccess" : {
-          "type" : "boolean",
-          "description" : "Success or failure for the given operation",
-          "example" : false
-        }
-      },
-      "example" : "{\n  \"timeStamp\": \"2018-06-13T18:34:25-07:00\",\n  \"amount\": 100,\n  \"paymentText\": \"Betaling ordreid:\",\n  \"operation\": \"REFUNDED\",\n  \"operationSuccess\": false\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
-    },
-    "PaymentStatus" : {
-      "type" : "object",
-      "properties" : {
-        "transactions" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/TransactionInfo"
-          }
-        }
-      },
-<<<<<<< HEAD
       "title": "PSPPaymentTransactionDetailsDVO"
-=======
-      "example" : "{\n  \"transactions\": [\n    {\n      \"amount\": 100,\n      \"currency\": \"NOK\",\n      \"pspTransactionId\": \"7686f7788898767977\",\n      \"paymentText\": \"Betaling ordreid: 893746\",\n      \"status\": \"CAPTURED\"\n    },\n    {\n      \"amount\": 100,\n      \"currency\": \"NOK\",\n      \"pspTransactionId\": \"7686f7788898767977\",\n      \"paymentText\": \"Betaling ordreid: 893746\",\n      \"status\": \"CAPTURED\"\n    }\n  ]\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
     },
-    "TransactionInfo" : {
-      "type" : "object",
-      "required" : [ "amount", "currency", "paymentText", "pspTransactionId", "status" ],
-      "properties" : {
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps",
-          "example" : "7686f7788898767977"
-        },
-        "status" : {
-          "type" : "string",
-          "description" : "PSP Transaction Status to be updated in Vipps",
-          "example" : "CAPTURED"
-        },
-        "amount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK",
-          "example" : 100
-        },
-        "currency" : {
-          "type" : "string",
-          "description" : "ISO 4217 defined currency code. Currently Vipps only supports NOK",
-          "example" : "NOK"
-        },
-        "paymentText" : {
-          "type" : "string",
-          "example" : "Betaling ordreid: 893746"
-        }
-      },
-<<<<<<< HEAD
-      "title": "PSPV2PaymentStatusDTO"
-=======
-      "example" : "{\n  \"amount\": 100,\n  \"currency\": \"NOK\",\n  \"pspTransactionId\": \"7686f7788898767977\",\n  \"paymentText\": \"Betaling ordreid: 893746\",\n  \"status\": \"CAPTURED\"\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
-    },
-    "PaymentDetailsRepresentation" : {
-      "type" : "object",
-      "properties" : {
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps",
-          "example" : "12345692"
-        },
-        "merchantOrderId" : {
-          "type" : "string",
-          "description" : "Id which uniquely identifies a payment",
-          "example" : "56787837"
-        },
-        "transactionSummary" : {
-          "$ref" : "#/definitions/TransactionSummary"
-        },
-        "transactionLogHistory" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/PaymentTransactionDetails"
+    "PSPV2PaymentStatusDTO": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PSPV2TransactionInfo"
           }
         }
       },
-<<<<<<< HEAD
-      "title": "PSPV2TransactionInfo"
-=======
-      "example" : "{\n  \"merchantOrderId\": \"56787837\",\n  \"transactionSummary\": {\n    \"capturedAmount\": 0,\n    \"remainingAmountToRefund\": 0,\n    \"remainingAmountToCapture\": 0,\n    \"refundedAmount\": 1200\n  },\n  \"pspTransactionId\": \"12345692\",\n  \"transactionLogHistory\": [\n    {\n      \"timeStamp\": \"2018-06-13T18:34:25-07:00\",\n      \"amount\": 100,\n      \"paymentText\": \"Betaling ordreid:\",\n      \"operation\": \"REFUNDED\",\n      \"operationSuccess\": false\n    },\n    {\n      \"timeStamp\": \"2018-06-13T18:34:25-07:00\",\n      \"amount\": 100,\n      \"paymentText\": \"Betaling ordreid:\",\n      \"operation\": \"REFUNDED\",\n      \"operationSuccess\": false\n    }\n  ]\n}"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
+      "title": "PSPV2PaymentStatusDTO"
     },
-    "PaymentInfo" : {
-      "type" : "object",
-      "properties" : {
-        "pspTransactionId" : {
-          "type" : "string",
-          "description" : "Used as a globally unique transaction reference for the PSP systems",
-          "example" : "7686f7788898767977"
+    "PSPV2TransactionInfo": {
+      "type": "object",
+      "properties": {
+        "pspTransactionId": {
+          "type": "string",
+          "example": "7686f7788898767977",
+          "description": "PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps"
         },
-        "status" : {
-          "type" : "string",
-          "description" : "Status of the transaction",
-          "enum" : [ "OK", "FAIL" ],
-          "example" : "OK"
+        "status": {
+          "type": "string",
+          "example": "CAPTURED",
+          "description": "PSP Transaction Status to be updated in Vipps"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 100,
+          "description": "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "description": "ISO 4217 defined currency code. Currently Vipps only supports NOK"
+        },
+        "paymentText": {
+          "type": "string",
+          "example": "Betaling ordreid: 893746"
         }
       },
-<<<<<<< HEAD
+      "title": "PSPV2TransactionInfo"
+    },
+    "PaymentInfoPSPV2": {
+      "type": "object",
+      "properties": {
+        "pspTransactionId": {
+          "type": "string",
+          "example": "7686f7788898767977",
+          "description": "Used as a globally unique transaction reference for the PSP systems"
+        },
+        "status": {
+          "type": "string",
+          "example": "RESERVE|CAPTURE|REJECT",
+          "description": "Status of the transaction",
+          "enum": [
+            "OK",
+            "FAIL"
+          ]
+        }
+      },
       "title": "PaymentInfoPSPV2"
     },
     "ResponseInfo": {
@@ -821,86 +675,39 @@
         },
         "responseMessage": {
           "type": "string"
-=======
-      "example" : "{\n  \"pspTransactionId\": \"7686f7788898767977\",\n  \"status\": \"RESERVE|CAPTURE|REJECT\"\n}"
-    },
-    "AuthorizationTokenResponse" : {
-      "type" : "object",
-      "required" : [ "access_token", "expires_in", "ext_expires_in", "not_before", "resource", "token_type" ],
-      "properties" : {
-        "token_type" : {
-          "type" : "string"
-        },
-        "access_token" : {
-          "type" : "string"
-        },
-        "ext_expires_in" : {
-          "type" : "integer"
-        },
-        "not_before" : {
-          "type" : "integer"
-        },
-        "expires_in" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "resource" : {
-          "type" : "string"
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
         }
       },
       "title": "ResponseInfo"
     },
-    "TransactionSummary" : {
-      "type" : "object",
-      "properties" : {
-        "capturedAmount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Total amount captured",
-          "example" : 0
+    "TransactionSummary": {
+      "type": "object",
+      "properties": {
+        "capturedAmount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Total amount captured"
         },
-        "remainingAmountToCapture" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Total remaining amount to capture",
-          "example" : 0
+        "remainingAmountToCapture": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Total remaining amount to capture"
         },
-        "refundedAmount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Total refunded amount of the order",
-          "example" : 1200
+        "refundedAmount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1200,
+          "description": "Total refunded amount of the order"
         },
-        "remainingAmountToRefund" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Total remaining amount to refund",
-          "example" : 0
+        "remainingAmountToRefund": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Total remaining amount to refund"
         }
       },
-<<<<<<< HEAD
       "title": "TransactionSummary"
-=======
-      "example" : {
-        "capturedAmount" : 0,
-        "remainingAmountToRefund" : 0,
-        "remainingAmountToCapture" : 0,
-        "refundedAmount" : 1200
-      }
-    },
-    "ResponseInfo" : {
-      "type" : "object",
-      "required" : [ "responseCode", "responseMessage" ],
-      "properties" : {
-        "responseCode" : {
-          "type" : "string"
-        },
-        "responseMessage" : {
-          "type" : "string"
-        }
-      }
->>>>>>> 4e663209eadf7342a559133313e381aa3693b539
     }
   }
 }
