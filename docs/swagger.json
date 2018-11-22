@@ -17,7 +17,7 @@
       "description": "PSP Initiate Payment Controller"
     },
     {
-      "name": "psp-payment-controller",
+      "name": "Payment Controller",
       "description": "PSP Payment Controller"
     },
     {
@@ -190,7 +190,7 @@
     "/v2/psppayments/updateStatus": {
       "post": {
         "tags": [
-          "psp-payment-controller"
+          "Payment Controller"
         ],
         "summary": "Update the status of the PSP transaction. Since Vipps doesn’t process transactions, updates on payment status are required in order to deliver expected customer experience. That means that PSP has to inform Vipps about any psp payment status change through this service",
         "operationId": "updateStatusUsingPOST",
