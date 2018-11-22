@@ -9,16 +9,8 @@
   "basePath": "/dwo-api-application",
   "tags": [
     {
-      "name": "Merchant Query Controller",
-      "description": "DWO Merchant Query Controller"
-    },
-    {
-      "name": "PSP Initiate Payment Controller",
-      "description": "PSP Initiate Payment Controller"
-    },
-    {
-      "name": "Payment Controller",
-      "description": "PSP Payment Controller"
+      "name": "Vipps PSP API",
+      "description": "Endpoints and operations in the PSP API"
     },
     {
       "name": "Endpoints required by Vipps at the PSP",
@@ -29,7 +21,7 @@
     "/v2/psppayments/init": {
       "post": {
         "tags": [
-          "PSP Initiate Payment Controller"
+          "Vipps PSP API"
         ],
         "summary": "Initiate a PSP Payment",
         "operationId": "initiatePaymentV2UsingPOST",
@@ -190,7 +182,7 @@
     "/v2/psppayments/updateStatus": {
       "post": {
         "tags": [
-          "Payment Controller"
+          "Vipps PSP API"
         ],
         "summary": "Update the status of the PSP transaction. Since Vipps doesn’t process transactions, updates on payment status are required in order to deliver expected customer experience. That means that PSP has to inform Vipps about any psp payment status change through this service",
         "operationId": "updateStatusUsingPOST",
@@ -284,7 +276,7 @@
     "/v2/psppayments/{pspTransactionId}/details": {
       "get": {
         "tags": [
-          "Merchant Query Controller"
+          "Vipps PSP API"
         ],
         "summary": "The details of PSP Payment",
         "operationId": "getPSPPaymentDetailsUsingGET",
