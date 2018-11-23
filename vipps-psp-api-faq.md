@@ -44,14 +44,6 @@ It is suggested that you send “FAIL” in case of failure either at your end o
 
 If field "Confirmed" has value: `No` / `TimeOut` / `Cancel` -> `paymentInfo.status` = "FAIL"?
 
-# When payment will be initiated, we need to display message like "Please confirm payment at your mobile device". Does it mean, that we as PSP will be hosting waiting page?
-
-Yes.
-
-# If we will be hosting waiting page, how long it should be shown (60 sec, 2 minutes...) before it time-outs? For example: If customer do not push anything on mobile device; Connectivity lost and etc
-
-We have a 5 minute user timeout.
-
 # Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?
 
 From `makePayment` specification:
