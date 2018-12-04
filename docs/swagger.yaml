@@ -30,7 +30,7 @@ info:
   version: '1.0'
   title: PSP API V2
 host: 'apitest.vipps.no'
-basePath: /dwo-api-application
+basePath: /psp
 tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
