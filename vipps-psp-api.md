@@ -65,22 +65,23 @@ Example response:
 }
 ```
 
-**Error codes**\
-| errorId | errorText                             |
-| ------- | ------------------------------------- |
-| 71      | Invalid request                       |
-| 72      | Different texts                       |
-| 81      | No such issuer                        |
-| 82      | Refused by Issuer                     |
-| 83      | Suspected fraud                       |
-| 84      | Exceeds withdrawal amount limit       |
-| 85      | Response received to late             |
-| 86      | Expired card                          |
-| 87      | Invalid card number (no such number)  |
-| 88      |                                       |
-| 91      | Internal error                        |
-| 92      | Unable to decrypt                     |
-| 93      | NA                                    |
+**Error codes**
+
+errorId | errorText
+------- | -----------
+71 | Invalid request
+72 | Different texts
+81 | No such issuer
+82 | Refused by Issuer
+83 | Suspected fraud
+84 | Exceeds withdrawal amount limit
+85 | Response received to late
+86 | Expired card
+87 | Invalid card number (no such number)
+88 | Merchant does not allow credit cards
+91 | Internal error
+92 | Unable to decrypt
+93 |
 
 
 ### Status Updates
