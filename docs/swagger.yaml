@@ -20,18 +20,16 @@ info:
 
     Every API call is authenticated and authorized based on the application
     Authorization token (JWT) and APIM subscription key
-    (`Ocp-Apim-Subscription-Key`). In addition, an APP Id need to be provided in
-    request header in order to authenticate the application the merchant has
-    registered. Following headers are required to be there in every API request
+    (`Ocp-Apim-Subscription-Key`). Following headers are required to be there in every API request
     to successfully authenticate every API call.
 
       | **Header Name** | **Header Value** | **Description** |
       | :-------------------------- | :--------------------------- | :--------------------------------------------- |
-      | Authorization | Bearer 'jwt_access_token'' | type: Authorization token<br>Value: Access token is obtained by registering merchant backend application in Merchant Developer Portal. |
-      | Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for eCommerce product.<br>This can be found in User Profile page on Merchant developer portal after merchant account is created |
+      | Authorization | Bearer 'jwt_access_token'' | type: Authorization token<br>Value: Access token is obtained from accessToken/get |
+      | Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product.<br>Can be found in Vipps developer portal |
   version: '1.0'
   title: PSP API V2
-host: 'localhost:8090'
+host: 'apitest.vipps.no'
 basePath: /dwo-api-application
 tags:
   - name: Vipps PSP API
@@ -56,24 +54,24 @@ paths:
           required: true
           type: string
           default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: MERCHANT-SERIAL-NUMBER
-          required: true
-          type: string
-          default: '12345'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for eCommerce product. This can be found in User Profile page on Merchant developer portal after merchant account is created
+          description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
           default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
-          description: PSP-ID
+          description: PSP ID as provided by Vipps
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
+        - name: MERCHANT-SERIAL-NUMBER
+          in: header
+          description: Identifies a merchant
+          required: true
+          type: string
+          default: '123456'
         - in: body
           name: pspInitiatePaymentRequestDTO
           description: pspInitiatePaymentRequestDTO
@@ -112,7 +110,7 @@ paths:
         Service end-point exposed by PSP. Used to transfer credit card data from TSP to PSP to complete initialized transaction.
         Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.
 
-        Communication security is established by using 1-way SSL and makePaymentToken (If exists in request body)
+        Communication security is established by using 1-way SSL and makePaymentToken
       operationId: makePaymentSwaggerUsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -125,24 +123,24 @@ paths:
           required: true
           type: string
           default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant sales channel
-          required: true
-          type: string
-          default: '12345'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for eCommerce product. This can be found in User Profile page on Merchant developer portal after merchant account is created
+          description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
           default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
-          description: PSP ID as defined during PSP enrollment. PSP should share a public key to encrypt the card data from TSP via Vipps
+          description: PSP ID as provided by Vipps
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
+        - name: MERCHANT-SERIAL-NUMBER
+          in: header
+          description: Identifies a merchant
+          required: true
+          type: string
+          default: '123456'
         - in: body
           name: makePaymentRequest
           description: makePaymentRequest
@@ -171,22 +169,22 @@ paths:
           description: Bearer JWT-TOKEN
           required: true
           type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
+          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
         - name: MERCHANT-SERIAL-NUMBER
           in: header
-          description: MERCHANT-SERIAL-NUMBER
+          description: Identifies a merchant
           required: true
           type: string
-          default: '12345'
+          default: '123456'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for eCommerce product. This can be found in User Profile page on Merchant developer portal after merchant account is created
+          description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
           default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
-          description: PSP-ID
+          description: PSP ID as provided by Vipps
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -237,25 +235,25 @@ paths:
           default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
         - name: MERCHANT-SERIAL-NUMBER
           in: header
-          description: MERCHANT-SERIAL-NUMBER
+          description: Identifies a merchant
           required: true
           type: string
-          default: '12345'
+          default: '123456'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for eCommerce product. This can be found in User Profile page on Merchant developer portal after merchant account is created
+          description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
           default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
-          description: PSP-ID
+          description: PSP ID as provided by Vipps
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
         - name: pspTransactionId
           in: path
-          description: pspTransactionId
+          description: Used as a globally unique transaction reference for the PSP systems
           required: true
           type: string
       responses:
@@ -301,11 +299,11 @@ definitions:
     properties:
       errorId:
         type: string
-        example: 81
+        example: 82
         description: PSP native ID of the error
       errorText:
         type: string
-        example: No Such Issuer
+        example: Refused by Issuer
         description: PSP native textual representation of the error
     title: ErrorMessage
   GenericResponse:
@@ -342,18 +340,17 @@ definitions:
       merchantSerialNumber:
         type: string
         example: 8874C4DDC93A2E3C
-        description: Uniquely identifies a payment order for a merchant
+        description: Identifies a merchant
       cardData:
         type: string
         example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
         description: Encrypted credit card details
       confirmed:
         type: string
-        example: YES/NO/TIMEOUT/CANCEL
+        example: YES/TIMEOUT/CANCEL
         description: Credit Card Details Encryption Status
         enum:
-          - 'YES'
-          - 'NO'
+          - YES
           - TIMEOUT
           - CANCEL
     title: MakePaymentRequest
@@ -403,7 +400,7 @@ definitions:
         description: Authorization header for MakePayment call
       paymentText:
         type: string
-        example: 'Order id :'
+        example: 'Description of payment'
         description: Text to be displayed to end user
       isApp:
         type: boolean
@@ -416,11 +413,11 @@ definitions:
       pspTransactionId:
         type: string
         example: 12345692
-        description: PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps
+        description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: 56787837
-        description: Id which uniquely identifies a payment
+        description: Uniquely identifies a payment order for a merchant
       transactionSummary:
         $ref: '#/definitions/TransactionSummary'
       transactionLogHistory:
@@ -438,7 +435,7 @@ definitions:
         description: Amount should be specified in Øre. 100 Øre conversion 1.00 NOK
       paymentText:
         type: string
-        example: 'Betaling ordreid:'
+        example: 'Description of payment'
         description: Transaction Note sent by PSP
       timeStamp:
         type: string
@@ -467,11 +464,15 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: PSP ID as defined in agreement with Netaxept TSP. PSP should have agreement with Netaxept to get the public key to encrypt the card data from NetAxept TSP via Vipps
+        description: Used as a globally unique transaction reference for the PSP systems
       status:
         type: string
         example: CAPTURED
         description: PSP Transaction Status to be updated in Vipps
+        enum:
+          - CAPTURED
+          - CANCELLED
+          - REFUNDED
       amount:
         type: integer
         format: int32
@@ -483,7 +484,7 @@ definitions:
         description: ISO 4217 defined currency code. Currently Vipps only supports NOK
       paymentText:
         type: string
-        example: 'Betaling ordreid: 893746'
+        example: 'Description of payment'
     title: TransactionInfo
   PaymentInfo:
     type: object
@@ -494,7 +495,7 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       status:
         type: string
-        example: RESERVE|CAPTURE|REJECT
+        example: OK|FAIL
         description: Status of the transaction
         enum:
           - OK
@@ -525,7 +526,7 @@ definitions:
         type: integer
         format: int32
         example: 1200
-        description: Total refunded amount of the order
+        description: Total refunded amount
       remainingAmountToRefund:
         type: integer
         format: int32
