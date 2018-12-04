@@ -67,6 +67,7 @@ Example response:
 
 **Error codes**
 | errorId | errorText                             |
+| ------- | ------------------------------------- |
 | 71      | Invalid request                       |
 | 72      | Different texts                       |
 | 81      | No such issuer                        |
@@ -76,7 +77,7 @@ Example response:
 | 85      | Response received to late             |
 | 86      | Expired card                          |
 | 87      | Invalid card number (no such number)  |
-| 88      |
+| 88      |                                       |
 | 91      | Internal error                        |
 | 92      | Unable to decrypt                     |
 | 93      | NA                                    |
