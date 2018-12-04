@@ -15,7 +15,8 @@ and provides feedback to merchant and Vipps of the payment transaction
 success or failure.
 
 *API version: 2*\
-*Document version 1.0.0*
+*Document version 1.0.0*\
+**API documentation:** https://vippsas.github.io/vipps-psp-api/
 
 ## Differences from PSP API version 1
 
