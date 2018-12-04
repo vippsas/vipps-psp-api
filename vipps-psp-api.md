@@ -65,7 +65,7 @@ Example response:
 }
 ```
 
-**Error codes**
+**Error codes**\
 | errorId | errorText                             |
 | ------- | ------------------------------------- |
 | 71      | Invalid request                       |
