@@ -14,7 +14,7 @@ The PSP processes the payment transaction
 and provides feedback to merchant and Vipps of the payment transaction
 success or failure.
 
-*API version: 2*
+*API version: 2*\
 *Document version 1.0.0*
 
 ## Differences from PSP API version 1
@@ -76,7 +76,7 @@ Example response:
 | 85      | Response received to late             |
 | 86      | Expired card                          |
 | 87      | Invalid card number (no such number)  |
-| 88      | 
+| 88      |
 | 91      | Internal error                        |
 | 92      | Unable to decrypt                     |
 | 93      | NA                                    |

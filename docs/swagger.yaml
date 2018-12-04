@@ -339,7 +339,7 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
-        example: 8874C4DDC93A2E3C
+        example: 123456
         description: Identifies a merchant
       cardData:
         type: string
