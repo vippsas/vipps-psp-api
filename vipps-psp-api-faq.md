@@ -26,7 +26,6 @@ eg. `4925********4444,2212, 3854ba014e184e0d8ba259253f4advfa`
 
 Service page encrypts data of the following format: `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`.
 This data is then transformed into a 256 bytes OEAP cryptogram which is encoded as 344-characters base64 string.
-The cryptorgam is then included into the 652-bytes length XML response.
 
 # Is there a unique PSP ID for all merchants?
 
