@@ -35,13 +35,13 @@ No, the PSP ID is unique for the PSP and used for all merchants.
 
 Yes, please see: [The Vipps test environment (MT)](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt).
 
-# What should we reply to MakePayment() service call in case field "Confirmed" has value: No/TimeOut/Cancel?
+# What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
 
 Should it be: paymentInfo.status = "OK" or "FAIL"? If it is fail, what error code should be returned?
 
-It is suggested that you send “FAIL” in case of failure either at your end or as in this case at our end.
+It is suggested that you send "FAIL" in case of failure either at your end or as in this case at our end.
 
-If field "Confirmed" has value: `No` / `TimeOut` / `Cancel` -> `paymentInfo.status` = "FAIL"?
+If field "Confirmed" has value: `TimeOut` or `Cancel` -> `paymentInfo.status` = "FAIL"?
 
 # Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?
 
@@ -49,11 +49,11 @@ From the `makePayment` specification:
 
 | Name | Type | Size | Optional | Values |
 | ---- | ---- | ---- | -------- | ------ |
-| confirmed	| String | 7 | No | YES/NO/TIMEOUT/CANCEL |
+| confirmed	| String | 7 | No | YES/TIMEOUT/CANCEL |
 
 # Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?
 
-*TODO: Complete the remaining questions from Confluence*
+Yes
 
 # More questions or comments?
 
