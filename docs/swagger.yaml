@@ -1,17 +1,18 @@
 swagger: '2.0'
 info:
-  description: |
+  description: >
 
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. PSPs have full transactional control of
     payments initiated in their payment terminals.
+
     The Vipps PSP API allows PSPs to initiate payments that end users accept
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.1'
-  title: PSP API V2
+  version: '1.0.3'
+  title: PSP API v2
 host: 'apitest.vipps.no'
 basePath: /psp
 tags:
@@ -24,7 +25,7 @@ paths:
     post:
       tags:
         - Vipps PSP API
-      summary: Initiate a PSP Payment
+      summary: Initiate a PSP payment
       operationId: initiatePaymentV2UsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -36,25 +37,21 @@ paths:
           description: Bearer JWT
           required: true
           type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the product. Can be found in Vipps developer portal
+          description: Subscription key for the PSP API
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
-        - name: PSP-ID
+        - name: psp-id
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps
           required: true
           type: string
-          default: C948DFD1546347568874C4DDC93A2E3C
-        - name: MERCHANT-SERIAL-NUMBER
+        - name: merchant-serial-number
           in: header
-          description: Identifies a merchant
+          description: The Vipps number (MSN) for the sales unit
           required: true
           type: string
-          default: '123456'
         - in: body
           name: pspInitiatePaymentRequest
           description: pspInitiatePaymentRequest
@@ -89,9 +86,13 @@ paths:
     post:
       tags:
         - Endpoints required by Vipps from the PSP
-      summary: |-
-        Service end-point exposed by PSP. Used to transfer credit card data from TSP to PSP to complete initialized transaction.
-        Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.
+      summary: Service endpoint exposed by the PSP
+      description: >
+        Used to transfer credit card data
+        from TSP to PSP to complete initialized transaction.
+        Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be
+        shown at PSP payment console but Vipps must be informed if payment is
+        refused (credit card expired, not enough funds etc) or OK.
 
         Communication security is established by using 1-way SSL and makePaymentToken
       operationId: makePaymentSwaggerUsingPOST
@@ -105,25 +106,21 @@ paths:
           description: Authorization
           required: true
           type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the product. Can be found in Vipps developer portal
+          description: Subscription key for the PSP API
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
-        - name: PSP-ID
+        - name: psp-id
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps
           required: true
           type: string
-          default: C948DFD1546347568874C4DDC93A2E3C
-        - name: MERCHANT-SERIAL-NUMBER
+        - name: merchant-serial-number
           in: header
-          description: Identifies a merchant
+          description: The Vipps number (MSN) for the sales unit
           required: true
           type: string
-          default: '123456'
         - in: body
           name: makePaymentRequest
           description: makePaymentRequest
@@ -136,12 +133,16 @@ paths:
           schema:
             $ref: '#/definitions/MakePaymentResponse'
       deprecated: false
-  /v2/psppayments/updateStatus:
+  /v2/psppayments/updatestatus:
     post:
       tags:
         - Vipps PSP API
-      summary: 'Update the status of the PSP transaction. Since Vipps doesn’t process transactions, updates on payment status are required in order to deliver expected customer experience. That means that PSP has to inform Vipps about any psp payment status change through this service'
-      operationId: updateStatusUsingPOST
+      summary: Update the status of the PSP transaction.
+      description: >
+        Since Vipps doesn’t process transactions, updates on payment status are
+        required in order to deliver expected customer experience. That means
+        that PSP has to inform Vipps about any psp payment status change through this service
+      operationId: updatestatusUsingPOST
       consumes:
         - application/json
       produces:
@@ -152,28 +153,24 @@ paths:
           description: Bearer JWT
           required: true
           type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
-        - name: MERCHANT-SERIAL-NUMBER
+        - name: merchant-serial-number
           in: header
-          description: Identifies a merchant
+          description: The Vipps number (MSN) for the sales unit
           required: true
           type: string
-          default: '123456'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the product. Can be found in Vipps developer portal
+          description: Subscription key for the PSP API
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
-        - name: PSP-ID
+        - name: psp-id
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps
           required: true
           type: string
-          default: C948DFD1546347568874C4DDC93A2E3C
         - in: body
-          name: pspPaymentStatusDTO
-          description: pspPaymentStatusDTO
+          name: pspPaymentStatus
+          description: pspPaymentStatus
           required: true
           schema:
             $ref: '#/definitions/PaymentStatus'
@@ -181,7 +178,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ResponseInfo'
+            $ref: '#/definitions/Response'
         '400':
           description: Bad Request
           schema:
@@ -205,7 +202,7 @@ paths:
     get:
       tags:
         - Vipps PSP API
-      summary: The details of PSP Payment
+      summary: Get the details of the PSP payment
       operationId: getPSPPaymentDetailsUsingGET
       produces:
         - application/json
@@ -215,25 +212,21 @@ paths:
           description: Bearer JWT
           required: true
           type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: MERCHANT-SERIAL-NUMBER
+        - name: merchant-serial-number
           in: header
-          description: Identifies a merchant
+          description: The Vipps number (MSN) for the sales unit
           required: true
           type: string
-          default: '123456'
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the product. Can be found in Vipps developer portal
+          description: Subscription key for the PSP API
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
-        - name: PSP-ID
+        - name: psp-id
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps
           required: true
           type: string
-          default: C948DFD1546347568874C4DDC93A2E3C
         - name: pspTransactionId
           in: path
           description: Used as a globally unique transaction reference for the PSP systems
@@ -258,9 +251,6 @@ paths:
           description: Gateway Timeout
       deprecated: false
 definitions:
-  BaseErrorResult:
-    type: object
-    title: BaseErrorResult
   ErrorDetails:
     type: object
     properties:
@@ -274,8 +264,6 @@ definitions:
         type: string
       errorMessage:
         type: string
-      errorResult:
-        $ref: '#/definitions/BaseErrorResult'
     title: ErrorDetails
   ErrorMessage:
     type: object
@@ -289,14 +277,13 @@ definitions:
         example: Refused by Issuer
         description: PSP native textual representation of the error
     title: ErrorMessage
-  GenericResponse:
+  Response:
     type: object
     properties:
-      responseInfo:
-        $ref: '#/definitions/ResponseInfo'
-      result:
-        type: object
-    title: GenericResponse
+      responseCode:
+        type: string
+      responseMessage:
+        type: string
   PaymentInitiationRepresentation:
     type: object
     properties:
@@ -310,7 +297,7 @@ definitions:
         description: Uniquely identifies a payment order for a merchant
       vippsRedirectUrl:
         type: string
-        example: 'https://psp.vipps.io'
+        example: 'https://psp-redirect.example.com'
         description: Vipps URL where customer can enter their mobile number
     title: PaymentInitiationRepresentation
   MakePaymentRequest:
@@ -322,15 +309,18 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
+        description: The Vipps number (MSN) for the sales unit
+        minLength: 6
+        maxLength: 6
         example: 123456
-        description: Identifies a merchant
+        pattern: '^\d{6}$'
       cardData:
         type: string
         example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
         description: Encrypted credit card details
       confirmed:
         type: string
-        example: YES/TIMEOUT/CANCEL
+        example: YES
         description: Credit Card Details Encryption Status
         enum:
           - YES
@@ -354,7 +344,7 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        example: 8874C4DDC93A2E3C
+        example: order123abc
         description: Uniquely identifies a payment order for a merchant
       customerMobileNumber:
         type: string
@@ -363,12 +353,13 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 100
-        description: Amount should be specified in øre. 100 øre conversion 1.00 NOK
+        example: 20000
+        description: Amount should be specified in øre.
       currency:
         type: string
         example: NOK
-        description: ISO 4217 defined currency code. Currently Vipps only supports NOK
+        default: NOK
+        description: ISO 4217 defined currency code. Vipps currently only supports NOK.
       pspRedirectUrl:
         type: string
         example: 'https://psp-redirect.example.com'
@@ -383,7 +374,7 @@ definitions:
         description: Authorization header for MakePayment call
       paymentText:
         type: string
-        example: 'Description of payment'
+        example: 'One pair of Vipps socks'
         description: Text to be displayed to end user
       isApp:
         type: boolean
@@ -395,11 +386,11 @@ definitions:
     properties:
       pspTransactionId:
         type: string
-        example: 12345692
+        example: 7686f7788898767977
         description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        example: 56787837
+        example: order123abc
         description: Uniquely identifies a payment order for a merchant
       transactionSummary:
         $ref: '#/definitions/TransactionSummary'
@@ -414,11 +405,11 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 100
-        description: Amount should be specified in øre. 100 øre conversion 1.00 NOK
+        example: 20000
+        description: Amount should be specified in øre.
       paymentText:
         type: string
-        example: 'Description of payment'
+        example: 'One pair of Vipps socks'
         description: Transaction Note sent by PSP
       timeStamp:
         type: string
@@ -459,15 +450,16 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 100
-        description: Amount should be specified in øre. 100 øre conversion 1.00 NOK
+        example: 20000
+        description: Amount should be specified in øre.
       currency:
         type: string
         example: NOK
-        description: ISO 4217 defined currency code. Currently Vipps only supports NOK
+        default: NOK
+        description: ISO 4217 defined currency code. Vipps currently only supports NOK.
       paymentText:
         type: string
-        example: 'Description of payment'
+        example: 'One pair of Vipps socks'
     title: TransactionInfo
   PaymentInfo:
     type: object
@@ -479,19 +471,12 @@ definitions:
       status:
         type: string
         example: OK
+        default: OK
         description: Status of the transaction
         enum:
           - OK
           - FAIL
     title: PaymentInfo
-  ResponseInfo:
-    type: object
-    properties:
-      responseCode:
-        type: string
-      responseMessage:
-        type: string
-    title: ResponseInfo
   TransactionSummary:
     type: object
     properties:
@@ -499,20 +484,20 @@ definitions:
         type: integer
         format: int32
         example: 0
-        description: Total amount captured
+        description: Total amount captured in øre
       remainingAmountToCapture:
         type: integer
         format: int32
         example: 0
-        description: Total remaining amount to capture
+        description: Total remaining amount to capture in øre
       refundedAmount:
         type: integer
         format: int32
         example: 1200
-        description: Total refunded amount
+        description: Total refunded amount in øre
       remainingAmountToRefund:
         type: integer
         format: int32
         example: 0
-        description: Total remaining amount to refund
+        description: Total remaining amount to refund in øre
     title: TransactionSummary
