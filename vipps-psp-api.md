@@ -1,9 +1,10 @@
 # Vipps PSP API version 2
 
-Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
-websites and apps (P2M). Vipps Netthandel offer merchants functionality to
+[Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
+(eCommerce) via PSP offers functionality for payments on
+websites and apps (P2M). Vipps på Nett offers merchants functionality to
 provide a solution where the end user only enters her Norwegian mobile number
-to retrieve a payment request in Vipps app.
+to retrieve a payment request in the Vipps app.
 
 In the Vipps app the end user selects a payment source to complete the payment
 request. Vipps initiates the payment transaction on the selected source and
@@ -12,9 +13,13 @@ provide feedback to the PSP of the payment card selected.
 The PSP processes the payment transaction and provides feedback to merchant
 and Vipps of the payment transaction success or failure.
 
-*API version: 2*\
-*Document version 1.0.1*\
-**API documentation:** https://vippsas.github.io/vipps-psp-api/
+API version: 2.0
+
+Document version 1.0.2
+
+API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
+[swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
+[swagger.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.json).
 
 ## Differences from PSP API version 1
 
