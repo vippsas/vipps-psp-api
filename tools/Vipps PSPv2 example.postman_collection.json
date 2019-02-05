@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "0602075f-298d-41e0-b164-cd0359eb1124",
+		"name": "Vipps PSPv2 example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "001_PSP_GetAccessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06398261-2635-4f7d-a6b1-c30e3d0fac7b",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\",jsonData.access_token);",
+							"token=jsonData.access_token;",
+							"console.log(jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "client_id",
+						"value": "{{client_id}}"
+					},
+					{
+						"key": "client_secret",
+						"value": "{{client_secret}}"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{url}}/accessToken/get",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accessToken",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "002_PSPv2_Init",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f8622f2-7e6e-4ef9-95d9-a5bc46b400e4",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"orderId\",jsonData.merchantOrderId);",
+							"postman.setEnvironmentVariable(\"psptransactionid\",jsonData.pspTransactionId);",
+							"console.log(jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Psp-Id",
+						"value": "{{pspid}}"
+					},
+					{
+						"key": "Merchant-Serial-Number",
+						"value": "{{msn}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"pspRedirectUrl\": \"yourRedirectUrl\",\r\n  \"amount\": 1337,\r\n  \"makePaymentToken\": \"tokenGoesHere\",\r\n  \"makePaymentUrl\": \"yourCallbackEndpointUrl\",\r\n  \"currency\": \"NOK\",\r\n  \"merchantOrderId\": \"123123123\",\r\n  \"isApp\": false,\r\n  \"pspTransactionId\": \"{{psptransactionid}}\",\r\n  \"paymentText\": \"Order id: 213213\"\r\n}"
+				},
+				"url": {
+					"raw": "https://{{url}}/psp/v2/psppayments/init",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"psp",
+						"v2",
+						"psppayments",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "003_PSP_Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Psp-Id",
+						"value": "{{pspid}}"
+					},
+					{
+						"key": "Merchant-Serial-Number",
+						"value": "{{msn}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{url}}/psp/v2/psppayments/{{psptransactionid}}/details",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"psp",
+						"v2",
+						"psppayments",
+						"{{psptransactionid}}",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "004_PSP_UpdateStatus",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Psp-Id",
+						"value": "{{pspid}}"
+					},
+					{
+						"key": "Merchant-Serial-Number",
+						"value": "{{msn}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"transactions\": [\r\n    {\r\n      \"amount\": \"7043\",\r\n      \"currency\": \"NOK\",\r\n      \"pspTransactionId\": \"{{psptransactionid}}\",\r\n      \"paymentText\": \"Betaling 55: 5656557\",\r\n      \"status\": \"CAPTURED\"\r\n    },\r\n    {\r\n      \"amount\": \"6043\",\r\n      \"currency\": \"NOK\",\r\n      \"pspTransactionId\": \"{{psptransactionid}}\",\r\n      \"paymentText\": \"Betaling 55: 5656557\",\r\n      \"status\": \"REFUNDED\"\r\n    }\r\n    \r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{url}}/psp/v2/psppayments/updateStatus",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"psp",
+						"v2",
+						"psppayments",
+						"updateStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "32bb812d-e95e-4eea-88f5-ed88d3d06f4a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d78f3f30-1d99-4164-a628-9787a4c29022",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
