@@ -1,6 +1,6 @@
 # Vipps PSP API Checklist
 
-Document version 0.1.0
+Document version 0.1.1
 
 # Overall flow for PSP integrations
 
@@ -12,6 +12,7 @@ Document version 0.1.0
     - `82 Refused by issuer`
     - `89 Not sufficient funds`
     - See [Error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes)
+    - See [Test data](https://github.com/vippsas/vipps-developers/tree/master/testdata)
   - See the Postman collection in [tools](tools/)
 2. The PSP completes testing in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt)
 3. The PSP completes one or more test transactions in the production environment
