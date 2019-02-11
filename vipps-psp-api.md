@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.2
+Document version 1.0.3
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -31,6 +31,10 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 ## PSP payment sequence
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
+
+### PSP implementation checklist
+
+See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
 
 ### Initiate payment
 
