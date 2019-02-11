@@ -1,6 +1,6 @@
 # Vipps PSP API Checklist
 
-Document version 0.1.1
+Document version 0.2.0
 
 # Overall flow for PSP integrations
 
@@ -15,6 +15,16 @@ Document version 0.1.1
     - See [Test data](https://github.com/vippsas/vipps-developers/tree/master/testdata)
   - See the Postman collection in [tools](tools/)
 2. The PSP completes testing in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt)
+  - "Happy day": Valid card, confirmed in the Vipps app, completed payment
+    - Initiate
+    - Receive `makePaymentRequest`
+    - Reserve
+    - Capture and updateStatus
+    - Refund and updateStatus
+  - "Happy day", but with Cancel instead of Capture.
+  - Insufficient funds
+  - Card expired
+  - Card rejected by issuer
 3. The PSP completes one or more test transactions in the production environment
 4. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment
 5. Vipps completes one or more transactions in the production environment
