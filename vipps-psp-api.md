@@ -118,7 +118,7 @@ to successfully authenticate every API call.
 | 86      | Expired card                         |
 | 87      | Invalid card number (no such number) |
 | 88      | Merchant does not allow credit cards |
-| 89      | Not sufficient funds                 |
+| 89      | Insufficient funds                   |
 | 91      | Internal error                       |
 | 92      | Unable to decrypt                    |
 
