@@ -341,10 +341,14 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
+        pattern: "[a-z0-9]"
+        maxLength: 30
         description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: order123abc
+        pattern: "[a-z0-9]"
+        maxLength: 30
         description: Uniquely identifies a payment order for a merchant
       customerMobileNumber:
         type: string
