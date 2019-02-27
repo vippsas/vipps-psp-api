@@ -284,6 +284,10 @@ This API returns the following HTTP statuses in the responses:
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
 
+
+# Creating and managing merchants
+[Signup API documentation](./vipps-psp-api-signup.md)
+
 # Questions?
 
 We're always happy to help with code or other questions you might have!
