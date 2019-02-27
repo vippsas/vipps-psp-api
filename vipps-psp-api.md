@@ -125,6 +125,9 @@ to successfully authenticate every API call.
 | 89      | Insufficient funds                   |
 | 91      | Internal error                       |
 | 92      | Unable to decrypt                    |
+| 93      | Status from Vipps:CANCEL or Status from Vipps:TIMEOUT |
+
+Note 93 is for when the makePayment request from Vipps contains the statuses CANCEL or TIMEOUT. Cancel is when the user cancels in the Vipps app, and TimeOut is when the user does not act on the payment.
 
 ### Status Updates
 

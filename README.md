@@ -11,3 +11,5 @@ contribution guidelines,
 etc.
 
 You can peruse the API reference documentation here: https://vippsas.github.io/vipps-psp-api/
+
+For API documentation and development guidelines please see our [Guide](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md)
