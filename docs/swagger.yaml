@@ -103,22 +103,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: Authorization
-          required: true
-          type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API
-          required: true
-          type: string
-        - name: psp-id
-          in: header
-          description: PSP id as provided by Vipps
-          required: true
-          type: string
-        - name: merchant-serial-number
-          in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: Token provided by the PSP as 'makePaymentToken' in the /v2/psppayments/init call.
           required: true
           type: string
         - in: body
