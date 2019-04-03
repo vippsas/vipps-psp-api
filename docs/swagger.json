@@ -381,11 +381,18 @@
     "Response": {
       "type": "object",
       "properties": {
-        "responseCode": {
-          "type": "string"
-        },
-        "responseMessage": {
-          "type": "string"
+        "responseInfo": {
+          "type": "object",
+          "properties": {
+            "responseCode": {
+              "type": "string",
+              "example": "9000"
+            },
+            "responseMessage": {
+              "type": "string",
+              "example": "SUCCESS"
+            }
+          }
         }
       }
     },
