@@ -338,7 +338,9 @@ definitions:
       customerMobileNumber:
         type: string
         example: 92929292
-        description: Mobile number of the user who has to pay for the transaction from Vipps
+        maxLength: 8
+        pattern: '^\d{8}'
+        description: Mobile number (eight digits) of the user who has to pay for the transaction from Vipps.
       amount:
         type: integer
         format: int32
