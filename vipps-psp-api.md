@@ -55,7 +55,7 @@ Once the end user has confirmed the payment on the Vipps landing page, Vipps
 shares the encrypted card details with the PSP with
 [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST).
 
-If the user does not confirm the payment, Vipps does _not_ call the `makePaymentUrl`.
+Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.
 
 The PSP tries to process the payment through the acquirer and responds to the
 `makePayment` call with the payment request status. The end user receives

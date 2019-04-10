@@ -95,6 +95,8 @@ paths:
         refused (credit card expired, not enough funds etc) or OK.
 
         Communication security is established by using 1-way SSL and makePaymentToken
+
+        **Note:** Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.
       operationId: makePaymentSwaggerUsingPOST
       consumes:
         - application/json;charset=UTF-8
