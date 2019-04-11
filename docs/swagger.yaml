@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.3'
+  version: '1.0.4'
   title: PSP API v2
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -216,7 +216,7 @@ paths:
           type: string
         - name: pspTransactionId
           in: path
-          description: Used as a globally unique transaction reference for the PSP systems
+          description: Used as a globally unique per PSP transaction reference for the PSP systems
           required: true
           type: string
       responses:
@@ -282,7 +282,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: 8874C4DDC93A2E3C
@@ -298,7 +298,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
         description: The Vipps number (MSN) for the sales unit
@@ -335,7 +335,7 @@ definitions:
         example: 7686f7788898767977
         pattern: "[a-z0-9]"
         maxLength: 30
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: order123abc
@@ -385,7 +385,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: order123abc
@@ -436,7 +436,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       status:
         type: string
         example: CAPTURED
@@ -465,7 +465,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       status:
         type: string
         example: OK
