@@ -114,7 +114,7 @@
           "Endpoints required by Vipps from the PSP"
         ],
         "summary": "Service endpoint exposed by the PSP",
-        "description": "Used to transfer credit card data from TSP to PSP to complete initialized transaction. Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.\nCommunication security is established by using 1-way SSL and makePaymentToken\n",
+        "description": "Used to transfer credit card data from TSP to PSP to complete initialized transaction. Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be shown at PSP payment console but Vipps must be informed if payment is refused (credit card expired, not enough funds etc) or OK.\nCommunication security is established by using 1-way SSL and makePaymentToken\n**Note:** Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.\n",
         "operationId": "makePaymentSwaggerUsingPOST",
         "consumes": [
           "application/json;charset=UTF-8"
@@ -126,28 +126,7 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Ocp-Apim-Subscription-Key",
-            "in": "header",
-            "description": "Subscription key for the PSP API",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "psp-id",
-            "in": "header",
-            "description": "PSP id as provided by Vipps",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "merchant-serial-number",
-            "in": "header",
-            "description": "The Vipps number (MSN) for the sales unit",
+            "description": "Token provided by the PSP as 'makePaymentToken' in the /v2/psppayments/init call.",
             "required": true,
             "type": "string"
           },
@@ -381,11 +360,18 @@
     "Response": {
       "type": "object",
       "properties": {
-        "responseCode": {
-          "type": "string"
-        },
-        "responseMessage": {
-          "type": "string"
+        "responseInfo": {
+          "type": "object",
+          "properties": {
+            "responseCode": {
+              "type": "string",
+              "example": "9000"
+            },
+            "responseMessage": {
+              "type": "string",
+              "example": "SUCCESS"
+            }
+          }
         }
       }
     },
@@ -438,7 +424,8 @@
           "enum": [
             "YES",
             "TIMEOUT",
-            "CANCEL"
+            "CANCEL",
+            "NO"
           ]
         }
       },
@@ -476,7 +463,9 @@
         "customerMobileNumber": {
           "type": "string",
           "example": 92929292,
-          "description": "Mobile number of the user who has to pay for the transaction from Vipps"
+          "maxLength": 8,
+          "pattern": "^\\d{8}",
+          "description": "Mobile number (eight digits) of the user who has to pay for the transaction from Vipps."
         },
         "amount": {
           "type": "integer",

@@ -318,6 +318,7 @@ definitions:
           - YES
           - TIMEOUT
           - CANCEL
+          - NO
     title: MakePaymentRequest
   MakePaymentResponse:
     type: object
