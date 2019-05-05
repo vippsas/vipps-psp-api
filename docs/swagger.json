@@ -445,6 +445,14 @@
     },
     "InitiatePaymentRequest": {
       "type": "object",
+      "required": [
+        "pspTransactionId",
+        "merchantOrderId",
+        "amount",
+        "currency",
+        "pspRedirectUrl",
+        "makePaymentUrl"
+      ],
       "properties": {
         "pspTransactionId": {
           "type": "string",
@@ -502,6 +510,7 @@
         "isApp": {
           "type": "boolean",
           "example": true,
+          "default": false,
           "description": "Indicates whether payment request is triggered from Mobile App or Web browser"
         }
       },
