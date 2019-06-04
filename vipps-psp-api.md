@@ -62,6 +62,14 @@ The PSP tries to process the payment through the acquirer and responds to the
 confirmation in the Vipps app. Vipps redirects the end user to the `redirectUrl`
 provided during payment initiation.
 
+#### MakePayment status
+| Enum value    | Description                                   |
+| --------------| --------------------------------------------- |
+| YES           | User successfully approved the order          |
+| NO            | Something failed during approval              |
+| TIMEOUT       | User didn't act on the payment                |
+| CANCEL        | User cancelled the payment                    |
+
 ## Example request
 
 ```json
