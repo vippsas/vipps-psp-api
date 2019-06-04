@@ -65,7 +65,7 @@ provided during payment initiation.
 #### MakePayment status
 | Enum value    | Description                                   |
 | --------------| --------------------------------------------- |
-| YES           | User successfully approved the order          |
+| YES           | User successfully approved the payment        |
 | NO            | Something failed during approval              |
 | TIMEOUT       | User didn't act on the payment                |
 | CANCEL        | User cancelled the payment                    |
