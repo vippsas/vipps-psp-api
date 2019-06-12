@@ -30,6 +30,19 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ## PSP payment sequence
 
+### Summary
+
+1. PSP initiates payment
+2. User confirms payment in Vipps
+3. Vipps sends encrypted card details to PSP
+4. PSP uses the encrypted card details to perform the payment.
+5. PSP informs Vipps abouyt the payment status
+
+Please note that Vipps is _not_ involved in the actual payment. 
+Vipps provides the encrypted card details to the PSP, and it is the PSP that performs the payment.
+
+### Sequence diagram
+
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
 ### PSP implementation checklist
