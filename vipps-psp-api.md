@@ -32,11 +32,11 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ### Summary
 
-1. PSP initiates payment
+1. PSP initiates payment: [`POST/v2/psppayments/init`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/initiatePaymentV2UsingPOST)
 2. User confirms payment in Vipps
-3. Vipps sends encrypted card details to PSP
+3. Vipps sends encrypted card details to PSP: [`POST` to the PSP-specified `makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
 4. PSP uses the encrypted card details to perform the payment.
-5. PSP informs Vipps abouyt the payment status
+5. PSP informs Vipps about the payment status: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
 Please note that Vipps is _not_ involved in the actual payment. 
 Vipps provides the encrypted card details to the PSP, and it is the PSP that performs the payment.
