@@ -2,6 +2,8 @@
 
 Document version 0.2.0
 
+**Important:** V1 will be phased out shortly, and it is therefore important that you migrate all merchants over to V2 as soon as the integration is verified by Vipps and you are ready to go live.
+
 # Overall flow for PSP integrations
 
 1. The PSP completes the direct integration with the [Vipps PSP API v2](https://github.com/vippsas/vipps-psp-api)
