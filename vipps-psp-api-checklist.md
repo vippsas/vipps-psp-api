@@ -2,7 +2,7 @@
 
 Document version 0.2.0
 
-**Important:** V1 will be phased out shortly, and it is therefore important that you migrate all merchants over to V2 as soon as the integration is verified by Vipps and you are ready to go live.
+**Important:** V1 will be phased out shortly, and it is therefore important that all merchants are migrated over to V2 as soon as the integration is verified by Vipps and you are ready to go live.
 
 # Overall flow for PSP integrations
 
