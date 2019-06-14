@@ -45,7 +45,8 @@ Vipps provides the encrypted card details to the PSP, and it is the PSP that per
 therefore not being "redirected" back to the merchant. Because of this it is important for the
 merchant and the PSP to _not_ base their transaction logic on the redirect alone. 
 For example: Check for "reserved" status with the PSP's API (not Vipps' API), 
-then do "capture" when the goods have been delivered.
+then do "capture" when the goods have been delivered. 
+See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md).  
 
 ### Sequence diagram
 
