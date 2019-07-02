@@ -178,13 +178,11 @@ Authorization: makePaymentToken
 
 The PSP API supports recurring payments out of the box. This enables the PSP to perform recurring payments through Vipps, while retaining full transactional control. This has been built as an extension to the existing PSPv2 API, and no existing integrations will be affected, other than the possibility to initialize and preform recurring payments.
 
-## Subscription and oneclick scopes
+## Subscription scope
 
-As of now, there are two possible ways to perform a recurring payment - *subscription* and *oneclick*. These are referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
+As of now, there is one possible ways to perform a recurring payment - *subscription* . These are referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
 
-*Subscription* based payments are created as a consent to an agreement that allows the PSP to withdraw money on unknown intervals. This implies that the user won't have to accept the payment on each occasion, only the first one when consenting to the agreement. An example of this could be a subscription to a music streaming service.
-
-*Oneclick* payments are created as agreements where the user will be prompted on each payment. An example of a oneclick payment might be a ticketing service where the user will get prompted to buy a new ticket when the old one expires. Instead of switching to the app to accept the payment, the user already has a oneclick recurring agreement with Vipps as the payment source, and the ticketing app won´t need to involve the Vipps app at all.
+*Subscription* based payments are created as a consent to an agreement that allows withdrawal of money on intervals. This implies that the user won't have to accept the payment on each occasion, only the first occasion when consenting to the agreement. An example of this could be a subscription to a music streaming service paid monthly.
 
 ## Initialize a recurring payment
 
