@@ -204,6 +204,121 @@ Note 93 is for when the makePayment request from Vipps contains the statuses CAN
 
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded. Vipps also provides an endpoint to check the payment status.
 
+# PSD2 Compliance
+
+In order to be allow for delegated SCA through the PSD2 directive every transaction needs to be marked with Vipps's WalletId. Vipps's WalletId is A62.
+
+## 3DSecure Fallback.
+
+In case of a soft decline (issuer demanded 3DS) the PSP will need to provide the 3DSecure to Vipps.
+
+![PSP API sequence diagram](diagrams/3DSFallbackFlow.png)
+
+Format of MakePaymentRequest response provided by the PSP in case of a soft decline
+
+```json
+{
+  "errorMessage": {
+    "errorId": 1036,
+    "errorText": "Soft Decline"
+  },
+  "paymentInfo": {
+    "pspTransactionId": "7686f7788898767977",
+    "status": "Challenge",
+    "3DSUrl": "https://terminal.com/example"
+  }
+}
+```
+
+The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then forward the data from the 3DSecure session. The data will be sent in a an otherwise identical version of the MakePaymentRequest that got the soft decline.
+
+```json
+Authorization: makePaymentToken
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantSerialNumber": "123456",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "confirmed": "YES/TIMEOUT/CANCEL",
+  "3DSecureData": {
+    "pares" : "eNpdU8tymzAU3ecrvMumYz1AgD2yZnDsTpMZx06TRdudLK5skhiIgNjust/Tr+qXVMIm4DDDoHvuOdKZexB/2hqA2SOo2oC4Ggz4AspSbmCQJpPrSELAZKApSOyFkWYaY+brJAq0pzTQa6ewmlX8Hd4aRZDoKMIs8WXiK2/NvIAFDPwwoRrCkV6fFVbzDqZM80yQIR5SjtqybRcyE4xFPmUhoZiGhPkRRw5tGQswaiuzqgUsJNXb9PZeMBpYFUfnsuvvwNzOBKa4fTg6QR0lkzsQ84PcFa/AUVN1TZXXWWWOgmLrpS26dm1exbaqijFC+/1+CKddhrnZII5cs7WOPnvnq9oBZf+wQ5qIxSzed+/8uPj9QO6flb98iiccOUbHT2QF1hlhmODRgARj6o0Z46jBezPaOd/i35+/hH7x7ATOQMconJf4hBLqKH2kN43aGMjUUYxCN4626ghwKPIMrMbm+7HuGYZSCevPfT4m83kQ/ObbRcCqsnHls7V++fVAHoPlnb/9eVMuVz+m8fzrNN5MXOwN6cJHaoMiETkZSbvUOGr3t0e7v7i5A+h8CcQVR5cX5D/FxN2u"
+  }
+}
+```
+
+# Recurring PSP payments
+
+The PSP API supports recurring payments out of the box. This enables the PSP to perform recurring payments through Vipps, while retaining full transactional control. This has been built as an extension to the existing PSPv2 API, and no existing integrations will be affected, other than the possibility to initialize and preform recurring payments.
+
+## Subscription scope
+
+As of now, there is one possible ways to perform a recurring payment - *subscription* . These are referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
+
+*Subscription* based payments are created as a consent to an agreement that allows withdrawal of money on intervals. This implies that the user won't have to accept the payment on each occasion, only the first occasion when consenting to the agreement. An example of this could be a subscription to a music streaming service paid monthly.
+
+## Initialize a recurring payment
+
+Initializing a recurring payment works in the same way as a non-recurring payment, but with the inclusion of a *scope* and *agreementURL* in the init call.
+
+The *scope* can at the time be set to either *subscription* or *oneclick*. The *agreementURL* should be a link to where the user can click to administer the agreement.
+
+To start the initialization, create a standard /init call with the addition of the required fields. If you want to initialize a recurring *subscription*, the init request body could look like this.
+
+```json
+{
+  "pspRedirectUrl": "yourRedirectUrl",
+  "amount": 1337,
+  "makePaymentToken": "tokenGoesHere",
+  "makePaymentUrl": "yourCallbackEndpointUrl",
+  "currency": "NOK",
+  "merchantOrderId": "123123123",
+  "isApp": false,
+  "pspTransactionId": "{{psptransactionid}}",
+  "paymentText": "Order id: 213213",
+  "scope": "subscription",
+  "agreementURL": "linkToTheAgreement"
+}
+```
+
+In the same way as a normal, non-recurring PSPv2 payment, the PSP will receive a *makePayment* callback. In the body of this callback, you will now also find a *userToken*.
+
+## The userToken
+
+The user token is a token generated when the user has given a consent. This token is provided to the PSP in the makePayment callback when initializing or preforming a recurring payment.
+
+A *userToken* contains the *scope* of the consent, in the claim named *scope*. The token also includes various useful information
+
+```
+{
+  "sub" // agreement_id
+  "aud" // audience (usually something like "https://vipps.no")
+  "iat" // issue_day_time
+  "scope"
+}
+```
+
+## Do the next recurring payment
+
+After initialisation, the next payment can be made by passing your *userToken* to the */payments* endpoint as a header with the name *userToken*.
+
+```json
+HEADER: "
+        Authorization: asd123
+        Ocp-Apim-Subscription-Key: asdf234
+        PSP-ID: sdf421
+        Meerchant-Serial-Number: dsdf322
+        UserToken: 123abc
+        "
+{
+  "pspTransactionId": "123",
+  "merchantOrderId": "123ABCD",
+  "amount": 100,
+  "currency": "NOK",
+  "makePaymentUrl": "http://yourPaymentUrl",
+  "makePaymentToken": "token123",
+  "paymentText": "Description of payment"
+}
+```
+
 
 ## HTTP responses
 
@@ -231,8 +346,6 @@ This API returns the following HTTP statuses in the responses:
 | `amount`         | amount.less.than.one                       |
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
-
-
 
 # Questions?
 
