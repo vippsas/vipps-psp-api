@@ -1,0 +1,25 @@
+@startuml
+participant App
+participant VippsBackend
+participant PSP
+participant 3DSservice
+
+App -> VippsBackend: Approve
+VippsBackend -> PSP: MakePaymentRequest pspId X
+PSP -> VippsBackend: 3DSservice url
+VippsBackend -> App: 3DSservice url
+App -> App : Open url in Iframe
+App -> 3DSservice : User completes 3DSecure
+App -> App : Intercepts Redirect
+App -> VippsBackend: Authenticate
+note right
+Authenticate is the internal
+Vipps terminology for a
+3DS flow
+end note
+VippsBackend -> PSP: MakePaymentRequest pspId X
+note right
+Will contain PaRes value from 3Ds
+session.
+end note
+@enduml

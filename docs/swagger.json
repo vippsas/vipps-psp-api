@@ -108,6 +108,193 @@
         "deprecated": false
       }
     },
+    "/v2/psppayments/payments": {
+      "post": {
+        "tags": [
+          "Vipps PSP API"
+        ],
+        "summary": "Process a payment with token",
+        "operationId": "processPaymentOnToken",
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer JWT-TOKEN",
+            "required": true,
+            "type": "string",
+            "default": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Subscription key for the product. Can be found in Vipps developer portal",
+            "required": true,
+            "type": "string",
+            "default": "c1b1a8846ec56d09db39bd3b5403bf9"
+          },
+          {
+            "name": "PSP-ID",
+            "in": "header",
+            "description": "PSP ID as provided by Vipps",
+            "required": true,
+            "type": "string",
+            "default": "C948DFD1546347568874C4DDC93A2E3C"
+          },
+          {
+            "name": "MERCHANT-SERIAL-NUMBER",
+            "in": "header",
+            "description": "Identifies a merchant",
+            "required": true,
+            "type": "string",
+            "default": "123456"
+          },
+          {
+            "name": "userToken",
+            "in": "header",
+            "description": "JWT-TOKEN",
+            "required": true,
+            "type": "string",
+            "default": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+          },
+          {
+            "in": "body",
+            "name": "ProcessPaymentOnToken",
+            "description": "ProcessPaymentOnToken",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProcessPaymentOnToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaymentTokenRepresentation"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Vipps PSP API"
+        ],
+        "summary": "Delete a payment agreement",
+        "operationId": "deletePSPPaymenAgreementUsingDELETE",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer JWT-TOKEN",
+            "required": true,
+            "type": "string",
+            "default": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+          },
+          {
+            "name": "MERCHANT-SERIAL-NUMBER",
+            "in": "header",
+            "description": "Identifies a merchant",
+            "required": true,
+            "type": "string",
+            "default": "123456"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Subscription key for the product. Can be found in Vipps developer portal",
+            "required": true,
+            "type": "string",
+            "default": "c1b1a8846ec56d09db39bd3b5403bf9"
+          },
+          {
+            "name": "PSP-ID",
+            "in": "header",
+            "description": "PSP ID as provided by Vipps",
+            "required": true,
+            "type": "string",
+            "default": "C948DFD1546347568874C4DDC93A2E3C"
+          },
+          {
+            "name": "userToken",
+            "in": "header",
+            "description": "JWT-TOKEN",
+            "required": true,
+            "type": "string",
+            "default": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "makePaymentUrl": {
       "post": {
         "tags": [
@@ -378,6 +565,12 @@
       },
       "title": "ErrorMessage"
     },
+    "Scope": {
+      "type": "string",
+      "title": "Scope",
+      "description": "A scope for future payments you want to process with the usertoken. Current available scopes are \"psp_subscription\" or \"psp_one_click\", limited to one.",
+      "example": "psp_subscription"
+    },
     "Response": {
       "type": "object",
       "properties": {
@@ -410,6 +603,22 @@
       },
       "title": "PaymentInitiationRepresentation"
     },
+    "PaymentTokenRepresentation": {
+      "type": "object",
+      "properties": {
+        "pspTransactionId": {
+          "type": "string",
+          "example": "7686f7788898767977",
+          "description": "Used as a globally unique transaction reference for the PSP systems"
+        },
+        "merchantOrderId": {
+          "type": "string",
+          "example": "8874C4DDC93A2E3C",
+          "description": "Uniquely identifies a payment order for a merchant"
+        }
+      },
+      "title": "PaymentTokenRepresentation"
+    },
     "MakePaymentRequest": {
       "type": "object",
       "properties": {
@@ -440,6 +649,11 @@
             "TIMEOUT",
             "CANCEL"
           ]
+        },
+        "userToken": {
+          "description": "JWT-TOKEN",
+          "type": "string",
+          "example": "eyJh123"
         }
       },
       "title": "MakePaymentRequest"
@@ -542,6 +756,48 @@
         }
       },
       "title": "PaymentDetailsRepresentation"
+    },
+    "ProcessPaymentOnToken": {
+      "type": "object",
+      "properties": {
+        "pspTransactionId": {
+          "type": "string",
+          "example": "7686f7788898767977",
+          "description": "Used as a globally unique transaction reference for the PSP systems"
+        },
+        "merchantOrderId": {
+          "type": "string",
+          "example": "8874C4DDC93A2E3C",
+          "description": "Uniquely identifies a payment order for a merchant"
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 100,
+          "description": "Amount should be specified in Øre. 100 Øre conversion 1.00 NOK"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "description": "ISO 4217 defined currency code. Currently Vipps only supports NOK"
+        },
+        "makePaymentUrl": {
+          "type": "string",
+          "example": "https://makePaymentURL",
+          "description": "PSP URL used by Vipps to send the card data"
+        },
+        "makePaymentToken": {
+          "type": "string",
+          "example": "ynuiu",
+          "description": "Authorization header for MakePayment call"
+        },
+        "paymentText": {
+          "type": "string",
+          "example": "Description of payment",
+          "description": "Text to be displayed to end user"
+        }
+      },
+      "title": "ProcessPaymentOnToken"
     },
     "PaymentTransactionDetails": {
       "type": "object",
