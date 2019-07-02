@@ -2,10 +2,13 @@
 
 Document version 0.2.0
 
+**Important:** V1 will be phased out shortly, and it is therefore important that all merchants are migrated over to V2 as soon as the integration is verified by Vipps and you are ready to go live.
+
 # Overall flow for PSP integrations
 
 1. The PSP completes the direct integration with the [Vipps PSP API v2](https://github.com/vippsas/vipps-psp-api)
   - This includes _all_ the [API endpoints](https://vippsas.github.io/vipps-psp-api/)
+  - The PSP must not rely on "redirect" alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
   - The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
   - The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
   - The PSP must provide specific error information to Vipps, such as:

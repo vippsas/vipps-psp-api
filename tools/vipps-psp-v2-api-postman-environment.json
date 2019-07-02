@@ -1,0 +1,104 @@
+{
+	"id": "ec711ed3-9635-4d08-a915-9d6e01eebc03",
+	"name": "PSP API v2 - Environment",
+	"values": [
+		{
+			"key": "client_id",
+			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client Id here>",
+			"enabled": true
+		},
+		{
+			"key": "client_secret",
+			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client secret here>",
+			"enabled": true
+		},
+		{
+			"key": "Ocp-Apim-Subscription-Key-Access-Token",
+			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription relevant to your eCommerce InApp Alignment Product and copy the Primary key here>",
+			"enabled": true
+		},
+		{
+			"key": "Ocp-Apim-Subscription-Key-PSP",
+			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find \nthe product subscription and copy the value from Primary key here>",
+			"enabled": true
+		},
+		{
+			"key": "makePaymentUrl",
+			"value": "<PSP URL used by Vipps to send the card data>",
+			"enabled": true
+		},
+		{
+			"key": "MERCHANT-SERIAL-NUMBER",
+			"value": "<Go To Developer Portal->Select the Applications tab->Copy the Saleunit Serial Number from the application you registered for eCommerce InApp Alignment product here>",
+			"enabled": true
+		},
+		{
+			"key": "customerMobileNumber",
+			"value": "<input the mobile number for the test app profile you have received or registered",
+			"enabled": true
+		},
+		{
+			"key": "PSP-ID",
+			"value": "<PSP ID as provided by Vipps>",
+			"enabled": true
+		},
+		{
+			"key": "base_url",
+			"value": "https://apitest.vipps.no",
+			"enabled": true
+		},
+		{
+			"key": "amount",
+			"value": "200",
+			"enabled": true
+		},
+		{
+			"key": "pspTransactionId",
+			"value": "<Used as a globally unique transaction reference for the PSP systems>",
+			"enabled": true
+		},
+		{
+			"key": "pspRedirectUrl",
+			"value": "<Vipps will use this URL to redirect end user after payment confirmation>",
+			"enabled": true
+		},
+		{
+			"key": "status",
+			"value": "CAPTURED",
+			"enabled": true
+		},
+		{
+			"key": "paymentTextInit",
+			"value": "Transaction initiated through Postman",
+			"enabled": true
+		},
+		{
+			"key": "paymentTextUpdate",
+			"value": "Transaction updated through Postman",
+			"enabled": true
+		},
+		{
+			"key": "makePaymentToken",
+			"value": "<Authorization header for MakePayment call>",
+			"enabled": true
+		},
+		{
+			"key": "merchantOrderId",
+			"value": "<Uniquely identifies a payment order for a merchant>",
+			"enabled": true
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "access_token",
+			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v2 - MTE environment>",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-06-21T08:13:40.049Z",
+	"_postman_exported_using": "Postman/7.2.1"
+}

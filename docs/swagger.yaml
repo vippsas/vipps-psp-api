@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.3'
+  version: '1.0.4'
   title: PSP API v2
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -226,6 +226,8 @@ paths:
         refused (credit card expired, not enough funds etc) or OK.
 
         Communication security is established by using 1-way SSL and makePaymentToken
+
+        **Note:** Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.
       operationId: makePaymentSwaggerUsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -234,22 +236,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: Authorization
-          required: true
-          type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API
-          required: true
-          type: string
-        - name: psp-id
-          in: header
-          description: PSP id as provided by Vipps
-          required: true
-          type: string
-        - name: merchant-serial-number
-          in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: Token provided by the PSP as 'makePaymentToken' in the /v2/psppayments/init call.
           required: true
           type: string
         - in: body
@@ -360,7 +347,7 @@ paths:
           type: string
         - name: pspTransactionId
           in: path
-          description: Used as a globally unique transaction reference for the PSP systems
+          description: Used as a globally unique per PSP transaction reference for the PSP systems
           required: true
           type: string
       responses:
@@ -416,17 +403,22 @@ definitions:
   Response:
     type: object
     properties:
-      responseCode:
-        type: string
-      responseMessage:
-        type: string
+      responseInfo:
+        type: object
+        properties:
+          responseCode:
+            type: string
+            example: "9000"
+          responseMessage:
+            type: string
+            example: "SUCCESS"
   PaymentInitiationRepresentation:
     type: object
     properties:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: 8874C4DDC93A2E3C
@@ -454,7 +446,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
         description: The Vipps number (MSN) for the sales unit
@@ -473,7 +465,8 @@ definitions:
         enum:
           - YES
           - TIMEOUT
-          - CANCEL
+          - CANCEL          
+          - NO
       userToken:
         description: JWT-TOKEN
         type: string
@@ -489,13 +482,20 @@ definitions:
     title: MakePaymentResponse
   InitiatePaymentRequest:
     type: object
+    required:
+      - pspTransactionId
+      - merchantOrderId
+      - amount
+      - currency
+      - pspRedirectUrl
+      - makePaymentUrl
     properties:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
         pattern: "[a-z0-9]"
         maxLength: 30
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: order123abc
@@ -505,7 +505,9 @@ definitions:
       customerMobileNumber:
         type: string
         example: 92929292
-        description: Mobile number of the user who has to pay for the transaction from Vipps
+        maxLength: 8
+        pattern: '^\d{8}'
+        description: Mobile number (eight digits) of the user who has to pay for the transaction from Vipps.
       amount:
         type: integer
         format: int32
@@ -535,6 +537,7 @@ definitions:
       isApp:
         type: boolean
         example: true
+        default: false
         description: Indicates whether payment request is triggered from Mobile App or Web browser
     title: InitiatePaymentRequest
   PaymentDetailsRepresentation:
@@ -543,7 +546,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
         example: order123abc
@@ -627,7 +630,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       status:
         type: string
         example: CAPTURED
@@ -656,7 +659,7 @@ definitions:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
+        description: Used as a globally unique per PSP transaction reference for the PSP systems
       status:
         type: string
         example: OK
