@@ -547,7 +547,7 @@
     "Scope": {
       "type": "string",
       "title": "Scope",
-      "description": "A scope for future payments you want to process with the usertoken. Current available scopes are \"psp_subscription\" or \"psp_one_click\", limited to one.",
+      "description": "A scope for future payments you want to process with the usertoken. Current available scopes are \"psp_subscription\"",
       "example": "psp_subscription"
     },
     "Response": {

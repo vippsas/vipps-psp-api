@@ -2,9 +2,9 @@
 
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
 (eCommerce) via PSP offers functionality for payments on
-websites and apps (P2B). "Vipps på Nett" provides merchants a solution where
-the end user only enters a Norwegian mobile number to make a payment with a
-card in the Vipps app.
+websites and apps (P2M). Vipps på Nett offers merchants functionality to
+provide a solution where the end user only enters her Norwegian mobile number
+to retrieve a payment request in the Vipps app.
 
 In the Vipps app the end user selects a payment source to complete the payment
 request. Vipps initiates the payment transaction on the selected source and
@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.4
+Document version 1.0.3
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -29,26 +29,6 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 * Improved and more consistent parameter names in the API
 
 ## PSP payment sequence
-
-### Summary
-
-1. PSP initiates payment: [`POST:/v2/psppayments/init`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/initiatePaymentV2UsingPOST)
-2. User confirms payment in Vipps
-3. Vipps sends encrypted card details to PSP: [`POST` to the PSP-specified `makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
-4. PSP uses the encrypted card details to perform the payment.
-5. PSP informs Vipps about the payment status: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
-
-Please note that Vipps is _not_ involved in the actual payment. 
-Vipps provides the encrypted card details to the PSP, and it is the PSP that performs the payment.
-
-**Important:** Some users may close Vipps immediately after seeing the payment confirmation, 
-therefore not being "redirected" back to the merchant. Because of this it is important for the
-merchant and the PSP to _not_ base their transaction logic on the redirect alone. 
-For example: Check for "reserved" status with the PSP's API (not Vipps' API), 
-then do "capture" when the goods have been delivered. 
-See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md).  
-
-### Sequence diagram
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
@@ -71,24 +51,11 @@ app. In the Vipps app the end user can select payment source and confirm the amo
 
 ### MakePayment
 
-Once the end user has confirmed the payment on the Vipps landing page, Vipps
-shares the encrypted card details with the PSP with
-[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST).
-
-Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect. Vipps may also provide additional `makePayment` calls if the user retries a already paid order. In this case the second `makePayment` call should not override the result from the first.
-
-The PSP tries to process the payment through the acquirer and responds to the
-`makePayment` call with the payment request status. The end user receives
-confirmation in the Vipps app. Vipps redirects the end user to the `redirectUrl`
-provided during payment initiation.
-
-#### MakePayment status
-| Enum value    | Description                                   |
-| --------------| --------------------------------------------- |
-| YES           | User successfully approved the payment        |
-| NO            | Something failed during approval              |
-| TIMEOUT       | User didn't act on the payment                |
-| CANCEL        | User cancelled the payment                    |
+Once the end user has confirmed the payment, Vipps shares the encrypted card
+details with the PSP to the makePaymentUrl. PSP tries to process the payment
+through the acquirer and responds to the makePayment-call with the payment
+request status. End user receives confirmation in Vipps app. Vipps redirects
+the end user to the redirectUrl provided during payment initiation.
 
 ## Example request
 
@@ -98,7 +65,7 @@ Authorization: makePaymentToken
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES"
+  "confirmed": "YES/TIMEOUT/CANCEL"
 }
 ```
 
@@ -117,48 +84,12 @@ Authorization: makePaymentToken
 }
 ```
 
-## Update status
-
-Since Vipps doesn’t process transactions, updates on payment status are required
-in order to deliver expected customer experience. That means that PSP has to inform
-Vipps about any PSP payment status change with
-[`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
-
-### Example request
-
-```json
-{
-  "transactions": [
-    {
-      "pspTransactionId": "7686f7788898767977",
-      "status": "CAPTURED",
-      "amount": 20000,
-      "currency": "NOK",
-      "paymentText": "One pair of Vipps socks"
-    }
-  ]
-}
-```
-
-### Example response
-
-```json
-{
-  "responseInfo": {
-    "responseCode": "9000",
-    "responseMessage": "SUCCESS"
-  }
-}
-```
-
 ## Idempotency
 
-All API requests can be retried without any side effects
-by providing the `Request-Id` idempotency key in the header of the request.
-
-In case of network issues or other problems, the API call can be safely retried
-with the same idempotency key. The idempotency key is a unique alphanumeric id
-generated by the merchant.
+All API requests in Vipps eCommerce can be retried without any side effects
+by providing idempotent key in a header of  the request. For example, in
+case the request fails because of network error it can safely be retried
+with the same idempotent key. Idempotent key is generated by merchant.
 
 ```
 Request-Id: slvnwdcweofjwefweklfwelf
@@ -168,10 +99,8 @@ Request-Id: slvnwdcweofjwefweklfwelf
 
 Every API call is authenticated and authorized based on the application
 Authorization token (JWT) and APIM subscription key
-(`Ocp-Apim-Subscription-Key`).
-
-The following headers are required in every API request
-to successfully authenticate every API call:
+(`Ocp-Apim-Subscription-Key`). Following headers are required to be there in every API request
+to successfully authenticate every API call.
 
 | Header Name | Header Value | Description |
 | :-------------------------- | :--------------------------- | :--------------------------------------------- |
@@ -224,7 +153,7 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
   },
   "paymentInfo": {
     "pspTransactionId": "7686f7788898767977",
-    "status": "Challenge",
+    "status": "3DS",
     "3DSUrl": "https://terminal.com/example"
   }
 }
@@ -249,17 +178,18 @@ Authorization: makePaymentToken
 
 The PSP API supports recurring payments out of the box. This enables the PSP to perform recurring payments through Vipps, while retaining full transactional control. This has been built as an extension to the existing PSPv2 API, and no existing integrations will be affected, other than the possibility to initialize and preform recurring payments.
 
-## Subscription scope
+## Scopes
 
-As of now, there is one possible ways to perform a recurring payment - *subscription* . These are referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
+As of now, there are is one possible way to perform a recurring payment - *subscription*. Referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
 
-*Subscription* based payments are created as a consent to an agreement that allows withdrawal of money on intervals. This implies that the user won't have to accept the payment on each occasion, only the first occasion when consenting to the agreement. An example of this could be a subscription to a music streaming service paid monthly.
+*Subscription* based payments are created as a consent to an agreement that allows the PSP to withdraw money on unknown intervals. This implies that the user won't have to accept the payment on each occasion, only the first one when consenting to the agreement. An example of this could be a subscription to a music streaming service.
+
 
 ## Initialize a recurring payment
 
 Initializing a recurring payment works in the same way as a non-recurring payment, but with the inclusion of a *scope* and *agreementURL* in the init call.
 
-The *scope* can at the time be set to either *subscription* or *oneclick*. The *agreementURL* should be a link to where the user can click to administer the agreement.
+The *scope* can at the time be set to  *subscription* . The *agreementURL* should be a link to where the user can click to administer the agreement.
 
 To start the initialization, create a standard /init call with the addition of the required fields. If you want to initialize a recurring *subscription*, the init request body could look like this.
 
