@@ -139,11 +139,11 @@ In order to be allow for delegated SCA through the PSD2 directive every transact
 
 ## 3DSecure Fallback.
 
-In case of a soft decline (issuer demanded 3DS) the PSP will need to provide the 3DSecure to Vipps.
+In case of a soft decline (issuer demanded 3DS) the PSP will host a 3DSecure session and need to provide the url to Vipps.
 
 ![PSP API sequence diagram](diagrams/3DSFallbackFlow.png)
 
-Format of MakePaymentRequest response provided by the PSP in case of a soft decline
+Format of MakePaymentRequest response provided by the PSP in case of a soft decline:
 
 ```json
 {
@@ -154,12 +154,12 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
   "paymentInfo": {
     "pspTransactionId": "7686f7788898767977",
     "status": "3DS",
-    "3DSUrl": "https://terminal.com/example"
+    "3DSUrl": "https://psp.com/3ds/123123"
   }
 }
 ```
 
-The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then forward the data from the 3DSecure session. The data will be sent in a an otherwise identical version of the MakePaymentRequest that got the soft decline.
+The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then send an otherwise identical version of the makepayment request. Letting the PSP complete the transaction as neeeded.
 
 ```json
 Authorization: makePaymentToken
@@ -168,9 +168,6 @@ Authorization: makePaymentToken
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL",
-  "3DSecureData": {
-    "pares" : "eNpdU8tymzAU3ecrvMumYz1AgD2yZnDsTpMZx06TRdudLK5skhiIgNjust/Tr+qXVMIm4DDDoHvuOdKZexB/2hqA2SOo2oC4Ggz4AspSbmCQJpPrSELAZKApSOyFkWYaY+brJAq0pzTQa6ewmlX8Hd4aRZDoKMIs8WXiK2/NvIAFDPwwoRrCkV6fFVbzDqZM80yQIR5SjtqybRcyE4xFPmUhoZiGhPkRRw5tGQswaiuzqgUsJNXb9PZeMBpYFUfnsuvvwNzOBKa4fTg6QR0lkzsQ84PcFa/AUVN1TZXXWWWOgmLrpS26dm1exbaqijFC+/1+CKddhrnZII5cs7WOPnvnq9oBZf+wQ5qIxSzed+/8uPj9QO6flb98iiccOUbHT2QF1hlhmODRgARj6o0Z46jBezPaOd/i35+/hH7x7ATOQMconJf4hBLqKH2kN43aGMjUUYxCN4626ghwKPIMrMbm+7HuGYZSCevPfT4m83kQ/ObbRcCqsnHls7V++fVAHoPlnb/9eVMuVz+m8fzrNN5MXOwN6cJHaoMiETkZSbvUOGr3t0e7v7i5A+h8CcQVR5cX5D/FxN2u"
-  }
 }
 ```
 
