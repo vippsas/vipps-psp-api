@@ -153,13 +153,13 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
   },
   "paymentInfo": {
     "pspTransactionId": "7686f7788898767977",
-    "status": "3DS",
-    "3DSUrl": "https://psp.com/3ds/123123"
+    "status": "SOFT_DECLINE",
+    "url3dSecure": "https://psp.com/3ds/123123"
   }
 }
 ```
 
-The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then send an otherwise identical version of the makepayment request. Letting the PSP complete the transaction as neeeded.
+The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then send new makepayment request that contains data about the completed 3DSecure flow. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK".
 
 ```json
 Authorization: makePaymentToken
@@ -168,6 +168,10 @@ Authorization: makePaymentToken
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL",
+  "data3DSecure": {
+    "dispatchId": "...",
+    "pares": "..."
+  }
 }
 ```
 
