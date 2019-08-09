@@ -893,7 +893,8 @@
           "description": "Status of the transaction",
           "enum": [
             "OK",
-            "FAIL"
+            "FAIL",
+            "SOFT_DECLINE"
           ]
         }
       },
