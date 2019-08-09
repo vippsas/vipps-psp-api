@@ -668,6 +668,7 @@ definitions:
         enum:
           - OK
           - FAIL
+          - SOFT_DECLINE
     title: PaymentInfo
   TransactionSummary:
     type: object
