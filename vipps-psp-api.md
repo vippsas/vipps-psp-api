@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.3
+Document version 2.0.0
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -137,7 +137,7 @@ To provide a consistent end user experience it is important that Vipps is notifi
 
 In order to be allow for delegated SCA through the PSD2 directive every transaction needs to be marked with Vipps's WalletId. Vipps's WalletId is A62.
 
-## 3DSecure Fallback.
+## 3DSecure Fallback
 
 In case of a soft decline (issuer demanded 3DS) the PSP will host a 3DSecure session and need to provide the url to Vipps.
 
@@ -214,9 +214,12 @@ In the same way as a normal, non-recurring PSPv2 payment, the PSP will receive a
 
 ## The userToken
 
-The user token is a token generated when the user has given a consent. This token is provided to the PSP in the makePayment callback when initializing or preforming a recurring payment.
+The user token is a token generated when the user has given a consent.
+This token is provided to the PSP in the `makePayment` callback when initializing
+or preforming a recurring payment.
 
-A *userToken* contains the *scope* of the consent, in the claim named *scope*. The token also includes various useful information
+A *userToken* contains the *scope* of the consent, in the claim named *scope*.
+The token also includes various useful information
 
 ```
 {
@@ -229,7 +232,8 @@ A *userToken* contains the *scope* of the consent, in the claim named *scope*. T
 
 ## Do the next recurring payment
 
-After initialisation, the next payment can be made by passing your *userToken* to the */payments* endpoint as a header with the name *userToken*.
+After initialisation, the next payment can be made by passing your *userToken*
+to the */payments* endpoint as a header with the name *userToken*.
 
 ```json
 HEADER: "
@@ -277,6 +281,18 @@ This API returns the following HTTP statuses in the responses:
 | `amount`         | amount.less.than.one                       |
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
+
+# PSP certification process
+
+Vipps will assist the PSP in obtaining a decryption certificate. Once the PSP is ready
+to start, Vipps will initiate communication with Nets to assist in obtaining a
+certificate.
+
+# Onboarding new merchants
+
+This is currently a manual process, and Vipps is working on an API to
+automate this. The draft, which is very much a work in progress, is available
+here: https://github.com/vippsas/vipps-psp-api/blob/psp-signup/vipps-psp-api-signup.md
 
 # Questions?
 
