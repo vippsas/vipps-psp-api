@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.3
+Document version 1.0.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -159,7 +159,7 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
 }
 ```
 
-The Vipps App will then host the URL in an iframe, letting the user complete the 3DSecure flow. Vipps will then send new makepayment request that contains data about the completed 3DSecure flow. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK".
+The Vipps App will then open the URL in an iframe, letting the user complete the 3DSecure flow. The PSP will have to host and retrieve any necessary data from the session. Once the session is completed it will have to finish with a redirect to   "https://www.vipps.no/mobileintercept", where upon the app will close the iframe. Vipps will then resend the Makepayment request. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK". Once the status is returned it will be displayed to the user as normal in the app.
 
 ```json
 Authorization: makePaymentToken
@@ -167,11 +167,7 @@ Authorization: makePaymentToken
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES/TIMEOUT/CANCEL",
-  "data3DSecure": {
-    "dispatchId": "...",
-    "pares": "..."
-  }
+  "confirmed": "YES/TIMEOUT/CANCEL"
 }
 ```
 
