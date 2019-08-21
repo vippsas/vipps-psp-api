@@ -161,6 +161,10 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
 
 The Vipps App will then open the URL in an iframe, letting the user complete the 3DSecure flow. The PSP will have to host and retrieve any necessary data from the session. Once the session is completed it will have to finish with a redirect to   "https://www.vipps.no/mobileintercept", where upon the app will close the iframe. Vipps will then resend the Makepayment request. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK". Once the status is returned it will be displayed to the user as normal in the app.
 
+```
+Final Redirect URL: https://www.vipps.no/mobileintercept
+```
+
 ```json
 Authorization: makePaymentToken
 {
