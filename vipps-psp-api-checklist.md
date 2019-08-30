@@ -40,3 +40,10 @@ Document version 1.0.0
   - At least one order id for orders with each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes) 
 5. Vipps completes one or more transactions in the production environment
 6. The PSP goes live 🎉
+
+# Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
+a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
