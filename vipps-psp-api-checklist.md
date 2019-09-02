@@ -8,12 +8,12 @@ Document version 1.0.0
 
 1. The PSP completes the direct integration with the [Vipps PSP API v2](https://github.com/vippsas/vipps-psp-api)
   - This includes _all_ the [API endpoints](https://vippsas.github.io/vipps-psp-api/)
-    - `POST:/v2/psppayments/init`
-    - `POST:/v2/psppayments/updatestatus`
-    - `GET:/v2/psppayments/{pspTransactionId}/details`
-    - On the merchant side: `POST:makePaymentUrl`
-    - For recurring only: `POST:/v2/psppayments/payments`
-    - For recurring only: `DELETE:/v2/psppayments/payments`
+    - [`POST:/v2/psppayments/init`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/initiatePaymentV2UsingPOST)
+    - [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+    - [`GET:/v2/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+    - On the merchant side: [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
+    - For recurring only: [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/processPaymentOnToken)
+    - For recurring only: [`DELETE:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/deletePSPPaymenAgreementUsingDELETE)
   - The PSP _must not_ rely on "redirect" alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
   - The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
   - The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
