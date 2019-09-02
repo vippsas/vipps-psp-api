@@ -36,7 +36,7 @@ Document version 1.0.0
   - Card rejected by issuer
 3. The PSP completes one or more test transactions in the production environment
 4. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment:
-  - At least one order id the orders with the following statuses: capture, refund, cancel.
+  - At least one order id for orders with each of the following statuses: capture, refund, cancel.
   - At least one order id for orders with each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes) 
 5. Vipps completes one or more transactions in the production environment
 6. The PSP goes live 🎉
