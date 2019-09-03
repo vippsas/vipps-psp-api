@@ -1,6 +1,6 @@
 # Vipps PSP API Checklist
 
-Document version 1.0.0
+Document version 1.1.0
 
 **Important:** V1 will be phased out shortly, and it is therefore important that all merchants are migrated over to V2 as soon as the integration is verified by Vipps and you are ready to go live.
 
@@ -16,7 +16,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] For recurring only: [`DELETE:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/deletePSPPaymenAgreementUsingDELETE)
 - [ ] Respond with correct error information to [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST). See [error codes list](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes)
 - [ ] Avoid Integration pitfalls
-    - [ ] The PSP _must not_ rely on `` alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
+    - [ ] The PSP _must not_ rely on `pspRedirectUrl` alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
     - [ ] The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
   
