@@ -24,12 +24,12 @@ For examples of requests and responses, see the Postman collection in [tools](to
 # Live flow
 1. The PSP completes all checklist items.
 2. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
-  - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
-  - A complete order including `Cancel`, that has been updated with [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
-  - One ID for each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes).
+    - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
+    - A complete order including `Cancel`, that has been updated with [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
+    - One ID for each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes).
 3. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment:
-  - At least one IDs for orders with each of the following statuses: `Capture`, `Refund`, `Cancel`.
-  - At least 3 IDs for orders with different [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes).
+    - At least one IDs for orders with each of the following statuses: `Capture`, `Refund`, `Cancel`.
+    - At least 3 IDs for orders with different [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes).
 4. The PSP goes live 🎉
 
 # Questions?
