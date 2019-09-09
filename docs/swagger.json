@@ -641,7 +641,14 @@
           "description": "JWT-TOKEN",
           "type": "string",
           "example": "eyJh123"
-        }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationType"
+          }
+        }        
+        
       },
       "title": "MakePaymentRequest"
     },
@@ -934,6 +941,16 @@
         }
       },
       "title": "TransactionSummary"
+    },
+    "OperationType": {
+        "type": "string",
+        "example": "3dssuccess",
+        "description": "The 3D Secure result status",
+        "enum": [
+          "3dssuccess",
+          "3dscancel"
+        ]
+      }      
     }
   }
 }
