@@ -896,7 +896,12 @@
             "FAIL",
             "SOFT_DECLINE"
           ]
-        }
+        },
+        "url3dSecure": {
+          "type": "string",
+          "example": "https://example.com/",
+          "description": "If the end user needs go through a 3D Secure flow, this URL is set."
+        }        
       },
       "title": "PaymentInfo"
     },
