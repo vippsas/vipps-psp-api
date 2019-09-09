@@ -471,6 +471,10 @@ definitions:
         description: JWT-TOKEN
         type: string
         example: eyJh123
+      operations:  
+        type: array
+        items:
+          $ref: '#/definitions/OperationType'                
     title: MakePaymentRequest
   MakePaymentResponse:
     type: object
@@ -698,3 +702,10 @@ definitions:
         example: 0
         description: Total remaining amount to refund in øre
     title: TransactionSummary
+  OperationType:
+    type: string
+    example: 3dssuccess
+    description: The 3D Secure result status
+    enum:
+      - 3dssuccess
+      - 3dscancel
