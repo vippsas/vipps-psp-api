@@ -707,7 +707,7 @@ definitions:
     properties:
       url:
         type: string
-        example: https://vipps.no/mobileintercept?transactionId=123456789&responsecode=cancel
+        example: https://vipps.no/mobileintercept?transactionId=123456789&responsecode=OK
         description: The redirect url to use for the operation.     
       operation:
         type: string
