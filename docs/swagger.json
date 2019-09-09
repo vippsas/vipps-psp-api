@@ -942,15 +942,25 @@
       },
       "title": "TransactionSummary"
     },
-    "OperationType": {
-        "type": "string",
-        "example": "3dssuccess",
-        "description": "The 3D Secure result status",
-        "enum": [
-          "3dssuccess",
-          "3dscancel"
-        ]
-      }      
+    "Operation3DSecure": {
+      "type": "object",
+      "properties": {
+        "operation": {
+            "type": "string",
+            "example": "3dssuccess",
+            "description": "The 3D Secure result status",
+            "enum": [
+              "3dssuccess",
+              "3dscancel"
+            ]
+         },
+        "url": {
+          "type": "string",
+          "example": "https://vipps.no/mobileintercept?transactionId=123456789&responsecode=cancel",
+          "description": "The redirect url to use for the operation."          
+        }        
+      }                    
     }
+
   }
 }
