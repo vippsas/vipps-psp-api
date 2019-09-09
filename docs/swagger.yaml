@@ -474,7 +474,7 @@ definitions:
       operations:  
         type: array
         items:
-          $ref: '#/definitions/OperationType'                
+          $ref: '#/definitions/Operation3DSecure'                
     title: MakePaymentRequest
   MakePaymentResponse:
     type: object
@@ -702,10 +702,17 @@ definitions:
         example: 0
         description: Total remaining amount to refund in øre
     title: TransactionSummary
-  OperationType:
-    type: string
-    example: 3dssuccess
-    description: The 3D Secure result status
-    enum:
-      - 3dssuccess
-      - 3dscancel
+  Operation3DSecure:
+    type: object
+    properties:
+      url:
+        type: string
+        example: https://vipps.no/mobileintercept?transactionId=123456789&responsecode=cancel
+        description: The redirect url to use for the operation.     
+      operation:
+        type: string
+        example: 3dssuccess
+        description: The 3D Secure result status
+        enum:
+          - 3dssuccess
+          - 3dscancel
