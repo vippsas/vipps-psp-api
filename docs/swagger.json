@@ -645,7 +645,7 @@
         "operations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationType"
+            "$ref": "#/definitions/Operation3DSecure"
           }
         }        
         
