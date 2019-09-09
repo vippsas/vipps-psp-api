@@ -63,6 +63,10 @@ through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
 
+`cardData` is a string in the format `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` 
+that has been transformed into a 256 bytes OAEP cryptogram using the public 
+key provided by the PSP. The cryptogram is encoded as 344-characters base64 string. 
+
 ## Example request
 
 ```json

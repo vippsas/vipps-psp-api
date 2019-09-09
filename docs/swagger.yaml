@@ -457,7 +457,7 @@ definitions:
       cardData:
         type: string
         example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
-        description: Encrypted credit card details
+        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
       confirmed:
         type: string
         example: YES
