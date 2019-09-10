@@ -716,3 +716,4 @@ definitions:
         enum:
           - 3dssuccess
           - 3dscancel
+          - 3dsfailure
