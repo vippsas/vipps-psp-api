@@ -951,7 +951,8 @@
             "description": "The 3D Secure result status",
             "enum": [
               "3dssuccess",
-              "3dscancel"
+              "3dscancel",
+              "3dsfailure"
             ]
          },
         "url": {
