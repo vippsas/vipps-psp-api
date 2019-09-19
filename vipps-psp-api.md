@@ -128,7 +128,7 @@ to successfully authenticate every API call.
 | 82      | Refused by Issuer                    |
 | 83      | Suspected fraud                      |
 | 84      | Exceeds withdrawal amount limit      |
-| 85      | Response received to late            |
+| 85      | Response received too late            |
 | 86      | Expired card                         |
 | 87      | Invalid card number (no such number) |
 | 88      | Merchant does not allow credit cards |
