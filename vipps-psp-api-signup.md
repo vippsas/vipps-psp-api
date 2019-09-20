@@ -1,5 +1,8 @@
 # Signup API
 
+**:boom:This API is currently in the request-for-comment stage and is not available in either test or production!**  
+https://github.com/vippsas/vipps-developers/blob/master/contact.md
+
 ## Create merchant
 ### Request
 `POST` `/signup/psp`
