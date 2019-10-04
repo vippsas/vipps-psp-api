@@ -32,12 +32,6 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
-**Important:** Some users may close Vipps immediately after seeing the payment confirmation, 
-therefore not being "redirected" back to the merchant. Because of this it is important for the
-merchant and the PSP to _not_ base their transaction logic on the redirect alone. 
-For example: Check for "reserved" status with the PSP's API (not Vipps' API), 
-then do "capture" when the goods have been delivered.
-
 ### PSP implementation checklist
 
 See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
@@ -63,10 +57,6 @@ through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
 
-`cardData` is a string in the format `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` 
-that has been transformed into a 256 bytes OAEP cryptogram using the public 
-key provided by the PSP. The cryptogram is encoded as 344-characters base64 string. 
-
 ## Example request
 
 ```json
@@ -75,7 +65,7 @@ Authorization: makePaymentToken
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES"
+  "confirmed": "YES/TIMEOUT/CANCEL"
 }
 ```
 
@@ -128,7 +118,7 @@ to successfully authenticate every API call.
 | 82      | Refused by Issuer                    |
 | 83      | Suspected fraud                      |
 | 84      | Exceeds withdrawal amount limit      |
-| 85      | Response received too late            |
+| 85      | Response received to late            |
 | 86      | Expired card                         |
 | 87      | Invalid card number (no such number) |
 | 88      | Merchant does not allow credit cards |
@@ -141,7 +131,9 @@ Note 93 is for when the makePayment request from Vipps contains the statuses CAN
 
 ### Status Updates
 
-To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded. Vipps also provides an endpoint to check the payment status.
+To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+
+Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
 
 # PSD2 Compliance
 
@@ -287,10 +279,6 @@ This API returns the following HTTP statuses in the responses:
 | `amount`         | amount.less.than.one                       |
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
-
-
-# Creating and managing merchants
-[Signup API documentation](./vipps-psp-api-signup.md)
 
 # Questions?
 
