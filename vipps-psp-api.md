@@ -127,7 +127,9 @@ to successfully authenticate every API call.
 | 92      | Unable to decrypt                    |
 | 93      | Status from Vipps:CANCEL or Status from Vipps:TIMEOUT |
 
-Note 93 is for when the makePayment request from Vipps contains the statuses CANCEL or TIMEOUT. Cancel is when the user cancels in the Vipps app, and TimeOut is when the user does not act on the payment.
+Note: Error 93 is for when the 
+[`POST:makePayment`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST) 
+request from Vipps contains the statuses CANCEL or TIMEOUT. `CANCEL` is when the user cancels in the Vipps app, and `TIMEOUT` is when the user does not act on the payment.
 
 ### Status Updates
 
