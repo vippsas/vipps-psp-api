@@ -58,6 +58,12 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
+**Important:** Some users may close Vipps immediately after seeing the payment confirmation, 
+therefore not being "redirected" back to the merchant. Because of this it is important for the
+merchant and the PSP to _not_ base their transaction logic on the redirect alone. 
+For example: Check for "reserved" status with the PSP's API (not Vipps' API), 
+then do "capture" when the goods have been delivered.
+
 ### PSP implementation checklist
 
 See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
