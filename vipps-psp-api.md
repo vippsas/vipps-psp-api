@@ -75,6 +75,18 @@ request to pay with Vipps. Vipps creates the payment and returns a link to
 the Vipps landing page where end user can confirm the mobile number.
 Once user has confirmed number the payment can be considered initiated.
 
+#### Skip landing page
+
+*Only available for whitelisted sale units.*
+
+If this property is set to `true`,
+it will cause a push notification to be sent to the given phone number immediately,
+without loading the landing page.
+
+If the sale unit is not whitelisted, this property is ignored.
+
+If you need to be whitelisted, instructions for this can be found in the [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
+
 ### Payment confirmation
 
 After payment initiation, Vipps sends push notification or redirects user to

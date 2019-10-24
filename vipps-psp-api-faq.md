@@ -61,6 +61,14 @@ From the `makePayment` specification:
 
 Yes
 
+# Is it possible to skip the landing page?
+
+Skipping the landing page is reserved for special cases, where displaying it would not possible.
+This feature has to be enabled by Vipps for eligible sale units.
+Typically only physical points of sale are eligible.
+
+To request this feature, [contact Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
 # More questions or comments?
 
 Please use GitHub's built-in functionality for
