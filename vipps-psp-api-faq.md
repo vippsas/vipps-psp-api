@@ -63,11 +63,15 @@ Yes
 
 # Is it possible to skip the landing page?
 
-Skipping the landing page is reserved for special cases, where displaying it would not possible.
-This feature has to be enabled by Vipps for eligible sale units.
-Typically only physical points of sale are eligible.
+Skipping the landing page is reserved for special cases, where displaying it is not possible.
+See the details in the 
+[skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page) 
+in the API guide.
 
-To request this feature, [contact Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
+This functionality is typically used at physical points of sale, where there is no display available.
+
+To request this feature, [contact Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with a detailed description of why it is not possible to display the landing page.
 
 # More questions or comments?
 
