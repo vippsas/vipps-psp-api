@@ -2,7 +2,7 @@
 
 API version: 2.
 
-Document version 0.1.2.
+Document version 0.1.3.
 
 _**IMPORTANT:**_ This document is a work in progress.
 
@@ -12,6 +12,18 @@ Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
 See the [guide](vipps-psp-api.md) for more details.
+
+# Table of Contents
+
+- [What is the card data structure?](#what-is-the-card-data-structure-)
+  * [How can I view the card data?](#how-can-i-view-the-card-data-)
+- [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants-)
+- [Do we have a test environment?](#do-we-have-a-test-environment-)
+- [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment---service-call-in-case-field--confirmed--has-value--timeout-or-cancel-)
+- [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment---service-with-corresponding-values-in-field--confirmed--if-customer-declines-payment-transaction-or-time-out-occurs-)
+- [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment---we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate---informs-vipps-about-further-actions-with-payment--like-capture-void-refund-)
+- [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page-)
+- [More questions or comments?](#more-questions-or-comments-)
 
 # What is the card data structure?
 
