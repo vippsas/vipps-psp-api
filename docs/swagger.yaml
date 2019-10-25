@@ -543,6 +543,11 @@ definitions:
         example: true
         default: false
         description: Indicates whether payment request is triggered from Mobile App or Web browser
+      skipLandingPage:
+        type: boolean
+        example: true
+        default: false
+        description: Skips the landing page for whitelisted sale units. Requires a valid customerMobileNumber.
     title: InitiatePaymentRequest
   PaymentDetailsRepresentation:
     type: object
