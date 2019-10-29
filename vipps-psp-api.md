@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.
+Document version 1.1.0.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -58,10 +58,10 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
-**Important:** Some users may close Vipps immediately after seeing the payment confirmation, 
+**Important:** Some users may close Vipps immediately after seeing the payment confirmation,
 therefore not being "redirected" back to the merchant. Because of this it is important for the
-merchant and the PSP to _not_ base their transaction logic on the redirect alone. 
-For example: Check for "reserved" status with the PSP's API (not Vipps' API), 
+merchant and the PSP to _not_ base their transaction logic on the redirect alone.
+For example: Check for "reserved" status with the PSP's API (not Vipps' API),
 then do "capture" when the goods have been delivered.
 
 ### PSP implementation checklist
@@ -79,13 +79,13 @@ Once user has confirmed number the payment can be considered initiated.
 
 *Only available for whitelisted sale units.*
 
-If this property is set to `true`,
-it will cause a push notification to be sent to the given phone number immediately,
-without loading the landing page.
+If this property is set to `true`, it will cause a push notification to be sent
+to the given phone number immediately, without loading the landing page.
 
 If the sale unit is not whitelisted, this property is ignored.
 
-If you need to be whitelisted, instructions for this can be found in the [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
+If you need to be whitelisted, instructions for this can be found in the
+[FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
 
 ### Payment confirmation
 
@@ -100,6 +100,11 @@ details with the PSP to the makePaymentUrl. PSP tries to process the payment
 through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
+
+The `cardData` is a string in the format
+`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
+that has been transformed into a 256 bytes OAEP cryptogram using the public
+key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
 
 ## Example request
 
@@ -162,7 +167,7 @@ to successfully authenticate every API call.
 | 82      | Refused by Issuer                    |
 | 83      | Suspected fraud                      |
 | 84      | Exceeds withdrawal amount limit      |
-| 85      | Response received to late            |
+| 85      | Response received too late            |
 | 86      | Expired card                         |
 | 87      | Invalid card number (no such number) |
 | 88      | Merchant does not allow credit cards |
@@ -171,8 +176,8 @@ to successfully authenticate every API call.
 | 92      | Unable to decrypt                    |
 | 93      | Status from Vipps:CANCEL or Status from Vipps:TIMEOUT |
 
-Note: Error 93 is for when the 
-[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST) 
+Note: Error 93 is for when the
+[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
 request from Vipps contains the status `CANCEL` or `TIMEOUT`. `CANCEL` is when the user cancels in the Vipps app, and `TIMEOUT` is when the user does not act on the payment.
 
 ### Status Updates
