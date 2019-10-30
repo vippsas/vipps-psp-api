@@ -50,14 +50,14 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 
 
-##  1. <a name='DifferencesfromPSPAPIversion1'></a>Differences from PSP API version 1
+## Differences from PSP API version 1
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePayment` URL in the initiate payment call
 * Improved authorization of the `makePayment` call by adding the authorization header value
 * Improved and more consistent parameter names in the API
 
-##  2. <a name='PSPpaymentsequence'></a>PSP payment sequence
+## PSP payment sequence
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
@@ -67,18 +67,18 @@ merchant and the PSP to _not_ base their transaction logic on the redirect alone
 For example: Check for "reserved" status with the PSP's API (not Vipps' API),
 then do "capture" when the goods have been delivered.
 
-###  2.1. <a name='PSPimplementationchecklist'></a>PSP implementation checklist
+### PSP implementation checklist
 
 See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
 
-###  2.2. <a name='Initiatepayment'></a>Initiate payment
+### Initiate paymenI
 
 A payment request is initiated by the PSP to the Vipps API after end user has
 request to pay with Vipps. Vipps creates the payment and returns a link to
 the Vipps landing page where end user can confirm the mobile number.
 Once user has confirmed number the payment can be considered initiated.
 
-####  2.2.1. <a name='Skiplandingpage'></a>Skip landing page
+#### Skip landing page
 
 *Only available for whitelisted sale units.*
 
@@ -90,13 +90,13 @@ If the sale unit is not whitelisted, this property is ignored.
 If you need to be whitelisted, instructions for this can be found in the
 [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
 
-###  2.3. <a name='Paymentconfirmation'></a>Payment confirmation
+### Payment confirmation
 
 After payment initiation, Vipps sends push notification or redirects user to
 the Vipps app. End user verifies the Vipps profile by logging in to the Vipps
 app. In the Vipps app the end user can select payment source and confirm the amount.
 
-###  2.4. <a name='MakePayment'></a>MakePayment
+### MakePayment
 
 Once the end user has confirmed the payment, Vipps shares the encrypted card
 details with the PSP to the makePaymentUrl. PSP tries to process the payment
@@ -104,7 +104,7 @@ through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
 
-###  2.5. <a name='Cancellingpendingtransactions'></a>Cancelling pending transactions
+### Cancelling pending transactions
 
 A user might go back to the PSP's checkout without loggin in to the Vipps App, or aborting it in the Vipps App.
 Vipps's recommendation is that the PSP then cancels the transaction in their backend. And returns error code 
@@ -122,14 +122,14 @@ So a typical flow would be.
 4. User might end up going back to the Vipps app, if that happens and a makepayment request is sent
 the PSP responds with error code 85.
 
-###  2.6. <a name='CardDataformat'></a>Card Data format
+### Card Data format
 
 The `cardData` is a string in the format
 `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
 that has been transformed into a 256 bytes OAEP cryptogram using the public
 key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
 
-##  3. <a name='Examplerequest'></a>Example request
+## Example request
 
 ```json
 Authorization: makePaymentToken
@@ -141,7 +141,7 @@ Authorization: makePaymentToken
 }
 ```
 
-##  4. <a name='Exampleresponse'></a>Example response
+## Example response
 
 ```json
 {
@@ -156,7 +156,7 @@ Authorization: makePaymentToken
 }
 ```
 
-##  5. <a name='Idempotency'></a>Idempotency
+## Idempotency
 
 All API requests in Vipps eCommerce can be retried without any side effects
 by providing idempotent key in a header of  the request. For example, in
@@ -180,7 +180,7 @@ to successfully authenticate every API call.
 | Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product.<br>Can be found in Vipps developer portal |
 
 
-##  6. <a name='Errorcodes'></a>Error codes
+## Error codes
 
 | errorId | errorText                            |
 | ------- | ------------------------------------ |
@@ -203,7 +203,7 @@ Note: Error 93 is for when the
 [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
 request from Vipps contains the status `CANCEL` or `TIMEOUT`. `CANCEL` is when the user cancels in the Vipps app, and `TIMEOUT` is when the user does not act on the payment.
 
-###  6.1. <a name='StatusUpdates'></a>Status Updates
+### Status Updates
 
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
@@ -213,7 +213,7 @@ Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayme
 
 In order to be allow for delegated SCA through the PSD2 directive every transaction needs to be marked with Vipps's WalletId. Vipps's WalletId is A62.
 
-##  7. <a name='DSecureFallback.'></a>3DSecure Fallback.
+## 3DSecure Fallback.
 
 In case of a soft decline (issuer demanded 3DS) the PSP will host a 3DSecure session and need to provide the url to Vipps.
 
@@ -255,14 +255,14 @@ Authorization: makePaymentToken
 
 The PSP API supports recurring payments out of the box. This enables the PSP to perform recurring payments through Vipps, while retaining full transactional control. This has been built as an extension to the existing PSPv2 API, and no existing integrations will be affected, other than the possibility to initialize and preform recurring payments.
 
-##  8. <a name='Scopes'></a>Scopes
+## Scopes
 
 As of now, there are is one possible way to perform a recurring payment - *subscription*. Referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
 
 *Subscription* based payments are created as a consent to an agreement that allows the PSP to withdraw money on unknown intervals. This implies that the user won't have to accept the payment on each occasion, only the first one when consenting to the agreement. An example of this could be a subscription to a music streaming service.
 
 
-##  9. <a name='Initializearecurringpayment'></a>Initialize a recurring payment
+## Initialize a recurring payment
 
 Initializing a recurring payment works in the same way as a non-recurring payment, but with the inclusion of a *scope* and *agreementURL* in the init call.
 
@@ -288,7 +288,7 @@ To start the initialization, create a standard /init call with the addition of t
 
 In the same way as a normal, non-recurring PSPv2 payment, the PSP will receive a *makePayment* callback. In the body of this callback, you will now also find a *userToken*.
 
-##  10. <a name='TheuserToken'></a>The userToken
+## The userToken
 
 The user token is a token generated when the user has given a consent. This token is provided to the PSP in the makePayment callback when initializing or preforming a recurring payment.
 
@@ -303,7 +303,7 @@ A *userToken* contains the *scope* of the consent, in the claim named *scope*. T
 }
 ```
 
-##  11. <a name='Dothenextrecurringpayment'></a>Do the next recurring payment
+## Do the next recurring payment
 
 After initialisation, the next payment can be made by passing your *userToken* to the */payments* endpoint as a header with the name *userToken*.
 
@@ -327,7 +327,7 @@ HEADER: "
 ```
 
 
-##  12. <a name='HTTPresponses'></a>HTTP responses
+## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
 
@@ -340,7 +340,7 @@ This API returns the following HTTP statuses in the responses:
 | `404 Not Found`     | The resource was not found  |
 | `500 Server Error`  | An internal Vipps problem.                  |
 
-###  12.1. <a name='Errorcodes-1'></a>Error codes
+### Error codes
 
 | errorCode        | errorMessage                               |
 | ---------------- | ------------------------------------------ |
