@@ -68,7 +68,7 @@ then do "capture" when the goods have been delivered.
 
 See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
 
-### Initiate paymenI
+### Initiate payment
 
 A payment request is initiated by the PSP to the Vipps API after end user has
 request to pay with Vipps. Vipps creates the payment and returns a link to
