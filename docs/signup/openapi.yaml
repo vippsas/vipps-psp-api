@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: "PSP Signup API"
+  version: "1.0.0"
+  description: >
+    The Vipps PSP Signup API allows PSPs to onboard and control their merchants with Vipps.
+  contact:
+    name: Vipps AS
+    email: integration@vipps.no
+    url: https://vipps.no/
+tags:
+  - name: Merchant
+    description: Merchants
+  - name: SaleUnit
+    description: Merchant Sale Units
+servers:
+  - url: https://api.vipps.no/signup/psp
+paths:
+  /merchants  :
+    parameters:
+      - $ref: "#/components/parameters/auth"
+      - $ref: "#/components/parameters/apimKey"
+    get:
+      operationId: getMerchants
+      summary: Get all merchants for the PSP
+      tags: 
+       - Merchant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Merchant"
+        $ref: '#/components/responses'
+    post:
+      operationId: addMerchant
+      summary: Add a merchant to the PSP
+      tags:
+        - Merchant
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/MerchantSignup"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MerchantReference"
+        $ref: '#/components/responses'
+  /merchants/{merchantId}:
+    parameters:
+      - $ref: "#/components/parameters/auth"
+      - $ref: "#/components/parameters/apimKey"
+      - $ref: "#/components/parameters/merchantId"
+    get:
+      operationId: getMerchant
+      summary: Get merchant by Id for the PSP
+      tags: 
+       - Merchant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Merchant"
+        $ref: '#/components/responses'
+    patch:
+      operationId: patchMerchant
+      summary: Update a merchant for the PSP
+      tags: 
+       - Merchant
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/MerchantPatch"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MerchantReference"
+        $ref: '#/components/responses'
+  /merchants/{merchantId}/saleunits:
+    parameters:
+      - $ref: "#/components/parameters/auth"
+      - $ref: "#/components/parameters/apimKey"
+      - $ref: "#/components/parameters/merchantId"
+    get:
+      operationId: getMerchantSaleUnits
+      summary: Get all sale units for a merchant for the PSP
+      tags: 
+       - SaleUnit
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SaleUnit"
+        $ref: '#/components/responses'
+    post:
+      operationId: addSaleUnit
+      summary: Add a merchant to the PSP
+      tags:
+        - SaleUnit
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/SaleUnitSignup"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SaleUnitReference"
+        $ref: '#/components/responses'
+  /merchants/{merchantId}/saleunits/{saleUnitId}:
+    parameters:
+      - $ref: "#/components/parameters/auth"
+      - $ref: "#/components/parameters/apimKey"
+      - $ref: "#/components/parameters/merchantId"
+      - $ref: "#/components/parameters/saleUnitId"
+    get:
+      operationId: getMerchantSaleUnit
+      summary: Get a sale unit by id for a merchant for the PSP
+      tags: 
+       - SaleUnit
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SaleUnit"
+        $ref: '#/components/responses'
+    patch:
+      operationId: patchMerchantSaleUnit
+      summary: Update a sale unit by id for a merchant for the PSP
+      tags: 
+       - SaleUnit
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/SaleUnitPatch"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SaleUnitReference"
+        $ref: '#/components/responses'
+components:
+  responses:
+    "400":
+      description: Invalid request, check your parameters
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Error"
+    "401":
+      description: Unauthorized
+    "404":
+      description: Item does not exist
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Error"
+    "500":
+      description: Internal server error
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Error"
+  parameters:
+    merchantId:
+      name: merchantId
+      schema: 
+        type: string
+      in: path
+      required: true
+      description: The Vipps merchant serial number
+    saleUnitId:
+      name: saleUnitId
+      schema: 
+        type: string
+      in: path
+      required: true
+      description: The Vipps saleunit serial number
+    auth:
+      name: Authorization
+      in: header
+      required: true
+      description: Bearer 'auth token'
+      example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+      schema:
+        type: string
+    apimKey:
+      name: Ocp-Apim-Subscription-Key
+      in: header
+      description: Subscription key for the PSP Signup API
+      required: true
+      schema:
+        type: string
+  schemas:
+    MerchantSignup:
+      properties:
+        organizationNumber:
+          type: string
+        name: 
+          type: string
+          description: >
+            If norwegian and not supplied, we will attempt to get this from Brønnøysund Registret,
+            Otherwise this is required.
+        logo: 
+          type: string
+          description: base64 encoded
+        countryCode:
+          type: string
+          description: Two letter country code
+      required:
+        - organizationNumber
+        - country
+    MerchantPatch:
+      allOf:
+        - $ref: "#/components/schemas/MerchantSignup"
+      properties:
+        active:
+          type: boolean
+    Merchant:
+      properties:
+        organizationNumber:
+          type: string
+        name: 
+          type: string
+          description: Company Name
+        logo: 
+          type: string
+          description: base64 encoded
+        id:
+          type: string
+          description: Vipps merchant serial number
+        active: 
+          type: boolean
+        countryCode:
+          type: string
+          description: Two letter country code
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    MerchantReference:
+      properties:
+        id:
+          type: string
+          description: Vipps merchant serial number
+    SaleUnit:
+      properties:
+        id:
+          type: string
+          description: Vipps sale unit number
+        name:
+          type: string
+    SaleUnitSignup:
+      properties:
+        name:
+          type: string
+    SaleUnitPatch:
+      allOf:
+        - $ref: '#/components/schemas/SaleUnitSignup'
+      properties:
+        active:
+          type: boolean
+    SaleUnitReference:
+      properties:
+        id:
+          type: string
+          description: Vipps sale unit number
+    Error:
+      type: object
+      required:
+        - contextId
+        - message
+      properties:
+        code:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+        contextId:
+          type: string

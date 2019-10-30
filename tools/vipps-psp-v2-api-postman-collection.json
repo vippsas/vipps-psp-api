@@ -104,7 +104,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"pspTransactionId\": \"{{pspTransactionId}}\",\n  \"merchantOrderId\": \"{{merchantOrderId}}\",\n  \"customerMobileNumber\": \"{{customerMobileNumber}}\",\n  \"amount\": \"{{amount}}\",\n  \"currency\": \"NOK\",\n  \"pspRedirectUrl\": \"{{pspRedirectUrl}}\",\n  \"makePaymentUrl\": \"{{makePaymentUrl}}\",\n  \"makePaymentToken\": \"{{makePaymentToken}}\",\n  \"paymentText\": \"{{paymentTextInit}}\",\n  \"isApp\": false\n}"
+					"raw": "{\n  \"pspTransactionId\": \"{{pspTransactionId}}\",\n  \"merchantOrderId\": \"{{merchantOrderId}}\",\n  \"customerMobileNumber\": \"{{customerMobileNumber}}\",\n  \"amount\": \"{{amount}}\",\n  \"currency\": \"NOK\",\n  \"pspRedirectUrl\": \"{{pspRedirectUrl}}\",\n  \"makePaymentUrl\": \"{{makePaymentUrl}}\",\n  \"makePaymentToken\": \"{{makePaymentToken}}\",\n  \"paymentText\": \"{{paymentTextInit}}\",\n  \"isApp\": false,\n  \"skipLandingPage\": false\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/psp/v2/psppayments/init",

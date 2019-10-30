@@ -15,11 +15,37 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.0.
+Document version 1.1.0.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
 [swagger.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.json).
+
+# Table of Contents
+
+- [Vipps PSP API version 2](#vipps-psp-api-version-2)
+  * [Differences from PSP API version 1](#differences-from-psp-api-version-1)
+  * [PSP payment sequence](#psp-payment-sequence)
+    + [PSP implementation checklist](#psp-implementation-checklist)
+    + [Initiate payment](#initiate-payment)
+    + [Payment confirmation](#payment-confirmation)
+    + [MakePayment](#makepayment)
+  * [Example request](#example-request)
+  * [Example response](#example-response)
+  * [Idempotency](#idempotency)
+- [Authentication](#authentication)
+  * [Error codes](#error-codes)
+    + [Status Updates](#status-updates)
+- [PSD2 Compliance](#psd2-compliance)
+  * [3DSecure Fallback.](#3dsecure-fallback)
+- [Recurring PSP payments](#recurring-psp-payments)
+  * [Scopes](#scopes)
+  * [Initialize a recurring payment](#initialize-a-recurring-payment)
+  * [The userToken](#the-usertoken)
+  * [Do the next recurring payment](#do-the-next-recurring-payment)
+  * [HTTP responses](#http-responses)
+    + [Error codes](#error-codes-1)
+- [Questions?](#questions-)
 
 ## Differences from PSP API version 1
 
@@ -32,6 +58,12 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
+**Important:** Some users may close Vipps immediately after seeing the payment confirmation,
+therefore not being "redirected" back to the merchant. Because of this it is important for the
+merchant and the PSP to _not_ base their transaction logic on the redirect alone.
+For example: Check for "reserved" status with the PSP's API (not Vipps' API),
+then do "capture" when the goods have been delivered.
+
 ### PSP implementation checklist
 
 See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md) for details.
@@ -42,6 +74,18 @@ A payment request is initiated by the PSP to the Vipps API after end user has
 request to pay with Vipps. Vipps creates the payment and returns a link to
 the Vipps landing page where end user can confirm the mobile number.
 Once user has confirmed number the payment can be considered initiated.
+
+#### Skip landing page
+
+*Only available for whitelisted sale units.*
+
+If this property is set to `true`, it will cause a push notification to be sent
+to the given phone number immediately, without loading the landing page.
+
+If the sale unit is not whitelisted, this property is ignored.
+
+If you need to be whitelisted, instructions for this can be found in the
+[FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
 
 ### Payment confirmation
 
@@ -57,6 +101,7 @@ through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
 
+<<<<<<< HEAD
 ### Cancelling pending transctions
 
 A user might go back to the PSP's checkout without loggin in to the Vipps App, or aborting it in the Vipps App.
@@ -75,6 +120,12 @@ So a typical flow would be.
 4. User might end up going back to the Vipps app, if that happens and a makepayment request is sent
 the PSP responds with error code 85.
 
+=======
+The `cardData` is a string in the format
+`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
+that has been transformed into a 256 bytes OAEP cryptogram using the public
+key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
+>>>>>>> 175bbda999c347683b98cbca40a6956ffd0dc257
 
 ## Example request
 
@@ -137,7 +188,7 @@ to successfully authenticate every API call.
 | 82      | Refused by Issuer                    |
 | 83      | Suspected fraud                      |
 | 84      | Exceeds withdrawal amount limit      |
-| 85      | Response received to late            |
+| 85      | Response received too late            |
 | 86      | Expired card                         |
 | 87      | Invalid card number (no such number) |
 | 88      | Merchant does not allow credit cards |
@@ -146,11 +197,15 @@ to successfully authenticate every API call.
 | 92      | Unable to decrypt                    |
 | 93      | Status from Vipps:CANCEL or Status from Vipps:TIMEOUT |
 
-Note 93 is for when the makePayment request from Vipps contains the statuses CANCEL or TIMEOUT. Cancel is when the user cancels in the Vipps app, and TimeOut is when the user does not act on the payment.
+Note: Error 93 is for when the
+[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
+request from Vipps contains the status `CANCEL` or `TIMEOUT`. `CANCEL` is when the user cancels in the Vipps app, and `TIMEOUT` is when the user does not act on the payment.
 
 ### Status Updates
 
-To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded. Vipps also provides an endpoint to check the payment status.
+To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+
+Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
 
 # PSD2 Compliance
 
