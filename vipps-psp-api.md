@@ -1,5 +1,3 @@
-# Vipps PSP API version 2
-
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
 (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M). Vipps på Nett offers merchants functionality to
@@ -30,6 +28,8 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
     + [Initiate payment](#initiate-payment)
     + [Payment confirmation](#payment-confirmation)
     + [MakePayment](#makepayment)
+    * [Transaction cancellation](#Cancelling-pending-transactions)
+    * [Card data format](#Card-data-format)
   * [Example request](#example-request)
   * [Example response](#example-response)
   * [Idempotency](#idempotency)
@@ -101,6 +101,27 @@ through the acquirer and responds to the makePayment-call with the payment
 request status. End user receives confirmation in Vipps app. Vipps redirects
 the end user to the redirectUrl provided during payment initiation.
 
+### Cancelling pending transactions
+
+A user might go back to the PSP's checkout without loggin in to the Vipps App, or aborting it in the Vipps App.
+Vipps's recommendation is that the PSP then cancel the transaction in their backend and return error code.
+
+```json
+| 85      | Response received too late            |
+```
+
+As seen in the error codes section of this graph.
+
+So a typical flow would be.
+
+1. User selects Vipps in a checkout.
+2. User returns without completing in the app. (No MakePayment request has been received by the PSP)
+3. PSP cancels the payment on their end, and restarts the checkout.
+4. User might end up going back to the Vipps app, if that happens and a makepayment request is sent
+the PSP responds with error code 85.
+
+### Card Data format
+
 The `cardData` is a string in the format
 `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
 that has been transformed into a 256 bytes OAEP cryptogram using the public
@@ -156,7 +177,6 @@ to successfully authenticate every API call.
 | Authorization | Bearer 'jwt_access_token'' | type: Authorization token. Value: Access token is obtained from accessToken/get |
 | Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product.<br>Can be found in Vipps developer portal |
 
-
 ## Error codes
 
 | errorId | errorText                            |
@@ -190,7 +210,7 @@ Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayme
 
 In order to be allow for delegated SCA through the PSD2 directive every transaction needs to be marked with Vipps's WalletId. Vipps's WalletId is A62.
 
-## 3DSecure Fallback.
+## 3DSecure Fallback
 
 In case of a soft decline (issuer demanded 3DS) the PSP will host a 3DSecure session and need to provide the url to Vipps.
 
@@ -212,7 +232,7 @@ Format of MakePaymentRequest response provided by the PSP in case of a soft decl
 }
 ```
 
-The Vipps App will then open the URL in an iframe, letting the user complete the 3DSecure flow. The PSP will have to host and retrieve any necessary data from the session. Once the session is completed it will have to finish with a redirect to   "https://www.vipps.no/mobileintercept", where upon the app will close the iframe. Vipps will then resend the Makepayment request. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK". Once the status is returned it will be displayed to the user as normal in the app.
+The Vipps App will then open the URL in an iframe, letting the user complete the 3DSecure flow. The PSP will have to host and retrieve any necessary data from the session. Once the session is completed it will have to finish with a redirect to   "<https://www.vipps.no/mobileintercept",> where upon the app will close the iframe. Vipps will then resend the Makepayment request. The status in the response to this makepayment should never be "SOFT_DECLINE", only "FAIL" or "OK". Once the status is returned it will be displayed to the user as normal in the app.
 
 ```
 Final Redirect URL: https://www.vipps.no/mobileintercept
@@ -237,7 +257,6 @@ The PSP API supports recurring payments out of the box. This enables the PSP to 
 As of now, there are is one possible way to perform a recurring payment - *subscription*. Referred to as the *scope* of the recurring agreement. Only one *scope* can be used at a time, and it's not possible to change the scope of an agreement.
 
 *Subscription* based payments are created as a consent to an agreement that allows the PSP to withdraw money on unknown intervals. This implies that the user won't have to accept the payment on each occasion, only the first one when consenting to the agreement. An example of this could be a subscription to a music streaming service.
-
 
 ## Initialize a recurring payment
 
@@ -303,7 +322,6 @@ HEADER: "
 }
 ```
 
-
 ## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
@@ -331,7 +349,7 @@ This API returns the following HTTP statuses in the responses:
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
 
-# Questions?
+# Questions
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
