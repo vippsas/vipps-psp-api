@@ -104,10 +104,10 @@ the end user to the redirectUrl provided during payment initiation.
 ### Cancelling pending transactions
 
 A user might go back to the PSP's checkout without loggin in to the Vipps App, or aborting it in the Vipps App.
-Vipps's recommendation is that the PSP then cancels the transaction in their backend. And returns error code
+Vipps's recommendation is that the PSP then cancel the transaction in their backend and return error code.
 
 ```json
-| 85      | Response received to late            |
+| 85      | Response received too late            |
 ```
 
 As seen in the error codes section of this graph.
@@ -116,7 +116,7 @@ So a typical flow would be.
 
 1. User selects Vipps in a checkout.
 2. User returns without completing in the app. (No MakePayment request has been received by the PSP)
-3. PSP cancels the payment on their end. And restarts the checkout.
+3. PSP cancels the payment on their end, and restarts the checkout.
 4. User might end up going back to the Vipps app, if that happens and a makepayment request is sent
 the PSP responds with error code 85.
 
