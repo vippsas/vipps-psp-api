@@ -251,7 +251,7 @@ a soft decline:
 The Vipps App will then open the URL in an iframe, letting the user complete
 the 3DSecure flow. The PSP will have to host and retrieve any necessary data
 from the session. Once the session is completed it will have to finish with a
-redirect to `<https://www.vipps.no/mobileintercept`, where upon the app
+redirect to `https://www.vipps.no/mobileintercept`, where upon the app
 will close the iframe. Vipps will then resend the `makePaymentUrl` request.
 
 The status in the response to this `makePaymentUrl` should never be
