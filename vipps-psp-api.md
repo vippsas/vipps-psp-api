@@ -210,13 +210,16 @@ Vipps may return the following errors:
 | 89      | Insufficient funds                   |
 | 91      | Internal error                       |
 | 92      | Unable to decrypt                    |
-| 93      | Status from Vipps:CANCEL or Status from Vipps:TIMEOUT |
+| 93      | Status from Vipps:CANCEL             |
+| 93      | Status from Vipps:TIMEOUT            |
+| 93      | Status from Vipps:NO                 |
 
 Note: Error 93 is for when the
 [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
-request from Vipps contains the status `CANCEL` or `TIMEOUT`.
-`CANCEL` is when the user cancels in the Vipps app, and
+request from Vipps contains the status `CANCEL`, `TIMEOUT` or `NO`.
+`CANCEL` is when the user cancels in the Vipps app.
 `TIMEOUT` is when the user does not act on the payment.
+`NO` is when the approval process fails, such as timeout when acquiring card data.
 
 # PSD2 Compliance and Secure Customer Authentication (SCA)
 
