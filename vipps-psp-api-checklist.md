@@ -22,9 +22,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
   
 
 # Live flow
-1. The PSP sends public keys to pspbestilling@vipps.no
-    - `Public key - RSA 2048 - for TEST`
-    - `Public key - RSA 2048 - for PROD`
+1. The PSP sends public keys to pspbestilling@vipps.no, see [public key](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#public-key).
 2. The PSP completes all checklist items.
 3. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
     - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).

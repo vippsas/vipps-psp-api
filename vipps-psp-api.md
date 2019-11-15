@@ -31,7 +31,8 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
     + [Skip landing page](#skip-landing-page)
     + [Payment confirmation](#payment-confirmation)
     + [makePaymentUrl](#makepaymenturl)
-    + [Card Data format](#card-data-format)
+        - [Public key](#public-key)
+        - [Card Data format](#card-data-format)
   * [Status Updates](#status-updates)
   * [Cancelling pending transactions](#cancelling-pending-transactions)
 - [Example request](#example-request)
@@ -115,7 +116,22 @@ process the payment through the acquirer and responds to the `makePaymentUrl`
 call with the payment request status. The Vipps user receives confirmation in
 Vipps. Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
-### Card Data format
+#### Public key
+
+The public key that `cardData` is encrypted with is provided by the PSP during onboarding. This key needs to be a 
+RSA 2048 public key in PKCS#8 format. The corresponding private key is then used to decrypt `cardData`. Under is 
+provided a basic suggestion for generating keys.
+
+**For generating public/private key**
+```console
+$ ssh-keygen -t rsa -b 2048 -C "email@email.email"
+```
+**For converting to PKCS#8 format**
+```console
+$ ssh-keygen -m PKCS8 -e
+```
+
+#### Card Data format
 
 The `cardData` is a string in the format
 `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
