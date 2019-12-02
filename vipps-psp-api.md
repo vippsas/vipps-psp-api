@@ -209,33 +209,28 @@ See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
 
 # Errors
 
-Vipps may return the following errors:
+The PSP should return the following errorIds and errorTexts when applicable:
 
-| errorId | errorText                            |
-| ------- | ------------------------------------ |
-| 71      | Invalid request                      |
-| 72      | Different texts                      |
-| 81      | No such issuer                       |
-| 82      | Refused by Issuer                    |
-| 83      | Suspected fraud                      |
-| 84      | Exceeds withdrawal amount limit      |
-| 85      | Response received too late            |
-| 86      | Expired card                         |
-| 87      | Invalid card number (no such number) |
-| 88      | Merchant does not allow credit cards |
-| 89      | Insufficient funds                   |
-| 91      | Internal error                       |
-| 92      | Unable to decrypt                    |
-| 93      | Status from Vipps:CANCEL             |
-| 93      | Status from Vipps:TIMEOUT            |
-| 93      | Status from Vipps:NO                 |
+| errorId | errorText                            | Description (should not be included in response)                                                                                  |
+| ------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| 71      | Invalid request                      | The request received from Vipps failed validation.                                                                                     |
+| 72      | Different texts                      | For errors that are not in this list. Please include text describing the error.                                                   |
+| 81      | No such issuer                       | The PSP were unable to identify the card issuer.                                                                                  |
+| 82      | Refused by Issuer                    | Generic response for cards that were refused by issuer, without the PSP knowing why.                                              |
+| 83      | Suspected fraud                      | Suspected fraud.                                                                                                                  |
+| 84      | Exceeds withdrawal amount limit      | The amount exceeds an amount limit. Could be per transaction limit, or for a period.                                             |
+| 85      | Response received too late            | A third party didn't respond in time for the makePayment or [Cancelling pending transactions](#Cancelling-pending-transactions)                                                      |
+| 86      | Expired card                         | Expired card.                                                                                                                     |
+| 87      | Invalid card number (no such number) | The card provided is invalid.                                                                                                     |
+| 88      | Merchant does not allow credit cards | If the PSP supports disallowing credit cards.                                                                                     |
+| 89      | Insufficient funds                   | Insufficient funds.                                                                                                               |
+| 91      | Internal error                       | Unhandled or unknown exception.                                                                                                   |
+| 92      | Unable to decrypt                    | The PSP was unable to decrypt `cardData` from the makePayment request.                                                            |
+| 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.    |
+| 93      | Status from Vipps:TIMEOUT            | Response to Vipps sending `TIMEOUT`. Caused by customer not acting on the payment.                                                |
+| 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.|
 
-Note: Error 93 is for when the
-[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
-request from Vipps contains the status `CANCEL`, `TIMEOUT` or `NO`.
-`CANCEL` is when the user cancels in the Vipps app.
-`TIMEOUT` is when the user does not act on the payment.
-`NO` is when the approval process fails, such as timeout when acquiring card data.
+
 
 # PSD2 Compliance and Secure Customer Authentication (SCA)
 
