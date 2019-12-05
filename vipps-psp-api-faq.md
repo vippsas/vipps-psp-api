@@ -2,9 +2,7 @@
 
 API version: 2.
 
-Document version 0.1.3.
-
-_**IMPORTANT:**_ This document is a work in progress.
+Document version 0.1.4.
 
 # About this API
 
