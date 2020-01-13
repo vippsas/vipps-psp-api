@@ -86,7 +86,7 @@ paths:
     post:
       tags:
         - Vipps PSP API
-      summary: Process a payment with token
+      summary: Get card data to process a payment with token
       operationId: processPaymentOnToken
       consumes:
         - application/json;charset=UTF-8
@@ -439,6 +439,10 @@ definitions:
         type: string
         example: 8874C4DDC93A2E3C
         description: Uniquely identifies a payment order for a merchant
+      cardData:
+        type: string
+        example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
+        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
     title: PaymentTokenRepresentation
   MakePaymentRequest:
     type: object
@@ -548,6 +552,12 @@ definitions:
         example: true
         default: false
         description: Skips the landing page for whitelisted sale units. Requires a valid customerMobileNumber.
+      scope:
+        type: string
+        example: psp_subscription
+        description: PSP Transaction Status to be updated in Vipps
+        enum:
+          - psp_subscription
     title: InitiatePaymentRequest
   PaymentDetailsRepresentation:
     type: object
@@ -645,6 +655,7 @@ definitions:
         example: CAPTURED
         description: PSP Transaction Status to be updated in Vipps
         enum:
+          - RESERVED
           - CAPTURED
           - CANCELLED
           - REFUNDED

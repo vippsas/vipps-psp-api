@@ -376,11 +376,14 @@ HEADER: "
   "merchantOrderId": "8874C4DDC93A2E3C",
   "amount": 39900,
   "currency": "NOK",
-  "makePaymentUrl": "https://example.com/yourPaymentUrl",
-  "makePaymentToken": "ynuiu",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
   "paymentText": "Description of payment"
 }
 ```
+
+Once the card data is received from [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call 
+[`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
+If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
 
 # HTTP responses
 
