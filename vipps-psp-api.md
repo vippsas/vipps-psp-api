@@ -348,7 +348,7 @@ preforming a recurring payment.
 A `userToken` contains the `scope` of the consent, in the claim named `scope`.
 The token also includes various useful information:
 
-```
+```json
 {
   "sub" // agreement_id
   "aud" // audience (usually something like "https://vipps.no")
@@ -418,3 +418,39 @@ We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
 a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+# Proposals
+
+## Recurring 3DS Update Card
+
+The following is a proposal for triggering 3DS when a user changes the card attached to a PSP recurring agreement in the Vipps app.
+
+A new optional `updateCardUrl` property would be added to the initate call. This callback will be triggered when the user changes card with the following request;
+
+```json
+HEADER: "
+        PSP-ID: C948DFD1546347568874C4DDC93A2E3C
+        Meerchant-Serial-Number: 123456
+        UserToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        "
+{
+  "agreementId": "7686f7788898767977",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
+}
+```
+
+To which the PSP should respond with a `require3DS` boolean flag which, if true, will cause a 3DS session to be hosted in the Vipps app.
+
+
+```json
+{
+  "require3DS": true,
+  "url3dSecure": "https://psp.com/3ds/123123"
+}
+```
+
+The Vipps app will the host a 3DS session from the PSP, once this session is completed 
+the PSP should redirect to `https://www.vipps.no/mobileintercept`.
+
+Once the user completes the 3DS session the `updateCardUrl` will be called again.
+The PSP should then only approve or deny the request.
