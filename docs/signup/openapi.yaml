@@ -261,6 +261,9 @@ definitions:
       - name
       - address
       - logo
+      - organizationNumber
+      - companyName
+      - companyEmail
   UpdateMerchantRequest:
     properties:
       deactivate:
@@ -312,7 +315,7 @@ definitions:
         description: City
         example: 'Oslo'
         maxLength: 255
-      country:
+      countryCode:
         type: string
         description: Two letter country code based on ISO 3166
         pattern: '^\w{2}$'
@@ -320,7 +323,7 @@ definitions:
         maxLength: 2
         example: 'NO'
         enum:
-          - NO
+          - 'NO'
       postCode:
         type: string
         description: Post Code
