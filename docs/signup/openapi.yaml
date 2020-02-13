@@ -1,4 +1,4 @@
-openapi: 3.0.0
+swagger: "2.0"
 info:
   title: "PSP Signup API"
   version: "1.0.0"
@@ -13,13 +13,18 @@ tags:
     description: Merchants
   - name: SaleUnit
     description: Merchant Sale Units
-servers:
-  - url: https://api.vipps.no/signup/psp
+host: api.vipps.no
+schemes:
+  - "https"
+consumes:
+  - application/json
+produces:
+  - application/json;charset=UTF-8    
 paths:
-  /merchants  :
+  /merchants:
     parameters:
-      - $ref: "#/components/parameters/auth"
-      - $ref: "#/components/parameters/apimKey"
+      - $ref: "#/parameters/auth"
+      - $ref: "#/parameters/apimKey"
     get:
       operationId: getMerchants
       summary: Get all merchants for the PSP
@@ -28,36 +33,52 @@ paths:
       responses:
         '200':
           description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Merchant"
-        $ref: '#/components/responses'
+          schema:
+            $ref: "#/definitions/GetMerchantsResponse"
+        '400':
+          $ref: "#/responses/400"
+        '401':
+          $ref: "#/responses/401"
+        '403':
+          $ref: "#/responses/403"               
+        '405':
+          $ref: "#/responses/405"             
+        '500':
+          $ref: "#/responses/500"
     post:
       operationId: addMerchant
       summary: Add a merchant to the PSP
       tags:
         - Merchant
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: "#/components/schemas/MerchantSignup"
+      parameters:  
+      - name: "merchant"
+        in: "body"
+        description: "merchant"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateMerchantRequest"
       responses:
         '200':
           description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/MerchantReference"
-        $ref: '#/components/responses'
-  /merchants/{merchantId}:
+          schema:
+            $ref: "#/definitions/CreateMerchantResponse"
+        '400':
+          $ref: "#/responses/400"
+        '401':
+          $ref: "#/responses/401"
+        '403':
+          $ref: "#/responses/403"
+        '405':
+          $ref: "#/responses/405"                     
+        '415':
+          $ref: "#/responses/415"          
+        '500':
+          $ref: "#/responses/500"
+  /merchants/{merchantSerialNumber}:
     parameters:
-      - $ref: "#/components/parameters/auth"
-      - $ref: "#/components/parameters/apimKey"
-      - $ref: "#/components/parameters/merchantId"
+      - $ref: "#/parameters/auth"
+      - $ref: "#/parameters/apimKey"
+      - $ref: "#/parameters/merchantSerialNumber"
     get:
       operationId: getMerchant
       summary: Get merchant by Id for the PSP
@@ -66,247 +87,277 @@ paths:
       responses:
         '200':
           description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/Merchant"
-        $ref: '#/components/responses'
+          schema:
+            $ref: "#/definitions/Merchant"
+        '400':
+          $ref: "#/responses/400"
+        '401':
+          $ref: "#/responses/401"
+        '403':
+          $ref: "#/responses/403"         
+        '404':
+          $ref: "#/responses/404" 
+        '405':
+          $ref: "#/responses/405"     
+        '500':
+          $ref: "#/responses/500"
     patch:
       operationId: patchMerchant
       summary: Update a merchant for the PSP
       tags: 
        - Merchant
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: "#/components/schemas/MerchantPatch"
+      parameters:  
+      - name: "merchant"
+        in: "body"
+        description: "merchant"
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateMerchantRequest"
       responses:
         '200':
           description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/MerchantReference"
-        $ref: '#/components/responses'
-  /merchants/{merchantId}/saleunits:
-    parameters:
-      - $ref: "#/components/parameters/auth"
-      - $ref: "#/components/parameters/apimKey"
-      - $ref: "#/components/parameters/merchantId"
-    get:
-      operationId: getMerchantSaleUnits
-      summary: Get all sale units for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/SaleUnit"
-        $ref: '#/components/responses'
-    post:
-      operationId: addSaleUnit
-      summary: Add a merchant to the PSP
-      tags:
-        - SaleUnit
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: "#/components/schemas/SaleUnitSignup"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/SaleUnitReference"
-        $ref: '#/components/responses'
-  /merchants/{merchantId}/saleunits/{saleUnitId}:
-    parameters:
-      - $ref: "#/components/parameters/auth"
-      - $ref: "#/components/parameters/apimKey"
-      - $ref: "#/components/parameters/merchantId"
-      - $ref: "#/components/parameters/saleUnitId"
-    get:
-      operationId: getMerchantSaleUnit
-      summary: Get a sale unit by id for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/SaleUnit"
-        $ref: '#/components/responses'
-    patch:
-      operationId: patchMerchantSaleUnit
-      summary: Update a sale unit by id for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: "#/components/schemas/SaleUnitPatch"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/SaleUnitReference"
-        $ref: '#/components/responses'
-components:
-  responses:
-    "400":
-      description: Invalid request, check your parameters
-      content:
-        application/json;charset=UTF-8:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Error"
-    "401":
-      description: Unauthorized
-    "404":
-      description: Item does not exist
-      content:
-        application/json;charset=UTF-8:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Error"
-    "500":
-      description: Internal server error
-      content:
-        application/json;charset=UTF-8:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Error"
-  parameters:
-    merchantId:
-      name: merchantId
-      schema: 
+        '400':
+          $ref: "#/responses/400"
+        '401':
+          $ref: "#/responses/401"
+        '403':
+          $ref: "#/responses/403"         
+        '404':
+          $ref: "#/responses/404" 
+        '405':
+          $ref: "#/responses/405"
+        '415':
+          $ref: "#/responses/415"          
+        '500':
+          $ref: "#/responses/500"
+responses:
+  "400":
+    description: Invalid request, check request parameters
+    schema:
+      $ref: "#/definitions/Error"
+  "401":
+    description: Unauthorized
+  "403":
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/Error"
+  "404":
+    description: Item does not exist
+    schema:
+      $ref: "#/definitions/Error"
+  "405":
+    description: Request method not supported
+    schema:
+      $ref: "#/definitions/Error"
+  "415":
+    description: Unsupported media type
+    schema:
+      $ref: "#/definitions/Error"
+  "500":
+    description: Internal server error
+    schema:
+      $ref: "#/definitions/Error"
+parameters:
+  merchantSerialNumber:
+    name: merchantSerialNumber
+    type: string
+    in: path
+    required: true
+    description: The Vipps merchant serial number
+  auth:
+    name: Authorization
+    in: header
+    required: true
+    description: Bearer 'auth token'
+    type: string
+  apimKey:
+    name: Ocp-Apim-Subscription-Key
+    in: header
+    description: Subscription key for the PSP Signup API
+    required: true
+    type: string
+definitions:
+  Merchant:
+    properties:
+      merchantSerialNumber:
         type: string
-      in: path
-      required: true
-      description: The Vipps merchant serial number
-    saleUnitId:
-      name: saleUnitId
-      schema: 
+        description: Vipps sale unit's merchant serial number
+      organizationNumber:
         type: string
-      in: path
-      required: true
-      description: The Vipps saleunit serial number
-    auth:
-      name: Authorization
-      in: header
-      required: true
-      description: Bearer 'auth token'
-      example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-      schema:
+        pattern: '^\d{9}$'
+        minLength: 9
+        maxLength: 9
+      companyName:
         type: string
-    apimKey:
-      name: Ocp-Apim-Subscription-Key
-      in: header
-      description: Subscription key for the PSP Signup API
-      required: true
-      schema:
+      companyEmail:
+        type: string        
+      name:
         type: string
-  schemas:
-    MerchantSignup:
-      properties:
-        organizationNumber:
-          type: string
-        name: 
-          type: string
-          description: >
-            If norwegian and not supplied, we will attempt to get this from Brønnøysund Registret,
-            Otherwise this is required.
-        logo: 
-          type: string
-          description: base64 encoded
-        countryCode:
-          type: string
-          description: Two letter country code
-      required:
-        - organizationNumber
-        - country
-    MerchantPatch:
-      allOf:
-        - $ref: "#/components/schemas/MerchantSignup"
-      properties:
-        active:
-          type: boolean
-    Merchant:
-      properties:
-        organizationNumber:
-          type: string
-        name: 
-          type: string
-          description: Company Name
-        logo: 
-          type: string
-          description: base64 encoded
-        id:
-          type: string
-          description: Vipps merchant serial number
-        active: 
-          type: boolean
-        countryCode:
-          type: string
-          description: Two letter country code
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-    MerchantReference:
-      properties:
-        id:
-          type: string
-          description: Vipps merchant serial number
-    SaleUnit:
-      properties:
-        id:
-          type: string
-          description: Vipps sale unit number
-        name:
-          type: string
-    SaleUnitSignup:
-      properties:
-        name:
-          type: string
-    SaleUnitPatch:
-      allOf:
-        - $ref: '#/components/schemas/SaleUnitSignup'
-      properties:
-        active:
-          type: boolean
-    SaleUnitReference:
-      properties:
-        id:
-          type: string
-          description: Vipps sale unit number
-    Error:
-      type: object
-      required:
-        - contextId
-        - message
-      properties:
-        code:
-          type: string
-        field:
-          type: string
-        message:
-          type: string
-        contextId:
-          type: string
+      status:
+        type: string
+        enum: 
+          - ACTIVE
+          - DEACTIVATED
+          - PENDING
+      logo: 
+        type: string
+        description: base64 encoded
+      email:
+        type: string
+        description: Email id of sale unit contact or PSP contact
+        format: email
+      website:
+        type: string
+        description: Website of sale unit or PSP
+        format: uri
+      address:
+        $ref: '#/definitions/Address'
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time         
+  GetMerchantsResponse:
+    type: object
+    properties:
+      merchants:
+        type: array
+        description: List of Sale Unit details
+        items:
+          $ref: "#/definitions/Merchant"
+  CreateMerchantRequest:
+    properties:
+      organizationNumber:
+        type: string
+        pattern: '^\d{9}$'
+        minLength: 9
+        maxLength: 9
+      name:
+        type: string
+        maxLength: 200
+      logo: 
+        type: string
+        description: base64 encoded
+      email:
+        type: string
+        description: Email id of sale unit contact or PSP contact
+        format: email
+        maxLength: 255
+      website:
+        type: string
+        description: Website of sale unit or PSP
+        format: uri
+        maxLength: 255
+      address:
+        $ref: '#/definitions/Address'
+      companyName:
+        type: string
+        maxLength: 255
+      companyEmail:
+        type: string
+        maxLength: 255
+    required:
+      - name
+      - address
+      - logo
+      - organizationNumber
+      - companyName
+      - companyEmail
+  UpdateMerchantRequest:
+    properties:
+      deactivate:
+        type: boolean
+      name:
+        type: string
+        maxLength: 200
+      logo: 
+        type: string
+        description: base64 encoded
+      email:
+        type: string
+        description: Email id of sale unit contact or PSP contact
+        format: email
+        maxLength: 255
+      website:
+        type: string
+        description: Website of sale unit or PSP
+        format: uri
+        maxLength: 255
+      address:
+        $ref: '#/definitions/Address'
+  CreateMerchantResponse:
+    properties:
+      merchantSerialNumber:
+        type: string
+        description: The Vipps saleunit's merchant serial number
+  Address:
+    type: object
+    description: Address details
+    required:
+      - addressLine1
+      - city
+      - countryCode
+      - postCode
+    properties:
+      addressLine1:
+        type: string
+        description: Address Line 1
+        example: 'Robert Levins gate 5'
+        maxLength: 255
+      addressLine2:
+        type: string
+        description: Address Line 2
+        example: 'Att: Rune Garborg'
+        maxLength: 255
+      city:
+        type: string
+        description: City
+        example: 'Oslo'
+        maxLength: 255
+      countryCode:
+        type: string
+        description: Two letter country code based on ISO 3166
+        pattern: '^\w{2}$'
+        minLength: 2
+        maxLength: 2
+        example: 'NO'
+        enum:
+          - 'NO'
+      postCode:
+        type: string
+        description: Post Code
+        pattern: '^\d{4}$'
+        minLength: 4
+        maxLength: 4
+        example: '0154'
+  Error:
+    type: object
+    required:
+      - status
+      - title
+      - detail
+      - instance
+    properties:
+      type:
+        type: "string"
+        description: |
+          "A URI reference that identifies the problem type"
+      title:
+        type: "string"
+        description: |
+          "A short, human-readable summary of the problem type"
+      status:
+        type: "number"
+        description: |
+          "The HTTP status code generated by the origin server for this occurrence of the problem"
+      detail:
+        type: "string"
+        description: |
+          "A human-readable explanation specific to this occurrence of the problem. 
+          The detail member, if present, ought to focus on helping the client correct the problem, 
+          rather than giving debugging information."
+      instance:
+        type: "string"
+        description: |
+          "A URI reference that identifies the specific occurrence of the problem"
