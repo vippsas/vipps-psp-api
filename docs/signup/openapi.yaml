@@ -164,6 +164,9 @@ parameters:
     in: path
     required: true
     description: The Vipps merchant serial number
+    minLength: 6
+    maxLength: 6
+    pattern: '^\d{6}$'
   auth:
     name: Authorization
     in: header
@@ -182,6 +185,9 @@ definitions:
       merchantSerialNumber:
         type: string
         description: Vipps sale unit's merchant serial number
+        minLength: 6
+        maxLength: 6
+        pattern: '^\d{6}$'        
       organizationNumber:
         type: string
         pattern: '^\d{9}$'
@@ -291,6 +297,9 @@ definitions:
       merchantSerialNumber:
         type: string
         description: The Vipps saleunit's merchant serial number
+        minLength: 6
+        maxLength: 6
+        pattern: '^\d{6}$'            
   Address:
     type: object
     description: Address details
