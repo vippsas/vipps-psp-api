@@ -13,6 +13,7 @@ tags:
     description: Merchants
   - name: SaleUnit
     description: Merchant Sale Units
+host: api.vipps.no
 schemes:
   - "https"
 consumes:
@@ -20,7 +21,7 @@ consumes:
 produces:
   - application/json;charset=UTF-8    
 paths:
-  /merchants  :
+  /merchants:
     parameters:
       - $ref: "#/parameters/auth"
       - $ref: "#/parameters/apimKey"
@@ -33,21 +34,15 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Merchant"
+            $ref: "#/definitions/GetMerchantsResponse"
         '400':
           $ref: "#/responses/400"
         '401':
           $ref: "#/responses/401"
         '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
+          $ref: "#/responses/403"               
         '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
+          $ref: "#/responses/405"             
         '500':
           $ref: "#/responses/500"
     post:
@@ -61,31 +56,29 @@ paths:
         description: "merchant"
         required: true
         schema:
-          $ref: "#/definitions/MerchantSignup"
+          $ref: "#/definitions/CreateMerchantRequest"
       responses:
         '200':
           description: OK
           schema:
-            $ref: "#/definitions/MerchantReference"
+            $ref: "#/definitions/CreateMerchantResponse"
         '400':
           $ref: "#/responses/400"
         '401':
           $ref: "#/responses/401"
         '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
+          $ref: "#/responses/403"
         '405':
-          $ref: "#/responses/405"
+          $ref: "#/responses/405"                     
         '415':
           $ref: "#/responses/415"          
         '500':
           $ref: "#/responses/500"
-  /merchants/{merchantId}:
+  /merchants/{merchantSerialNumber}:
     parameters:
       - $ref: "#/parameters/auth"
       - $ref: "#/parameters/apimKey"
-      - $ref: "#/parameters/merchantId"
+      - $ref: "#/parameters/merchantSerialNumber"
     get:
       operationId: getMerchant
       summary: Get merchant by Id for the PSP
@@ -105,9 +98,7 @@ paths:
         '404':
           $ref: "#/responses/404" 
         '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
+          $ref: "#/responses/405"     
         '500':
           $ref: "#/responses/500"
     patch:
@@ -121,135 +112,10 @@ paths:
         description: "merchant"
         required: true
         schema:
-          $ref: "#/definitions/MerchantPatch"
+          $ref: "#/definitions/UpdateMerchantRequest"
       responses:
         '200':
           description: OK
-          schema:
-            $ref: "#/definitions/MerchantReference"
-        '400':
-          $ref: "#/responses/400"
-        '401':
-          $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
-        '500':
-          $ref: "#/responses/500"
-  /merchants/{merchantId}/saleunits:
-    parameters:
-      - $ref: "#/parameters/auth"
-      - $ref: "#/parameters/apimKey"
-      - $ref: "#/parameters/merchantId"
-    get:
-      operationId: getMerchantSaleUnits
-      summary: Get all sale units for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/SaleUnit"
-        '400':
-          $ref: "#/responses/400"
-        '401':
-          $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
-        '500':
-          $ref: "#/responses/500"
-    post:
-      operationId: addSaleUnit
-      summary: Add a merchant to the PSP
-      tags:
-        - SaleUnit
-      parameters:  
-      - name: "saleUnit"
-        in: "body"
-        description: "saleUnit"
-        required: true
-        schema:
-          $ref: "#/definitions/SaleUnitSignup"
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: "#/definitions/SaleUnitReference"
-        '400':
-          $ref: "#/responses/400"
-        '401':
-          $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
-        '500':
-          $ref: "#/responses/500"
-  /merchants/{merchantId}/saleunits/{saleUnitId}:
-    parameters:
-      - $ref: "#/parameters/auth"
-      - $ref: "#/parameters/apimKey"
-      - $ref: "#/parameters/merchantId"
-      - $ref: "#/parameters/saleUnitId"
-    get:
-      operationId: getMerchantSaleUnit
-      summary: Get a sale unit by id for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: "#/definitions/SaleUnit"
-        '400':
-          $ref: "#/responses/400"
-        '401':
-          $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
-          $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
-        '500':
-          $ref: "#/responses/500"
-    patch:
-      operationId: patchMerchantSaleUnit
-      summary: Update a sale unit by id for a merchant for the PSP
-      tags: 
-       - SaleUnit
-      parameters:
-      - name: "saleUnit"
-        in: "body"
-        description: "saleUnit"
-        required: true
-        schema:
-          $ref: "#/definitions/SaleUnitPatch"
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: "#/definitions/SaleUnitReference"
         '400':
           $ref: "#/responses/400"
         '401':
@@ -292,18 +158,12 @@ responses:
     schema:
       $ref: "#/definitions/Error"
 parameters:
-  merchantId:
-    name: merchantId
+  merchantSerialNumber:
+    name: merchantSerialNumber
     type: string
     in: path
     required: true
     description: The Vipps merchant serial number
-  saleUnitId:
-    name: saleUnitId
-    type: string
-    in: path
-    required: true
-    description: The Vipps saleunit serial number
   auth:
     name: Authorization
     in: header
@@ -317,79 +177,157 @@ parameters:
     required: true
     type: string
 definitions:
-  MerchantSignup:
-    properties:
-      organizationNumber:
-        type: string
-      name: 
-        type: string
-        description: >
-          If norwegian and not supplied, we will attempt to get this from Brønnøysund Registret,
-          Otherwise this is required.
-      logo: 
-        type: string
-        description: base64 encoded
-      countryCode:
-        type: string
-        description: Two letter country code
-    required:
-      - organizationNumber
-      - country
-  MerchantPatch:
-    allOf:
-      - $ref: "#/definitions/MerchantSignup"
-    properties:
-      active:
-        type: boolean
   Merchant:
     properties:
+      merchantSerialNumber:
+        type: string
+        description: Vipps sale unit's merchant serial number
       organizationNumber:
         type: string
-      name: 
+        pattern: '^\d{9}$'
+        minLength: 9
+        maxLength: 9
+      companyName:
         type: string
-        description: Company Name
+      companyEmail:
+        type: string        
+      name:
+        type: string
+      status:
+        type: string
+        enum: 
+          - ACTIVE
+          - DEACTIVATED
+          - PENDING
       logo: 
         type: string
         description: base64 encoded
-      id:
+      email:
         type: string
-        description: Vipps merchant serial number
-      active: 
-        type: boolean
-      countryCode:
+        description: Email id of sale unit contact or PSP contact
+        format: email
+      website:
         type: string
-        description: Two letter country code
+        description: Website of sale unit or PSP
+        format: uri
+      address:
+        $ref: '#/definitions/Address'
       createdAt:
         type: string
+        format: date-time
       updatedAt:
         type: string
-  MerchantReference:
+        format: date-time         
+  GetMerchantsResponse:
+    type: object
     properties:
-      id:
-        type: string
-        description: Vipps merchant serial number
-  SaleUnit:
+      merchants:
+        type: array
+        description: List of Sale Unit details
+        items:
+          $ref: "#/definitions/Merchant"
+  CreateMerchantRequest:
     properties:
-      id:
+      organizationNumber:
         type: string
-        description: Vipps sale unit number
+        pattern: '^\d{9}$'
+        minLength: 9
+        maxLength: 9
       name:
         type: string
-  SaleUnitSignup:
-    properties:
-      name:
+        maxLength: 200
+      logo: 
         type: string
-  SaleUnitPatch:
-    allOf:
-      - $ref: '#/definitions/SaleUnitSignup'
+        description: base64 encoded
+      email:
+        type: string
+        description: Email id of sale unit contact or PSP contact
+        format: email
+        maxLength: 255
+      website:
+        type: string
+        description: Website of sale unit or PSP
+        format: uri
+        maxLength: 255
+      address:
+        $ref: '#/definitions/Address'
+      companyName:
+        type: string
+        maxLength: 255
+      companyEmail:
+        type: string
+        maxLength: 255
+    required:
+      - name
+      - address
+      - logo
+  UpdateMerchantRequest:
     properties:
-      active:
+      deactivate:
         type: boolean
-  SaleUnitReference:
-    properties:
-      id:
+      name:
         type: string
-        description: Vipps sale unit number
+        maxLength: 200
+      logo: 
+        type: string
+        description: base64 encoded
+      email:
+        type: string
+        description: Email id of sale unit contact or PSP contact
+        format: email
+        maxLength: 255
+      website:
+        type: string
+        description: Website of sale unit or PSP
+        format: uri
+        maxLength: 255
+      address:
+        $ref: '#/definitions/Address'
+  CreateMerchantResponse:
+    properties:
+      merchantSerialNumber:
+        type: string
+        description: The Vipps saleunit's merchant serial number
+  Address:
+    type: object
+    description: Address details
+    required:
+      - addressLine1
+      - city
+      - countryCode
+      - postCode
+    properties:
+      addressLine1:
+        type: string
+        description: Address Line 1
+        example: 'Robert Levins gate 5'
+        maxLength: 255
+      addressLine2:
+        type: string
+        description: Address Line 2
+        example: 'Att: Rune Garborg'
+        maxLength: 255
+      city:
+        type: string
+        description: City
+        example: 'Oslo'
+        maxLength: 255
+      country:
+        type: string
+        description: Two letter country code based on ISO 3166
+        pattern: '^\w{2}$'
+        minLength: 2
+        maxLength: 2
+        example: 'NO'
+        enum:
+          - NO
+      postCode:
+        type: string
+        description: Post Code
+        pattern: '^\d{4}$'
+        minLength: 4
+        maxLength: 4
+        example: '0154'
   Error:
     type: object
     required:
