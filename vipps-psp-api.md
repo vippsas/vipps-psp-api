@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.2.0.
+Document version 1.2.1.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -118,8 +118,8 @@ Vipps. Vipps redirects the end user to the `redirectUrl` provided during payment
 
 #### Public key
 
-The public key that `cardData` is encrypted with is provided by the PSP during onboarding. This key needs to be a 
-RSA 2048 public key in PKCS#8 format. The corresponding private key is then used to decrypt `cardData`. Under is 
+The public key that `cardData` is encrypted with is provided by the PSP during onboarding. This key needs to be a
+RSA 2048 public key in PKCS#8 format. The corresponding private key is then used to decrypt `cardData`. Under is
 provided a basic suggestion for generating keys.
 
 **For generating public/private key**
@@ -143,6 +143,9 @@ key provided by the PSP. The cryptogram is encoded as 344-characters base64 stri
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
 Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+
+For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
+with the v2 API on payments done with the v1 API.
 
 ## Cancelling pending transactions
 
@@ -381,7 +384,7 @@ HEADER: "
 }
 ```
 
-Once the card data is received from [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call 
+Once the card data is received from [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call
 [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
 
@@ -449,7 +452,7 @@ To which the PSP should respond with a `require3DS` boolean flag which, if true,
 }
 ```
 
-The Vipps app will the host a 3DS session from the PSP, once this session is completed 
+The Vipps app will the host a 3DS session from the PSP, once this session is completed
 the PSP should redirect to `https://www.vipps.no/mobileintercept`.
 
 Once the user completes the 3DS session the `updateCardUrl` will be called again.
