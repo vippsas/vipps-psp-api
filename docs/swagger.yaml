@@ -631,10 +631,12 @@ definitions:
         description: Uniquely identifies a payment order for a merchant
       networkToken:
         type: string
-        description: "Network token of the card"
+        example: "5000000000000000001"
+        description: "Network token of the card, up to 19 digits"
       tvv:
         type: string
-        description: The cryptogram for processing with this token
+        example: "f0a29801b4#d4ff30e221fa2980ff30e2"
+        description: The cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters
     title: PaymentTokenRepresentationV3
   MakePaymentRequest:
     type: object
