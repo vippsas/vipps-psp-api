@@ -166,7 +166,10 @@ Authorization: makePaymentToken
 ```
 
 Where networkToken is the Network token of the card, up to 19 digits. A full replacement of the PAN and should be set in the DE02 field.
+
 TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. To be added to the DE55 field.
+
+### Token Requestor Ids
 
 The Vipps Transactions should be marked with the Vipps token requestor ID.
 
