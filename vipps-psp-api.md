@@ -159,7 +159,7 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "networkToken": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "networkToken": "2000000000000000001",
   "tvv": "d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL"
 }
