@@ -33,6 +33,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
     + [makePaymentUrl](#makepaymenturl)
         - [Public key](#public-key)
         - [Card Data format](#card-data-format)
+    * [Emvco Token processing](#emvco-token-processing)
   * [Status Updates](#status-updates)
   * [Cancelling pending transactions](#cancelling-pending-transactions)
 - [Example request](#example-request)
