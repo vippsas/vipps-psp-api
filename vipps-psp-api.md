@@ -139,6 +139,45 @@ The `cardData` is a string in the format
 that has been transformed into a 256 bytes OAEP cryptogram using the public
 key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
 
+## Emvco Token processing
+
+```
+NB: Details subject to change, the full solution is not yet ready. This should be considered a draft
+```
+
+In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
+EMVCO token based token processing.
+
+The solution will function on a flow lever identical to it's current implementation, but the PSP
+will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
+
+This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
+and cryptogram in the following format.
+
+```
+Authorization: makePaymentToken
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantSerialNumber": "123456",
+  "networkToken": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "tvv": "d4ff30e221fa2980ff30e2",
+  "confirmed": "YES/TIMEOUT/CANCEL"
+}
+```
+
+Where networkToken is the Network token of the card, up to 19 digits. A full replacement of the PAN and should be set in the DE02 field.
+TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. To be added to the DE55 field.
+
+The Vipps Transactions should be marked with the Vipps token requestor ID.
+
+```
+Token requestor IDs
+MasterCard: Pending finishing enrollment with scheme.
+Visa: Pending finishing enrollment with scheme.
+```
+
+
+  
 ## Status Updates
 
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
