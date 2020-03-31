@@ -146,9 +146,9 @@ NB: Details subject to change, the full solution is not yet ready. This should b
 ```
 
 In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
-EMVCO token based token processing.
+EMVCO token based processing.
 
-The solution will function on a flow lever identical to it's current implementation, but the PSP
+The solution will function on a flow level identical to it's current implementation, but the PSP
 will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
 
 This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
@@ -165,9 +165,9 @@ Authorization: makePaymentToken
 }
 ```
 
-Where networkToken is the Network token of the card, up to 19 digits. A full replacement of the PAN and should be set in the DE02 field.
+Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN and should be set in the DE02 field.
 
-TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. To be added to the DE55 field.
+TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. (pending more information) To be added to the DE55 field.
 
 ### Token Requestor Ids
 
