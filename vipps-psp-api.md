@@ -3,7 +3,7 @@
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
 (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M). Vipps på Nett offers merchants functionality to
-provide a solution where the end user only enters her Norwegian mobile number
+provide a solution where the end user only enters the Norwegian mobile number
 to retrieve a payment request in the Vipps app.
 
 In the Vipps app the end user selects a payment source to complete the payment
@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.2.1.
+Document version 1.3.0.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -34,6 +34,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
         - [Public key](#public-key)
         - [Card Data format](#card-data-format)
   * [Status Updates](#status-updates)
+    + [Batch processing of status updates](#batch-processing-of-status-updates)
   * [Cancelling pending transactions](#cancelling-pending-transactions)
 - [Example request](#example-request)
   * [Example response](#example-response)
@@ -55,7 +56,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePaymentUrl` in the initiate payment call
-* Improved authorization of the `makePaymentUrl` call by adding the authorization header value
+* Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
 * Improved and more consistent parameter names in the API
 
 # PSP payment sequence
@@ -146,6 +147,22 @@ Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayme
 
 For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
 with the v2 API on payments done with the v1 API.
+
+### Batch processing of status updates
+
+Requests to
+[`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+receive a `HTTP 200 OK` response if the JSON payload was valid.
+The actual _processing_ of the data is done as a batch.
+
+The reasoning is that in designing the API this way, was that some partners
+wanted to send all status updates once a day. Based on this we created
+a service that can consume thousands of transaction updates in one operation.
+
+To avoid all of these updates being written to our database at once, with the
+resulting performance hit, we chose to defer these into a nightly batch job.
+
+Because of this, the updated status is only visible in Vipps the nexct day.
 
 ## Cancelling pending transactions
 

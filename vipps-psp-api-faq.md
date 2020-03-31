@@ -43,7 +43,7 @@ This data is then transformed into a 256 bytes OEAP cryptogram which is encoded 
 Nets are our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
 
 Vipps only has a reference to the card data at the TSP, which we use to fetch the encrypted data to pass it through to the PSP for processing.
-  
+
 
 # Is there a unique PSP ID for all merchants?
 
@@ -76,8 +76,8 @@ Yes
 # Is it possible to skip the landing page?
 
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
-See the details in the 
-[skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page) 
+See the details in the
+[skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page)
 in the API guide.
 
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
