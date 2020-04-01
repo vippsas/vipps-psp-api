@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.0.0"
+  version: "1.0.1"
   description: >
-    The Vipps PSP Signup API allows PSPs to onboard and control their merchants with Vipps.
+    The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
     name: Vipps AS
     email: integration@vipps.no
@@ -19,7 +19,7 @@ schemes:
 consumes:
   - application/json
 produces:
-  - application/json;charset=UTF-8    
+  - application/json;charset=UTF-8
 paths:
   /merchants:
     parameters:
@@ -28,7 +28,7 @@ paths:
     get:
       operationId: getMerchants
       summary: Get all merchants for the PSP
-      tags: 
+      tags:
        - Merchant
       responses:
         '200':
@@ -40,9 +40,9 @@ paths:
         '401':
           $ref: "#/responses/401"
         '403':
-          $ref: "#/responses/403"               
+          $ref: "#/responses/403"
         '405':
-          $ref: "#/responses/405"             
+          $ref: "#/responses/405"
         '500':
           $ref: "#/responses/500"
     post:
@@ -50,7 +50,7 @@ paths:
       summary: Add a merchant to the PSP
       tags:
         - Merchant
-      parameters:  
+      parameters:
       - name: "merchant"
         in: "body"
         description: "merchant"
@@ -69,9 +69,9 @@ paths:
         '403':
           $ref: "#/responses/403"
         '405':
-          $ref: "#/responses/405"                     
+          $ref: "#/responses/405"
         '415':
-          $ref: "#/responses/415"          
+          $ref: "#/responses/415"
         '500':
           $ref: "#/responses/500"
   /merchants/{merchantSerialNumber}:
@@ -82,7 +82,7 @@ paths:
     get:
       operationId: getMerchant
       summary: Get merchant by Id for the PSP
-      tags: 
+      tags:
        - Merchant
       responses:
         '200':
@@ -94,19 +94,19 @@ paths:
         '401':
           $ref: "#/responses/401"
         '403':
-          $ref: "#/responses/403"         
+          $ref: "#/responses/403"
         '404':
-          $ref: "#/responses/404" 
+          $ref: "#/responses/404"
         '405':
-          $ref: "#/responses/405"     
+          $ref: "#/responses/405"
         '500':
           $ref: "#/responses/500"
     patch:
       operationId: patchMerchant
       summary: Update a merchant for the PSP
-      tags: 
+      tags:
        - Merchant
-      parameters:  
+      parameters:
       - name: "merchant"
         in: "body"
         description: "merchant"
@@ -121,13 +121,13 @@ paths:
         '401':
           $ref: "#/responses/401"
         '403':
-          $ref: "#/responses/403"         
+          $ref: "#/responses/403"
         '404':
-          $ref: "#/responses/404" 
+          $ref: "#/responses/404"
         '405':
           $ref: "#/responses/405"
         '415':
-          $ref: "#/responses/415"          
+          $ref: "#/responses/415"
         '500':
           $ref: "#/responses/500"
 responses:
@@ -164,18 +164,21 @@ parameters:
     in: path
     required: true
     description: The Vipps merchant serial number
+    example: "123456"
   auth:
     name: Authorization
     in: header
     required: true
     description: Bearer 'auth token'
     type: string
+    example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni"
   apimKey:
     name: Ocp-Apim-Subscription-Key
     in: header
     description: Subscription key for the PSP Signup API
     required: true
     type: string
+    example: "fnhrt8457fbfl23743b"
 definitions:
   Merchant:
     properties:
@@ -184,32 +187,38 @@ definitions:
         description: Vipps sale unit's merchant serial number
       organizationNumber:
         type: string
-        pattern: '^\d{9}$'
-        minLength: 9
-        maxLength: 9
+        pattern: '^\d{6}$'
+        minLength: 6
+        maxLength: 6
+        example: "123456"
       companyName:
         type: string
+        example: "Vipps AS"
       companyEmail:
-        type: string        
+        type: string
+        example: "user@example.com"
       name:
         type: string
+        example: "Rune Garborg"
       status:
         type: string
-        enum: 
+        enum:
           - ACTIVE
           - DEACTIVATED
           - PENDING
-      logo: 
+      logo:
         type: string
-        description: base64 encoded
+        description: Base64 encoded
       email:
         type: string
-        description: Email id of sale unit contact or PSP contact
+        description: Email of sale unit contact or PSP contact
         format: email
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
+        example: "https://example.com"
       address:
         $ref: '#/definitions/Address'
       createdAt:
@@ -217,7 +226,7 @@ definitions:
         format: date-time
       updatedAt:
         type: string
-        format: date-time         
+        format: date-time
   GetMerchantsResponse:
     type: object
     properties:
@@ -233,30 +242,36 @@ definitions:
         pattern: '^\d{9}$'
         minLength: 9
         maxLength: 9
+        example: "918713867"
       name:
         type: string
         maxLength: 200
-      logo: 
+        example: "Rune Garborg"
+      logo:
         type: string
-        description: base64 encoded
+        description: Base64 encoded
       email:
         type: string
         description: Email id of sale unit contact or PSP contact
         format: email
         maxLength: 255
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
         maxLength: 255
+        example: "https://example.com"
       address:
         $ref: '#/definitions/Address'
       companyName:
         type: string
         maxLength: 255
+        example: "Vipps AS"
       companyEmail:
         type: string
         maxLength: 255
+        example: "user@example.com"
     required:
       - name
       - address
@@ -271,19 +286,22 @@ definitions:
       name:
         type: string
         maxLength: 200
-      logo: 
+        example: "Vipps AS"
+      logo:
         type: string
-        description: base64 encoded
+        description: Base64 encoded
       email:
         type: string
         description: Email id of sale unit contact or PSP contact
         format: email
         maxLength: 255
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
         maxLength: 255
+        example: "https://example.com"
       address:
         $ref: '#/definitions/Address'
   CreateMerchantResponse:
@@ -326,7 +344,7 @@ definitions:
           - 'NO'
       postCode:
         type: string
-        description: Post Code
+        description: Postcode
         pattern: '^\d{4}$'
         minLength: 4
         maxLength: 4
@@ -343,21 +361,26 @@ definitions:
         type: "string"
         description: |
           "A URI reference that identifies the problem type"
+        example: "https://example.net/validation-error"
       title:
         type: "string"
         description: |
           "A short, human-readable summary of the problem type"
+        example: "Postcode validation error"
       status:
         type: "number"
         description: |
           "The HTTP status code generated by the origin server for this occurrence of the problem"
+        example: "400"
       detail:
         type: "string"
         description: |
-          "A human-readable explanation specific to this occurrence of the problem. 
-          The detail member, if present, ought to focus on helping the client correct the problem, 
+          "A human-readable explanation specific to this occurrence of the problem.
+          The detail member, if present, ought to focus on helping the client correct the problem,
           rather than giving debugging information."
+        example: "Postcode must be four digits"
       instance:
         type: "string"
         description: |
           "A URI reference that identifies the specific occurrence of the problem"
+        example: "https://example.net/validation-error/postcode"
