@@ -165,9 +165,9 @@ Authorization: makePaymentToken
 }
 ```
 
-Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN and should be set in the DE02 field.
+Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. To be added by the acquirer DE02 field.
 
-TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. (pending more information) To be added to the DE55 field.
+TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. (pending more information) To be added by the acquirer to the DE55 field.
 
 ### Token Requestor Ids
 
@@ -178,8 +178,6 @@ Token requestor IDs
 MasterCard: Pending finishing enrollment with scheme.
 Visa: Pending finishing enrollment with scheme.
 ```
-
-
   
 ## Status Updates
 
