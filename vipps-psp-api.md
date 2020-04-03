@@ -33,6 +33,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
     + [makePaymentUrl](#makepaymenturl)
         - [Public key](#public-key)
         - [Card Data format](#card-data-format)
+    * [Emvco Token processing](#emvco-token-processing)
   * [Status Updates](#status-updates)
     + [Batch processing of status updates](#batch-processing-of-status-updates)
   * [Cancelling pending transactions](#cancelling-pending-transactions)
@@ -139,6 +140,46 @@ The `cardData` is a string in the format
 that has been transformed into a 256 bytes OAEP cryptogram using the public
 key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
 
+## Emvco Token processing
+
+```
+NB: Details subject to change, the full solution is not yet ready. This should be considered a draft
+```
+
+In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
+EMVCO token based processing.
+
+The solution will function on a flow level identical to it's current implementation, but the PSP
+will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
+
+This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
+and cryptogram in the following format.
+
+```
+Authorization: makePaymentToken
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantSerialNumber": "123456",
+  "networkToken": "2000000000000000001",
+  "tvv": "d4ff30e221fa2980ff30e2",
+  "confirmed": "YES/TIMEOUT/CANCEL"
+}
+```
+
+Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. To be added by the acquirer DE02 field.
+
+TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. (pending more information) To be added by the acquirer to the DE55 field.
+
+### Token Requestor Ids
+
+The Vipps Transactions should be marked with the Vipps token requestor ID.
+
+```
+Token requestor IDs
+MasterCard: Pending finishing enrollment with scheme.
+Visa: Pending finishing enrollment with scheme.
+```
+  
 ## Status Updates
 
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
