@@ -19,11 +19,11 @@ tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
   - name: Vipps PSP API v3
-    description: Endpoints and operations in the PSP API v3 DRAFT
+    description: Endpoints and operations in the PSP API v3 [DRAFT]
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
-  - name: Endpoints required by Vipps from the PSP v3 API DRAFT
-    description: Calls from Vipps to the PSP
+  - name: Endpoints required by Vipps from the PSP for network token 
+    description: Calls from Vipps to the PSP [DRAFT]
 paths:
   /v3/psppayments/init:
     post:
@@ -362,8 +362,6 @@ paths:
         refused (credit card expired, not enough funds etc) or OK.
 
         Communication security is established by using 1-way SSL and makePaymentToken
-
-        **Note:** Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.
       operationId: makePaymentSwaggerUsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -390,7 +388,7 @@ paths:
   [makePaymentUrlV3]:
     post:
       tags:
-        - Endpoints required by Vipps from the PSP v3 API
+        - Endpoints required by Vipps from the PSP for network token
       summary: Service endpoint exposed by the PSP
       description: >
         Used to the card network token
@@ -400,8 +398,6 @@ paths:
         refused (credit card expired, not enough funds etc) or OK.
 
         Communication security is established by using 1-way SSL and makePaymentToken
-
-        **Note:** Vipps does _not_ call the `makePaymentUrl` if the order is not activated by the user. The user activates the order by either accepting/cancelling in the landing page or logging in to the app from a deeplink/landing page redirect.
       operationId: makePaymentV3UsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -690,7 +686,8 @@ definitions:
         pattern: '^\d{6}$'
       networkToken:
         type: string
-        description: "Network token of the card"
+        example: "5000000000000000001"
+        description: "Network token of the card, up to 19 digits"
       tvv:
         type: string
         description: The cryptogram for processing with this token
