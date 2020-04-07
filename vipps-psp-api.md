@@ -445,6 +445,7 @@ HEADER: "
 Once the card data is received from [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call
 [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
+If a recurring payment fails you should call [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) with `operationStatus: FAILED` set in the body.
 
 # HTTP responses
 
