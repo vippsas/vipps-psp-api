@@ -900,7 +900,19 @@ definitions:
       paymentText:
         type: string
         example: 'One pair of Vipps socks'
+      operationStatus:
+        type: string
+        example: SUCCESS
+        default: SUCCESS
+        description: The operation result for the status performed (ie imforming a reserve failed for recurring processing)
+        enum:
+          - FAILED
+          - SUCCESS
     title: TransactionInfo
+    required:
+      - pspTransactionId
+      - status
+      - amount
   PaymentInfo:
     type: object
     properties:
