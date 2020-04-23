@@ -85,9 +85,11 @@ This functionality is typically used at physical points of sale, where there is 
 
 To request this feature, [contact Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with a detailed description of why it is not possible to display the landing page.
 
-# More questions or comments?
+# Questions?
 
-Please use GitHub's built-in functionality for
-[issues](https://github.com/vippsas/vipps-invoice-api/issues) and
-[pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
+a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).

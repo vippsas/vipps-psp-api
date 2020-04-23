@@ -13,3 +13,12 @@ etc.
 You can peruse the API reference documentation here: https://vippsas.github.io/vipps-psp-api/
 
 For API documentation and development guidelines please see our [Guide](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md)
+
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
+a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).

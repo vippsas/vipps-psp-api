@@ -179,7 +179,7 @@ Token requestor IDs
 MasterCard: Pending finishing enrollment with scheme.
 Visa: Pending finishing enrollment with scheme.
 ```
-  
+
 ## Status Updates
 
 To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
@@ -516,3 +516,12 @@ the PSP should redirect to `https://www.vipps.no/mobileintercept`.
 
 Once the user completes the 3DS session the `updateCardUrl` will be called again.
 The PSP should then only approve or deny the request.
+
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
+a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
