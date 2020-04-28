@@ -181,7 +181,7 @@ Authorization: makePaymentToken
 }
 ```
 
-Where paymentInstruemnt is meant as a indicator that can be used to differentiate. 
+Where paymentInstruemnt is as an indicator that can be used to differentiate the two alternatives.
 
 Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. To be added by the acquirer DE02 field.
 
