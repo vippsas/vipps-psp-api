@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.0.0"
+  version: "1.0.2"
   description: >
-    The Vipps PSP Signup API allows PSPs to onboard and control their merchants with Vipps.
+    The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
     name: Vipps AS
     email: integration@vipps.no
@@ -14,67 +14,68 @@ tags:
   - name: SaleUnit
     description: Merchant Sale Units
 host: api.vipps.no
+basePath: /merchant-management/psp
 schemes:
   - "https"
 consumes:
   - application/json
 produces:
-  - application/json;charset=UTF-8    
+  - application/json;charset=UTF-8
 paths:
-  /merchants:
+  /v1/merchants:
     parameters:
       - $ref: "#/parameters/auth"
       - $ref: "#/parameters/apimKey"
     get:
       operationId: getMerchants
       summary: Get all merchants for the PSP
-      tags: 
-       - Merchant
+      tags:
+        - Merchant
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             $ref: "#/definitions/GetMerchantsResponse"
-        '400':
+        "400":
           $ref: "#/responses/400"
-        '401':
+        "401":
           $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"               
-        '405':
-          $ref: "#/responses/405"             
-        '500':
+        "403":
+          $ref: "#/responses/403"
+        "405":
+          $ref: "#/responses/405"
+        "500":
           $ref: "#/responses/500"
     post:
       operationId: addMerchant
       summary: Add a merchant to the PSP
       tags:
         - Merchant
-      parameters:  
-      - name: "merchant"
-        in: "body"
-        description: "merchant"
-        required: true
-        schema:
-          $ref: "#/definitions/CreateMerchantRequest"
+      parameters:
+        - name: "merchant"
+          in: "body"
+          description: "merchant"
+          required: true
+          schema:
+            $ref: "#/definitions/CreateMerchantRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             $ref: "#/definitions/CreateMerchantResponse"
-        '400':
+        "400":
           $ref: "#/responses/400"
-        '401':
+        "401":
           $ref: "#/responses/401"
-        '403':
+        "403":
           $ref: "#/responses/403"
-        '405':
-          $ref: "#/responses/405"                     
-        '415':
-          $ref: "#/responses/415"          
-        '500':
+        "405":
+          $ref: "#/responses/405"
+        "415":
+          $ref: "#/responses/415"
+        "500":
           $ref: "#/responses/500"
-  /merchants/{merchantSerialNumber}:
+  /v1/merchants/{merchantSerialNumber}:
     parameters:
       - $ref: "#/parameters/auth"
       - $ref: "#/parameters/apimKey"
@@ -82,53 +83,53 @@ paths:
     get:
       operationId: getMerchant
       summary: Get merchant by Id for the PSP
-      tags: 
-       - Merchant
+      tags:
+        - Merchant
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             $ref: "#/definitions/Merchant"
-        '400':
+        "400":
           $ref: "#/responses/400"
-        '401':
+        "401":
           $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
-          $ref: "#/responses/405"     
-        '500':
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "405":
+          $ref: "#/responses/405"
+        "500":
           $ref: "#/responses/500"
     patch:
       operationId: patchMerchant
       summary: Update a merchant for the PSP
-      tags: 
-       - Merchant
-      parameters:  
-      - name: "merchant"
-        in: "body"
-        description: "merchant"
-        required: true
-        schema:
-          $ref: "#/definitions/UpdateMerchantRequest"
+      tags:
+        - Merchant
+      parameters:
+        - name: "merchant"
+          in: "body"
+          description: "merchant"
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateMerchantRequest"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           $ref: "#/responses/400"
-        '401':
+        "401":
           $ref: "#/responses/401"
-        '403':
-          $ref: "#/responses/403"         
-        '404':
-          $ref: "#/responses/404" 
-        '405':
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "405":
           $ref: "#/responses/405"
-        '415':
-          $ref: "#/responses/415"          
-        '500':
+        "415":
+          $ref: "#/responses/415"
+        "500":
           $ref: "#/responses/500"
 responses:
   "400":
@@ -188,13 +189,16 @@ definitions:
         minLength: 9
         maxLength: 9
         x-order: 1
+        example: "123456789"
       companyName:
         type: string
         x-order: 2
+        example: "Vipps AS"
       companyEmail:
         type: string
         x-isisnullable: true
-        x-order: 3             
+        x-order: 3
+        example: "user@example.com"
       merchantSerialNumber:
         type: string
         description: Vipps sale unit's merchant serial number
@@ -202,46 +206,60 @@ definitions:
         maxLength: 6
         pattern: '^\d{6}$'
         x-order: 4
+        example: "123456"
       name:
         type: string
-        x-order: 5                         
+        description: Name of the sale unit
+        x-order: 5
+        example: "Example AS"
+      mccCode:
+        type: string
+        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        minLength: 4
+        maxLength: 4
+        pattern: '^\d{4}$'
+        x-order: 6
+        example: "5411"
       status:
         type: string
-        enum: 
+        description: Status of the sale unit
+        enum:
           - ACTIVE
           - DEACTIVATED
           - PENDING
-        x-order: 6            
-      logo: 
+        x-order: 7
+      logo:
         type: string
-        description: base64 encoded
+        description: Base64 encoded string of the logo of a sale unit
         x-isnullable: true
-        x-order: 7        
+        x-order: 8
       email:
         type: string
-        description: Email id of sale unit contact or PSP contact
+        description: Email of sale unit contact or PSP contact
         format: email
         x-isnullable: true
-        x-order: 8        
+        x-order: 9
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
         x-isnullable: true
-        x-order: 9           
+        x-order: 10
+        example: "https://example.com"
       createdAt:
         type: string
         format: date-time
         x-isnullable: true
-        x-order: 10
+        x-order: 11
       updatedAt:
         type: string
-        format: date-time   
+        format: date-time
         x-isnullable: true
-        x-order: 11        
+        x-order: 12
       address:
-        $ref: '#/definitions/Address'
-        x-order: 12         
+        $ref: "#/definitions/Address"
+        x-order: 13
   GetMerchantsResponse:
     type: object
     properties:
@@ -257,30 +275,44 @@ definitions:
         pattern: '^\d{9}$'
         minLength: 9
         maxLength: 9
+        example: "123456789"
       name:
         type: string
         maxLength: 200
-      logo: 
+        description: Name of the sale unit
+        example: "Example AS"
+      mccCode:
         type: string
-        description: base64 encoded
+        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        minLength: 4
+        maxLength: 4
+        pattern: '^\d{4}$'
+        example: "5411"
+      logo:
+        type: string
+        description: Base64 encoded string of the logo of a sale unit
       email:
         type: string
-        description: Email id of sale unit contact or PSP contact
+        description: Email of sale unit contact or PSP contact
         format: email
         maxLength: 255
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
         maxLength: 255
+        example: "https://example.com"
       address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       companyName:
         type: string
         maxLength: 255
+        example: "Vipps AS"
       companyEmail:
         type: string
         maxLength: 255
+        example: "user@example.com"
     required:
       - name
       - address
@@ -288,28 +320,41 @@ definitions:
       - organizationNumber
       - companyName
       - companyEmail
+      - mccCode
   UpdateMerchantRequest:
     properties:
       deactivate:
         type: boolean
+        description: Set as true in order to deactivate a sale unit. Already deactivated sale unit cannot be activated or updated through the API
       name:
         type: string
         maxLength: 200
-      logo: 
+        description: Name of the sale unit
+        example: "Example AS"
+      mccCode:
         type: string
-        description: base64 encoded
+        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        minLength: 4
+        maxLength: 4
+        pattern: '^\d{4}$'
+        example: "5411"
+      logo:
+        type: string
+        description: Base64 encoded string of the logo of a sale unit
       email:
         type: string
-        description: Email id of sale unit contact or PSP contact
+        description: Email of sale unit contact or PSP contact
         format: email
         maxLength: 255
+        example: "user@example.com"
       website:
         type: string
         description: Website of sale unit or PSP
         format: uri
         maxLength: 255
+        example: "https://example.com"
       address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
   CreateMerchantResponse:
     properties:
       merchantSerialNumber:
@@ -317,7 +362,7 @@ definitions:
         description: The Vipps saleunit's merchant serial number
         minLength: 6
         maxLength: 6
-        pattern: '^\d{6}$'            
+        pattern: '^\d{6}$'
   Address:
     type: object
     description: Address details
@@ -330,40 +375,40 @@ definitions:
       addressLine1:
         type: string
         description: Address Line 1
-        example: 'Robert Levins gate 5'
+        example: "Robert Levins gate 5"
         maxLength: 255
         x-order: 1
       addressLine2:
         type: string
         description: Address Line 2
-        example: 'Att: Rune Garborg'
+        example: "Att: Rune Garborg"
         maxLength: 255
         x-isnullable: true
-        x-order: 2        
+        x-order: 2
       city:
         type: string
         description: City
-        example: 'Oslo'
+        example: "Oslo"
         maxLength: 255
         x-order: 3
       postCode:
         type: string
-        description: Post Code
+        description: Postcode
         pattern: '^\d{4}$'
         minLength: 4
         maxLength: 4
-        example: '0154'
-        x-order: 4                
+        example: "0154"
+        x-order: 4
       countryCode:
         type: string
         description: Two letter country code based on ISO 3166
         pattern: '^\w{2}$'
         minLength: 2
         maxLength: 2
-        example: 'NO'
+        example: "NO"
         enum:
-          - 'NO'
-        x-order: 5          
+          - "NO"
+        x-order: 5
   Error:
     type: object
     required:
@@ -376,26 +421,31 @@ definitions:
         type: "string"
         description: |
           "A URI reference that identifies the problem type"
-        x-order: 1          
+        example: "https://example.net/validation-error"
+        x-order: 1
       title:
         type: "string"
         description: |
           "A short, human-readable summary of the problem type"
-        x-order: 2          
+        example: "Postcode validation error"
+        x-order: 2
       status:
         type: "number"
         description: |
           "The HTTP status code generated by the origin server for this occurrence of the problem"
-        x-order: 3          
+        example: 400
+        x-order: 3
       detail:
         type: "string"
         description: |
-          "A human-readable explanation specific to this occurrence of the problem. 
-          The detail member, if present, ought to focus on helping the client correct the problem, 
+          "A human-readable explanation specific to this occurrence of the problem.
+          The detail member, if present, ought to focus on helping the client correct the problem,
           rather than giving debugging information."
-        x-order: 4          
+        example: "Postcode must be four digits"
+        x-order: 4
       instance:
         type: "string"
         description: |
           "A URI reference that identifies the specific occurrence of the problem"
-        x-order: 5          
+        example: "https://example.net/validation-error/postcode"
+        x-order: 5
