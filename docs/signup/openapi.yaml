@@ -182,6 +182,17 @@ parameters:
     type: string
 definitions:
   Merchant:
+    description: Details of a merchant
+    required:
+      - merchantSerialNumber
+      - name
+      - address
+      - logo
+      - status
+      - organizationNumber
+      - companyName
+      - companyEmail
+      - mccCode
     properties:
       organizationNumber:
         type: string
@@ -190,18 +201,21 @@ definitions:
         maxLength: 9
         x-order: 1
         example: "123456789"
+        description: Norwegian organization number of the merchant
       companyName:
         type: string
         x-order: 2
         example: "Vipps AS"
+        description: Legal name of the organization
       companyEmail:
         type: string
         x-isisnullable: true
         x-order: 3
         example: "user@example.com"
+        description: Contact email for the organisation
       merchantSerialNumber:
         type: string
-        description: Vipps sale unit's merchant serial number
+        description: Vipps merchant serial number
         minLength: 6
         maxLength: 6
         pattern: '^\d{6}$'
@@ -209,7 +223,7 @@ definitions:
         example: "123456"
       name:
         type: string
-        description: Name of the sale unit
+        description: Name of the merchant. This name will be presented in the Vipps app
         x-order: 5
         example: "Example AS"
       mccCode:
@@ -222,7 +236,7 @@ definitions:
         example: "5411"
       status:
         type: string
-        description: Status of the sale unit
+        description: Status of the merchant in Vipps
         enum:
           - ACTIVE
           - DEACTIVATED
@@ -230,45 +244,52 @@ definitions:
         x-order: 7
       logo:
         type: string
-        description: Base64 encoded string of the logo of a sale unit
+        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
         x-isnullable: true
         x-order: 8
       email:
         type: string
-        description: Email of sale unit contact or PSP contact
+        description: Contact email for the merchant. Can be same as companyEmail
         format: email
         x-isnullable: true
         x-order: 9
         example: "user@example.com"
       website:
         type: string
-        description: Website of sale unit or PSP
+        description: Website of the merchant
         format: uri
         x-isnullable: true
         x-order: 10
         example: "https://example.com"
       createdAt:
         type: string
+        description: Date-time when the merchant was created in Vipps
         format: date-time
         x-isnullable: true
         x-order: 11
       updatedAt:
         type: string
+        description: Date-time when the merchant was last updated in Vipps
         format: date-time
         x-isnullable: true
         x-order: 12
       address:
+        description: Address of the merchant
         $ref: "#/definitions/Address"
         x-order: 13
   GetMerchantsResponse:
     type: object
+    description: Response of successful getMerchants operation
+    required:
+      - merchants
     properties:
       merchants:
         type: array
-        description: List of Sale Unit details
+        description: List of Merchants
         items:
           $ref: "#/definitions/Merchant"
   CreateMerchantRequest:
+    description: Request for addMerchant operation
     properties:
       organizationNumber:
         type: string
@@ -276,10 +297,11 @@ definitions:
         minLength: 9
         maxLength: 9
         example: "123456789"
+        description: Norwegian organization number of the merchant
       name:
         type: string
         maxLength: 200
-        description: Name of the sale unit
+        description: Name of the merchant. This name will be presented in the Vipps app
         example: "Example AS"
       mccCode:
         type: string
@@ -290,29 +312,32 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of a sale unit
+        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
       email:
         type: string
-        description: Email of sale unit contact or PSP contact
+        description: Contact email for the merchant. Can be same as companyEmail
         format: email
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
-        description: Website of sale unit or PSP
+        description: Website of the merchant
         format: uri
         maxLength: 255
         example: "https://example.com"
       address:
+        description: Address of the merchant
         $ref: "#/definitions/Address"
       companyName:
         type: string
         maxLength: 255
         example: "Vipps AS"
+        description: Legal name of the organization
       companyEmail:
         type: string
         maxLength: 255
         example: "user@example.com"
+        description: Contact email for the organisation
     required:
       - name
       - address
@@ -322,14 +347,15 @@ definitions:
       - companyEmail
       - mccCode
   UpdateMerchantRequest:
+    description: Request for patchMerchant operation. Atleast one of the properties is required
     properties:
       deactivate:
         type: boolean
-        description: Set as true in order to deactivate a sale unit. Already deactivated sale unit cannot be activated or updated through the API
+        description: Set as true in order to deactivate a merchant. Already deactivated merchant cannot be activated or updated through the API
       name:
         type: string
         maxLength: 200
-        description: Name of the sale unit
+        description: Name of the merchant. This name will be presented in the Vipps app
         example: "Example AS"
       mccCode:
         type: string
@@ -340,22 +366,26 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of a sale unit
+        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
       email:
         type: string
-        description: Email of sale unit contact or PSP contact
+        description: Contact email for the merchant. Can be same as companyEmail
         format: email
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
-        description: Website of sale unit or PSP
+        description: Website of the merchant
         format: uri
         maxLength: 255
         example: "https://example.com"
       address:
+        description: Address of the merchant
         $ref: "#/definitions/Address"
   CreateMerchantResponse:
+    description: Response of successful addMerchant operation
+    required:
+      - merchantSerialNumber
     properties:
       merchantSerialNumber:
         type: string
@@ -365,7 +395,7 @@ definitions:
         pattern: '^\d{6}$'
   Address:
     type: object
-    description: Address details
+    description: Address of the merchant
     required:
       - addressLine1
       - city
@@ -411,6 +441,7 @@ definitions:
         x-order: 5
   Error:
     type: object
+    description: Problem details of HTTP APIs based on RFC 7807
     required:
       - status
       - title
