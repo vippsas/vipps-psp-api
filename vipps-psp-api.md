@@ -163,12 +163,11 @@ Authorization: makePaymentToken
   "networkToken": "2000000000000000001",
   "tvv": "d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL"
-  "paymentInstrument" : "NETWORKTOKEN"
+  "paymentInstrument" : "TOKEN"
 }
 ```
 
 If Vipps can not provide a valid netWorkToken transaction, either due to downtime or missing issuer support we will provide the encrypted card exactly in the same manner as the existing solution.
-
 
 ```
 Authorization: makePaymentToken
@@ -177,7 +176,7 @@ Authorization: makePaymentToken
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL"
-  "paymentInstrument" : "ENCRYPEDCARD"
+  "paymentInstrument" : "ENCRYPTEDCARD"
 }
 ```
 
