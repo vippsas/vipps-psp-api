@@ -218,6 +218,7 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
+  /v2/psppayments/agreements:
     delete:
       tags:
         - Vipps PSP API
