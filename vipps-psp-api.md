@@ -163,8 +163,25 @@ Authorization: makePaymentToken
   "networkToken": "2000000000000000001",
   "tvv": "d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL"
+  "paymentInstrument" : "NETWORKTOKEN"
 }
 ```
+
+If Vipps can not provide a valid netWorkToken transaction, either due to downtime or missing issuer support we will provide the encrypted card exactly in the same manner as the existing solution.
+
+
+```
+Authorization: makePaymentToken
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantSerialNumber": "123456",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "confirmed": "YES/TIMEOUT/CANCEL"
+  "paymentInstrument" : "ENCRYPEDCARD"
+}
+```
+
+Where paymentInstruemnt is as an indicator that can be used to differentiate the two alternatives.
 
 Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. To be added by the acquirer DE02 field.
 
