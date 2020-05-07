@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.0.2"
+  version: "1.1.0"
   description: >
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
@@ -28,7 +28,7 @@ paths:
       - $ref: "#/parameters/apimKey"
     get:
       operationId: getMerchants
-      summary: Get all merchants for the PSP
+      summary: Get all merchants
       tags:
         - Merchant
       responses:
@@ -48,7 +48,7 @@ paths:
           $ref: "#/responses/500"
     post:
       operationId: addMerchant
-      summary: Add a merchant to the PSP
+      summary: Create a new merchant
       tags:
         - Merchant
       parameters:
@@ -82,7 +82,7 @@ paths:
       - $ref: "#/parameters/merchantSerialNumber"
     get:
       operationId: getMerchant
-      summary: Get merchant by Id for the PSP
+      summary: Get merchant by Id
       tags:
         - Merchant
       responses:
@@ -104,7 +104,7 @@ paths:
           $ref: "#/responses/500"
     patch:
       operationId: patchMerchant
-      summary: Update a merchant for the PSP
+      summary: Update a merchant
       tags:
         - Merchant
       parameters:
@@ -206,13 +206,13 @@ definitions:
         type: string
         x-order: 2
         example: "Vipps AS"
-        description: Legal name of the organization
+        description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
       companyEmail:
         type: string
         x-isisnullable: true
         x-order: 3
         example: "user@example.com"
-        description: Contact email for the organisation
+        description: "The merchant's email address"
       merchantSerialNumber:
         type: string
         description: Vipps merchant serial number
@@ -223,7 +223,7 @@ definitions:
         example: "123456"
       name:
         type: string
-        description: Name of the merchant. This name will be presented in the Vipps app
+        description: "The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`."
         x-order: 5
         example: "Example AS"
       mccCode:
@@ -241,22 +241,24 @@ definitions:
           - ACTIVE
           - DEACTIVATED
           - PENDING
+        default: PENDING
         x-order: 7
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
+        format: byte
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
         x-isnullable: true
         x-order: 8
       email:
         type: string
-        description: Contact email for the merchant. Can be same as companyEmail
+        description: "Contact email for the merchant. Can be the same as `companyEmail`."
         format: email
         x-isnullable: true
         x-order: 9
         example: "user@example.com"
       website:
         type: string
-        description: Website of the merchant
+        description: "The URL for the merchant's website"
         format: uri
         x-isnullable: true
         x-order: 10
@@ -267,14 +269,16 @@ definitions:
         format: date-time
         x-isnullable: true
         x-order: 11
+        example: 2019-01-01T00:00:00Z
       updatedAt:
         type: string
         description: Date-time when the merchant was last updated in Vipps
         format: date-time
         x-isnullable: true
         x-order: 12
+        example: 2019-01-01T00:00:00Z
       address:
-        description: Address of the merchant
+        description: "The merchant's address"
         $ref: "#/definitions/Address"
         x-order: 13
   GetMerchantsResponse:
@@ -301,7 +305,7 @@ definitions:
       name:
         type: string
         maxLength: 200
-        description: Name of the merchant. This name will be presented in the Vipps app
+        description: The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`.
         example: "Example AS"
       mccCode:
         type: string
@@ -312,7 +316,7 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -321,23 +325,23 @@ definitions:
         example: "user@example.com"
       website:
         type: string
-        description: Website of the merchant
+        description: "The URL for the merchant's website"
         format: uri
         maxLength: 255
         example: "https://example.com"
       address:
-        description: Address of the merchant
+        description: "The merchant's address"
         $ref: "#/definitions/Address"
       companyName:
         type: string
         maxLength: 255
         example: "Vipps AS"
-        description: Legal name of the organization
+        description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
       companyEmail:
         type: string
         maxLength: 255
         example: "user@example.com"
-        description: Contact email for the organisation
+        description: "The merchant's email address"
     required:
       - name
       - address
@@ -355,7 +359,7 @@ definitions:
       name:
         type: string
         maxLength: 200
-        description: Name of the merchant. This name will be presented in the Vipps app
+        description: "The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`."
         example: "Example AS"
       mccCode:
         type: string
@@ -366,7 +370,7 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be presented in the Vipps app
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -375,12 +379,12 @@ definitions:
         example: "user@example.com"
       website:
         type: string
-        description: Website of the merchant
+        description: "The URL for the merchant's website"
         format: uri
         maxLength: 255
         example: "https://example.com"
       address:
-        description: Address of the merchant
+        description: "The merchant's address"
         $ref: "#/definitions/Address"
   CreateMerchantResponse:
     description: Response of successful addMerchant operation
@@ -395,11 +399,11 @@ definitions:
         pattern: '^\d{6}$'
   Address:
     type: object
-    description: Address of the merchant
+    description: "The merchant's address"
     required:
       - addressLine1
       - city
-      - countryCode
+      - country
       - postCode
     properties:
       addressLine1:
@@ -429,13 +433,14 @@ definitions:
         maxLength: 4
         example: "0154"
         x-order: 4
-      countryCode:
+      country:
         type: string
         description: Two letter country code based on ISO 3166
         pattern: '^\w{2}$'
         minLength: 2
         maxLength: 2
         example: "NO"
+        default: "NO"
         enum:
           - "NO"
         x-order: 5
