@@ -15,7 +15,7 @@ and Vipps of the payment transaction success or failure.
 
 API version: 2.0
 
-Document version 1.3.0.
+Document version 1.3.1.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
@@ -219,7 +219,7 @@ a service that can consume thousands of transaction updates in one operation.
 To avoid all of these updates being written to our database at once, with the
 resulting performance hit, we chose to defer these into a nightly batch job.
 
-Because of this, the updated status is only visible in Vipps the nexct day.
+Because of this, the updated status is only visible in Vipps the next day.
 
 ## Cancelling pending transactions
 

@@ -22,7 +22,7 @@ tags:
     description: Endpoints and operations in the PSP API v3 [DRAFT]
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
-  - name: Endpoints required by Vipps from the PSP for network token 
+  - name: Endpoints required by Vipps from the PSP for network token
     description: Calls from Vipps to the PSP [DRAFT]
 paths:
   /v3/psppayments/init:
@@ -428,9 +428,12 @@ paths:
         - Vipps PSP API
       summary: Update the status of the PSP transaction.
       description: >
-        Since Vipps doesn’t process transactions, updates on payment status are
+        Since Vipps doesn’t process the PSP transactions, updates on payment status are
         required in order to deliver expected customer experience. That means
-        that PSP has to inform Vipps about any psp payment status change through this service
+        that PSP has to inform Vipps about any PSP payment status change through this endpoint.
+        Valid requests get a HTTP 200 response, but the actual update is done in
+        a batch job during the night. See the API guide for more details:
+        https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#batch-processing-of-status-updates
       operationId: updatestatusUsingPOST
       consumes:
         - application/json
@@ -666,7 +669,7 @@ definitions:
         description: JWT-TOKEN
         type: string
         example: eyJh123
-      operations:  
+      operations:
         type: array
         items:
           $ref: '#/definitions/Operation3DSecure'
@@ -704,7 +707,7 @@ definitions:
         description: JWT-TOKEN
         type: string
         example: eyJh123
-      operations:  
+      operations:
         type: array
         items:
           $ref: '#/definitions/Operation3DSecure'
@@ -933,7 +936,7 @@ definitions:
       url3dSecure:
         type: string
         example: https://example.com/
-        description: If the end user needs go through a 3D Secure flow, this URL is set.          
+        description: If the end user needs go through a 3D Secure flow, this URL is set.
     title: PaymentInfo
   TransactionSummary:
     type: object
@@ -965,7 +968,7 @@ definitions:
       url:
         type: string
         example: https://vipps.no/mobileintercept?transactionId=123456789&responsecode=OK
-        description: The redirect url to use for the operation.     
+        description: The redirect url to use for the operation.
       operation:
         type: string
         example: 3dssuccess
