@@ -6,7 +6,7 @@ For more information about this product, please see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
 * [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
-* [Vipps PSP API guide](vipps-psp-api): Developer guide for Vipps PSP API.
+* [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
 * [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
 * [Frequently Asked Questions](vipps-psp-api-faq.md): Questions and answers.
 * [Postman collection](tools/): Collection and environment for testing using Postman.
