@@ -2,19 +2,24 @@
 
 This repository contains developer resources for the Vipps PSP API.
 
-[Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): information about API keys, product activation, etc please see the guide.
+For more information about this product, please see
+[Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
+
+* [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
+* [Vipps PSP API guide](vipps-psp-api): Developer guide for Vipps PSP API.
+* [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
+* [Frequently Asked Questions](vipps-psp-api-faq.md): Questions and answers.
+* [Postman collection](tools/): Collection and environment for testing using Postman.
+
+You can peruse the API reference documentation as:
+* [Swagger](https://vippsas.github.io/vipps-psp-api).
+
+Vipps do not handle the settlements for PSP integrations. These are handled by the PSP. 
 
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
-for
-contact information,
-contribution guidelines,
-etc.
+for contact information, contribution guidelines, etc.
 
-You can peruse the API reference documentation here: https://vippsas.github.io/vipps-psp-api/
-
-For API documentation and development guidelines please see our [Guide](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md)
-
-## Questions?
+# Questions?
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
@@ -22,3 +27,4 @@ a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+
