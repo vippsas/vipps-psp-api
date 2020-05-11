@@ -12,7 +12,7 @@ For more information about this product, please see
 * [Postman collection](tools/): Collection and environment for testing using Postman.
 
 You can peruse the API reference documentation as:
-* [Swagger](https://vippsas.github.io/vipps-psp-api).
+* [Swagger](https://vippsas.github.io/vipps-psp-api)
 
 Vipps do not handle the settlements for PSP integrations. These are handled by the PSP. 
 
