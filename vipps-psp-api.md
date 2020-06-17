@@ -163,7 +163,7 @@ Authorization: makePaymentToken
   "networkToken": "2000000000000000001",
   "tvv": "d4ff30e221fa2980ff30e2",
   "confirmed": "YES/TIMEOUT/CANCEL"
-  "paymentInstrument" : "TOKEN"
+  "paymentInstrument" : "NETWORKTOKEN"
 }
 ```
 
@@ -311,9 +311,6 @@ The PSP should return the following errorIds and errorTexts when applicable:
 
 # PSD2 Compliance and Secure Customer Authentication (SCA)
 
-In order to be allow for delegated SCA through the PSD2 directive every
-transaction needs to be marked with Vipps's WalletId.
-Vipps's WalletId is A62.
 
 ## 3DSecure Fallback
 
