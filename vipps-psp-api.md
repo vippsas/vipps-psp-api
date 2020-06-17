@@ -311,9 +311,6 @@ The PSP should return the following errorIds and errorTexts when applicable:
 
 # PSD2 Compliance and Secure Customer Authentication (SCA)
 
-In order to be allow for delegated SCA through the PSD2 directive every
-transaction needs to be marked with Vipps's WalletId.
-Vipps's WalletId is A62.
 
 ## 3DSecure Fallback
 
