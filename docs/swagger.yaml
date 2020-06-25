@@ -28,7 +28,7 @@ paths:
   /v3/psppayments/init:
     post:
       tags:
-        - Vipps PSP API makePaymentUrlV3
+        - Vipps PSP API v3
       summary: Initiate a PSP payment with Network Tokens
       operationId: initiatePaymentV3UsingPOST
       consumes:
