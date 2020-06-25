@@ -43,7 +43,7 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API
+          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: Psp-Id
@@ -53,7 +53,7 @@ paths:
           type: string
         - name: Merchant-Serial-Number
           in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: The Vipps number (MSN) for the merchant's sales unit.
           required: true
           type: string
         - in: body
@@ -104,7 +104,7 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API
+          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: psp-id
@@ -114,7 +114,7 @@ paths:
           type: string
         - name: merchant-serial-number
           in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: The Vipps number (MSN) for the merchant's sales unit.
           required: true
           type: string
         - in: body
@@ -169,7 +169,6 @@ paths:
           description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
           description: PSP ID as provided by Vipps
@@ -244,7 +243,6 @@ paths:
           description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: PSP-ID
           in: header
           description: PSP ID as provided by Vipps
@@ -301,7 +299,6 @@ paths:
           description: Subscription key for the product. Can be found in Vipps developer portal
           required: true
           type: string
-          default: c1b1a8846ec56d09db39bd3b5403bf9
         - name: Psp-Id
           in: header
           description: PSP ID as provided by Vipps
@@ -447,7 +444,7 @@ paths:
           type: string
         - name: merchant-serial-number
           in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: The Vipps number (MSN) for the merchant's sales unit.
           required: true
           type: string
         - name: Ocp-Apim-Subscription-Key
@@ -506,12 +503,12 @@ paths:
           type: string
         - name: merchant-serial-number
           in: header
-          description: The Vipps number (MSN) for the sales unit
+          description: The Vipps number (MSN) for the merchant's sales unit.
           required: true
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API
+          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: psp-id
@@ -647,7 +644,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
-        description: The Vipps number (MSN) for the sales unit
+        description: The Vipps number (MSN) for the merchant's sales unit.
         minLength: 6
         maxLength: 6
         example: 123456
@@ -683,7 +680,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantSerialNumber:
         type: string
-        description: The Vipps number (MSN) for the sales unit
+        description: The Vipps number (MSN) for the merchant's sales unit.
         minLength: 6
         maxLength: 6
         example: 123456
