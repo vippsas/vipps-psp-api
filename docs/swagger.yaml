@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.4'
+  version: '1.0.5'
   title: PSP API v2
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -28,7 +28,7 @@ paths:
   /v3/psppayments/init:
     post:
       tags:
-        - Vipps PSP API v3
+        - Vipps PSP API makePaymentUrlV3
       summary: Initiate a PSP payment with Network Tokens
       operationId: initiatePaymentV3UsingPOST
       consumes:
@@ -452,12 +452,12 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API
+          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: psp-id
           in: header
-          description: PSP id as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
         - in: body
