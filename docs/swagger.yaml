@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.5'
+  version: '1.0.6'
   title: PSP API v2
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -48,7 +48,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: Merchant-Serial-Number
@@ -109,7 +109,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: PSP id as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: merchant-serial-number
@@ -171,7 +171,7 @@ paths:
           type: string
         - name: PSP-ID
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -245,7 +245,7 @@ paths:
           type: string
         - name: PSP-ID
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -301,7 +301,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: PSP ID as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -513,7 +513,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: PSP id as provided by Vipps
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
           required: true
           type: string
         - name: pspTransactionId
