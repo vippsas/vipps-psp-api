@@ -23,35 +23,42 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 # Table of Contents
 
+- [Vipps PSP API v2](#vipps-psp-api-v2)
+- [Table of Contents](#table-of-contents)
 - [Differences from PSP API version 1](#differences-from-psp-api-version-1)
 - [PSP payment sequence](#psp-payment-sequence)
 - [API overview](#api-overview)
-  * [Authentication](#authentication)
-  * [Initiate payment](#initiate-payment)
-    + [Skip landing page](#skip-landing-page)
-    + [Payment confirmation](#payment-confirmation)
-    + [makePaymentUrl](#makepaymenturl)
-        - [Public key](#public-key)
-        - [Card Data format](#card-data-format)
-    * [Emvco Token processing](#emvco-token-processing)
-  * [Status Updates](#status-updates)
-    + [Batch processing of status updates](#batch-processing-of-status-updates)
-  * [Cancelling pending transactions](#cancelling-pending-transactions)
+  - [Authentication](#authentication)
+  - [Initiate payment](#initiate-payment)
+    - [Skip landing page](#skip-landing-page)
+    - [Payment confirmation](#payment-confirmation)
+    - [makePaymentUrl](#makepaymenturl)
+      - [Public key](#public-key)
+      - [Card Data format](#card-data-format)
+  - [Emvco Token processing](#emvco-token-processing)
+    - [Token Requestor Ids](#token-requestor-ids)
+  - [Status Updates](#status-updates)
+    - [Batch processing of status updates](#batch-processing-of-status-updates)
+  - [Cancelling pending transactions](#cancelling-pending-transactions)
 - [Example request](#example-request)
-  * [Example response](#example-response)
-  * [Idempotency](#idempotency)
+  - [Example response](#example-response)
+  - [Idempotency](#idempotency)
 - [PSP API implementation checklist](#psp-api-implementation-checklist)
 - [Errors](#errors)
-- [PSD2 Compliance and Secure Customer Authentication (SCA)](#psd2-compliance-and-secure-customer-authentication--sca-)
-  * [3DSecure Fallback](#3dsecure-fallback)
+- [PSD2 Compliance and Secure Customer Authentication (SCA)](#psd2-compliance-and-secure-customer-authentication-sca)
+  - [3DSecure Fallback](#3dsecure-fallback)
 - [Recurring payments](#recurring-payments)
-  * [Scopes](#scopes)
-  * [Initialize a recurring payment](#initialize-a-recurring-payment)
-  * [The userToken](#the-usertoken)
-  * [Make the next recurring payment](#make-the-next-recurring-payment)
+  - [Scopes](#scopes)
+  - [Initialize a recurring payment](#initialize-a-recurring-payment)
+  - [The userToken](#the-usertoken)
+  - [Make the next recurring payment](#make-the-next-recurring-payment)
+- [URL Validation](#url-validation)
 - [HTTP responses](#http-responses)
-  * [Error codes](#error-codes)
+  - [Error codes](#error-codes)
 - [Questions](#questions)
+- [Proposals](#proposals)
+  - [Recurring 3DS Update Card](#recurring-3ds-update-card)
+  - [Questions?](#questions-1)
 
 # Differences from PSP API version 1
 
@@ -459,6 +466,40 @@ Once the card data is received from [`POST:/v2/psppayments/payments`](https://vi
 [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
 If a recurring payment fails you should call [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) with `operationStatus: FAILED` set in the body.
+
+# URL Validation
+
+All URLs in Vipps eCommerce API are validated with the
+[Apache Commons UrlValidator](https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/routines/UrlValidator.html).
+
+If `isApp` is true, any `pspRedirectUrl` is not validated with Apache Commons UrlValidator,
+as the app-switch URL may be something like `vipps://`, which is not a valid URL.
+
+The endpoints required by Vipps must be publicly available.
+
+URLs that start with `https://localhost` will be rejected. If you want to use
+localhost as fallback, please use `http://127.0.0.1`.
+It is, naturally, not possible to use `https://localhost` or
+`http://127.0.0.1` for the callback, as the Vipps backend would then call itself.
+
+Here is a simple Java class suitable for testing URLs,
+using the dummy URL `https://example.com/vipps/fallback-result-page/order123abc`:
+
+```java
+import org.apache.commons.validator.routines.UrlValidator;
+
+public class UrlValidate {
+ public static void main(String[] args) {
+  UrlValidator urlValidator = new UrlValidator();
+
+  if (urlValidator.isValid("https://example.com/vipps/fallback-result-page/order123abc")) {
+   System.out.println("URL is valid");
+  } else {
+   System.out.println("URL is invalid");
+  }
+ }
+}
+```
 
 # HTTP responses
 
