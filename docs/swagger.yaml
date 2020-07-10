@@ -181,7 +181,7 @@ paths:
           required: true
           type: string
           default: '123456'
-        - name: userToken
+        - name: User-Token
           in: header
           description: JWT-TOKEN
           required: true
@@ -249,7 +249,7 @@ paths:
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
-        - name: userToken
+        - name: User-Token
           in: header
           description: JWT-TOKEN
           required: true
@@ -569,7 +569,7 @@ definitions:
   Scope:
     type: string
     title: Scope
-    description: A scope for future payments you want to process with the usertoken. Current available scopes are "psp_subscription"
+    description: A scope for future payments you want to process with the userToken. Current available scopes are "psp_subscription"
     example: "psp_subscription"
   Response:
     type: object
