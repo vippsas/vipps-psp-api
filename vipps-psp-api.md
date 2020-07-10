@@ -377,7 +377,7 @@ and preform recurring payments.
 
 ## Scopes
 
-As of now, there are is one possible way to perform a recurring payment: `subscription`.
+As of now, there are is one possible way to perform a recurring payment: `psp_subscription`.
 This is referred to as the `scope` of the recurring agreement.
 Only one `scope` can be used at a time, and it's not possible to change the scope of an agreement.
 
@@ -392,11 +392,11 @@ service.
 Initializing a recurring payment works in the same way as a non-recurring payment,
 but with the inclusion of a `scope` and `agreementURL` in the init call.
 
-The `scope` can at the time be set to  `subscription`.
+The `scope` can at the time be set to  `psp_subscription`.
 The `agreementURL` should be a link to where the user can click to manage the agreement.
 
 To start the initialization, create a standard /init call with the addition of
-the required fields. If you want to initialize a recurring `subscription`,
+the required fields. If you want to initialize a recurring `psp_subscription`,
 the init request body could look like this.
 
 ```json
@@ -410,7 +410,7 @@ the init request body could look like this.
   "isApp": false,
   "pspTransactionId": "{{psptransactionid}}",
   "paymentText": "Order id: 213213",
-  "scope": "subscription",
+  "scope": "psp_subscription",
   "agreementURL": "https://example.com/linkToTheAgreement"
 }
 ```
@@ -442,15 +442,15 @@ The token also includes various useful information:
 
 After initialisation, the next payment can be made by passing your `userToken`
 to the [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
-endpoint as a header with the name `userToken`.
+endpoint as a header with the name `User-Token`.
 
 ```json
 HEADER: "
         Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5c<snip>
         Ocp-Apim-Subscription-Key: c1b1a8846ec56d09db39bd3b5403bf9
         PSP-ID: C948DFD1546347568874C4DDC93A2E3C
-        Meerchant-Serial-Number: 123456
-        UserToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        Merchant-Serial-Number: 123456
+        User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         "
 {
   "pspTransactionId": "7686f7788898767977",
@@ -547,7 +547,7 @@ A new optional `updateCardUrl` property would be added to the initate call. This
 HEADER: "
         PSP-ID: C948DFD1546347568874C4DDC93A2E3C
         Meerchant-Serial-Number: 123456
-        UserToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         "
 {
   "agreementId": "7686f7788898767977",
