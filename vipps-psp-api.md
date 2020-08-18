@@ -167,10 +167,10 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "networkToken": "2000000000000000001",
-  "tvv": "d4ff30e221fa2980ff30e2",
+  "networkToken": "12345678901234",
+  "tvv": "aFgdgjdkfgjdFDF=",
+  "tokenType": "Mastercard",
   "confirmed": "YES/TIMEOUT/CANCEL"
-  "paymentInstrument" : "NETWORKTOKEN"
 }
 ```
 
