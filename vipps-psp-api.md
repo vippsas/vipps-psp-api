@@ -167,7 +167,11 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "networkToken": "12345678901234",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "expiryYear": "2025"
+  }
   "cryptogram": "aFgdgjdkfgjdFDF=",
   "tokenType": "Mastercard",
   "confirmed": "YES/TIMEOUT/CANCEL"
