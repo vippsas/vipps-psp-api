@@ -167,8 +167,6 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-
-  
   "confirmed": "YES/TIMEOUT/CANCEL",
   "paymentInstrument": "TOKEN",
   "networkToken": {
