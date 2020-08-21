@@ -167,10 +167,17 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "networkToken": "12345678901234",
-  "tvv": "aFgdgjdkfgjdFDF=",
-  "tokenType": "Mastercard",
-  "confirmed": "YES/TIMEOUT/CANCEL"
+
+  
+  "confirmed": "YES/TIMEOUT/CANCEL",
+  "paymentInstrument": "TOKEN",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "cryptogram": "aFgdgjdkfgjdFDF=",
+    "tokenType": "Mastercard",
+    "expiryYear": "2025"
+  }
 }
 ```
 
@@ -181,9 +188,9 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
+  "confirmed": "YES/TIMEOUT/CANCEL",
+  "paymentInstrument" : "ENCRYPTEDCARD",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES/TIMEOUT/CANCEL"
-  "paymentInstrument" : "ENCRYPTEDCARD"
 }
 ```
 
