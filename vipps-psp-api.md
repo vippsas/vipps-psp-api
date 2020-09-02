@@ -160,7 +160,7 @@ The solution will function on a flow level identical to it's current implementat
 will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
 
 This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
-and cryptogram in the following format.
+and cryptogram in the following format. This is refered to as the makePayment request.
 
 ```
 Authorization: makePaymentToken
@@ -175,6 +175,7 @@ Authorization: makePaymentToken
     "cryptogram": "aFgdgjdkfgjdFDF=",
     "tokenType": "Mastercard",
     "expiryYear": "2025"
+    "trid": "42345678910"
   }
 }
 ```
@@ -200,13 +201,7 @@ TVV is the cryptogram for processing with this token Alphabetic, numeric; maximu
 
 ### Token Requestor Ids
 
-The Vipps Transactions should be marked with the Vipps token requestor ID.
-
-```
-Token requestor IDs
-MasterCard: Pending finishing enrollment with scheme.
-Visa: Pending finishing enrollment with scheme.
-```
+The Vipps Transactions should be marked with the Vipps token requestor ID when processing with tokens. The "trid" value given in the makepayment request in accordance with your acquirer setup. For Visa/Mastercard the Trid is an eleven digit number.
 
 ## Status Updates
 
