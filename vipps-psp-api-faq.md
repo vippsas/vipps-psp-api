@@ -38,9 +38,9 @@ for more.
 An example of the card data structure.
 CardData format: `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
 
-CardNumber: Numeric
-ExpiryDate: YYMM
-SessionId: Guid 
+CardNumber: Numeric  
+ExpiryDate: YYMM  
+SessionId: Guid
 
 eg. `4925********4444,2212, 3854ba014e184e0d8ba259253f4advfa`
 
