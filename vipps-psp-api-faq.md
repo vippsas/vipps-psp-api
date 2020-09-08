@@ -13,7 +13,7 @@ See the [guide](vipps-psp-api.md) for more details.
 
 # Table of Contents
 
-- [What is a network token?](#what-is-a-network-token)
+- [What is a network token?](#what-is-a-newtork-token)
 - [What is the card data structure?](#what-is-the-card-data-structure)
   * [How can I view the card data?](#how-can-i-view-the-card-data)
 - [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
