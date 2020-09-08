@@ -1,8 +1,8 @@
 # Vipps PSP API FAQ
 
-API version: 2.
+API version: 3.
 
-Document version 0.1.4.
+Document version 1.0.0.
 
 # About this API
 
@@ -37,13 +37,11 @@ eg. `4925********4444,2212, 3854ba014e184e0d8ba259253f4advfa`
 During onboarding the PSP needs to send a 2048-bit RSA public key for test and production. CardData will be encrypted using this key.
 This data is then transformed into a 256 bytes OEAP cryptogram which is encoded as 344-characters base64 string.
 
-
 ## How can I view the card data?
 
 Nets are our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
 
 Vipps only has a reference to the card data at the TSP, which we use to fetch the encrypted data to pass it through to the PSP for processing.
-
 
 # Is there a unique PSP ID for all merchants?
 

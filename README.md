@@ -23,14 +23,17 @@ for contact information, contribution guidelines, etc.
 
 The PSP API v3 adds functionality for network tokens: PSPs use the API to
 obtain tokens, not the actual card details.
-
 From January 1 2021 all PSPs must be able to process network tokens.
+
+Except for the network token functionality, v3 works the same way as v2.
+We have decided to change the major version to signify the fundamental way
+of performing payments: From card details to network tokens.
 
 See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more information.
 
-The PSP API v2 has been archived: https://github.com/vippsas/vipps-psp-api-v2
+The PSP API v2 has been archived here: https://github.com/vippsas/vipps-psp-api-v2
 
 # Questions?
 
