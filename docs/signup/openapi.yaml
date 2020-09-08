@@ -246,7 +246,7 @@ definitions:
       logo:
         type: string
         format: byte
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
         x-isnullable: true
         x-order: 8
       email:
@@ -316,7 +316,7 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -370,7 +370,7 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
