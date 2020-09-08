@@ -543,9 +543,9 @@ Currently we only allow the PSPs to onboard merchants who have a Norwegian organ
 
 The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
 
-![Payment Screen](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/payment.png)
+![Payment Screen](./docs/signup/payment.png)
 
-![Confirm Payment and Receipt Screen](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/fields.png)
+![Confirm Payment and Receipt Screen](./docs/signup/fields.png)
 
 
 # Questions
