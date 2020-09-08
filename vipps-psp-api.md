@@ -55,6 +55,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 - [URL Validation](#url-validation)
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
+- [PSP Signup APIs](#psp-signup-apis)
 - [Questions](#questions)
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
