@@ -1,6 +1,6 @@
 {
 	"id": "ec711ed3-9635-4d08-a915-9d6e01eebc03",
-	"name": "PSP API v2 - Environment",
+	"name": "PSP API v3 - Environment",
 	"values": [
 		{
 			"key": "client_id",
@@ -94,7 +94,7 @@
 		},
 		{
 			"key": "access_token",
-			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v2 - MTE environment>",
+			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v3 - MTE environment>",
 			"enabled": true
 		}
 	],
