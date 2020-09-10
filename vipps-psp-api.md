@@ -545,7 +545,7 @@ The following are the screens in the Vipps app, where the information about the 
 
 ![Payment Screen](./docs/signup/payment.png)
 
-![Confirm Payment and Receipt Screen](./docs/signup/fields.png)
+![Receipt Screen](./docs/signup/receipt.png)
 
 
 # Questions
