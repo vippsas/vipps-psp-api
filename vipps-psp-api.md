@@ -230,7 +230,7 @@ resulting performance hit, we chose to defer these into a nightly batch job.
 Because of this, the updated status is only visible in Vipps the next day.
 
 **Please note:** The batch update is _not_ run in the test environment, as
-there are some technical details preventing it from bein run in the same way
+there are some technical details preventing it from being run in the same way
 as in the production environment.
 
 ## Cancelling pending transactions
