@@ -30,7 +30,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 2.0.0.
+Document version 2.0.1.
 
 # Table of Contents
 
