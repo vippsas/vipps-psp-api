@@ -55,6 +55,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 - [URL Validation](#url-validation)
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
+- [PSP Signup APIs](#psp-signup-apis)
 - [Questions](#questions)
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
@@ -531,6 +532,25 @@ This API returns the following HTTP statuses in the responses:
 | `amount`         | amount.less.than.one                       |
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
+
+# PSP Signup APIs
+
+The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
+The API specification can be found [here](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/openapi.yaml)
+
+A PSP can use their existing keys to access this APIs. They can perform the following 
+- List all or one merchant(s) under them
+- Create a new merchant under them
+- Update an existing merchant
+
+Currently we only allow the PSPs to onboard merchants who have a Norwegian organisation number. 
+
+The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
+
+![Payment Screen](./docs/signup/payment.png)
+
+![Receipt Screen](./docs/signup/receipt.png)
+
 
 # Questions
 
