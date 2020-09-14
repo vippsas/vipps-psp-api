@@ -107,7 +107,7 @@ Once user has confirmed number the payment can be considered initiated.
 If this property is set to `true`, it will cause a push notification to be sent
 to the given phone number immediately, without loading the landing page.
 
-If the sale unit is not whitelisted, this property is ignored.
+If the sale unit is not whitelisted, an error message will be returned.
 
 If you need to be whitelisted, instructions for this can be found in the
 [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
