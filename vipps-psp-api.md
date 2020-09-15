@@ -174,7 +174,7 @@ Authorization: makePaymentToken
     "number": "12345678901234",
     "expiryMonth": "12",
     "cryptogram": "aFgdgjdkfgjdFDF=",
-    "tokenType": "Mastercard",
+    "tokenType": "MASTERCARD",
     "expiryYear": "2025"
     "trid": "12345678910"
   }

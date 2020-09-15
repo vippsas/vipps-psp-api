@@ -685,13 +685,6 @@ definitions:
         maxLength: 6
         example: 123456
         pattern: '^\d{6}$'
-      networkToken:
-        type: string
-        example: "5000000000000000001"
-        description: "Network token of the card, up to 19 digits"
-      tvv:
-        type: string
-        description: The cryptogram for processing with this token
       paymentState:
         type: string
         example: ACCEPTED
@@ -708,7 +701,44 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Operation3DSecure'
+      paymentInstrument:
+        $ref: '#/definitions/PaymentInstrument'
+      networkToken:
+        $ref: '#/definitions/NetworkToken'
+      cardData:
+        type: string
+        example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
+        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
     title: MakePaymentRequestV3
+  NetworkToken:
+    type: object
+    properties: 
+      number:
+        type: string
+        example: "5000000000000000001"
+        description: "Network token of the card, up to 19 digits"
+      cryptogram:
+        type: string
+        description: The cryptogram for processing with this token
+        example: "aFgdgjdkfgjdFDF="
+      expiryMonth:
+        type: string
+      expiryYear:
+        type: string
+      tokenType:
+        $ref: '#/definitions/TokenType'
+      trid:
+        type: string
+  PaymentInstrument:
+    type: string
+    enum:
+      - TOKEN
+      - ENCRYPTEDCARD
+  TokenType:
+    type: string
+    enum:
+      - VISA
+      - MASTERCARD
   MakePaymentResponse:
     type: object
     properties:
