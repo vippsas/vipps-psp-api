@@ -88,11 +88,6 @@ See the details in the
 [skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page)
 in the API guide.
 
-This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
-This functionality is typically used at physical points of sale, where there is no display available.
-
-To request this feature, [contact Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with a detailed description of why it is not possible to display the landing page.
-
 # Questions?
 
 We're always happy to help with code or other questions you might have!
