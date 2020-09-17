@@ -17,6 +17,16 @@ and Vipps of the payment transaction success or failure.
 
 The PSP API v3 adds functionality for network tokens: PSPs use the API to
 obtain tokens, not the actual card details.
+Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
+Values for this enum have changed accordingly
+| Old Value | New Value |
+|-----------|-----------|
+| Yes | ACCEPTED |
+|TIMEOUT| TIMEOUT|
+|CANCEL| USER_CANCEL|
+|NO| USER_CANCEL|
+
+----
 
 From January 1 2021 all PSPs must be able to process network tokens.
 
@@ -30,7 +40,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 2.0.1.
+Document version 3.0.0.
 
 # Table of Contents
 
