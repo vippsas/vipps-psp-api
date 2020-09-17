@@ -33,6 +33,8 @@ See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more information.
 
+The deprecation notice for v2 is here: [v2-deprecation.md](v2-deprecation.md).
+
 The PSP API v2 has been archived here: https://github.com/vippsas/vipps-psp-api-v2
 
 # Questions?
