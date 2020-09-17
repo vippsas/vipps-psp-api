@@ -189,7 +189,7 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "confirmed": "YES/TIMEOUT/CANCEL",
+  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
   "paymentInstrument": "TOKEN",
   "networkToken": {
     "number": "12345678901234",
@@ -209,7 +209,7 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "confirmed": "YES/TIMEOUT/CANCEL",
+  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
   "paymentInstrument" : "ENCRYPTEDCARD",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
 }
@@ -283,7 +283,7 @@ Authorization: makePaymentToken
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES/TIMEOUT/CANCEL"
+  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL"
 }
 ```
 
