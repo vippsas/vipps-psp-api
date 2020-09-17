@@ -2,13 +2,10 @@
 
 In order to achieve compliance with PSD2’s SCA requirements Vipps will be processing network tokens instead of PANs going forward. Network Tokens is Vipps' strategy to achieve Delegated Authentication and will enable Vipps to leverage existing solutions to authenticate users - maintaining the current user experience with PIN or biometric identification to approve payments.
 
-This will affect Vipps' PSP/PassThrough services and we are therefore required to launch an updated version of our PSP-API. The new version, that we will call V3, has the exact same workflow as our current V2 API, but the messages exchanged in the API calls contain different information. V3 API messages will contain a Network token, a cryptogram (aka. TAVV) and Vipps' Token Requestor ID (TRID).  V3 will require that you have the capabilities to process Network Tokens instead of raw PANs.This is described in technical detail in 
+This will affect Vipps' PSP/PassThrough services and we are therefore required to launch an updated version of our PSP-API. The new version, that we will call V3, has the exact same workflow as our current V2 API, but the messages exchanged in the API calls contain different information. V3 API messages will contain a Network token, a cryptogram (aka. TAVV) and Vipps' Token Requestor ID (TRID).  V3 will require that you have the capabilities to process Network Tokens instead of raw PANs.This is described in technical detail below and is live in our test environment:
 
-https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-between-v2-and-v3
-
- https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#emvco-token-processing
-
-and is live in our test environment.
+* [Differrences between v2 and v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-between-v2-and-v3)
+* [EMVco token processing](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#emvco-token-processing)
 
 As EBA and national authorities have mandated, SCA will come into effect January 1st 2021, and Vipps is working towards this deadline. We expect all raw PAN-processing to cause 3D Secure step ups beyond this date. Please contact us if you have any questions or want a meeting, and we will find a time to meet up.
 
