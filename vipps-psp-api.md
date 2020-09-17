@@ -1,4 +1,4 @@
-# Vipps PSP API v2
+# Vipps PSP API v3
 
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
 (eCommerce) via PSP offers functionality for payments on
@@ -13,17 +13,38 @@ provide feedback to the PSP of the payment card selected.
 The PSP processes the payment transaction and provides feedback to merchant
 and Vipps of the payment transaction success or failure.
 
-API version: 2.0
+## Differences between v2 and v3
 
-Document version 1.3.2.
+The PSP API v3 adds functionality for network tokens: PSPs use the API to
+obtain tokens, not the actual card details.
+Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
+Values for this enum have changed accordingly
+| Old Value | New Value |
+|-----------|-----------|
+| Yes | ACCEPTED |
+|TIMEOUT| TIMEOUT|
+|CANCEL| USER_CANCEL|
+|NO| USER_CANCEL|
+
+----
+
+From January 1 2021 all PSPs must be able to process network tokens.
+
+See the
+[EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
+for more information.
 
 API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 [swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
 [swagger.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.json).
 
+API version: 3.0
+
+Document version 3.0.0.
+
 # Table of Contents
 
-- [Vipps PSP API v2](#vipps-psp-api-v2)
+- [Vipps PSP API v3](#vipps-psp-api-v3)
 - [Table of Contents](#table-of-contents)
 - [Differences from PSP API version 1](#differences-from-psp-api-version-1)
 - [PSP payment sequence](#psp-payment-sequence)
@@ -206,17 +227,17 @@ The Vipps Transactions should be marked with the Vipps token requestor ID when p
 
 ## Status Updates
 
-To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
-Vipps also provides an endpoint to check the payment status: [`POST:/v2/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+Vipps also provides an endpoint to check the payment status: [`POST:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
 
 For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
-with the v2 API on payments done with the v1 API.
+with the v3 API on payments done with the v1 API.
 
 ### Batch processing of status updates
 
 Requests to
-[`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 receive a `HTTP 200 OK` response if the JSON payload was valid.
 The actual _processing_ of the data is done as a batch.
 
@@ -376,7 +397,7 @@ Authorization: makePaymentToken
 
 The PSP API supports recurring payments, allowing the PSP to
 perform recurring payments through Vipps, while retaining full transactional
-control. This has been built as an extension to the existing PSP v2 API, and no
+control. This has been built as an extension to the existing PSP v3 API, and no
 existing integrations will be affected, other than the possibility to initialize
 and preform recurring payments.
 
@@ -420,7 +441,7 @@ the init request body could look like this.
 }
 ```
 
-In the same way as a normal, non-recurring PSP v2 payment, the PSP will receive a
+In the same way as a normal, non-recurring PSP v3 payment, the PSP will receive a
 [`POST:makePaymentURL`](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentSwaggerUsingPOST)
 callback.
 In the body of this callback, you will now also find a `userToken`.
@@ -446,7 +467,7 @@ The token also includes various useful information:
 ## Make the next recurring payment
 
 After initialisation, the next payment can be made by passing your `userToken`
-to the [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
+to the [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
 endpoint as a header with the name `User-Token`.
 
 ```json
@@ -467,10 +488,10 @@ HEADER: "
 }
 ```
 
-Once the card data is received from [`POST:/v2/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call
-[`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
+Once the card data is received from [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
-If a recurring payment fails you should call [`POST:/v2/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) with `operationStatus: FAILED` set in the body.
+If a recurring payment fails you should call [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) with `operationStatus: FAILED` set in the body.
 
 # URL Validation
 

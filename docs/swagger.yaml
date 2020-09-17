@@ -12,7 +12,7 @@ info:
     payment processing to the PSP.
 
   version: '1.0.6'
-  title: PSP API v2
+  title: PSP API v3
 host: 'apitest.vipps.no'
 basePath: /psp
 tags:
@@ -86,138 +86,7 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
-  /v2/psppayments/init:
-    post:
-      tags:
-        - Vipps PSP API
-      summary: Initiate a PSP payment
-      operationId: initiatePaymentV2UsingPOST
-      consumes:
-        - application/json;charset=UTF-8
-      produces:
-        - application/json;charset=UTF-8
-      parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT
-          required: true
-          type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
-          required: true
-          type: string
-        - name: psp-id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
-          required: true
-          type: string
-        - name: merchant-serial-number
-          in: header
-          description: The Vipps number (MSN) for the merchant's sales unit.
-          required: true
-          type: string
-        - in: body
-          name: pspInitiatePaymentRequest
-          description: pspInitiatePaymentRequest
-          required: true
-          schema:
-            $ref: '#/definitions/InitiatePaymentRequest'
-      responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: '#/definitions/PaymentInitiationRepresentation'
-        '400':
-          description: Bad Request
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorDetails'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorDetails'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
-  /v2/psppayments/payments:
-    post:
-      tags:
-        - Vipps PSP API
-      summary: Get card data to process a payment with token
-      operationId: processPaymentOnToken
-      consumes:
-        - application/json;charset=UTF-8
-      produces:
-        - application/json;charset=UTF-8
-      parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT-TOKEN
-          required: true
-          type: string
-          default: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the product. Can be found in Vipps developer portal
-          required: true
-          type: string
-        - name: PSP-ID
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
-          required: true
-          type: string
-          default: C948DFD1546347568874C4DDC93A2E3C
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant
-          required: true
-          type: string
-          default: '123456'
-        - name: User-Token
-          in: header
-          description: JWT-TOKEN
-          required: true
-          type: string
-          default: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - in: body
-          name: ProcessPaymentOnToken
-          description: ProcessPaymentOnToken
-          required: true
-          schema:
-            $ref: '#/definitions/ProcessPaymentOnToken'
-      responses:
-        '200':
-          description: "OK"
-          schema:
-            $ref: '#/definitions/PaymentTokenRepresentation'
-        '400':
-          description: Bad Request
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorMessage'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorMessage'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
-  /v2/psppayments/agreements:
+  /v3/psppayments/agreements:
     delete:
       tags:
         - Vipps PSP API
@@ -327,7 +196,7 @@ paths:
         '200':
           description: "OK"
           schema:
-            $ref: '#/definitions/PaymentTokenRepresentationV3'
+            $ref: '#/definitions/PaymentTokenRepresentation'
         '400':
           description: Bad Request
           schema:
@@ -348,42 +217,6 @@ paths:
           description: Gateway Timeout
       deprecated: false
   [makePaymentUrl]:
-    post:
-      tags:
-        - Endpoints required by Vipps from the PSP
-      summary: Service endpoint exposed by the PSP
-      description: >
-        Used to transfer credit card data
-        from TSP to PSP to complete initialized transaction.
-        Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be
-        shown at PSP payment console but Vipps must be informed if payment is
-        refused (credit card expired, not enough funds etc) or OK.
-
-        Communication security is established by using 1-way SSL and makePaymentToken
-      operationId: makePaymentSwaggerUsingPOST
-      consumes:
-        - application/json;charset=UTF-8
-      produces:
-        - application/json;charset=UTF-8
-      parameters:
-        - name: Authorization
-          in: header
-          description: Token provided by the PSP as 'makePaymentToken' in the /v2/psppayments/init call.
-          required: true
-          type: string
-        - in: body
-          name: makePaymentRequest
-          description: makePaymentRequest
-          required: true
-          schema:
-            $ref: '#/definitions/MakePaymentRequest'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/MakePaymentResponse'
-      deprecated: false
-  [makePaymentUrlV3]:
     post:
       tags:
         - Endpoints required by Vipps from the PSP for network token
@@ -412,14 +245,14 @@ paths:
           description: makePaymentRequest
           required: true
           schema:
-            $ref: '#/definitions/MakePaymentRequestV3'
+            $ref: '#/definitions/MakePaymentRequest'
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/MakePaymentResponse'
       deprecated: false
-  /v2/psppayments/updatestatus:
+  /v3/psppayments/updatestatus:
     post:
       tags:
         - Vipps PSP API
@@ -487,7 +320,7 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
-  '/v2/psppayments/{pspTransactionId}/details':
+  /v3/psppayments/{pspTransactionId}/details:
     get:
       tags:
         - Vipps PSP API
@@ -610,68 +443,16 @@ definitions:
         type: string
         example: 8874C4DDC93A2E3C
         description: Uniquely identifies a payment order for a merchant
+      paymentInstrument:
+        $ref: '#/definitions/PaymentInstrument'
+      networkToken:
+        $ref: '#/definitions/NetworkToken'
       cardData:
         type: string
         example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
         description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
     title: PaymentTokenRepresentation
-  PaymentTokenRepresentationV3:
-    type: object
-    properties:
-      pspTransactionId:
-        type: string
-        example: 7686f7788898767977
-        description: Used as a globally unique transaction reference for the PSP systems
-      merchantOrderId:
-        type: string
-        example: 8874C4DDC93A2E3C
-        description: Uniquely identifies a payment order for a merchant
-      networkToken:
-        type: string
-        example: "5000000000000000001"
-        description: "Network token of the card, up to 19 digits"
-      tvv:
-        type: string
-        example: "f0a29801b4#d4ff30e221fa2980ff30e2"
-        description: The cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters
-    title: PaymentTokenRepresentationV3
   MakePaymentRequest:
-    type: object
-    properties:
-      pspTransactionId:
-        type: string
-        example: 7686f7788898767977
-        description: Used as a globally unique per PSP transaction reference for the PSP systems
-      merchantSerialNumber:
-        type: string
-        description: The Vipps number (MSN) for the merchant's sales unit.
-        minLength: 6
-        maxLength: 6
-        example: 123456
-        pattern: '^\d{6}$'
-      cardData:
-        type: string
-        example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
-        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
-      confirmed:
-        type: string
-        example: YES
-        description: Credit Card Details Encryption Status
-        enum:
-          - YES
-          - TIMEOUT
-          - CANCEL
-          - NO
-      userToken:
-        description: JWT-TOKEN
-        type: string
-        example: eyJh123
-      operations:
-        type: array
-        items:
-          $ref: '#/definitions/Operation3DSecure'
-    title: MakePaymentRequest
-  MakePaymentRequestV3:
     type: object
     properties:
       pspTransactionId:
@@ -709,7 +490,7 @@ definitions:
         type: string
         example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
         description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
-    title: MakePaymentRequestV3
+    title: MakePaymentRequest
   NetworkToken:
     type: object
     properties: 
