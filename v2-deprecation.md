@@ -25,7 +25,7 @@ Vipps is in dialogue with Mastercard regarding flagging delegated authentication
 
 ## Soft decline
 
-While Vipps is doing it’s utmost to achieve delegated SCA in all scenarios we are not in full control of all  the factors. Therefore it is critical that you support soft decline step-ups for all payment flows. This is described in our documentation here: https://github.com/alfmags/vipps-psp-api/blob/master/vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca
+While Vipps is doing it’s utmost to achieve delegated SCA in all scenarios we are not in full control of all  the factors. Therefore it is critical that you support soft decline step-ups for all payment flows. This is described in our documentation here: https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca
 
 ### Exemptions
 
