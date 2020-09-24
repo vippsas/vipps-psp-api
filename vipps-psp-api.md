@@ -162,6 +162,44 @@ $ ssh-keygen -t rsa -b 2048 -C "email@email.email"
 $ ssh-keygen -m PKCS8 -e
 ```
 
+**For testing that decryption works**  
+Python example
+```python
+import base64
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+with open("id_rsa", "rb") as key_file:
+    private_key = serialization.load_pem_private_key(
+        key_file.read(),
+        password=None,
+        backend=default_backend()
+    )
+with open("enc.text") as enc_file:
+    cipher_text = enc_file.read()
+ciphertext = base64.b64decode(cipher_text)
+plaintext = private_key.decrypt(
+    ciphertext,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+print(plaintext)
+```
+Alternative for C#
+```cs
+var bytesToDecrypt = Convert.FromBase64String(toDecrypt);
+var pemReader = new PemReader(new StringReader(_privateKey));
+var privateKeyObject = pemReader.ReadObject();
+var keyPair = (AsymmetricCipherKeyPair)privateKeyObject;
+var decryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
+decryptEngine.Init(false, keyPair.Private);
+var decryptedBytes = decryptEngine.ProcessBlock(bytesToDecrypt, 0, bytesToDecrypt.Length);
+var resultString = BytesToString(decryptedBytes);
+```
+
 #### Card Data format
 
 The `cardData` is a string in the format
