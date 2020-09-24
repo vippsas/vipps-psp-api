@@ -162,7 +162,8 @@ $ ssh-keygen -t rsa -b 2048 -C "email@email.email"
 $ ssh-keygen -m PKCS8 -e
 ```
 
-For testing that decryption works we made this short Python snippet.
+**For testing that decryption works**  
+Python example
 ```python
 import base64
 from cryptography.hazmat.backends import default_backend
