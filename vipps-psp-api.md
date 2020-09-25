@@ -206,6 +206,7 @@ The `cardData` is a string in the format
 `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
 that has been transformed into a 256 bytes OAEP cryptogram using the public
 key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
+The `ExpiryDate` is in YYMM format.
 
 ## Emvco Token processing
 
