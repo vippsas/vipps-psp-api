@@ -20,4 +20,7 @@ Vipps terminology for a
 3DS flow
 end note
 VippsBackend -> PSP: MakePaymentRequest pspId X
+PSP -> PSP : Process Payment with 3ds session data.
+PSP --> VippsBackend : Payment Result
+VippsBackend --> App: Display result
 @enduml
