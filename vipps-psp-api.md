@@ -45,6 +45,7 @@ Document version 3.0.0.
 # Table of Contents
 
 - [Vipps PSP API v3](#vipps-psp-api-v3)
+  - [Differences between v2 and v3](#differences-between-v2-and-v3)
 - [Table of Contents](#table-of-contents)
 - [Differences from PSP API version 1](#differences-from-psp-api-version-1)
 - [PSP payment sequence](#psp-payment-sequence)
@@ -57,6 +58,9 @@ Document version 3.0.0.
       - [Public key](#public-key)
       - [Card Data format](#card-data-format)
   - [Emvco Token processing](#emvco-token-processing)
+    - [Scheme specific details](#scheme-specific-details)
+      - [Visa](#visa)
+      - [Mastercard](#mastercard)
     - [Token Requestor Ids](#token-requestor-ids)
   - [Status Updates](#status-updates)
     - [Batch processing of status updates](#batch-processing-of-status-updates)
@@ -211,11 +215,13 @@ The `ExpiryDate` is in YYMM format.
 ## Emvco Token processing
 
 ```
-NB: Details subject to change, the full solution is not yet ready. This should be considered a draft
+NB: Minor details subject to change, the full solution is out in test. 
 ```
 
 In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
 EMVCO token based processing.
+
+The ECI value will be the same for encrypted card based and token based transactions.
 
 The solution will function on a flow level identical to it's current implementation, but the PSP
 will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
@@ -254,15 +260,28 @@ Authorization: makePaymentToken
 }
 ```
 
-Where paymentInstruemnt is as an indicator that can be used to differentiate the two alternatives.
+Where paymentInstrument is as an indicator that can be used to differentiate the two alternatives.
 
-Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. To be added by the acquirer DE02 field.
+Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. 
 
-TVV is the cryptogram for processing with this token Alphabetic, numeric; maximum 28 characters. (pending more information) To be added by the acquirer to the DE55 field.
+### Scheme specific details
+
+#### Visa
+
+Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the Network Token will contain the information for Delegated Authentication (DA) and the SCA factors used. Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way Issuers recognise Vipps originated transactions and not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
+
+#### Mastercard
+
+A Mastercard token transaction should be processed in accordance to Mastercards token program. 
+
+```
+NB Vipps will communicate more regarding Mastercard D-SCA shortly.
+```
+
 
 ### Token Requestor Ids
 
-The Vipps Transactions should be marked with the Vipps token requestor ID when processing with tokens. The "trid" value given in the makepayment request in accordance with your acquirer setup. For Visa/Mastercard the Trid is an eleven digit number.
+For Visa/Mastercard the Trid is an eleven digit number. And is exposed for reference in the API.
 
 ## Status Updates
 
