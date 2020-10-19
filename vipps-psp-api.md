@@ -281,7 +281,7 @@ NB Vipps will communicate more regarding Mastercard D-SCA shortly.
 
 ### Token Requestor Ids
 
-For Visa/Mastercard the Trid is an eleven digit number. And is added by the Scheme in the processing of the Payment.
+For Visa/Mastercard the TRID is an eleven digit number. And is added by the Scheme in the processing of the Payment.
 
 ### Magic Numbers for EMVCo Tokens
 
