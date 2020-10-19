@@ -272,7 +272,7 @@ Visa tokens must be processed with the acquirer submitting the TAVV cryptogram i
 
 #### Mastercard
 
-A Mastercard transactions should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the TRID to the authoriziation message. It will always be available in the DE48, SE33, SF6.
+A Mastercard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the TRID to the authoriziation message. It will always be available in DE48, SE33, SF6.
 
 ```
 NB Vipps will communicate more regarding Mastercard D-SCA shortly.
