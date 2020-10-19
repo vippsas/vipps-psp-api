@@ -62,6 +62,7 @@ Document version 3.0.0.
       - [Visa](#visa)
       - [Mastercard](#mastercard)
     - [Token Requestor Ids](#token-requestor-ids)
+    - [Magic Numbers for EMVCo Tokens](#magic-numbers-for-emvco-tokens)
   - [Status Updates](#status-updates)
     - [Batch processing of status updates](#batch-processing-of-status-updates)
   - [Cancelling pending transactions](#cancelling-pending-transactions)
@@ -242,7 +243,6 @@ Authorization: makePaymentToken
     "cryptogram": "aFgdgjdkfgjdFDF=",
     "tokenType": "MASTERCARD",
     "expiryYear": "2025"
-    "trid": "12345678910"
   }
 }
 ```
@@ -272,7 +272,7 @@ Visa tokens must be processed with the acquirer submitting the TAVV cryptogram i
 
 #### Mastercard
 
-A Mastercard token transaction should be processed in accordance to Mastercards token program. 
+A Mastercard transactions should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the TRID to the authoriziation message. It will always be available in the DE48, SE33, SF6.
 
 ```
 NB Vipps will communicate more regarding Mastercard D-SCA shortly.
@@ -281,7 +281,16 @@ NB Vipps will communicate more regarding Mastercard D-SCA shortly.
 
 ### Token Requestor Ids
 
-For Visa/Mastercard the Trid is an eleven digit number. And is exposed for reference in the API.
+For Visa/Mastercard the Trid is an eleven digit number. And is added by the Scheme in the processing of the Payment.
+
+### Magic Numbers for EMVCo Tokens
+
+Any request to the v3 API will return a Visa Token. However this can be changed by setting the amount in the init request. No matter what is selected in the app the Token returned in the MakePayment request will be:
+
+
+| Amount Value | Token Returned |
+|-----------|-----------|
+| 22.00 | MasterCard |
 
 ## Status Updates
 
