@@ -508,8 +508,6 @@ definitions:
         type: string
       tokenType:
         $ref: '#/definitions/TokenType'
-      trid:
-        type: string
   PaymentInstrument:
     type: string
     enum:
