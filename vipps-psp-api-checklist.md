@@ -13,7 +13,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] [`POST:/v3/psppayments/init`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/initiatePaymentV2UsingPOST)
     - [ ] [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
     - [ ] [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
-    - [ ] On the merchant side, being prepareed for both Encrypted Cards and EMVco Tokens: [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
+    - [ ] On the merchant side, being prepared for both Encrypted Cards and EMVco Tokens: [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
     - [ ] For recurring only(Currently on freeze pending PSD2 migration): [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/processPaymentOnToken)
     - [ ] For recurring only (Currently on freeze pending PSD2 migration): [`DELETE:/v3/psppayments/agreements`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/deletePSPPaymenAgreementUsingDELETE)
 - [ ] Respond with correct error information to [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST). See [error codes list](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes) for possible responses.
