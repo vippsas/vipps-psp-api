@@ -40,7 +40,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 3.0.0.
+Document version 3.0.1.
 
 # Table of Contents
 
@@ -216,7 +216,7 @@ The `ExpiryDate` is in YYMM format.
 ## Emvco Token processing
 
 ```
-NB: Minor details subject to change, the full solution is out in test. 
+NB: Minor details subject to change, the full solution is out in test.
 ```
 
 In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
@@ -262,7 +262,7 @@ Authorization: makePaymentToken
 
 Where paymentInstrument is as an indicator that can be used to differentiate the two alternatives.
 
-Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN. 
+Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
 
 ### Scheme specific details
 
@@ -439,20 +439,21 @@ a soft decline:
 The Vipps App will then open the URL in an iframe, letting the user complete
 the 3DSecure flow. The PSP will have to host and retrieve any necessary data
 from the session. Once the session is completed it will have to finish with a
-redirect according to the operations.url object sent in the initial makepayment request, where upon the app
-will close the iframe. Vipps will then resend the `makePayment` request.
+redirect according to the operations.url object sent in the initial
+`makePayment` request, where upon the app will close the iframe. Vipps will
+then resend the `makePayment` request.
 
-For example if a 3ds session succeeds you should redirect to the 
-Operations.url with the operation `3dssuccess`.
+For example if a 3DSecure session succeeds you should redirect to the
+`Operations.url` with the operation `3dssuccess`.
 
 ```
-operations\":[{\"url\":\"https://www.google.no/?transactionId=xxxxx&responsecode=OK\",\"operation\":\"3dssuccess\"}"
+operations\":[{\"url\":\"https://www.example.com/?transactionId=xxxxx&responsecode=OK\",\"operation\":\"3dssuccess\"}"
 ```
 
-Note that the responseCode query paramater is critical.
+Note that the `responseCode` query parameter is critical.
 
-When Vipps sends the seThe status in the response to the second `makePayment`  request should never be
-`SOFT_DECLINE`, only `FAIL` or `OK`.
+When Vipps sends the status in the response to the second `makePayment`
+request should never be `SOFT_DECLINE`, only `FAIL` or `OK`.
 Once the status is returned it will be displayed to the user as normal in the app.
 
 ```json
