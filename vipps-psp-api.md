@@ -440,7 +440,7 @@ The Vipps App will then open the URL in an iframe, letting the user complete
 the 3DSecure flow. The PSP will have to host and retrieve any necessary data
 from the session. Once the session is completed it will have to finish with a
 redirect according to the operations.url object sent in the initial makepayment request, where upon the app
-will close the iframe. Vipps will then resend the `makePaymentUrl` request.
+will close the iframe. Vipps will then resend the `makePayment` request.
 
 For example if a 3ds session succeeds you should redirect to the 
 Operations.url with the operation `3dssuccess`.
@@ -451,7 +451,7 @@ operations\":[{\"url\":\"https://www.google.no/?transactionId=xxxxx&responsecode
 
 Note that the responseCode query paramater is critical.
 
-The status in the response to this `makePaymentUrl` should never be
+When Vipps sends the seThe status in the response to the second `makePayment`  request should never be
 `SOFT_DECLINE`, only `FAIL` or `OK`.
 Once the status is returned it will be displayed to the user as normal in the app.
 
