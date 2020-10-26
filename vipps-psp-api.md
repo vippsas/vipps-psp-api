@@ -287,7 +287,6 @@ For Visa/Mastercard the TRID is an eleven digit number. And is added by the Sche
 
 Any request to the v3 API will return a Visa Token. However this can be changed by setting the amount in the init request. No matter what is selected in the app the Token returned in the MakePayment request will be:
 
-
 | Amount Value | Instrument Sent |
 |-----------|-----------|
 | 22.00 | MasterCard |
