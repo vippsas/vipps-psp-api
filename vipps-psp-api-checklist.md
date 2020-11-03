@@ -2,7 +2,7 @@
 
 Document version 2.0.0
 
-**Important:** V2 will be phased out by the end of 2010, and it is therefore
+**Important:** V2 will be phased out by early 2021, and it is therefore
 important that all merchants are migrated over to V3 as soon as the integration
 is verified by Vipps and you are ready to go live.
 
