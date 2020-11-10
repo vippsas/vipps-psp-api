@@ -478,6 +478,10 @@ definitions:
         description: JWT-TOKEN
         type: string
         example: eyJh123
+      binNumber:
+        description: Bin number for the card
+        type: string
+        example: '492556'
       operations:
         type: array
         items:
