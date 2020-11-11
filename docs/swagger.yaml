@@ -478,6 +478,10 @@ definitions:
         description: JWT-TOKEN
         type: string
         example: eyJh123
+      binNumber:
+        description: Bin number for the card
+        type: string
+        example: '492556'
       operations:
         type: array
         items:
@@ -635,14 +639,6 @@ definitions:
         type: string
         example: NOK
         description: ISO 4217 defined currency code. Currently Vipps only supports NOK
-      makePaymentUrl:
-        type: string
-        example: 'https://makePaymentURL'
-        description: PSP URL used by Vipps to send the card data
-      makePaymentToken:
-        type: string
-        example: ynuiu
-        description: Authorization header for MakePayment call
       paymentText:
         type: string
         example: 'Description of payment'

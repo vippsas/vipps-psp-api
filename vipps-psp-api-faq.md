@@ -88,6 +88,9 @@ See the details in the
 [skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page)
 in the API guide.
 
+See the eCom FAQ for more details:
+[Is it possible to skip the landing page?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#is-it-possible-to-skip-the-landing-page)
+
 # Questions?
 
 We're always happy to help with code or other questions you might have!
