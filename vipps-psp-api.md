@@ -238,6 +238,7 @@ Authorization: makePaymentToken
   "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
   "paymentInstrument": "TOKEN",
   "binNumber": "492556",
+  "cardData": null,
   "networkToken": {
     "number": "12345678901234",
     "expiryMonth": "12",
@@ -259,6 +260,7 @@ Authorization: makePaymentToken
   "paymentInstrument" : "ENCRYPTEDCARD",
   "binNumber": "492556",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "networkToken": null
 }
 ```
 
