@@ -560,8 +560,33 @@ HEADER: "
   "merchantOrderId": "8874C4DDC93A2E3C",
   "amount": 39900,
   "currency": "NOK",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
   "paymentText": "Description of payment"
+}
+```
+
+Response with network token
+```json
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantOrderId": "8874C4DDC93A2E3C",
+  "paymentInstrument": "TOKEN",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "cryptogram": "aFgdgjdkfgjdFDF=",
+    "tokenType": "MASTERCARD",
+    "expiryYear": "2025"
+  }
+}
+```
+
+Response with encryptedCard
+```json
+{
+  "pspTransactionId": "7686f7788898767977",
+  "merchantOrderId": "8874C4DDC93A2E3C",
+  "paymentInstrument": "ENCRYPTEDCARD",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
 }
 ```
 
