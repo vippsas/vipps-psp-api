@@ -555,7 +555,8 @@ HEADER: "
   "merchantOrderId": "8874C4DDC93A2E3C",
   "amount": 39900,
   "currency": "NOK",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "makePaymentUrl": "https://makePaymentURL",
+  "makePaymentToken": "ynuiu",
   "paymentText": "Description of payment"
 }
 ```
