@@ -29,7 +29,7 @@ See the [guide](vipps-psp-api.md) for more details.
 - [Questions?](#questions)
 
 # How do we update a transaction?
-Every operation done to a transaction after it has been processed should be updated to our /updatestatus endpoint. This includes partial refunds, captues etc. This is critical for support work and user experience. This goes for single payment flow and recurring.
+Every operation done to a transaction after it has been processed should be updated to our [Update status endpoint](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST). This includes partial refunds, captues etc. This is critical for support work and user experience. This goes for single payment flow and recurring.
 
 Note that you do not need to send an update for the reservation part of the single payment flow. As that is handled by the synchronous response to the Makepayment call. But you must send it for the Recurring flow.
 
