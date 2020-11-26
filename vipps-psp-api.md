@@ -575,7 +575,8 @@ Response with network token
     "expiryMonth": "12",
     "cryptogram": "aFgdgjdkfgjdFDF=",
     "tokenType": "MASTERCARD",
-    "expiryYear": "2025"
+    "expiryYear": "2025",
+    "eci": "07"
   }
 }
 ```
