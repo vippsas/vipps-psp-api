@@ -62,6 +62,7 @@ Document version 3.0.1.
       - [Visa](#visa)
       - [Mastercard](#mastercard)
     - [Token Requestor Ids](#token-requestor-ids)
+    - [3DSecure and Network tokens](#3dsecure-and-network-tokens)
     - [Magic Numbers for EMVCo Tokens](#magic-numbers-for-emvco-tokens)
   - [Status Updates](#status-updates)
     - [Batch processing of status updates](#batch-processing-of-status-updates)
@@ -288,6 +289,13 @@ NB Vipps will communicate more regarding Mastercard D-SCA shortly.
 
 For Visa/Mastercard the TRID is an eleven digit number. And is added by the Scheme in the processing of the Payment.
 
+### 3DSecure and Network tokens
+
+In order to start a 3DS session simply use the Network Token Number instead of the regular PAN. The scheme Directory Server maps the Network Token to the underlying PAN before it requests the challenge session from the Issuing Bank's ACS. CVC is not required in order to perform the 3DS session with a network token.
+
+Once the 3DS CAVV cryptogram is acquired from the 3DS session both the CAVV and the token cryptogram must be submitted in the authorization request in the fields specified by the acquirer in order to perform a valid authorization.
+
+
 ### Magic Numbers for EMVCo Tokens
 
 Any request to the v3 API will return a Visa Token. However this can be changed by setting the amount in the init request. No matter what is selected in the app the Token returned in the MakePayment request will be:
@@ -296,6 +304,7 @@ Any request to the v3 API will return a Visa Token. However this can be changed 
 |-----------|-----------|
 | 22.00 | MasterCard |
 | 31.00 | Encrypted card as chosen in app |
+| 32.00 | Visa example with late expiry|
 
 ## Status Updates
 
