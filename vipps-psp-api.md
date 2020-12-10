@@ -278,7 +278,7 @@ Visa tokens must be processed with the acquirer submitting the TAVV cryptogram i
 
 #### Mastercard
 
-A MasterCard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID (TRID) to the authoriziation message. It will always be available in DE48, SE33, SF6. Vipps is pursuing bilateral agreements for delegated authentication. As the time of writing you should expect soft declines on all MasterCard transactions.
+A MasterCard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID (TRID) to the authoriziation message. It will always be available in DE48, SE33, SF6. Vipps is pursuing multiple avenues for delegated authentication with MasterCard. As the time of writing you should expect soft declines on all MasterCard transactions.
 
 ### Token Requestor Ids
 
