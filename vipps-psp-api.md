@@ -251,7 +251,7 @@ Authorization: makePaymentToken
 }
 ```
 
-If Vipps can not provide a valid netWorkToken transaction, for any reason, for example due to network issuesx or missing issuer support we will provide the encrypted card exactly in the same manner as the existing solution.
+If Vipps can not provide a valid netWorkToken transaction, for any reason, for example due to network issues or missing issuer support we will provide the encrypted card exactly in the same manner as the existing solution.
 
 ```
 Authorization: makePaymentToken
@@ -274,11 +274,11 @@ Where networkToken is the Network token of the card, up to 16-19 digits. A full 
 
 #### Visa
 
-Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the Network Token will contain the information for Delegated Authentication (DA) and the SCA factors used. Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way Issuers recognise Vipps originated transactions and will not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
+Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the Network Token will contain the information for Delegated Authentication (DA) and the SCA factors used. Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way Issuers recognise Vipps originated transactions and will not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program. The expected ECI value for VISA requests is ECI-07.
 
 #### Mastercard
 
-A MasterCard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID (TRID) to the authoriziation message. It will always be available in DE48, SE33, SF6. Vipps is pursuing multiple avenues for delegated authentication with MasterCard. As the time of writing you should expect soft declines on all MasterCard transactions.
+A MasterCard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID (TRID) to the authoriziation message. It will always be available in DE48, SE33, SF6. Vipps is pursuing multiple avenues for delegated authentication with MasterCard. As the time of writing you should expect soft declines on all MasterCard transactions. Vipps initially return ECI-06 for Mastercard, this should be handled as "no 3ds, no challenge requested" in accordance with your acquirer.
 
 ### Token Requestor Ids
 
