@@ -299,7 +299,9 @@ Any request to the v3 API will return a Visa Token. However this can be changed 
 |-----------|-----------|
 | 22.00 | MasterCard |
 | 31.00 | Encrypted card as chosen in app |
-| 32.00 | Visa example with late expiry|
+| 32.00 | Visa example with late expiry |
+| 42.00 | Visa example with different cryptogram |
+| 43.00 | Mastercard example with different cryptogram |
 
 ## Status Updates
 
