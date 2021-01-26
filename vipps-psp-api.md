@@ -82,7 +82,7 @@ Document version 3.0.1.
 - [URL Validation](#url-validation)
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
-  - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
+- [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
 - [PSP Signup APIs](#psp-signup-apis)
 - [Questions](#questions)
 - [Proposals](#proposals)
@@ -665,7 +665,7 @@ This API returns the following HTTP statuses in the responses:
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
 
-## Recomendations regarding handling redirects
+# Recomendations regarding handling redirects
 
 Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
 
