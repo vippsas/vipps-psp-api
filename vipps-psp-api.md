@@ -676,6 +676,15 @@ Examples of some, but not all, factors outside of Vipps control.
 
 Therefore Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
 
+Example for demonstration purposes that should be handled.
+
+- User starts is in web session in a Chrome Browser.
+- A Vipps purchase is started, a redirect URL is defined by the Merchant.
+- The user completes the purchase.
+- The Vipps app redirects the user.
+- The OS defaults to a Safari Browser for the redirect.
+- The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
+
 # PSP Signup APIs
 
 The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
