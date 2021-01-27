@@ -19,11 +19,11 @@ tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
   - name: Vipps PSP API v3
-    description: Endpoints and operations in the PSP API v3 [DRAFT]
+    description: Endpoints and operations in the PSP API v3
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
   - name: Endpoints required by Vipps from the PSP for network token
-    description: Calls from Vipps to the PSP [DRAFT]
+    description: Calls from Vipps to the PSP
 paths:
   /v3/psppayments/init:
     post:
