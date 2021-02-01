@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.6'
+  version: '1.0.7'
   title: PSP API v3
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -497,7 +497,7 @@ definitions:
     title: MakePaymentRequest
   NetworkToken:
     type: object
-    properties: 
+    properties:
       number:
         type: string
         example: "5000000000000000001"
@@ -552,7 +552,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        example: order123abc
+        example: acme-shop-123-order123abc
         pattern: "[a-z0-9]"
         maxLength: 30
         description: Uniquely identifies a payment order for a merchant
@@ -614,7 +614,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        example: order123abc
+        example: acme-shop-123-order123abc
         description: Uniquely identifies a payment order for a merchant
       transactionSummary:
         $ref: '#/definitions/TransactionSummary'

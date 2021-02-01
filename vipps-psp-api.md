@@ -40,7 +40,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 3.0.1.
+Document version 3.0.2.
 
 # Table of Contents
 
@@ -620,7 +620,7 @@ It is, naturally, not possible to use `https://localhost` or
 `http://127.0.0.1` for the callback, as the Vipps backend would then call itself.
 
 Here is a simple Java class suitable for testing URLs,
-using the dummy URL `https://example.com/vipps/fallback-result-page/order123abc`:
+using the dummy URL `https://example.com/vipps/fallback-result-page/acme-shop-123-order123abc`:
 
 ```java
 import org.apache.commons.validator.routines.UrlValidator;
@@ -629,7 +629,7 @@ public class UrlValidate {
  public static void main(String[] args) {
   UrlValidator urlValidator = new UrlValidator();
 
-  if (urlValidator.isValid("https://example.com/vipps/fallback-result-page/order123abc")) {
+  if (urlValidator.isValid("https://example.com/vipps/fallback-result-page/acme-shop-123-order123abc")) {
    System.out.println("URL is valid");
   } else {
    System.out.println("URL is invalid");
