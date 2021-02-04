@@ -426,7 +426,7 @@ The PSP should return the following errorIds and errorTexts when applicable:
 
 ## 3DSecure Fallback
 
-In case of a soft decline (when the3 issuer requires 3DS), the PSP will host a
+In case of a soft decline (when the issuer requires 3DS), the PSP will host a
 3DSecure session and needs to provide the URL to Vipps.
 
 ![PSP API sequence diagram](diagrams/3DSFallbackFlow.png)
