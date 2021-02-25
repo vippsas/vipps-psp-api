@@ -1,35 +1,18 @@
 # Vipps PSP API v3
 
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
-(eCommerce) via PSP offers functionality for payments on
-websites and apps (P2M). Vipps på Nett offers merchants functionality to
-provide a solution where the end user only enters the Norwegian mobile number
-to retrieve a payment request in the Vipps app.
+(eCommerce) via PSP offers functionality for payments
+where the end user only enters the Norwegian mobile number
+to complate a payment in Vipps (the app).
 
-In the Vipps app the end user selects a payment source to complete the payment
-request. Vipps initiates the payment transaction on the selected source and
-provide feedback to the PSP of the payment card selected.
+In Vipps the user selects a payment card (a payment source),
+and Vipps then gives the PSP a token for that card so the3 PSP can process the payment.
 
-The PSP processes the payment transaction and provides feedback to merchant
-and Vipps of the payment transaction success or failure.
-
-## Differences between v2 and v3
-
-The PSP API v3 adds functionality for network tokens: PSPs use the API to
-obtain tokens, not the actual card details.
-Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
-Values for this enum have changed accordingly
-| Old Value | New Value |
-|-----------|-----------|
-| Yes | ACCEPTED |
-|TIMEOUT| TIMEOUT|
-|CANCEL| USER_CANCEL|
-|NO| USER_CANCEL|
-
-----
+The PSP processes the payment, provides feedback to merchant,
+and sends Vipps an update of the payment transaction success or failure,
+so the user can see the correct status for the payment in Vipps.
 
 From January 1 2021 all PSPs must be able to process network tokens.
-
 See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more information.
@@ -40,15 +23,14 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 3.0.3.
+Document version 3.1.0.
 
 # Table of Contents
 
-- [Vipps PSP API v3](#vipps-psp-api-v3)
-  - [Differences between v2 and v3](#differences-between-v2-and-v3)
-- [Table of Contents](#table-of-contents)
-- [Differences from PSP API version 1](#differences-from-psp-api-version-1)
 - [PSP payment sequence](#psp-payment-sequence)
+- [Differences from previous versions](#differences-from-previous-versions)
+  - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
+  - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
 - [API overview](#api-overview)
   - [Authentication](#authentication)
   - [Initiate payment](#initiate-payment)
@@ -57,7 +39,7 @@ Document version 3.0.3.
     - [makePaymentUrl](#makepaymenturl)
       - [Public key](#public-key)
       - [Card Data format](#card-data-format)
-  - [Emvco Token processing](#emvco-token-processing)
+  - [EMVCo token processing](#emvco-token-processing)
     - [Scheme specific details](#scheme-specific-details)
       - [Visa](#visa)
       - [Mastercard](#mastercard)
@@ -89,7 +71,23 @@ Document version 3.0.3.
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
   - [Questions?](#questions-1)
 
-# Differences from PSP API version 1
+
+# Differences from previous versions
+
+## Differences from PSP API v2 to v3
+
+The PSP API v3 adds functionality for network tokens: PSPs use the API to
+obtain tokens, not the actual card details.
+Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
+Values for this enum have changed accordingly
+| Old Value | New Value |
+|-----------|-----------|
+| Yes | ACCEPTED |
+|TIMEOUT| TIMEOUT|
+|CANCEL| USER_CANCEL|
+|NO| USER_CANCEL|
+
+# Differences from PSP API v1 to v2
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePaymentUrl` in the initiate payment call
@@ -110,21 +108,23 @@ then do "capture" when the goods have been shipped/delivered.
 
 ## Authentication
 
-Every API call is authenticated and authorized based on the application
-Authorization token (JWT) and subscription key
-(`Ocp-Apim-Subscription-Key`).
-The following headers are required to be there in every API request
-to successfully authenticate every API call.
+All Vipps API calls are authenticated and authorized with an access token
+(JWT bearer token) and an API subscription key:
 
 | Header Name | Header Value | Description |
-| :-------------------------- | :--------------------------- | :--------------------------------------------- |
-| Authorization | Bearer '<JWT access token>'' | type: Authorization token. Value: Access token is obtained from accessToken/get |
-| Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product, available on portal.vipps.no. |
+| ----------- | ------------ | ----------- |
+| `Authorization` | `Bearer <JWT access token>` | Type: Authorization token. This is available on [portal.vipps.no](https://portal.vipps.no). |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
+
+For more information about how to obtain an access token and all details around this, please see:
+[Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
+in the
+[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
 
 ## Initiate payment
 
 A payment request is initiated by the PSP to the Vipps API after end user has
-request to pay with Vipps. Vipps creates the payment and returns a link to
+requested to pay with Vipps. Vipps creates the payment and returns a link to
 the Vipps landing page where end user can confirm the mobile number.
 Once user has confirmed number the payment can be considered initiated.
 
@@ -142,23 +142,28 @@ If you need to be whitelisted, instructions for this can be found in the
 
 ### Payment confirmation
 
-After payment initiation, Vipps sends push notification or redirects user to
+After payment initiation, Vipps sends push notification or redirects the user to
 the Vipps app. End user verifies the Vipps profile by logging in to the Vipps
 app. In the Vipps app the end user can select payment source and confirm the amount.
 
 ### makePaymentUrl
 
 Once the end user has confirmed the payment, Vipps shares the encrypted card
-details with the PSP to the `makePaymentUrl`. The PSP uses the card details to
-process the payment through the acquirer and responds to the `makePaymentUrl`
-call with the payment request status. The Vipps user receives confirmation in
-Vipps. Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
+details with the PSP to the `makePaymentUrl`.
+
+The PSP uses the card token to process the payment through the acquirer and
+responds to the `makePaymentUrl` call with the payment request status.
+
+The user receives confirmation in Vipps.
+Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
 #### Public key
 
-The public key that `cardData` is encrypted with is provided by the PSP during onboarding. This key needs to be a
-RSA 2048 public key in PKCS#8 format. The corresponding private key is then used to decrypt `cardData`. Under is
-provided a basic suggestion for generating keys.
+The public key that `cardData` is encrypted with is provided by the PSP during
+onboarding. This key needs to be a RSA 2048 public key in PKCS#8 format.
+The corresponding private key is then used to decrypt `cardData`.
+
+See below for a basic suggestion for generating keys:
 
 **For generating public/private key**
 ```console
@@ -215,7 +220,7 @@ that has been transformed into a 256 bytes OAEP cryptogram using the public
 key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
 The `ExpiryDate` is in YYMM format.
 
-## Emvco Token processing
+## EMVCo Token processing
 
 ```
 NB: Minor details subject to change, the full solution is out in test.
@@ -230,7 +235,7 @@ The solution will function on a flow level identical to it's current implementat
 will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
 
 This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
-and cryptogram in the following format. This is refered to as the makePayment request.
+and cryptogram in the following format. This is referred to as the makePayment request.
 
 ```
 Authorization: makePaymentToken
@@ -275,26 +280,47 @@ Where networkToken is the Network token of the card, up to 16-19 digits. A full 
 
 #### Visa
 
-Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the Network Token will contain the information for Delegated Authentication (DA) and the SCA factors used. Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way Issuers recognise Vipps originated transactions and will not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program. The expected ECI value for VISA requests is ECI-07.
+Visa tokens must be processed with the acquirer submitting the TAVV cryptogram
+in field 126.8. The cryptogram received with the Network Token will contain the
+information for Delegated Authentication (DA) and the SCA factors used.
+Visa Token Service will during detokenization populate a flag for DA in field
+34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way
+Issuers recognise Vipps originated transactions and will not soft decline for
+DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
+The expected ECI value for VISA requests is ECI-07.
 
 #### Mastercard
 
-A MasterCard transaction should be processed as an ecom-token in accordance with the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID (TRID) to the authoriziation message. It will always be available in DE48, SE33, SF6. Vipps is pursuing multiple avenues for delegated authentication with MasterCard. As the time of writing you should expect soft declines on all MasterCard transactions. Vipps initially return ECI-06 for Mastercard, this should be handled as "no 3ds, no challenge requested" in accordance with your acquirer.
+A MasterCard transaction should be processed as an ecom-token in accordance with
+the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID
+(TRID) to the authorization message. It will always be available in DE48, SE33, SF6.
+Vipps is pursuing multiple avenues for delegated authentication with MasterCard.
+As the time of writing you should expect soft declines on all MasterCard transactions.
+Vipps initially returns ECI-06 for Mastercard, this should be handled as "no 3DS,
+no challenge requested" in accordance with your acquirer.
 
 ### Token Requestor Ids
 
-For Visa/Mastercard the Token Requestor ID (TRID) is an eleven digit number. And is added by the Scheme in the processing of the payments.
+For Visa/Mastercard the Token Requestor ID (TRID) is an eleven digit number.
+And is added by the Scheme in the processing of the payments.
 
 ### 3DSecure and Network tokens
 
-In order to start a 3DS session simply use the Network Token Number instead of the regular PAN. The scheme Directory Server maps the Network Token to the underlying PAN before it requests the challenge session from the Issuing Bank's ACS. CVC is not required in order to perform the 3DS session with a network token.
+In order to start a 3DS session simply use the Network Token Number instead of
+the regular PAN. The scheme Directory Server maps the Network Token to the
+underlying PAN before it requests the challenge session from the Issuing Bank's ACS.
+CVC is not required in order to perform the 3DS session with a network token.
 
-Once the 3DS CAVV cryptogram is acquired from the 3DS session both the CAVV and the token cryptogram must be submitted in the authorization request in the fields specified by the acquirer in order to perform a valid authorization.
+Once the 3DS CAVV cryptogram is acquired from the 3DS session both the CAVV and
+the token cryptogram must be submitted in the authorization request in the fields
+specified by the acquirer in order to perform a valid authorization.
 
 
 ### Magic Numbers for EMVCo Tokens
 
-Any request to the v3 API will return a Visa Token. However this can be changed by setting the amount in the init request. No matter what is selected in the app the Token returned in the MakePayment request will be:
+Any request to the v3 API will return a Visa Token. However this can be changed
+by setting the amount in the init request. No matter what is selected in the app
+the Token returned in the MakePayment request will be:
 
 | Amount Value | Instrument Sent |
 |-----------|-----------|
@@ -306,9 +332,11 @@ Any request to the v3 API will return a Visa Token. However this can be changed 
 
 ## Status Updates
 
-To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded: [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded:
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
-Vipps also provides an endpoint to check the payment status: [`POST:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+Vipps also provides an endpoint to check the payment status:
+[`POST:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
 
 For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
 with the v3 API on payments done with the v1 API.
@@ -394,7 +422,8 @@ Request-Id: slvnwdcweofjwefweklfwelf
 
 # PSP API implementation checklist
 
-See the [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
+See the
+[Vipps PSP API Checklist](vipps-psp-api-checklist.md).
 
 # Errors
 
