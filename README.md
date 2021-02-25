@@ -19,24 +19,6 @@ Vipps do not handle the settlements for PSP integrations. These are handled by t
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
 for contact information, contribution guidelines, etc.
 
-## Differences between v2 and v3
-
-The PSP API v3 adds functionality for network tokens: PSPs use the API to
-obtain tokens, not the actual card details.
-From January 1 2021 all PSPs must be able to process network tokens.
-
-Except for the network token functionality, v3 works the same way as v2.
-We have decided to change the major version to signify the fundamental way
-of performing payments: From card details to network tokens.
-
-See the
-[EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
-for more information.
-
-The deprecation notice for v2 is here: [v2-deprecation.md](v2-deprecation.md).
-
-The PSP API v2 has been archived here: https://github.com/vippsas/vipps-psp-api-v2
-
 # Questions?
 
 We're always happy to help with code or other questions you might have!
