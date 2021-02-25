@@ -40,7 +40,7 @@ API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
 
 API version: 3.0
 
-Document version 3.0.2.
+Document version 3.0.3.
 
 # Table of Contents
 
@@ -119,7 +119,7 @@ to successfully authenticate every API call.
 | Header Name | Header Value | Description |
 | :-------------------------- | :--------------------------- | :--------------------------------------------- |
 | Authorization | Bearer '<JWT access token>'' | type: Authorization token. Value: Access token is obtained from accessToken/get |
-| Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product, available on poertal.vipps.no. |
+| Ocp-Apim-Subscription-Key | Base 64 encoded string | Subscription key for the product, available on portal.vipps.no. |
 
 ## Initiate payment
 
