@@ -548,7 +548,7 @@ definitions:
         type: string
         example: 7686f7788898767977
         pattern: "[a-z0-9]"
-        maxLength: 30
+        maxLength: 36
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
