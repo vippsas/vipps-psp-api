@@ -22,13 +22,11 @@ Vipps' new PSP, not the old one. That means Vipps is only able to provide a toke
 cards, not the card details. If you are not able to process tokens, you should respond with
 `HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
 
-API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
-[swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
-[swagger.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.json).
+API details: [https://github.com/vippsas/vipps-psp-api](https://github.com/vippsas/vipps-psp-api).
 
 API version: 3.0
 
-Document version 3.1.1.
+Document version 3.1.2.
 
 # Table of Contents
 
