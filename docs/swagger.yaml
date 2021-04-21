@@ -11,25 +11,21 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.7'
+  version: '1.0.8'
   title: PSP API v3
 host: 'apitest.vipps.no'
 basePath: /psp
 tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
-  - name: Vipps PSP API v3
-    description: Endpoints and operations in the PSP API v3
   - name: Endpoints required by Vipps from the PSP
-    description: Calls from Vipps to the PSP
-  - name: Endpoints required by Vipps from the PSP for network token
     description: Calls from Vipps to the PSP
 paths:
   /v3/psppayments/init:
     post:
       tags:
-        - Vipps PSP API v3
-      summary: Initiate a PSP payment with Network Tokens
+        - Vipps PSP API
+      summary: Initiate a PSP payment with network tokens
       operationId: initiatePaymentV3UsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -149,7 +145,7 @@ paths:
   /v3/psppayments/payments:
     post:
       tags:
-        - Vipps PSP API v3
+        - Vipps PSP API
       summary: Get card data to process a payment with token
       operationId: processPaymentOnTokenV3
       consumes:
@@ -219,7 +215,7 @@ paths:
   [makePaymentUrl]:
     post:
       tags:
-        - Endpoints required by Vipps from the PSP for network token
+        - Endpoints required by Vipps from the PSP
       summary: Service endpoint exposed by the PSP
       description: >
         Used to the card network token
