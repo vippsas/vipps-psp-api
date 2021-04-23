@@ -11,7 +11,7 @@ info:
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
 
-  version: '1.0.8'
+  version: '1.0.9'
   title: PSP API v3
 host: 'apitest.vipps.no'
 basePath: /psp
@@ -21,7 +21,7 @@ tags:
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
 paths:
-  /v3/psppayments/init:
+  /v3/psppayments/init/:
     post:
       tags:
         - Vipps PSP API
@@ -612,7 +612,9 @@ definitions:
           - psp_subscription
       merchantAgreementUrl:
         type: string
-        description: For use with PSP Recurring `scope: psp_subscription`, provides the user a link back to the merchants surfaces from their agreement overview in the Vipps App.
+        description: >-
+          For use with PSP Recurring `scope: psp_subscription`, provides the
+          user a link back to the merchants surfaces from their agreement overview in the Vipps App.
     title: InitiatePaymentRequest
   PaymentDetailsRepresentation:
     type: object
