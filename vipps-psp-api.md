@@ -68,7 +68,7 @@ Document version 3.1.3.
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
 - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
-- [PSP Signup APIs](#psp-signup-apis)
+- [PSP Signup API](#psp-signup-api)
 - [Questions](#questions)
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
