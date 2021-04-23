@@ -610,6 +610,9 @@ definitions:
         description: PSP Transaction Status to be updated in Vipps
         enum:
           - psp_subscription
+      merchantAgreementUrl:
+        type: string
+        description: For use with PSP Recurring `scope: psp_subscription`, provides the user a link back to the merchants surfaces from their agreement overview in the Vipps App.
     title: InitiatePaymentRequest
   PaymentDetailsRepresentation:
     type: object
