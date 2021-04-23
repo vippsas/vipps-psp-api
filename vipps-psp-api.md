@@ -717,7 +717,7 @@ Example for demonstration purposes that should be handled.
 - The OS defaults to a Safari Browser for the redirect.
 - The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
 
-# PSP Signup APIs
+# PSP Signup API
 
 The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
 The API specification is available here:
