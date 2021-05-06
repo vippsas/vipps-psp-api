@@ -11,8 +11,6 @@ info:
 tags:
   - name: Merchant
     description: Merchants
-  - name: SaleUnit
-    description: Merchant Sale Units
 host: api.vipps.no
 basePath: /merchant-management/psp
 schemes:
@@ -52,6 +50,7 @@ paths:
       tags:
         - Merchant
       parameters:
+        - $ref: "#/parameters/idempotency"
         - name: "merchant"
           in: "body"
           description: "merchant"
@@ -165,9 +164,9 @@ parameters:
     in: path
     required: true
     description: The Vipps merchant serial number
-    minLength: 6
+    minLength: 5
     maxLength: 6
-    pattern: '^\d{6}$'
+    pattern: '^\d{5-6}$'
   auth:
     name: Authorization
     in: header
@@ -178,6 +177,12 @@ parameters:
     name: Ocp-Apim-Subscription-Key
     in: header
     description: Subscription key for the PSP Signup API
+    required: true
+    type: string
+  idempotency:
+    name: Idempotency-Key
+    in: header
+    description: Unique key for idempotent operation
     required: true
     type: string
 definitions:
@@ -216,9 +221,9 @@ definitions:
       merchantSerialNumber:
         type: string
         description: Vipps merchant serial number
-        minLength: 6
+        minLength: 5
         maxLength: 6
-        pattern: '^\d{6}$'
+        pattern: '^\d{5,6}$'
         x-order: 4
         example: "123456"
       name:
@@ -305,6 +310,7 @@ definitions:
       name:
         type: string
         maxLength: 200
+        pattern: "^[A-Za-z0-9 ]+$"
         description: The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`.
         example: "Example AS"
       mccCode:
@@ -321,11 +327,13 @@ definitions:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
         format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
+        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
         format: uri
         maxLength: 255
         example: "https://example.com"
@@ -335,10 +343,13 @@ definitions:
       companyName:
         type: string
         maxLength: 255
+        pattern: "^[A-Za-z0-9 ]+$"
         example: "Vipps AS"
         description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
       companyEmail:
         type: string
+        format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
         description: "The merchant's email address"
@@ -359,6 +370,7 @@ definitions:
       name:
         type: string
         maxLength: 200
+        pattern: "^[A-Za-z0-9 ]+$"
         description: "The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`."
         example: "Example AS"
       mccCode:
@@ -370,17 +382,19 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
         format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
         format: uri
+        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
         maxLength: 255
         example: "https://example.com"
       address:
@@ -394,9 +408,9 @@ definitions:
       merchantSerialNumber:
         type: string
         description: The Vipps saleunit's merchant serial number
-        minLength: 6
+        minLength: 5
         maxLength: 6
-        pattern: '^\d{6}$'
+        pattern: '^\d{5,6}$'
   Address:
     type: object
     description: "The merchant's address"
@@ -411,12 +425,14 @@ definitions:
         description: Address Line 1
         example: "Robert Levins gate 5"
         maxLength: 255
+        pattern: "^[A-Za-z0-9 ]+$"
         x-order: 1
       addressLine2:
         type: string
         description: Address Line 2
         example: "Att: Rune Garborg"
         maxLength: 255
+        pattern: "^[A-Za-z0-9 ]+$"
         x-isnullable: true
         x-order: 2
       city:
