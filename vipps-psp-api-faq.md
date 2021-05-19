@@ -2,7 +2,7 @@
 
 API version: 3.
 
-Document version 1.1.0.
+Document version 1.1.1.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -77,7 +77,7 @@ This data is then transformed into a 256 bytes OEAP cryptogram which is encoded 
 **Please note:** This is now deprecated. See:
 [Differences from PSP API v2 to v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-from-psp-api-v2-to-v3).
 
-Nets are our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
+Nets is our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
 
 Vipps only has a reference to the card data at the TSP, which we use to fetch the encrypted data to pass it through to the PSP for processing.
 
@@ -91,7 +91,9 @@ Yes, please see: [The Vipps test environment (MT)](https://github.com/vippsas/vi
 
 # What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
 
-Should it be: paymentInfo.status = "OK" or "FAIL"? If it is fail, what error code should be returned?
+Continued:
+Should it be: paymentInfo.status = "OK" or "FAIL"?
+If it is "FAIL", what error code should be returned?
 
 It is suggested that you send "FAIL" in case of failure either at your end or as in this case at our end.
 
