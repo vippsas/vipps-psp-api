@@ -376,12 +376,14 @@ definitions:
         type: string
       errorCode:
         type: string
+        example: 21
       errorField:
         type: string
       errorKey:
         type: string
       errorMessage:
         type: string
+        example: Merchant not available or active
     title: ErrorDetails
   ErrorMessage:
     type: object
