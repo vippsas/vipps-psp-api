@@ -26,7 +26,7 @@ API details: [https://github.com/vippsas/vipps-psp-api](https://github.com/vipps
 
 API version: 3.0
 
-Document version 3.1.3.
+Document version 3.1.4.
 
 # Table of Contents
 
@@ -90,7 +90,7 @@ Values for this enum have changed accordingly
 |CANCEL| USER_CANCEL|
 |NO| USER_CANCEL|
 
-# Differences from PSP API v1 to v2
+## Differences from PSP API v1 to v2
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePaymentUrl` in the initiate payment call
