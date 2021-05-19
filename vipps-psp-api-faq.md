@@ -2,7 +2,7 @@
 
 API version: 3.
 
-Document version 1.1.1.
+Document version 1.1.2.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -29,9 +29,10 @@ See the [guide](vipps-psp-api.md) for more details.
 You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
 [`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/initiatePaymentV3UsingPOST).
 
-If the merchant or sale unit is not active, you will get an error.
+If the merchant or sale unit is not active, you will get an error:
+"Merchant not available or active".
 
-See the eCom FAQ:
+This is similar to the error in the eCom API. See the eCom FAQ:
 [`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
 
 # How do we update a transaction?
