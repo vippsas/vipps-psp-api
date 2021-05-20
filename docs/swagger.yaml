@@ -590,7 +590,8 @@ definitions:
         description: PSP URL used by Vipps to send the card data
       makePaymentToken:
         type: string
-        example: ynuiu
+        example: lfkhwef3op48yufpcno3fh34qp8fyncpf83hy4
+        maxLength: 255
         description: Authorization header for MakePayment call
       paymentText:
         type: string
