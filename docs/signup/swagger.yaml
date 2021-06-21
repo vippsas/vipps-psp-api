@@ -70,6 +70,8 @@ paths:
           $ref: "#/responses/403"
         "405":
           $ref: "#/responses/405"
+        "409":
+          $ref: "#/responses/409"
         "415":
           $ref: "#/responses/415"
         "500":
@@ -149,6 +151,10 @@ responses:
     description: Request method not supported
     schema:
       $ref: "#/definitions/Error"
+  "409":
+    description: Idempotent conflict
+    schema:
+      $ref: "#/definitions/Error"
   "415":
     description: Unsupported media type
     schema:
@@ -166,7 +172,7 @@ parameters:
     description: The Vipps merchant serial number
     minLength: 5
     maxLength: 6
-    pattern: '^\d{5-6}$'
+    pattern: '^\d{5,6}$'
   auth:
     name: Authorization
     in: header
@@ -201,12 +207,12 @@ definitions:
     properties:
       organizationNumber:
         type: string
-        pattern: '^\d{9}$'
+        pattern: '^(\d{9}|[0-9A-Z]{4}00[0-9A-Z]{12}[0-9]{2})$'
         minLength: 9
-        maxLength: 9
+        maxLength: 20
         x-order: 1
         example: "123456789"
-        description: Norwegian organization number of the merchant
+        description: Norwegian organization number or LEI of the merchant
       companyName:
         type: string
         x-order: 2
@@ -251,7 +257,7 @@ definitions:
       logo:
         type: string
         format: byte
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
         x-isnullable: true
         x-order: 8
       email:
@@ -302,11 +308,12 @@ definitions:
     properties:
       organizationNumber:
         type: string
-        pattern: '^\d{9}$'
+        pattern: '^(\d{9}|[0-9A-Z]{4}00[0-9A-Z]{12}[0-9]{2})$'
         minLength: 9
-        maxLength: 9
+        maxLength: 20
+        x-order: 1
         example: "123456789"
-        description: Norwegian organization number of the merchant
+        description: Norwegian organization number or LEI of the merchant
       name:
         type: string
         maxLength: 200
@@ -322,7 +329,7 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -457,8 +464,6 @@ definitions:
         maxLength: 2
         example: "NO"
         default: "NO"
-        enum:
-          - "NO"
         x-order: 5
   Error:
     type: object
