@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: >
+  description: |
 
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. PSPs have full transactional control of
@@ -10,10 +10,14 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
-
-  version: '1.0.9'
+  version: 1.0.10
   title: PSP API v3
-host: 'apitest.vipps.no'
+  contact:
+    name: Vipps AS
+    url: 'https://github.com/vippsas/vipps-developers/blob/master/contact.md'
+schemes:
+  - https
+host: apitest.vipps.no
 basePath: /psp
 tags:
   - name: Vipps PSP API
@@ -21,11 +25,11 @@ tags:
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
 paths:
-  /v3/psppayments/init/:
+  /v3/psppayments/init:
     post:
       tags:
         - Vipps PSP API
-      summary: Initiate a PSP payment with network tokens
+      summary: Initiate a PSP payment
       operationId: initiatePaymentV3UsingPOST
       consumes:
         - application/json;charset=UTF-8
@@ -39,12 +43,12 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
+          description: 'Subscription key for the PSP API. This is the PSP''s key, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: Merchant-Serial-Number
@@ -59,8 +63,8 @@ paths:
           schema:
             $ref: '#/definitions/InitiatePaymentRequest'
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
           schema:
             $ref: '#/definitions/PaymentInitiationRepresentation'
         '400':
@@ -82,6 +86,7 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
+      description: Initiate a payment
   /v3/psppayments/agreements:
     delete:
       tags:
@@ -110,7 +115,7 @@ paths:
           type: string
         - name: PSP-ID
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -128,7 +133,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ErrorMessage'
+              $ref: '#/definitions/ErrorDetails'
         '401':
           description: Unauthorized
         '500':
@@ -136,12 +141,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ErrorMessage'
+              $ref: '#/definitions/ErrorDetails'
         '503':
           description: Service unavailable
         '504':
           description: Gateway Timeout
       deprecated: false
+      description: Used to cancel a recurring agreement
   /v3/psppayments/payments:
     post:
       tags:
@@ -166,7 +172,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -190,7 +196,7 @@ paths:
             $ref: '#/definitions/ProcessPaymentOnToken'
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
             $ref: '#/definitions/PaymentTokenRepresentation'
         '400':
@@ -198,7 +204,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ErrorMessage'
+              $ref: '#/definitions/ErrorDetails'
         '401':
           description: Unauthorized
         '500':
@@ -206,18 +212,19 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ErrorMessage'
+              $ref: '#/definitions/ErrorDetails'
         '503':
           description: Service unavailable
         '504':
           description: Gateway Timeout
       deprecated: false
+      description: 'Request a MIT payment for a recurring agreement, provides card details for processing. A updatestatus call should be made afterwards with the result of the authorisation.'
   [makePaymentUrl]:
     post:
       tags:
         - Endpoints required by Vipps from the PSP
       summary: Service endpoint exposed by the PSP
-      description: >
+      description: |
         Used to the card network token
         from Token Requestor Service to PSP to complete initialized transaction.
         Outcome of transactional processing (RESERVE|CAPTURE|REJECT) will be
@@ -253,7 +260,7 @@ paths:
       tags:
         - Vipps PSP API
       summary: Update the status of the PSP transaction.
-      description: >
+      description: |
         Since Vipps doesn’t process the PSP transactions, updates on payment status are
         required in order to deliver expected customer experience. That means
         that PSP has to inform Vipps about any PSP payment status change through this endpoint.
@@ -278,12 +285,12 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
+          description: 'Subscription key for the PSP API. This is the PSP''s key, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: psp-id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - in: body
@@ -316,7 +323,7 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
-  /v3/psppayments/{pspTransactionId}/details:
+  '/v3/psppayments/{pspTransactionId}/details':
     get:
       tags:
         - Vipps PSP API
@@ -337,12 +344,12 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
+          description: 'Subscription key for the PSP API. This is the PSP''s key, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: psp-id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: pspTransactionId
@@ -368,29 +375,27 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
+      description: Get the details of a payment
 definitions:
   ErrorDetails:
     type: object
     properties:
-      developerMsg:
-        type: string
       errorCode:
         type: string
-        example: 21
-      errorField:
-        type: string
-      errorKey:
-        type: string
+        example: '21'
       errorMessage:
         type: string
         example: Merchant not available or active
+      contextId:
+        type: string
+        example: 'cf6d52c9-98cc-4285-b9b3-c7d36b6b06d9'
     title: ErrorDetails
   ErrorMessage:
     type: object
     properties:
       errorId:
         type: string
-        example: 82
+        example: '82'
         description: PSP native ID of the error
       errorText:
         type: string
@@ -401,7 +406,9 @@ definitions:
     type: string
     title: Scope
     description: A scope for future payments you want to process with the userToken. Current available scopes are "psp_subscription"
-    example: "psp_subscription"
+    example: psp_subscription
+    enum:
+      - psp_subscription
   Response:
     type: object
     properties:
@@ -410,10 +417,10 @@ definitions:
         properties:
           responseCode:
             type: string
-            example: "9000"
+            example: '9000'
           responseMessage:
             type: string
-            example: "SUCCESS"
+            example: SUCCESS
   PaymentInitiationRepresentation:
     type: object
     properties:
@@ -423,7 +430,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        description: >-
+        description: |
           Id which uniquely identifies a payment. Maximum length is 50
           alphanumeric characters: a-z, A-Z, 0-9 and '-'.
         example: acme-shop-123-order123abc
@@ -443,7 +450,7 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        description: >-
+        description: |
           Id which uniquely identifies a payment. Maximum length is 50
           alphanumeric characters: a-z, A-Z, 0-9 and '-'.
         example: acme-shop-123-order123abc
@@ -455,8 +462,8 @@ definitions:
         $ref: '#/definitions/NetworkToken'
       cardData:
         type: string
-        example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
-        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
+        example: f0a29801b4#d4ff30e221fa2980ff30e2
+        description: '`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string.'
     title: PaymentTokenRepresentation
   MakePaymentRequest:
     type: object
@@ -470,7 +477,7 @@ definitions:
         description: The Vipps number (MSN) for the merchant's sales unit.
         minLength: 6
         maxLength: 6
-        example: 123456
+        example: '123456'
         pattern: '^\d{6}$'
       paymentState:
         type: string
@@ -498,37 +505,57 @@ definitions:
         $ref: '#/definitions/NetworkToken'
       cardData:
         type: string
-        example: 'f0a29801b4#d4ff30e221fa2980ff30e2'
-        description: "`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string."
+        example: f0a29801b4#d4ff30e221fa2980ff30e2
+        description: '`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string.'
     title: MakePaymentRequest
+    required:
+      - pspTransactionId
+      - merchantSerialNumber
+      - paymentState
+      - binNumber
+      - operations
+      - paymentInstrument
+      - networkToken
+      - cardData
   NetworkToken:
     type: object
     properties:
       number:
         type: string
-        example: "5000000000000000001"
-        description: "Network token of the card, up to 19 digits"
+        example: '5000000000000000001'
+        description: 'Network token of the card, up to 19 digits'
       cryptogram:
         type: string
         description: The cryptogram for processing with this token
-        example: "aFgdgjdkfgjdFDF="
+        example: aFgdgjdkfgjdFDF=
       expiryMonth:
         type: string
+        example: '03'
       expiryYear:
         type: string
+        example: '2030'
       tokenType:
         $ref: '#/definitions/TokenType'
       eci:
         type: string
-        example: 07
+        example: '7'
         description: ECI value
+    required:
+      - number
+      - cryptogram
+      - expiryMonth
+      - expiryYear
+      - tokenType
+      - eci
   PaymentInstrument:
     type: string
+    example: 'TOKEN'
     enum:
       - TOKEN
       - ENCRYPTEDCARD
   TokenType:
     type: string
+    example: 'VISA'
     enum:
       - VISA
       - MASTERCARD
@@ -542,23 +569,17 @@ definitions:
     title: MakePaymentResponse
   InitiatePaymentRequest:
     type: object
-    required:
-      - pspTransactionId
-      - merchantOrderId
-      - amount
-      - currency
-      - pspRedirectUrl
-      - makePaymentUrl
+    title: InitiatePaymentRequest
     properties:
       pspTransactionId:
         type: string
         example: 7686f7788898767977
-        pattern: "[a-z0-9]"
+        pattern: '[a-z0-9]'
         maxLength: 36
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        description: >-
+        description: |
           Id which uniquely identifies a payment. Maximum length is 50
           alphanumeric characters: a-z, A-Z, 0-9 and '-'.
         example: acme-shop-123-order123abc
@@ -566,7 +587,7 @@ definitions:
         maxLength: 50
       customerMobileNumber:
         type: string
-        example: 92929292
+        example: '92929292'
         maxLength: 8
         pattern: '^\d{8}'
         description: Mobile number (eight digits) of the user who has to pay for the transaction from Vipps.
@@ -595,7 +616,7 @@ definitions:
         description: Authorization header for MakePayment call
       paymentText:
         type: string
-        example: 'One pair of Vipps socks'
+        example: One pair of Vipps socks
         description: Text to be displayed to end user
       isApp:
         type: boolean
@@ -608,17 +629,17 @@ definitions:
         default: false
         description: Skips the landing page for whitelisted sale units. Requires a valid customerMobileNumber.
       scope:
-        type: string
-        example: psp_subscription
-        description: PSP Transaction Status to be updated in Vipps
-        enum:
-          - psp_subscription
+        $ref: '#/definitions/Scope'
       merchantAgreementUrl:
         type: string
-        description: >-
-          For use with PSP Recurring `scope: psp_subscription`, provides the
-          user a link back to the merchants surfaces from their agreement overview in the Vipps App.
-    title: InitiatePaymentRequest
+        description: 'For use with PSP Recurring `scope: psp_subscription`, provides the user a link back to the merchants surfaces from their agreement overview in the Vipps App.'
+    required:
+      - pspTransactionId
+      - merchantOrderId
+      - amount
+      - currency
+      - pspRedirectUrl
+      - makePaymentUrl
   PaymentDetailsRepresentation:
     type: object
     properties:
@@ -628,9 +649,7 @@ definitions:
         description: Used as a globally unique per PSP transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        description: >-
-          Id which uniquely identifies a payment. Maximum length is 50
-          alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+        description: 'Id which uniquely identifies a payment. Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and ''-''.'
         example: acme-shop-123-order123abc
         pattern: '^[a-zA-Z0-9-]{1,50}$'
         maxLength: 50
@@ -650,7 +669,7 @@ definitions:
         description: Used as a globally unique transaction reference for the PSP systems
       merchantOrderId:
         type: string
-        description: >-
+        description: |
           Id which uniquely identifies a payment. Maximum length is 50
           alphanumeric characters: a-z, A-Z, 0-9 and '-'.
         example: acme-shop-123-order123abc
@@ -667,7 +686,7 @@ definitions:
         description: ISO 4217 defined currency code. Currently Vipps only supports NOK
       paymentText:
         type: string
-        example: 'Description of payment'
+        example: Description of payment
         description: Text to be displayed to end user
     title: ProcessPaymentOnToken
   PaymentTransactionDetails:
@@ -680,7 +699,7 @@ definitions:
         description: Amount should be specified in øre.
       paymentText:
         type: string
-        example: 'One pair of Vipps socks'
+        example: One pair of Vipps socks
         description: Transaction Note sent by PSP
       timeStamp:
         type: string
@@ -731,7 +750,7 @@ definitions:
         description: ISO 4217 defined currency code. Vipps currently only supports NOK.
       paymentText:
         type: string
-        example: 'One pair of Vipps socks'
+        example: One pair of Vipps socks
       operationStatus:
         type: string
         example: SUCCESS
@@ -763,8 +782,8 @@ definitions:
           - SOFT_DECLINE
       url3dSecure:
         type: string
-        example: https://example.com/
-        description: If the end user needs go through a 3D Secure flow, this URL is set.
+        example: 'https://example.com/'
+        description: 'If the end user needs go through a 3D Secure flow, this URL is set.'
     title: PaymentInfo
   TransactionSummary:
     type: object
@@ -795,7 +814,7 @@ definitions:
     properties:
       url:
         type: string
-        example: https://vipps.no/mobileintercept?transactionId=123456789&responsecode=OK
+        example: 'https://vipps.no/mobileintercept?transactionId=123456789&responsecode=OK'
         description: The redirect url to use for the operation.
       operation:
         type: string
