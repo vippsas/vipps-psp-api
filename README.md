@@ -13,6 +13,7 @@ For more information about this product, please see
 
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-psp-api)
+* [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
 
 Vipps do not handle the settlements for PSP integrations. These are handled by the PSP.
 
