@@ -2,12 +2,12 @@
 
 API version: 3.
 
-Document version 1.1.2.
+Document version 1.2.0.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
-See the [guide](vipps-psp-api.md) for more details.
+See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 
 # Table of Contents
 
@@ -22,6 +22,7 @@ See the [guide](vipps-psp-api.md) for more details.
 - [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
 - [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
 - [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
+- [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 - [Questions?](#questions)
 
 # How can I check if a merchant or sale unit is active?
@@ -121,6 +122,11 @@ in the eCom API guide.
 
 See the eCom FAQ for more details:
 [Is it possible to skip the landing page?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#is-it-possible-to-skip-the-landing-page)
+
+# What functionality is included in the eCom API, but not the PSP API?
+
+See the
+[Vipps eCom API FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
 
 # Questions?
 
