@@ -10,7 +10,7 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with encrypted credit card details and hand over the
     payment processing to the PSP.
-  version: 1.0.10
+  version: 1.0.11
   title: PSP API v3
   contact:
     name: Vipps AS
