@@ -595,7 +595,7 @@ definitions:
         type: integer
         format: int32
         example: 20000
-        description: Amount should be specified in øre.
+        description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
         example: NOK
@@ -679,7 +679,7 @@ definitions:
         type: integer
         format: int32
         example: 100
-        description: Amount should be specified in Øre. 100 Øre conversion 1.00 NOK
+        description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
         example: NOK
@@ -696,7 +696,7 @@ definitions:
         type: integer
         format: int32
         example: 20000
-        description: Amount should be specified in øre.
+        description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       paymentText:
         type: string
         example: One pair of Vipps socks
@@ -742,7 +742,7 @@ definitions:
         type: integer
         format: int32
         example: 20000
-        description: Amount should be specified in øre.
+        description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
         example: NOK
@@ -792,22 +792,22 @@ definitions:
         type: integer
         format: int32
         example: 0
-        description: Total amount captured in øre
+        description: 'Total amount captured. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       remainingAmountToCapture:
         type: integer
         format: int32
         example: 0
-        description: Total remaining amount to capture in øre
+        description: 'Total remaining amount to capture. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       refundedAmount:
         type: integer
         format: int32
         example: 1200
-        description: Total refunded amount in øre
+        description: 'Total refunded amount. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       remainingAmountToRefund:
         type: integer
         format: int32
         example: 0
-        description: Total remaining amount to refund in øre
+        description: 'Total remaining amount to refund. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
     title: TransactionSummary
   Operation3DSecure:
     type: object
