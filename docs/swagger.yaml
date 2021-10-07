@@ -372,6 +372,77 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
+  '/v3/integration-test/psppayments/{pspTransactionId}/approve':
+    post:
+      tags:
+        - Vipps PSP API
+      summary: Force Approve Payment
+      description: >
+        This endpoint allows developers to approve a psp payment through the Vipps PSP API
+        without the use of the Vipps app. This is useful for automated testing.
+        The endpoint is only available in our Test environment.
+        Attempted use of the endpoint in production is not allowed, and will fail.
+        Important: All test users must manually approve at least one payment in
+        Vipps (using the app) before this endpoint can be used for that user.
+      operationId: integrationTestApprovePayment
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
+          required: true
+          type: string
+        - name: Psp-Id
+          in: header
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          required: true
+          type: string
+        - name: Merchant-Serial-Number
+          in: header
+          description: The Vipps number (MSN) for the merchant's sales unit.
+          required: true
+          type: string
+        - name: pspTransactionId
+          in: path
+          description: Used as a globally unique per PSP transaction reference for the PSP systems
+          required: true
+          type: string          
+        - name: forceApproveRequest
+          in: body
+          description: ForceApproveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ForceApproveRequest'
+      responses:
+        '200':
+          description: Force approve payment response
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorMessage'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorMessage'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+      deprecated: false
 definitions:
   ErrorDetails:
     type: object
@@ -783,3 +854,19 @@ definitions:
           - 3dssuccess
           - 3dscancel
           - 3dsfailure
+  ForceApproveRequest:
+    type: object
+    required:
+      - customerPhoneNumber
+      - token
+    properties:
+      customerPhoneNumber:
+        type: string
+        description: Target customer phone number. 8 digits.
+        example: '91234567'
+        pattern: '^\d{8}$'
+      token:
+        type: string
+        description: The token value recieved in the `url` property in the Initiate response
+        example: eyJraWQiOiJqd3R
+    title: ForceApproveRequest
