@@ -2,36 +2,51 @@
 
 API version: 3.
 
-Document version 1.0.0.
-
-# About this API
+Document version 1.2.0.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
-See the [guide](vipps-psp-api.md) for more details.
+See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 
 # Table of Contents
 
-- [Vipps PSP API FAQ](#vipps-psp-api-faq)
-- [About this API](#about-this-api)
-- [Table of Contents](#table-of-contents)
+- [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
 - [How do we update a transaction?](#how-do-we-update-a-transaction)
 - [What is a network token?](#what-is-a-network-token)
 - [What is the card data structure?](#what-is-the-card-data-structure)
-  - [How can I view the card data?](#how-can-i-view-the-card-data)
+- [How can I view the card data?](#how-can-i-view-the-card-data)
 - [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
 - [Do we have a test environment?](#do-we-have-a-test-environment)
 - [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment-service-call-in-case-field-confirmed-has-value-timeout-or-cancel)
 - [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
 - [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
 - [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
+- [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 - [Questions?](#questions)
 
-# How do we update a transaction?
-Every operation done to a transaction after it has been processed should be updated to our [Update status endpoint](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST). This includes partial refunds, captues etc. This is critical for support work and user experience. This goes for single payment flow and recurring.
+# How can I check if a merchant or sale unit is active?
 
-Note that you do not need to send an update for the reservation part of the single payment flow. As that is handled by the synchronous response to the Makepayment call. But you must send it for the Recurring flow.
+You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
+[`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/initiatePaymentV3UsingPOST).
+
+If the merchant or sale unit is not active, you will get an error:
+"Merchant not available or active".
+
+This is similar to the error in the eCom API. See the eCom FAQ:
+[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
+
+# How do we update a transaction?
+
+Every operation done to a transaction after it has been processed should be
+updated to our
+[Update status endpoint](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST).
+This includes partial refunds, captures etc. This is critical for support work
+and user experience. This goes both for the single payment flow and for recurring payments.
+
+Note that you do not need to send an update for the _reservation_ part of the
+single payment flow, since that is handled by the synchronous response to the
+Makepayment call. But you must send it for the Recurring flow.
 
 # What is a network token?
 
@@ -43,6 +58,9 @@ See the
 for more.
 
 # What is the card data structure?
+
+**Please note:** This is now deprecated. See:
+[Differences from PSP API v2 to v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-from-psp-api-v2-to-v3).
 
 An example of the card data structure.
 CardData format: `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
@@ -58,7 +76,10 @@ This data is then transformed into a 256 bytes OEAP cryptogram which is encoded 
 
 ## How can I view the card data?
 
-Nets are our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
+**Please note:** This is now deprecated. See:
+[Differences from PSP API v2 to v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-from-psp-api-v2-to-v3).
+
+Nets is our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
 
 Vipps only has a reference to the card data at the TSP, which we use to fetch the encrypted data to pass it through to the PSP for processing.
 
@@ -72,7 +93,9 @@ Yes, please see: [The Vipps test environment (MT)](https://github.com/vippsas/vi
 
 # What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
 
-Should it be: paymentInfo.status = "OK" or "FAIL"? If it is fail, what error code should be returned?
+Continued:
+Should it be: paymentInfo.status = "OK" or "FAIL"?
+If it is "FAIL", what error code should be returned?
 
 It is suggested that you send "FAIL" in case of failure either at your end or as in this case at our end.
 
@@ -88,17 +111,22 @@ From the `makePayment` specification:
 
 # Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?
 
-Yes
+Yes.
 
 # Is it possible to skip the landing page?
 
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
 See the details in the
 [skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page)
-in the API guide.
+in the eCom API guide.
 
 See the eCom FAQ for more details:
 [Is it possible to skip the landing page?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#is-it-possible-to-skip-the-landing-page)
+
+# What functionality is included in the eCom API, but not the PSP API?
+
+See the
+[Vipps eCom API FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
 
 # Questions?
 

@@ -6,7 +6,7 @@ where the end user only enters the Norwegian mobile number
 to complate a payment in Vipps (the app).
 
 In Vipps the user selects a payment card (a payment source),
-and Vipps then gives the PSP a token for that card so the3 PSP can process the payment.
+and Vipps then gives the PSP a token for that card so the PSP can process the payment.
 
 The PSP processes the payment, provides feedback to merchant,
 and sends Vipps an update of the payment transaction success or failure,
@@ -17,13 +17,16 @@ See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more information.
 
-API details: [Swagger UI](https://vippsas.github.io/vipps-psp-api/#/),
-[swagger.yaml](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.yaml),
-[swagger.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/docs/swagger.json).
+**Important:** Cards that were added to Vipps after January 1 2021 are only enrolled with
+Vipps' new PSP, not the old one. That means Vipps is only able to provide a token for those
+cards, not the card details. If you are not able to process tokens, you should respond with
+`HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
+
+API details: [https://github.com/vippsas/vipps-psp-api](https://github.com/vippsas/vipps-psp-api).
 
 API version: 3.0
 
-Document version 3.1.0.
+Document version 3.1.4.
 
 # Table of Contents
 
@@ -65,7 +68,7 @@ Document version 3.1.0.
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
 - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
-- [PSP Signup APIs](#psp-signup-apis)
+- [PSP Signup API](#psp-signup-api)
 - [Questions](#questions)
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
@@ -87,7 +90,7 @@ Values for this enum have changed accordingly
 |CANCEL| USER_CANCEL|
 |NO| USER_CANCEL|
 
-# Differences from PSP API v1 to v2
+## Differences from PSP API v1 to v2
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePaymentUrl` in the initiate payment call
@@ -714,10 +717,12 @@ Example for demonstration purposes that should be handled.
 - The OS defaults to a Safari Browser for the redirect.
 - The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
 
-# PSP Signup APIs
+# PSP Signup API
 
 The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
-The API specification can be found [here](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/openapi.yaml)
+The API specification is available here:
+* [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
+* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/openapi.yaml)
 
 A PSP can use their existing keys to access this APIs. They can perform the following
 - List all or one merchant(s) under them
