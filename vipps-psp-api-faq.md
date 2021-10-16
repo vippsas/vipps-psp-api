@@ -57,32 +57,6 @@ See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more.
 
-# What is the card data structure?
-
-**Please note:** This is now deprecated. See:
-[Differences from PSP API v2 to v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-from-psp-api-v2-to-v3).
-
-An example of the card data structure.
-CardData format: `{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
-
-CardNumber: Numeric  
-ExpiryDate: YYMM  
-SessionId: Guid
-
-eg. `4925********4444,2212, 3854ba014e184e0d8ba259253f4advfa`
-
-During onboarding the PSP needs to send a 2048-bit RSA public key for test and production. CardData will be encrypted using this key.
-This data is then transformed into a 256 bytes OEAP cryptogram which is encoded as 344-characters base64 string.
-
-## How can I view the card data?
-
-**Please note:** This is now deprecated. See:
-[Differences from PSP API v2 to v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-from-psp-api-v2-to-v3).
-
-Nets is our TSP (Token Service Provider) and all PSPs must exchange keys with Nets in order to decrypt card data.
-
-Vipps only has a reference to the card data at the TSP, which we use to fetch the encrypted data to pass it through to the PSP for processing.
-
 # Is there a unique PSP ID for all merchants?
 
 No, the PSP ID is unique for the PSP and used for all the PSP's merchants.

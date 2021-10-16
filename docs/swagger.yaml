@@ -8,7 +8,7 @@ info:
 
     The Vipps PSP API allows PSPs to initiate payments that end users accept
     with the Vipps app. When the customer confirms the payment, Vipps enriches
-    the payment data with encrypted credit card details and hand over the
+    the payment data with a EMVco network token and cryptogram and hand over the
     payment processing to the PSP.
   version: 1.0.11
   title: PSP API v3
