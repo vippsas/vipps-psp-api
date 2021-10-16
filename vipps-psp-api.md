@@ -40,8 +40,6 @@ Document version 3.1.4.
     - [Skip landing page](#skip-landing-page)
     - [Payment confirmation](#payment-confirmation)
     - [makePaymentUrl](#makepaymenturl)
-      - [Public key](#public-key)
-      - [Card Data format](#card-data-format)
   - [EMVCo token processing](#emvco-token-processing)
     - [Scheme specific details](#scheme-specific-details)
       - [Visa](#visa)
@@ -151,7 +149,7 @@ app. In the Vipps app the end user can select payment source and confirm the amo
 
 ### makePaymentUrl
 
-Once the end user has confirmed the payment, Vipps shares the encrypted card
+Once the end user has confirmed the payment, Vipps shares the network token
 details with the PSP to the `makePaymentUrl`.
 
 The PSP uses the card token to process the payment through the acquirer and
@@ -160,84 +158,14 @@ responds to the `makePaymentUrl` call with the payment request status.
 The user receives confirmation in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
-#### Public key
-
-The public key that `cardData` is encrypted with is provided by the PSP during
-onboarding. This key needs to be a RSA 2048 public key in PKCS#8 format.
-The corresponding private key is then used to decrypt `cardData`.
-
-See below for a basic suggestion for generating keys:
-
-**For generating public/private key**
-```console
-$ ssh-keygen -t rsa -b 2048 -C "email@email.email"
-```
-**For converting to PKCS#8 format**
-```console
-$ ssh-keygen -m PKCS8 -e
-```
-
-**For testing that decryption works**  
-Python example
-```python
-import base64
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric import padding
-with open("id_rsa", "rb") as key_file:
-    private_key = serialization.load_pem_private_key(
-        key_file.read(),
-        password=None,
-        backend=default_backend()
-    )
-with open("enc.text") as enc_file:
-    cipher_text = enc_file.read()
-ciphertext = base64.b64decode(cipher_text)
-plaintext = private_key.decrypt(
-    ciphertext,
-    padding.OAEP(
-        mgf=padding.MGF1(algorithm=hashes.SHA256()),
-        algorithm=hashes.SHA256(),
-        label=None
-    )
-)
-print(plaintext)
-```
-Alternative for C#
-```cs
-var bytesToDecrypt = Convert.FromBase64String(toDecrypt);
-var pemReader = new PemReader(new StringReader(_privateKey));
-var privateKeyObject = pemReader.ReadObject();
-var keyPair = (AsymmetricCipherKeyPair)privateKeyObject;
-var decryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
-decryptEngine.Init(false, keyPair.Private);
-var decryptedBytes = decryptEngine.ProcessBlock(bytesToDecrypt, 0, bytesToDecrypt.Length);
-var resultString = BytesToString(decryptedBytes);
-```
-
-#### Card Data format
-
-The `cardData` is a string in the format
-`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}`
-that has been transformed into a 256 bytes OAEP cryptogram using the public
-key provided by the PSP. The cryptogram is encoded as 344-characters base64 string.
-The `ExpiryDate` is in YYMM format.
-
 ## EMVCo Token processing
 
-```
-NB: Minor details subject to change, the full solution is out in test.
-```
-
-In order to give the best possible payment experience, the Vipps PSP solution will begin supporting
+In order to give the best possible payment experience, the Vipps PSP solution now uses
 EMVCO token based processing.
 
-The ECI value will be the same for encrypted card based and token based transactions.
+The solution requires the PSP to have support for EMVCO token processing.
 
-The solution will function on a flow level identical to it's current implementation, but the PSP
-will have to support EMVCO token processing. The Vipps endpoints are, except for the version number, otherwise identical.
-
-This will result in a new MakePayment callback where the Encrypted card details are replaced with a token
+The MakePayment callback sends the network token
 and cryptogram in the following format. This is referred to as the makePayment request.
 
 ```
@@ -260,7 +188,7 @@ Authorization: makePaymentToken
 }
 ```
 
-If Vipps can not provide a valid netWorkToken transaction, for any reason, for example due to network issues or missing issuer support we will provide the encrypted card exactly in the same manner as the existing solution.
+In certain cases a legacy encrypted card request is sent in the following format. Note: New PSP partners are not onboarded to this flow anymore.
 
 ```
 Authorization: makePaymentToken
@@ -511,6 +439,8 @@ Authorization: makePaymentToken
 ```
 
 # Recurring payments
+
+> NOTE: We are currently not onboarding new PSP partners to Passthrough Recurring Payments due to challenges with user experience under PSD2. We will come back shortly with more information.
 
 The PSP API supports recurring payments, allowing the PSP to
 perform recurring payments through Vipps, while retaining full transactional
