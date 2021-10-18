@@ -159,7 +159,7 @@ The user receives confirmation in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
 The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period 
-Vipps will make the transaction as failed. This is a known issue with the current API. 
+Vipps will mark the transaction as failed. This is a known issue with the current API. 
 Future improvements to address this issue are planned.
 
 ## EMVCo Token processing
