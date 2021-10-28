@@ -26,7 +26,7 @@ API details: [https://github.com/vippsas/vipps-psp-api](https://github.com/vipps
 
 API version: 3.0
 
-Document version 3.1.4.
+Document version 3.1.5.
 
 # Table of Contents
 
@@ -656,7 +656,7 @@ Example for demonstration purposes that should be handled.
 The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
 The API specification is available here:
 * [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
-* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/openapi.yaml)
+* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
 
 A PSP can use their existing keys to access this APIs. They can perform the following
 - List all or one merchant(s) under them
