@@ -663,8 +663,6 @@ A PSP can use their existing keys to access this APIs. They can perform the foll
 - Create a new merchant under them
 - Update an existing merchant
 
-Currently we only allow the PSPs to onboard merchants who have a Norwegian organisation number.
-
 The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
 
 ![Payment Screen](./docs/signup/payment.png)
