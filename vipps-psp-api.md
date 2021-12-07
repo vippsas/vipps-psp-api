@@ -22,11 +22,19 @@ Vipps' new PSP, not the old one. That means Vipps is only able to provide a toke
 cards, not the card details. If you are not able to process tokens, you should respond with
 `HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
 
-API details: [https://github.com/vippsas/vipps-psp-api](https://github.com/vippsas/vipps-psp-api).
+These OpenAPI representations may be useful to get a quick overview:
+* [Swagger](https://vippsas.github.io/vipps-psp-api)
+* [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
+
+API details: [Github Repository](https://github.com/vippsas/vipps-psp-api), 
+[Postman collection](tools/), 
+[Checklist](vipps-psp-api-checklist.md),
+[FAQ](vipps-psp-api-faq.md), 
+[Postman Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-postman.md)
 
 API version: 3.0
 
-Document version 3.1.5.
+Document version 3.1.6.
 
 # Table of Contents
 
@@ -657,6 +665,8 @@ The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
 The API specification is available here:
 * [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
 * [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
+* [Postman collection](tools/vipps-psp-v2-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v2-api-postman-environment.json)
 
 A PSP can use their existing keys to access this APIs. They can perform the following
 - List all or one merchant(s) under them
