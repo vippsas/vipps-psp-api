@@ -30,6 +30,7 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 [Postman collection](tools/), 
 [Checklist](vipps-psp-api-checklist.md),
 [FAQ](vipps-psp-api-faq.md), 
+[Postman Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-postman.md)
 
 API version: 3.0
 
