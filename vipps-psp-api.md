@@ -26,15 +26,15 @@ These OpenAPI representations may be useful to get a quick overview:
 * [Swagger](https://vippsas.github.io/vipps-psp-api)
 * [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
 
-API details: [Github Repository](https://github.com/vippsas/vipps-psp-api), 
-[Postman collection](tools/), 
+API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
+[Postman collection](tools/),
 [Checklist](vipps-psp-api-checklist.md),
-[FAQ](vipps-psp-api-faq.md), 
+[FAQ](vipps-psp-api-faq.md),
 [Postman Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-postman.md)
 
 API version: 3.0
 
-Document version 3.1.6.
+Document version 3.1.7.
 
 # Table of Contents
 
@@ -137,6 +137,11 @@ requested to pay with Vipps. Vipps creates the payment and returns a link to
 the Vipps landing page where end user can confirm the mobile number.
 Once user has confirmed number the payment can be considered initiated.
 
+**Please note:** Never show the Vipps landing page inside an iframe.
+That will make it impossible for the user to reliably be redirected back to the
+merchant's website, and result in a lower success rate.
+In general: Any "optimization" of the payment flow may break the Vipps payment flow - if not today, then later.
+
 ### Skip landing page
 
 *Only available for whitelisted sale units.*
@@ -166,8 +171,8 @@ responds to the `makePaymentUrl` call with the payment request status.
 The user receives confirmation in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
-The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period 
-Vipps will mark the transaction as failed. This is a known issue with the current API. 
+The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
+Vipps will mark the transaction as failed. This is a known issue with the current API.
 Future improvements to address this issue are planned.
 
 ## EMVCo Token processing
