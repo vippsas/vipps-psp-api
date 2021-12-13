@@ -2,7 +2,7 @@
 
 API version: 3.
 
-Document version 1.2.0.
+Document version 1.2.1.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -14,7 +14,6 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 - [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
 - [How do we update a transaction?](#how-do-we-update-a-transaction)
 - [What is a network token?](#what-is-a-network-token)
-- [What is the card data structure?](#what-is-the-card-data-structure)
 - [How can I view the card data?](#how-can-i-view-the-card-data)
 - [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
 - [Do we have a test environment?](#do-we-have-a-test-environment)
