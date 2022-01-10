@@ -1,7 +1,6 @@
 swagger: '2.0'
 info:
   description: |
-
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. PSPs have full transactional control of
     payments initiated in their payment terminals.
@@ -219,7 +218,7 @@ paths:
           description: Gateway Timeout
       deprecated: false
       description: 'Request a MIT payment for a recurring agreement, provides card details for processing. A updatestatus call should be made afterwards with the result of the authorisation.'
-  [makePaymentUrl]:
+  '/[makePaymentUrl]':
     post:
       tags:
         - Endpoints required by Vipps from the PSP
@@ -381,13 +380,8 @@ paths:
       tags:
         - Vipps PSP API
       summary: Force Approve Payment
-      description: >
-        This endpoint allows developers to approve a psp payment through the Vipps PSP API
-        without the use of the Vipps app. This is useful for automated testing.
-        The endpoint is only available in our Test environment.
-        Attempted use of the endpoint in production is not allowed, and will fail.
-        Important: All test users must manually approve at least one payment in
-        Vipps (using the app) before this endpoint can be used for that user.
+      description: |
+        This endpoint allows developers to approve a psp payment through the Vipps PSP API without the use of the Vipps app. This is useful for automated testing. The endpoint is only available in our Test environment. Attempted use of the endpoint in production is not allowed, and will fail. Important: All test users must manually approve at least one payment in Vipps (using the app) before this endpoint can be used for that user.
       operationId: integrationTestApprovePayment
       consumes:
         - application/json;charset=UTF-8
@@ -401,12 +395,12 @@ paths:
           type: string
         - name: Ocp-Apim-Subscription-Key
           in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the same for all the PSP's merchants.
+          description: 'Subscription key for the PSP API. This is the PSP''s key, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
           required: true
           type: string
         - name: Merchant-Serial-Number
@@ -418,7 +412,7 @@ paths:
           in: path
           description: Used as a globally unique per PSP transaction reference for the PSP systems
           required: true
-          type: string          
+          type: string
         - name: forceApproveRequest
           in: body
           description: ForceApproveRequest
@@ -451,7 +445,7 @@ definitions:
         example: Merchant not available or active
       contextId:
         type: string
-        example: 'cf6d52c9-98cc-4285-b9b3-c7d36b6b06d9'
+        example: cf6d52c9-98cc-4285-b9b3-c7d36b6b06d9
     title: ErrorDetails
   ErrorMessage:
     type: object
@@ -506,6 +500,7 @@ definitions:
     title: PaymentInitiationRepresentation
   PaymentTokenRepresentation:
     type: object
+    title: PaymentTokenRepresentation
     properties:
       pspTransactionId:
         type: string
@@ -527,9 +522,14 @@ definitions:
         type: string
         example: f0a29801b4#d4ff30e221fa2980ff30e2
         description: '`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string.'
-    title: PaymentTokenRepresentation
+      traceId:
+        type: string
+        description: |-
+          The current traceId stored for this agreement and card.
+          For PSD2 purposes on subscription payments.
   MakePaymentRequest:
     type: object
+    title: MakePaymentRequest
     properties:
       pspTransactionId:
         type: string
@@ -550,6 +550,8 @@ definitions:
           - ACCEPTED
           - TIMEOUT
           - USER_CANCEL
+          - VERIFY
+          - VERIFY_COMPLETED
       userToken:
         description: JWT-TOKEN
         type: string
@@ -570,7 +572,6 @@ definitions:
         type: string
         example: f0a29801b4#d4ff30e221fa2980ff30e2
         description: '`{CardNumber:16-19},{ExpiryDate:4},{SessionId:1-32}` format string transformed into a 256 bytes OEAP cryptogram, which is encoded as 344-characters base64 string.'
-    title: MakePaymentRequest
     required:
       - pspTransactionId
       - merchantSerialNumber
@@ -612,13 +613,13 @@ definitions:
       - eci
   PaymentInstrument:
     type: string
-    example: 'TOKEN'
+    example: TOKEN
     enum:
       - TOKEN
       - ENCRYPTEDCARD
   TokenType:
     type: string
-    example: 'VISA'
+    example: VISA
     enum:
       - VISA
       - MASTERCARD
@@ -829,6 +830,7 @@ definitions:
       - amount
   PaymentInfo:
     type: object
+    title: PaymentInfo
     properties:
       pspTransactionId:
         type: string
@@ -847,7 +849,12 @@ definitions:
         type: string
         example: 'https://example.com/'
         description: 'If the end user needs go through a 3D Secure flow, this URL is set.'
-    title: PaymentInfo
+      traceId:
+        type: string
+        description: |-
+          Scheme TraceId for subscription transactions.
+          Required when using PSP Recurring.
+          Will be stored by Vipps and provided back on all `/v3/psppayments/payments` requests.
   TransactionSummary:
     type: object
     properties:
