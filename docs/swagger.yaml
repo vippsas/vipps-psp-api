@@ -406,7 +406,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants. (May also have been called "supermerchant id")'
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants. (May also have been called "supermerchant id")
           required: true
           type: string
         - name: Merchant-Serial-Number
