@@ -48,7 +48,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
         - name: Merchant-Serial-Number
@@ -115,7 +115,7 @@ paths:
           type: string
         - name: PSP-ID
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -172,7 +172,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -290,7 +290,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
         - in: body
@@ -349,7 +349,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants.'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
         - name: pspTransactionId
@@ -406,7 +406,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants.
+          description: 'PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants. (May also have been called "supermerchant id")'
           required: true
           type: string
         - name: Merchant-Serial-Number
