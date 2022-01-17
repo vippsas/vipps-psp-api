@@ -259,6 +259,7 @@ definitions:
         description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
         x-isnullable: true
         x-order: 8
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
         description: "Contact email for the merchant. Can be the same as `companyEmail`."
@@ -327,6 +328,7 @@ definitions:
       logo:
         type: string
         description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -385,6 +387,7 @@ definitions:
       logo:
         type: string
         description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
@@ -413,6 +416,7 @@ definitions:
         minLength: 5
         maxLength: 6
         pattern: '^\d{5,6}$'
+        example: 123456
   Address:
     type: object
     description: "The merchant's address"

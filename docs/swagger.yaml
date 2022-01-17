@@ -418,7 +418,7 @@ paths:
           in: path
           description: Used as a globally unique per PSP transaction reference for the PSP systems
           required: true
-          type: string          
+          type: string
         - name: forceApproveRequest
           in: body
           description: ForceApproveRequest
@@ -472,6 +472,7 @@ definitions:
     example: psp_subscription
     enum:
       - psp_subscription
+    default: psp_subscription
   Response:
     type: object
     properties:
@@ -616,6 +617,7 @@ definitions:
     enum:
       - TOKEN
       - ENCRYPTEDCARD
+    default: TOKEN
   TokenType:
     type: string
     example: 'VISA'
@@ -657,7 +659,7 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 20000
+        example: 49900
         description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
@@ -696,6 +698,7 @@ definitions:
       merchantAgreementUrl:
         type: string
         description: 'For use with PSP Recurring `scope: psp_subscription`, provides the user a link back to the merchants surfaces from their agreement overview in the Vipps App.'
+        example: https://example.com/agreements/acme-shop-123-order123abc
     required:
       - pspTransactionId
       - merchantOrderId
@@ -741,7 +744,7 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 100
+        example: 49900
         description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
@@ -758,7 +761,7 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 20000
+        example: 49900
         description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       paymentText:
         type: string
@@ -804,7 +807,7 @@ definitions:
       amount:
         type: integer
         format: int32
-        example: 20000
+        example: 49900
         description: 'Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       currency:
         type: string
@@ -854,7 +857,7 @@ definitions:
       capturedAmount:
         type: integer
         format: int32
-        example: 0
+        example: 49900
         description: 'Total amount captured. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       remainingAmountToCapture:
         type: integer
@@ -864,12 +867,12 @@ definitions:
       refundedAmount:
         type: integer
         format: int32
-        example: 1200
+        example: 0
         description: 'Total refunded amount. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
       remainingAmountToRefund:
         type: integer
         format: int32
-        example: 0
+        example: 49900
         description: 'Total remaining amount to refund. Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.'
     title: TransactionSummary
   Operation3DSecure:
