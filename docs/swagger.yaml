@@ -10,11 +10,11 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with a EMVco network token and cryptogram and hand over the
     payment processing to the PSP.
-  version: 1.0.11
+  version: 1.0.12
   title: PSP API v3
   contact:
     name: Vipps AS
-    url: 'https://github.com/vippsas/vipps-developers/blob/master/contact.md'
+    url: 'https://github.com/vippsas/vipps-developers'
 schemes:
   - https
 host: apitest.vipps.no
