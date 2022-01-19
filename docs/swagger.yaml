@@ -10,7 +10,7 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with a EMVco network token and cryptogram and hand over the
     payment processing to the PSP.
-  version: 1.0.12
+  version: 1.0.13
   title: PSP API v3
   contact:
     name: Vipps AS
@@ -48,7 +48,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. GUID value for PSPs created after start of 2021.'
           required: true
           type: string
         - name: Merchant-Serial-Number
@@ -115,7 +115,7 @@ paths:
           type: string
         - name: PSP-ID
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. GUID value for PSPs created after start of 2021.'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -172,7 +172,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. GUID value for PSPs created after start of 2021.'
           required: true
           type: string
           default: C948DFD1546347568874C4DDC93A2E3C
@@ -290,7 +290,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. GUID value for PSPs created after start of 2021.'
           required: true
           type: string
         - in: body
@@ -349,7 +349,7 @@ paths:
           type: string
         - name: psp-id
           in: header
-          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. (May also have been called "supermerchant id")'
+          description: 'PSP id as provided by Vipps. This is the PSP''s id, and the same for all the PSP''s merchants. GUID value for PSPs created after start of 2021.'
           required: true
           type: string
         - name: pspTransactionId
@@ -406,7 +406,7 @@ paths:
           type: string
         - name: Psp-Id
           in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants. (May also have been called "supermerchant id")
+          description: PSP id as provided by Vipps. This is the PSP's id, and the same for all the PSP's merchants. GUID value for PSPs created after start of 2021.
           required: true
           type: string
         - name: Merchant-Serial-Number
