@@ -15,6 +15,13 @@ You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-psp-api)
 * [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
 
+# PSP Signup API
+See: [PSP Signup API](vipps-psp-api.md#psp-signup-api).
+* [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
+* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
+* [Postman collection](tools/vipps-psp-v2-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v2-api-postman-environment.json)
+
 Vipps do not handle the settlements for PSP integrations. These are handled by the PSP.
 
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
