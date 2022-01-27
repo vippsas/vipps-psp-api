@@ -34,7 +34,7 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 
 API version: 3.0
 
-Document version 3.1.7.
+Document version 3.1.8.
 
 # Table of Contents
 
@@ -684,6 +684,17 @@ The following are the screens in the Vipps app, where the information about the 
 
 ![Receipt Screen](./docs/signup/receipt.png)
 
+Some details of information shown in the screenshots:
+
+| Item               | Description                                           |
+| ------------------ | ----------------------------------------------------- |
+| Merchant           | The name of the merchant's sale unit                  |
+| #23412             | Merchant serial number, the sale unit's id            |
+| Merchant AS        | The name of the merchant                              |
+| Product name       | The name of the product being paid for                |
+| Order ID / Description | The orderId, provided by the merchant             |
+| Transaction ID     | The internal Vipps id for the transaction             |
+| butikken.no        | Merchant website                                      |
 
 # Questions
 
