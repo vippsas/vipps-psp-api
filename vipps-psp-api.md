@@ -742,7 +742,7 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 
 The following is a proposal for triggering 3DS when a user changes the card attached to a PSP recurring agreement in the Vipps app.
 
-A new optional `updateCardUrl` property would be added to the initate call. This callback will be triggered when the user changes card with the following request;
+A new optional `updateCardUrl` property would be added to the initiate call. This callback will be triggered when the user changes card with the following request;
 
 ```json
 HEADER: "
