@@ -170,7 +170,7 @@ the Vipps app. The user logs in, selects payment source, and confirm the payment
 
 Once the end user has confirmed the payment, Vipps shares the network token
 with the PSP by `POST`-ing to the `makePaymentUrl`:
-[`POST:makePaymentUrl](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentV3UsingPOST).
+[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentV3UsingPOST).
 
 The PSP uses the card token to process the payment through the acquirer.
 This is the PSP's responsibility.
@@ -183,14 +183,13 @@ The PSP then sends Vipps an update on the status of the payment:
 It's important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
 Without a status update from the PSP, the user will see an incorrect status.
-
-**Please note:** Payment updates are processed in batches.
+Payment updates are processed in batches.
 See: [Batch processing of status updates](#batch-processing-of-status-updates).
 
 The user receives confirmation of the payment in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
-**Please note::*
+**Please note:**
 * The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
   Vipps will mark the transaction as failed. This is a known issue with the current API.
   Future improvements to address this issue are planned.
@@ -229,6 +228,7 @@ Authorization: makePaymentToken
 ```
 
 In certain cases a legacy encrypted card request is sent in the following format.
+
 **Important:** This is only available for existing PSPs that are not able to handle
 tokens, and there are _very_ few left.
 
