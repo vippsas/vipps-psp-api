@@ -34,7 +34,7 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 
 API version: 3.0
 
-Document version 3.1.8.
+Document version 3.1.9.
 
 # Table of Contents
 
@@ -86,9 +86,11 @@ Document version 3.1.8.
 ## Differences from PSP API v2 to v3
 
 The PSP API v3 adds functionality for network tokens: PSPs use the API to
-obtain tokens, not the actual card details.
+obtain tokens, not the actual card details, from Vipps.
+
 Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
-Values for this enum have changed accordingly
+
+Values for this enum have changed accordingly:
 | Old Value | New Value |
 |-----------|-----------|
 | Yes | ACCEPTED |
@@ -109,7 +111,8 @@ Values for this enum have changed accordingly
 
 **Important:** Some users may close Vipps immediately after seeing the payment confirmation,
 therefore not being "redirected" back to the merchant. Because of this it is important for the
-merchant and the PSP to _not_ base their transaction logic on the redirect alone.
+merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
+
 For example: Check for "reserved" status with the PSP's API (not Vipps' API),
 then do "capture" when the goods have been shipped/delivered.
 
@@ -132,12 +135,13 @@ in the
 
 ## Initiate payment
 
-A payment request is initiated by the PSP to the Vipps API after end user has
-requested to pay with Vipps. Vipps creates the payment and returns a link to
-the Vipps landing page where end user can confirm the mobile number.
-Once user has confirmed number the payment can be considered initiated.
+When a user chooses Vipps as the payment method, a payment request is initiated
+by the PSP to the Vipps API. Vipps creates the payment and returns a link that
+either opens the Vipps landing page in a browser (if the user is not using a
+mobile device, so the user can enter the phone number) or does an app-switch to
+the Vipps app. The user then confirms the payment in Vipps.
 
-**Please note:** Never show the Vipps landing page inside an iframe.
+**Important:** Never show the Vipps landing page inside an iframe.
 That will make it impossible for the user to reliably be redirected back to the
 merchant's website, and result in a lower success rate.
 In general: Any "optimization" of the payment flow may break the Vipps payment flow - if not today, then later.
@@ -146,44 +150,63 @@ In general: Any "optimization" of the payment flow may break the Vipps payment f
 
 *Only available for whitelisted sale units.*
 
-If this property is set to `true`, it will cause a push notification to be sent
-to the given phone number immediately, without loading the landing page.
+If `skipLandingpage` is set to `true`, Vipps will _not_ display the landing page,
+but instead send a push notification to the phone number immediately.
+This must only be used when the payment does not start on the user's device and
+when there is no customer-facing display available.
 
-If the sale unit is not whitelisted, an error message will be returned.
+If the sale unit is not whitelisted for `skipLandingpage`, an attempt to use it
+will result in an error.
 
 If you need to be whitelisted, instructions for this can be found in the
 [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
 
 ### Payment confirmation
 
-After payment initiation, Vipps sends push notification or redirects the user to
-the Vipps app. End user verifies the Vipps profile by logging in to the Vipps
-app. In the Vipps app the end user can select payment source and confirm the amount.
+After the payment initiation, Vipps sends a push notification or redirects the user to
+the Vipps app. The user logs in, selects payment source, and confirm the payment.
 
 ### makePaymentUrl
 
 Once the end user has confirmed the payment, Vipps shares the network token
-details with the PSP to the `makePaymentUrl`.
+with the PSP by `POST`-ing to the `makePaymentUrl`:
+[`POST:makePaymentUrl](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentV3UsingPOST).
 
-The PSP uses the card token to process the payment through the acquirer and
-responds to the `makePaymentUrl` call with the payment request status.
+The PSP uses the card token to process the payment through the acquirer.
+This is the PSP's responsibility.
+Vipps is not involved in the actual payment, Vipps only provides the
+PSP with the card token
 
-The user receives confirmation in Vipps.
+The PSP then sends Vipps an update on the status of the payment:
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST)
+
+It's important that the PSP sends this update, so the user can see the
+correct status of the payment in Vipps.
+Without a status update from the PSP, the user will see an incorrect status.
+
+**Please note:** Payment updates are processed in batches.
+See: [Batch processing of status updates](#batch-processing-of-status-updates).
+
+The user receives confirmation of the payment in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
-The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
-Vipps will mark the transaction as failed. This is a known issue with the current API.
-Future improvements to address this issue are planned.
+**Please note::*
+* The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
+  Vipps will mark the transaction as failed. This is a known issue with the current API.
+  Future improvements to address this issue are planned.
+* Some users may close Vipps immediately after seeing the payment confirmation,
+  therefore not being "redirected" back to the merchant. Because of this it is important for the
+  merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
 
 ## EMVCo Token processing
 
-In order to give the best possible payment experience, the Vipps PSP solution now uses
+In order to give the best possible payment experience, the Vipps PSP API uses
 EMVCO token based processing.
 
 The solution requires the PSP to have support for EMVCO token processing.
 
-The MakePayment callback sends the network token
-and cryptogram in the following format. This is referred to as the makePayment request.
+The `makePaymentUrl` call to the PSP sends the network token
+and cryptogram in the following format. This is referred to as the `makePayment` request.
 
 ```
 Authorization: makePaymentToken
@@ -205,7 +228,9 @@ Authorization: makePaymentToken
 }
 ```
 
-In certain cases a legacy encrypted card request is sent in the following format. Note: New PSP partners are not onboarded to this flow anymore.
+In certain cases a legacy encrypted card request is sent in the following format.
+**Important:** This is only available for existing PSPs that are not able to handle
+tokens, and there are _very_ few left.
 
 ```
 Authorization: makePaymentToken
@@ -220,9 +245,9 @@ Authorization: makePaymentToken
 }
 ```
 
-Where paymentInstrument is as an indicator that can be used to differentiate the two alternatives.
-
-Where networkToken is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
+Where:
+* `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
+* `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
 
 ### Scheme specific details
 
@@ -231,7 +256,8 @@ Where networkToken is the Network token of the card, up to 16-19 digits. A full 
 Visa tokens must be processed with the acquirer submitting the TAVV cryptogram
 in field 126.8. The cryptogram received with the Network Token will contain the
 information for Delegated Authentication (DA) and the SCA factors used.
-Visa Token Service will during detokenization populate a flag for DA in field
+
+The Visa Token Service will during detokenization populate a flag for DA in field
 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way
 Issuers recognise Vipps originated transactions and will not soft decline for
 DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
@@ -242,7 +268,8 @@ The expected ECI value for VISA requests is ECI-07.
 A MasterCard transaction should be processed as an ecom-token in accordance with
 the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID
 (TRID) to the authorization message. It will always be available in DE48, SE33, SF6.
-Vipps is pursuing multiple avenues for delegated authentication with MasterCard.
+
+Vipps is working on providing delegated authentication with MasterCard.
 As the time of writing you should expect soft declines on all MasterCard transactions.
 Vipps initially returns ECI-06 for Mastercard, this should be handled as "no 3DS,
 no challenge requested" in accordance with your acquirer.
@@ -263,10 +290,9 @@ Once the 3DS CAVV cryptogram is acquired from the 3DS session both the CAVV and
 the token cryptogram must be submitted in the authorization request in the fields
 specified by the acquirer in order to perform a valid authorization.
 
-
 ### Magic Numbers for EMVCo Tokens
 
-Any request to the v3 API will return a Visa Token. However this can be changed
+Any request to the Vipps PSP API will return a Visa Token. However this can be changed
 by setting the amount in the init request. No matter what is selected in the app
 the Token returned in the MakePayment request will be:
 
@@ -280,7 +306,8 @@ the Token returned in the MakePayment request will be:
 
 ## Status Updates
 
-To provide a consistent end user experience it is important that Vipps is notified by changes to the payment status when it is captured, cancelled or refunded:
+To provide a consistent end user experience it is important that Vipps is
+notified by changes to the payment status when it is captured, cancelled or refunded:
 [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
 
 Vipps also provides an endpoint to check the payment status:
@@ -296,9 +323,9 @@ Requests to
 receive a `HTTP 200 OK` response if the JSON payload was valid.
 The actual _processing_ of the data is done as a batch.
 
-The reasoning is that in designing the API this way, was that some partners
-wanted to send all status updates once a day. Based on this we created
-a service that can consume thousands of transaction updates in one operation.
+The reason for this is that some PSPs send Vipps all their status updates once
+a day. Based on this we created a service that can handle thousands of
+transaction updates in one operation.
 
 To avoid all of these updates being written to our database at once, with the
 resulting performance hit, we chose to defer these into a nightly batch job.
@@ -307,7 +334,8 @@ Because of this, the updated status is only visible in Vipps the next day.
 
 **Please note:** The batch update is _not_ run in the test environment, as
 there are some technical details preventing it from being run in the same way
-as in the production environment.
+as in the production environment. The status of PSP payments will therefore
+always be in the initiated state in the test environment.
 
 ## Cancelling pending transactions
 
@@ -320,15 +348,15 @@ backend and return an error code.
 | 85      | Response received too late            |
 ```
 
-As seen in the error codes section of this graph.
+See: [Error codes](#error-codes).
 
-So a typical flow would be:
+A typical flow would be:
 
-1. The user selects Vipps in a checkout.
-2. The user returns without completing in the app. (No `makePaymentUrl` request has been received by the PSP)
-3. The PSP cancels the payment on their end, and restarts the checkout.
+1. The user selects Vipps as payment method
+2. The user returns without completing in the app (no `makePaymentUrl` request has been received by the PSP)
+3. The PSP cancels the payment on their end, and restarts the checkout
 4. The user might end up going back to the Vipps app. If that happens and a `makePaymentUrl` request is sent,
-the PSP responds with error code 85.
+   the PSP responds with error code 85.
 
 # Example request
 
@@ -359,10 +387,11 @@ Authorization: makePaymentToken
 
 ## Idempotency
 
-All API requests in Vipps eCommerce can be retried without any side effects
-by providing idempotent key in a header of  the request. For example, in
-case the request fails because of network error it can safely be retried
-with the same idempotent key. The idempotency key is generated by the merchant. Example:
+Many API request to Vipps APIs can be retried without any side effects
+by providing `Request-Id` (or `Idempotency-key`- tech debt, sorry) header of the
+request. For example, in case the request fails because of network error it can
+safely be retried with the same idempotency key. The idempotency key must be
+generated by the merchant. Example:
 
 ```
 Request-Id: slvnwdcweofjwefweklfwelf
@@ -370,8 +399,7 @@ Request-Id: slvnwdcweofjwefweklfwelf
 
 # PSP API implementation checklist
 
-See the
-[Vipps PSP API Checklist](vipps-psp-api-checklist.md).
+See: [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
 
 # Errors
 
@@ -397,14 +425,12 @@ The PSP should return the following errorIds and errorTexts when applicable:
 | 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.|
 | 94      | Unhandled soft decline               | Response to a Soft Decline from the bank that could not be processed or forwarded to the Vipps App.                               |
 
-
-
 # PSD2 Compliance and Secure Customer Authentication (SCA)
 
 ## 3DSecure Fallback
 
-In case of a soft decline (when the issuer requires 3DS), the PSP will host a
-3DSecure session and needs to provide the URL to Vipps.
+In case of a soft decline (when the issuer requires 3DS), the PSP must host a
+3DSecure session and must provide the URL to Vipps.
 
 ![PSP API sequence diagram](diagrams/3DSFallbackFlow.png)
 
@@ -425,7 +451,7 @@ a soft decline:
 }
 ```
 
-The Vipps App will then open the URL in an iframe, letting the user complete
+The Vipps App will then open the URL in a web view, letting the user complete
 the 3DSecure flow. The PSP will have to host and retrieve any necessary data
 from the session. Once the session is completed it will have to finish with a
 redirect according to the operations.url object sent in the initial
@@ -457,7 +483,9 @@ Authorization: makePaymentToken
 
 # Recurring payments
 
-> NOTE: We are currently not onboarding new PSP partners to Passthrough Recurring Payments due to challenges with user experience under PSD2. We will come back shortly with more information.
+**Please note:** We are currently not onboarding new PSP partners to
+Passthrough Recurring Payments due to challenges with user experience under PSD2.
+We will update this section when there is new information.
 
 The PSP API supports recurring payments, allowing the PSP to
 perform recurring payments through Vipps, while retaining full transactional
@@ -578,10 +606,15 @@ Response with encryptedCard
 }
 ```
 
-Once the card data is received from [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken) and the payment has been processed, the PSP must call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
-If the status for the previous payment has not been recieved, the agreement will be locked from processing future payments until the update is recieved.
-If a recurring payment fails you should call [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST) with `operationStatus: FAILED` set in the body.
+Once the card data is received from
+[`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
+and the payment has been processed, the PSP must call
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+to notify Vipps of the status, in this context updateStatus accepts a `RESERVED` status.
+If the status for the previous payment has not been received, the agreement will be locked from processing future payments until the update is received.
+If a recurring payment fails you should call
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+with `operationStatus: FAILED` set in the body.
 
 # URL Validation
 
