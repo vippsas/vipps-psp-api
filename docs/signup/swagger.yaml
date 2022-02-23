@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.1.2"
+  version: "1.1.3"
   description: >
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
@@ -210,7 +210,7 @@ definitions:
         maxLength: 50
         x-order: 1
         example: "123456789"
-        description: Organization number of the merchant
+        description: "Organization number of the merchant, in the corret format for the organization's country. For Norway: 9 digits without spaces."
       companyName:
         type: string
         x-order: 2
@@ -255,7 +255,13 @@ definitions:
       logo:
         type: string
         format: byte
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description: >-
+          Base64 encoded string of the logo of the merchant.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
+          The logo must be in PNG (Portable Network Graphics) format.
+          Square images are recommended.
+          The longest side can not be more than 1000 pixels.
+          The minimum size is 100 x 100 pixels.
         x-isnullable: true
         x-order: 8
         example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
@@ -311,7 +317,7 @@ definitions:
         maxLength: 50
         x-order: 1
         example: "123456789"
-        description: Organization number of the merchant
+        description: "Organization number of the merchant, in the corret format for the organization's country. For Norway: 9 digits without spaces."
       name:
         type: string
         maxLength: 200
