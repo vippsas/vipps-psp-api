@@ -257,7 +257,7 @@ definitions:
         format: byte
         description: >-
           Base64 encoded string of the logo of the merchant.
-          The logo will be displayed in the Vipps app, bith when paying and on receipts.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
           The must be in PNG (Portable Network Graphics) format.
           Square images are recommended, but we allow a width:height ratio of 1:10 (if the width is 100, the max height is 1000).
           The longest side can not be more than 1000 pixels.
