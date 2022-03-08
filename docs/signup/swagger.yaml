@@ -198,6 +198,7 @@ definitions:
       - name
       - address
       - logo
+      - logoUrl
       - status
       - organizationNumber
       - companyName
@@ -256,6 +257,7 @@ definitions:
         type: string
         format: byte
         description: >-
+          (Deprecated) 
           Base64 encoded string of the logo of the merchant.
           The logo will be displayed in the Vipps app, both when paying and on receipts.
           The logo must be in PNG (Portable Network Graphics) format.
@@ -265,38 +267,45 @@ definitions:
         x-isnullable: true
         x-order: 8
         example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
+      logoUrl:
+        type: string
+        format: uri
+        description: An URL of the merchant's logo stored in Vipps' system.
+        x-isnullable: true
+        x-order: 9
+        example: "https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png"
       email:
         type: string
         description: "Contact email for the merchant. Can be the same as `companyEmail`."
         format: email
         x-isnullable: true
-        x-order: 9
+        x-order: 10
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
         format: uri
         x-isnullable: true
-        x-order: 10
+        x-order: 11
         example: "https://example.com"
       createdAt:
         type: string
         description: Date-time when the merchant was created in Vipps
         format: date-time
         x-isnullable: true
-        x-order: 11
+        x-order: 12
         example: 2019-01-01T00:00:00Z
       updatedAt:
         type: string
         description: Date-time when the merchant was last updated in Vipps
         format: date-time
         x-isnullable: true
-        x-order: 12
+        x-order: 13
         example: 2019-01-01T00:00:00Z
       address:
         description: "The merchant's address"
         $ref: "#/definitions/Address"
-        x-order: 13
+        x-order: 14
   GetMerchantsResponse:
     type: object
     description: Response of successful getMerchants operation
