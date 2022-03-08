@@ -669,7 +669,11 @@ definitions:
       pspRedirectUrl:
         type: string
         example: 'https://psp-redirect.example.com'
-        description: Vipps will use this URL to redirect end user after payment confirmation
+        description: >-
+          Vipps will use this URL to redirect end user after payment confirmation.
+          Important: Do not rely on the user always reaching this URL, as some users
+          may close Vipps immediately after seeing the payment confirmation,
+          therefore not being "redirected" back to the merchant.
       makePaymentUrl:
         type: string
         example: 'https://psp-makepayment.example.com'
