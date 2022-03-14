@@ -296,13 +296,17 @@ Any request to the Vipps PSP API will return a Visa Token. However this can be c
 by setting the amount in the init request. No matter what is selected in the app
 the Token returned in the MakePayment request will be:
 
-| Amount Value | Instrument Sent |
-|-----------|-----------|
-| 22.00 | MasterCard |
-| 31.00 | Encrypted card as chosen in app |
-| 32.00 | Visa example with late expiry |
-| 42.00 | Visa example with different cryptogram |
-| 43.00 | Mastercard example with different cryptogram |
+| Amount Value | Token Number | Expiry | Cryptogram
+|-----------|-----------|-----|-----|
+| 22.00 | 5226603115488031 | 05/25 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
+| 31.00 | Emulates Card not eligible |
+| 32.00 | 4111111111111111 | 03/30 | uxToh3Ep6gsR8AAkvZALN19Iz34=
+| 42.00 | 4895370013193500 | 03/30 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
+| 43.00 | 5226603115488031 | 03/30 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
+| 44.00 | 4895370012792682 | 12/22 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
+| 51.00 | 4268270087302871 | 09/24 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
+| 52.00 | 5413330089010442 | 12/25 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
+| All other amounts | 4895370013193500 | 05/25 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
 
 ## Status Updates
 
