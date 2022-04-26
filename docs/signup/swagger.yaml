@@ -342,7 +342,13 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description:
+          Base64 encoded string of the logo of the merchant.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
+          The logo must be in PNG (Portable Network Graphics) format.
+          Square images are recommended.
+          The longest side can not be more than 1000 pixels.
+          The minimum size is 100 x 100 pixels.
         example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
@@ -401,7 +407,13 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app.
+        description:
+          Base64 encoded string of the logo of the merchant.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
+          The logo must be in PNG (Portable Network Graphics) format.
+          Square images are recommended.
+          The longest side can not be more than 1000 pixels.
+          The minimum size is 100 x 100 pixels.
         example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
