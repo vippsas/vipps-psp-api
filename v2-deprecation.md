@@ -6,7 +6,7 @@ This will affect Vipps' PSP/PassThrough services and we are therefore required t
 
 The v3 API messages will contain a network token, a cryptogram (aka. TAVV) and Vipps' Token Requestor ID (TRID). The PSP API v3 will require that you have the capabilities to process Network Tokens instead of raw PANs. This is described in technical detail below and is live in our test environment:
 
-* [Differrences between v2 and v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-between-v2-and-v3)
+* [Differences between v2 and v3](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#differences-between-v2-and-v3)
 * [EMVco token processing](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#emvco-token-processing)
 
 As EBA and national authorities have mandated, SCA will come into effect January 1st 2021, and Vipps is working towards this deadline. We expect all raw PAN-processing to cause 3D Secure step-ups from this date. Please
