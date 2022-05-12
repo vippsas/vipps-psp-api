@@ -1,6 +1,6 @@
 {
-	"id": "ba3f96cd-b588-4b87-aee7-d0e080c5d213",
-	"name": "PSP API v3 - Environment",
+	"id": "2176c779-2c0c-4976-95cc-21585fa9ca6e",
+	"name": "PSP API v4 - Environment",
 	"values": [
 		{
 			"key": "client_id",
@@ -118,6 +118,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2021-12-02T10:08:42.455Z",
-	"_postman_exported_using": "Postman/8.12.2"
+	"_postman_exported_at": "2022-05-12T10:08:19.657Z",
+	"_postman_exported_using": "Postman/9.16.0"
 }
