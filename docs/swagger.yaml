@@ -28,33 +28,14 @@ paths:
       summary: Initiate a PSP payment
       operationId: initiatePaymentV3UsingPOST
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT
-          required: true
-          schema:
-            type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the
-            same for all the PSP's merchants.
-          required: true
-          schema:
-            type: string
-        - name: Psp-Id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The Vipps number (MSN) for the merchant's sales unit.
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Psp-Id"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -100,44 +81,16 @@ paths:
       summary: Delete a payment agreement
       operationId: deletePSPPaymenAgreementUsingDELETE
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT-TOKEN
-          required: true
-          schema:
-            type: string
-            default: Bearer
-              eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: MERCHANT-SERIAL-NUMBER
-          in: header
-          description: Identifies a merchant
-          required: true
-          schema:
-            type: string
-            default: "123456"
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the product. Can be found in Vipps developer
-            portal
-          required: true
-          schema:
-            type: string
-        - name: PSP-ID
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
-            default: C948DFD1546347568874C4DDC93A2E3C
-        - name: User-Token
-          in: header
-          description: JWT-TOKEN
-          required: true
-          schema:
-            type: string
-            default: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
+      
+        - $ref: "#/components/parameters/Authorization-with-default"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Psp-Id-with-default"
+        - $ref: "#/components/parameters/User-Token"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
@@ -172,44 +125,15 @@ paths:
       summary: Get card data to process a payment with token
       operationId: processPaymentOnTokenV3
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT-TOKEN
-          required: true
-          schema:
-            type: string
-            default: Bearer
-              eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the product. Can be found in Vipps developer
-            portal
-          required: true
-          schema:
-            type: string
-        - name: Psp-Id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
-            default: C948DFD1546347568874C4DDC93A2E3C
-        - name: Merchant-Serial-Number
-          in: header
-          description: Identifies a merchant
-          required: true
-          schema:
-            type: string
-            default: "123456"
-        - name: User-Token
-          in: header
-          description: JWT
-          required: true
-          schema:
-            type: string
-            default: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
+        - $ref: "#/components/parameters/Authorization-with-default"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Psp-Id-with-default"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/User-Token"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -257,9 +181,9 @@ paths:
       summary: Service endpoint exposed by the PSP
       description: >
         Used by Vipps to send the card network token from the Vipps token
-        requestor service
+        requestor service to the PSP to complete the initialized transaction.
 
-        to the PSP to complete the initialized transaction.
+
 
         The PSP will use the token to process the payment and then
 
@@ -275,10 +199,16 @@ paths:
         - name: Authorization
           in: header
           description: Token provided by the PSP as 'makePaymentToken' in the
-            /v3/psppayments/init call.
+
+            `/v3/psppayments/init` call.
+
           required: true
           schema:
             type: string
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -300,47 +230,27 @@ paths:
         - Vipps PSP API
       summary: Update the status of the PSP transaction.
       description: >
-        Since Vipps doesn’t process the PSP transactions, updates on payment
-        status are
+        Since Vipps doesn't process the PSP transactions, updates on payment
+        status are required in order to deliver expected customer experience. That means
 
-        required in order to deliver expected customer experience. That means
+
 
         that PSP has to inform Vipps about any PSP payment status change through this endpoint.
 
         Valid requests get a HTTP 200 response, but the actual update is done in
-
         a batch job during the night. See the API guide for more details:
 
         https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#batch-processing-of-status-updates
       operationId: updatestatusUsingPOST
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT
-          required: true
-          schema:
-            type: string
-        - name: merchant-serial-number
-          in: header
-          description: The Vipps number (MSN) for the merchant's sales unit.
-          required: true
-          schema:
-            type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the
-            same for all the PSP's merchants.
-          required: true
-          schema:
-            type: string
-        - name: psp-id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Psp-Id"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json:
@@ -385,40 +295,15 @@ paths:
       summary: Get the details of the PSP payment
       operationId: getPSPPaymentDetailsUsingGET
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT
-          required: true
-          schema:
-            type: string
-        - name: merchant-serial-number
-          in: header
-          description: The Vipps number (MSN) for the merchant's sales unit.
-          required: true
-          schema:
-            type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the
-            same for all the PSP's merchants.
-          required: true
-          schema:
-            type: string
-        - name: psp-id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
-        - name: pspTransactionId
-          in: path
-          description: Used as a globally unique per PSP transaction reference for the PSP
-            systems
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Psp-Id"
+        - $ref: "#/components/parameters/pspTransactionId"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
@@ -457,40 +342,15 @@ paths:
         for that user.
       operationId: integrationTestApprovePayment
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer JWT
-          required: true
-          schema:
-            type: string
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          description: Subscription key for the PSP API. This is the PSP's key, and the
-            same for all the PSP's merchants.
-          required: true
-          schema:
-            type: string
-        - name: Psp-Id
-          in: header
-          description: PSP id as provided by Vipps. This is the PSP's id, and the same for
-            all the PSP's merchants. GUID value for PSPs created after start of
-            2021.
-          required: true
-          schema:
-            type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The Vipps number (MSN) for the merchant's sales unit.
-          required: true
-          schema:
-            type: string
-        - name: pspTransactionId
-          in: path
-          description: Used as a globally unique per PSP transaction reference for the PSP
-            systems
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Psp-Id"
+        - $ref: "#/components/parameters/pspTransactionId"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -515,6 +375,120 @@ paths:
 servers:
   - url: https://apitest.vipps.no/psp
 components:
+  parameters:
+    Authorization:
+      in: header
+      name: Authorization
+      description: >-
+        Bearer JWT-TOKEN. 
+            The access token is a base64-encoded string that is required for all API calls.
+            It is a JWT (JSON Web Token).
+            The access token is fetched from the `POST:/accesstoken/get` endpoint.
+            It is valid for 1 hour in the test environment and 24 hours in the production environment.
+      required: true
+      schema:
+        type: string
+    Authorization-with-default:
+      in: header
+      name: Authorization
+      description: >-
+        Bearer JWT-TOKEN. 
+            The access token is a base64-encoded string that is required for all API calls.
+            It is a JWT (JSON Web Token).
+            The access token is fetched from the `POST:/accesstoken/get` endpoint.
+            It is valid for 1 hour in the test environment and 24 hours in the production environment.
+      required: true
+      schema:
+        type: string
+        default: Bearer
+          eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
+    Merchant-Serial-Number:
+      name: Merchant-Serial-Number
+      in: header
+      description: >-
+        The Merchant Serial Number (MSN) is a unique id for the sale unit
+        that this payment is made for. The Vipps number (MSN) for the merchant's sales unit.
+      required: true
+      schema:
+        type: string
+      example: 123456
+    Ocp-Apim-Subscription-Key:
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: >-
+        The subscription key for your API product is available on portal.vipps.no, under the *Utvikler* tab.
+        This is the PSP's key, and is the same for all the PSP's merchants.
+        Keep it secret.
+      required: true
+      schema:
+        type: string
+      example: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+    Psp-Id:
+      in: header
+      name: Psp-Id
+      description: >-
+        PSP id is provided by Vipps. This is the PSP's id, and the same for
+            all the PSP's merchants. GUID value for PSPs created after start of 2021.
+      required: true
+      schema:
+        type: string
+      example: C948DFD1546347568874C4DDC93A2E3C
+    Psp-Id-with-default:
+      in: header
+      name: Psp-Id
+      description: >-
+        PSP id is provided by Vipps. This is the PSP's id, and the same for
+            all the PSP's merchants. GUID value for PSPs created after start of 2021.
+      required: true
+      schema:
+        type: string
+        default: C948DFD1546347568874C4DDC93A2E3C
+      example: C948DFD1546347568874C4DDC93A2E3C
+    pspTransactionId:
+      in: path
+      name: pspTransactionId
+      description: Used as a globally unique per PSP transaction reference for the PSP
+        systems.
+      required: true
+      schema:
+        type: string
+      example: 7686f7788898767977
+    User-Token:
+      name: User-Token
+      in: header
+      description: JWT-TOKEN
+      required: true
+      schema:
+        type: string
+        default: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25OdW1iZXIiOiI5MTg3MTM4NjciLCJpc3MiOiJ2aXBwcy5ubyIsImV4cCI6MTY0NDc0Mzg5NywiYWNjb3VudE51bWJlciI6IjE4MDAwMDAwMDAwIn0.mqO4RsidM_-twRfCvgNnXUUPrXaTgFVMvkJTVmJgtmbHziMVxHnG9moHpEj90_A3MRPp_jucdgMnqixgExOykJCLX6VsiUB0qMLXTgBE7Mmkz3lk0jCgv7OwYDJuLksrXvLepD68KdyDTCVwPxdgqh_H9Tea7S3gSYUnYoNkNP5h7Eyvai6U7BuJVcoE5ckO1ZjGmOvNlfHUbAZYBH8I5RV96bnmEtdtkojrkoZtT7HjueyTZODfdaOyvI5VfMLKbr9qGkYKP0UBKTp9ST5eV-W_Y062PgOsfRNXL2-ltKgn0vDkpUWYGiA8Y98ondXLF1kQIc8pAFPAwhzWG31oM_wKeOjjjK-2lMg1X1LjTk-zbq0HBilhQzbXdW0PHws0p1UZgviW-bdIwRfcjn1ysEqzS0HzDuaRTGIQDeld3MrtcwLLce7PT4rSGZeoJM-pUTidztzX48pFUixLm-aa1-SWnbRIqUufmsylSJNZXjgS06pISGUMKPiAdSjINY17x8YkeptS1B_r56oshRY8BFffCPxtMJI1BAWYQBCQ8WvUadlWNrQ477kUuvauEPRK_eyXT83cANaEa39lBPz4J3PHAE6grV4c3G_rClFzaFl1mzrhUABKJ3CpP_q7LmkboXSI5xx0BkyIb4wG_eG1s7_E_P_T0hIj3CTBNZnu7mI
+    Vipps-System-Name:
+      name: Vipps-System-Name
+      in: header
+      description: The name of the ecommerce solution. One word in lowercase letters is good.
+      schema:
+        type: string
+      example: woocommerce
+    Vipps-System-Version:
+      name: Vipps-System-Version
+      in: header
+      description: The version number of the ecommerce solution.
+      schema:
+        type: string
+      example: "5.4"
+    Vipps-System-Plugin-Name:
+      name: Vipps-System-Plugin-Name
+      in: header
+      description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+      schema:
+        type: string
+      example: "vipps-woocommerce"
+    Vipps-System-Plugin-Version:
+      name: Vipps-System-Plugin-Version
+      in: header
+      description: The version number of the ecommerce plugin (if applicable).
+      schema:
+        type: string
+      example: "1.2.1"
   schemas:
     ErrorDetails:
       type: object
