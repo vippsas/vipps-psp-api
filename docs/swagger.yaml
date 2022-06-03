@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: |
-    
+
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. PSPs have full transactional control of
     payments initiated in their payment terminals.
@@ -10,7 +10,7 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with a EMVco network token and cryptogram and hand over the
     payment processing to the PSP.
-  version: 1.0.15
+  version: 1.0.16
   title: PSP API v3
   contact:
     name: Vipps AS
@@ -81,7 +81,7 @@ paths:
       summary: Delete a payment agreement
       operationId: deletePSPPaymenAgreementUsingDELETE
       parameters:
-      
+
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -371,13 +371,14 @@ paths:
       deprecated: false
 servers:
   - url: https://apitest.vipps.no/psp
+  - url: https://api.vipps.no/psp
 components:
   parameters:
     Authorization:
       in: header
       name: Authorization
       description: >-
-        Bearer JWT-TOKEN. 
+        Bearer JWT-TOKEN.
             The access token is a base64-encoded string that is required for all API calls.
             It is a JWT (JSON Web Token).
             The access token is fetched from the `POST:/accesstoken/get` endpoint.
