@@ -25,6 +25,10 @@
 								"type": "text"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -74,6 +78,10 @@
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}",
 								"type": "text"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -134,6 +142,10 @@
 								"type": "text"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -192,6 +204,10 @@
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}",
 								"type": "text"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -276,6 +292,10 @@
 						"value": "{{Ocp-Apim-Subscription-Key}}"
 					},
 					{
+						"key": "Merchant-Serial-Number",
+						"value": "{{merchantSerialNumber}}"
+					},
+					{
 						"key": "Vipps-System-Name",
 						"value": "{{vipps_system_name}}",
 						"type": "default"
@@ -357,7 +377,7 @@
 						"value": "{{PSP-ID}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
 					},
 					{
@@ -410,7 +430,7 @@
 						"value": "Bearer {{access_token}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
 					},
 					{
@@ -477,7 +497,7 @@
 						"value": "Bearer {{access_token}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
 					},
 					{
