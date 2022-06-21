@@ -30,16 +30,32 @@ Import the collection by following the steps below:
 3. Fill in the `Current Value` for the following fields to get started.
    - `client_id`
    - `client_secret`
-   - `Ocp-Apim-Subscription-Key`
+   - `Ocp-Apim-Subscription-Key-PSP`
+   - `PSP-ID`
    - `makePaymentUrl`
    - `customerMobileNumber`
-   - `PSP-ID`
-   - `merchantSerialNumber` - optional
+   - `merchantSerialNumber`
+   - `amount`
 
-### Step 4: Run tests
+Note that most of the calls in this PSP API require that you use your PSP key.
 
-1. Send request `Get Access Token`.
+### Step 4: Run PSP Payment tests
 
+1. Send request `Get Access Token`. This provides you with access to the API.
+2. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears and it will take you to the website where
+   you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment.
+   The pspTransactionId in the environment is updated automatically.
+3. Send `Get Details` for details about the transaction.
+4. Send `Update Status` to set information about the status.
+
+
+### Step 5: Run PSP Merchant Signup tests
+
+1. Send `Get all Merchants` for a json response showing all the merchants and their information.
+2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants.
+3. Send `Create new Merchant Sale Unit`. Notice the merchantSerialNumber is provided back.
+4. Open `Update Merchant Sale Unit`. Use MSN for the new merchant and update the body before sending the request.
+   Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
 
 ## Questions?
 
