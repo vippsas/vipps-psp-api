@@ -21,7 +21,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -72,7 +72,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -130,7 +130,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -151,6 +151,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -190,7 +195,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -273,7 +278,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "Vipps-System-Name",
@@ -350,7 +355,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",
@@ -415,7 +420,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",
@@ -482,7 +487,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",

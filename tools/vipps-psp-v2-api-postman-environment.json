@@ -13,8 +13,8 @@
 			"enabled": true
 		},
 		{
-			"key": "Ocp-Apim-Subscription-Key",
-			"value": "<Provided by Vipps>",
+			"key": "Ocp-Apim-Subscription-Key-PSP",
+			"value": "<This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>",
 			"enabled": true
 		},
 		{
@@ -90,6 +90,11 @@
 		{
 			"key": "access_token",
 			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v3 - MTE environment>",
+			"enabled": true
+		},
+		{
+			"key": "idempotency_key",
+			"value": "<The request_id - it can be a random number that you change for each new request.>",
 			"enabled": true
 		},
 		{
