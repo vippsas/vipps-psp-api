@@ -22,7 +22,7 @@ See: [PSP Signup API](vipps-psp-api.md#psp-signup-api).
 * [Postman collection](tools/vipps-psp-v2-api-postman-collection.json)
 * [Postman environment](tools/vipps-psp-v2-api-postman-environment.json)
 
-Vipps do not handle the settlements for PSP integrations. These are handled by the PSP.
+Vipps does not handle the settlements for PSP integrations. These are handled by the PSP.
 
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
 for contact information, contribution guidelines, etc.
