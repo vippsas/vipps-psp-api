@@ -221,7 +221,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deactivate\": false,\n    \"name\": \"Example AS\",\n    \"mccCode\": \"5411\",\n    \"logo\": \"ut commodo in aliqua\",\n    \"email\": \"user@example.com\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n        \"addressLine1\": \"Robert Levins gate 5\",\n        \"city\": \"Oslo\",\n        \"country\": \"NO\",\n        \"postCode\": \"0154\",\n        \"addressLine2\": \"Att: Rune Garborg\"\n    }\n}",
+							"raw": "{\n    \"name\": \"Vipps Merch Shop\",\n    \"address\": {\n        \"addressLine1\": \"Robert Levins gate 52\",\n        \"city\": \"Oslo\",\n        \"country\": \"NO\",\n        \"postCode\": \"0154\",\n        \"addressLine2\": \"Att: Team Integration\"\n    },\n    \"logo\": \"\",\n    \"organizationNumber\": \"918130047\",\n    \"companyName\": \"Vipps Teknologi AS\",\n    \"companyEmail\": \"integration@vipps.no\",\n    \"mccCode\": \"5411\",\n    \"email\": \"integration@vipps.no\",\n    \"website\": \"https://vipps.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
