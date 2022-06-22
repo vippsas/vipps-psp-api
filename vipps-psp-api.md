@@ -715,8 +715,8 @@ This API is the only way to sign up non-Norwegian merchants.
 The API specification is available here:
 * [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
 * [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v2-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v2-api-postman-environment.json)
+* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
 A PSP can use their existing keys to access this APIs. They can perform the following:
 - List one or all merchants under them
