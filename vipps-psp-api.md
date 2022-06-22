@@ -27,14 +27,13 @@ These OpenAPI representations may be useful to get a quick overview:
 * [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
 
 API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
-[Postman collection](tools/),
 [Checklist](vipps-psp-api-checklist.md),
 [FAQ](vipps-psp-api-faq.md),
-[Postman Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-postman.md)
+[Postman Guide](vipps-psp-postman.md)
 
 API version: 3.0
 
-Document version 3.1.12.
+Document version 3.1.13.
 
 # Table of Contents
 
@@ -715,8 +714,8 @@ This API is the only way to sign up non-Norwegian merchants.
 The API specification is available here:
 * [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
 * [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v2-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v2-api-postman-environment.json)
+* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
 A PSP can use their existing keys to access this APIs. They can perform the following:
 - List one or all merchants under them

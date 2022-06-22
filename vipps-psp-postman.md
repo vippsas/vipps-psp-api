@@ -16,12 +16,12 @@ We also have a short [getting started guide to Postman](https://github.com/vipps
 Import the collection by following the steps below:
 
 1. Click `Import` in the upper-left corner.
-2. Import the [vipps-psp-v2-api-postman-collection.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/tools/vipps-psp-v2-api-postman-collection.json) file.
+2. Import the [vipps-psp-v3-api-postman-collection.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/tools/vipps-psp-v3-api-postman-collection.json) file.
 
 ### Step 2: Import the Postman Environment
 
 1. Click `Import` in the upper-left corner.
-2. Import the [vipps-psp-v2-api.postman_environment.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/tools/vipps-psp-v2-api-postman-environment.json) file.
+2. Import the [vipps-psp-v3-api.postman_environment.json](https://raw.githubusercontent.com/vippsas/vipps-psp-api/master/tools/vipps-psp-v3-api-postman-environment.json) file.
 
 ### Step 3: Setup Postman Environment
 
