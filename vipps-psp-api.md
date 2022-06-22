@@ -27,14 +27,13 @@ These OpenAPI representations may be useful to get a quick overview:
 * [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
 
 API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
-[Postman collection](tools/),
 [Checklist](vipps-psp-api-checklist.md),
 [FAQ](vipps-psp-api-faq.md),
-[Postman Guide](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-postman.md)
+[Postman Guide](vipps-psp-postman.md)
 
 API version: 3.0
 
-Document version 3.1.12.
+Document version 3.1.13.
 
 # Table of Contents
 
