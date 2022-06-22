@@ -21,7 +21,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -72,7 +72,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -130,7 +130,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -151,6 +151,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -190,7 +195,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"value": "{{Ocp-Apim-Subscription-Key-PSP}}",
 								"type": "text"
 							},
 							{
@@ -216,7 +221,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deactivate\": false,\n    \"name\": \"Example AS\",\n    \"mccCode\": \"5411\",\n    \"logo\": \"ut commodo in aliqua\",\n    \"email\": \"user@example.com\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n        \"addressLine1\": \"Robert Levins gate 5\",\n        \"city\": \"Oslo\",\n        \"country\": \"NO\",\n        \"postCode\": \"0154\",\n        \"addressLine2\": \"Att: Rune Garborg\"\n    }\n}",
+							"raw": "{\n    \"name\": \"Vipps Merch Shop\",\n    \"address\": {\n        \"addressLine1\": \"Robert Levins gate 52\",\n        \"city\": \"Oslo\",\n        \"country\": \"NO\",\n        \"postCode\": \"0154\",\n        \"addressLine2\": \"Att: Team Integration\"\n    },\n    \"logo\": \"\",\n    \"organizationNumber\": \"918130047\",\n    \"companyName\": \"Vipps Teknologi AS\",\n    \"companyEmail\": \"integration@vipps.no\",\n    \"mccCode\": \"5411\",\n    \"email\": \"integration@vipps.no\",\n    \"website\": \"https://vipps.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +278,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "Vipps-System-Name",
@@ -350,7 +355,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",
@@ -415,7 +420,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",
@@ -482,7 +487,7 @@
 					},
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key}}"
+						"value": "{{Ocp-Apim-Subscription-Key-PSP}}"
 					},
 					{
 						"key": "PSP-ID",
