@@ -33,7 +33,7 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 
 API version: 3.0
 
-Document version 3.1.13.
+Document version 3.1.14.
 
 # Table of Contents
 
@@ -74,7 +74,10 @@ Document version 3.1.13.
   - [Error codes](#error-codes)
 - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
 - [PSP Signup API](#psp-signup-api)
-- [Questions](#questions)
+- [Get all merchants](#get-all-merchants)
+- [Get information about a specific merchant](#get-information-about-a-specific-merchant)
+- [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
+- [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
   - [Questions?](#questions-1)
@@ -711,17 +714,6 @@ The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.
 
-The API specification is available here:
-* [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
-* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
-
-A PSP can use their existing keys to access this APIs. They can perform the following:
-- List one or all merchants under them
-- Create a new merchant under them
-- Update an existing merchant
-
 The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
 
 ![Payment Screen](./docs/signup/payment.png)
@@ -739,6 +731,43 @@ Some details of information shown in the screenshots:
 | Order ID / Description | The orderId, provided by the merchant             |
 | Transaction ID     | The internal Vipps id for the transaction             |
 | butikken.no        | Merchant website                                      |
+
+The API specification is available here:
+* [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
+* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
+* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
+
+A PSP can use their existing keys to access this APIs. They can perform the following:
+- List one or all merchants under them
+- Create a new merchant under them
+- Update an existing merchant
+
+## Get all merchants
+
+For a json response showing all the merchants and their information, send [`GET:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchants).
+
+## Get information about a specific merchant
+
+For information about a specific merchant, send 
+[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchant). Supply the MSN for a merchant in your list of merchants.
+
+## Create a new merchant sale unit
+
+To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/addMerchant).
+
+## Update an existing merchant sale unit
+
+To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant). 
+Provide the MSN for the merchant and update the details in the body section.
+
+
+
+
+
+
+
+
 
 
 # Proposals
