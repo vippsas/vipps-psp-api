@@ -94,7 +94,7 @@
 		},
 		{
 			"key": "idempotency_key",
-			"value": "<The request_id - it can be a random number that you change for each new request.>",
+			"value": "<The request_id - a GUID value that is unique for each request. You can use {{$guid}} to generate a one each time.>",
 			"enabled": true
 		},
 		{

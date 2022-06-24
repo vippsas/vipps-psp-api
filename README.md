@@ -6,10 +6,7 @@ Vipps does not handle the settlements for PSP integrations. These are handled by
 
 ## Getting started
 
-Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, etc.
-
-See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
-for contact information, contribution guidelines, etc.
+Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
 
 
 ## PSP API
@@ -25,13 +22,13 @@ for contact information, contribution guidelines, etc.
 * [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml): OpenAPI Spec for the PSP Signup API.
 
 
-# Postman Examples
+## Examples
 
 
 * [Postman guide](vipps-psp-postman.md): Step-by-step guide for using the PSP API Postman collection of examples.
 
 
-# Questions?
+## Questions?
 
 For more information, see:
 
