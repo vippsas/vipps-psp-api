@@ -677,7 +677,7 @@ This API returns the following HTTP statuses in the responses:
 ## Error codes
 
 | errorCode        | errorMessage                               | Description |
-| ---------------- | ------------------------------------------ | |
+| ---------------- | ------------------------------------------ | ---|
 | `21`             | Merchant not available or active           | |
 | `42`             | Invalid payment model type                 | |
 | `51`             | Invalid request                            | |
