@@ -676,7 +676,7 @@ This API returns the following HTTP statuses in the responses:
 
 ## Error codes
 
-| errorCode        | errorMessage                               |
+| errorCode        | errorMessage                               | Description
 | ---------------- | ------------------------------------------ |
 | `21`             | Merchant not available or active           |
 | `42`             | Invalid payment model type                 |
@@ -687,6 +687,10 @@ This API returns the following HTTP statuses in the responses:
 | `amount`         | amount.less.than.one                       |
 | `currency`       | transaction.currency.invalid               |
 | `makePaymentUrl` | Invalid makePaymentUrl                     |
+| `121`        | Agreement not found | The agreement does not exist
+| `122`        | Agreement not active | The agreement has been deactivated via the Delete agreement endpoint
+| `123`        | Connected payment source not active for Agreement | The connected card is no longer active or valid
+| `124`        | No Network token available for this Agreement | The connected card does not have a active network token available
 
 # Recommendations regarding handling redirects
 
