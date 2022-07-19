@@ -680,8 +680,8 @@ This API returns the following HTTP statuses in the responses:
 | ---------------- | ------------------------------------------ | ---|
 | `21`             | Merchant not available or active           | |
 | `42`             | Invalid payment model type                 | |
+| `44`             | PSP Transaction id already exists          | |
 | `51`             | Invalid request                            | |
-| `99`             | PSP Transaction id already exists in Vipps | |
 | `51`             | Invalid pspRedirectUrl                     | |
 | `99`             | OrderId already exists                     | |
 | `amount`         | amount.less.than.one                       | |
