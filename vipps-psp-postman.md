@@ -39,16 +39,22 @@ Import the collection by following the steps below:
 
 Note that the calls in this PSP API require your PSP subscription key.
 
-### Step 4: Run PSP Payment tests
+### Step 4: Run tests
 
-1. Send request `Get Access Token`. This provides you with access to the API.
-2. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears and it will take you to the website where
-   you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The pspTransactionId in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/initiatePaymentV3UsingPOST).
-3. Send request  `Get Details` for details about the transaction. See [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET).
-4. Send request `Update Status`. This is an example of what the PSP sends Vipps to update on the status of the payment. See [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST).
+#### 1. Get access token
 
+Send request `Get Access Token`. This provides you with access to the API.
 
-### Step 5: Run PSP Merchant Signup tests
+The access token is valid for 1 hour in the test environment
+and 24 hours in the production environment.
+
+#### 2. Run PSP Payment tests
+
+1. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The pspTransactionId in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/initiatePaymentV3UsingPOST).
+2. Send request  `Get Details` for details about the transaction. See [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET).
+3. Send request `Update Status`. This is an example of what the PSP sends Vipps to update on the status of the payment. See [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST).
+
+#### 3. Run PSP Merchant Signup tests
 
 1. Send `Get all Merchants` for a json response showing all the merchants and their information. See [`GET:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchants).
 2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants. See [`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchant).
@@ -56,7 +62,7 @@ Note that the calls in this PSP API require your PSP subscription key.
 4. Open `Update Merchant Sale Unit`. Use MSN for the new merchant and update the body before sending the request.
    Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
     See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant).
-    
+
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
