@@ -2,7 +2,8 @@
 
 Document version 2.1.0
 
-For examples of requests and responses, see the Postman collection in [tools](tools/)
+For examples of requests and responses, see the [Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
+and [environment](./tools/vipps-psp-v3-api-postman-environment.json).
 
 # Checklist for Full integration
 - [ ] Integrate _all_ the [API endpoints](https://vippsas.github.io/vipps-psp-api/)
