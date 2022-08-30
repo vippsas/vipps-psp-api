@@ -253,21 +253,6 @@ definitions:
           - PENDING
         default: PENDING
         x-order: 7
-      logo:
-        deprecated: true
-        type: string
-        format: byte
-        description: >-
-          (Deprecated)
-          Base64 encoded string of the logo of the merchant.
-          The logo will be displayed in the Vipps app, both when paying and on receipts.
-          The logo must be in PNG (Portable Network Graphics) format.
-          Square images are recommended.
-          The longest side can not be more than 1000 pixels.
-          The minimum size is 100 x 100 pixels.
-        x-isnullable: true
-        x-order: 8
-        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       logoUrl:
         type: string
         format: uri
