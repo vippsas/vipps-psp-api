@@ -2,7 +2,7 @@
 
 API version: 3.
 
-Document version 1.2.1.
+Document version 1.2.2.
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -55,6 +55,16 @@ card details. The EMVco token number is not considered PCI DSS sensitive.
 See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more.
+
+# Why do I get `No network token available for this Agreement` or similar?
+
+The most common reason for this problem is that the user has a card issuer that
+does not support network tokens.
+
+Banks can block tokens, for instance if the card is blocked, and are not always
+great at reactivating them.
+
+It could also be that the user has not added his/her new card in Vipps.
 
 # Is there a unique PSP ID for all merchants?
 
