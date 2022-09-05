@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: V2 Deprecation
-sidebar_position: 20
+sidebar_position: 100
 ---
 END_METADATA -->
 
