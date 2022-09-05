@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: V2 Deprecation
+sidebar_position: 100
+---
+END_METADATA -->
+
 # PSP V2 API Deprecation
 
 In order to achieve compliance with PSD2’s SCA requirements, Vipps will be processing network tokens instead of PANs going forward. The use of network tokens is Vipps' strategy to achieve Delegated Authentication. This will enable Vipps to leverage existing solutions to authenticate users; thus, maintaining the current user experience with PIN or biometric identification in payment approvals.
