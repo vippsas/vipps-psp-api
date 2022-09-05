@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: FAQ
+sidebar_position: 40
+---
+END_METADATA -->
+
 # Vipps PSP API FAQ
 
 API version: 3.
@@ -8,6 +15,8 @@ Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
 See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
+
+<!-- START_TOC -->
 
 # Table of Contents
 
@@ -23,6 +32,8 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 - [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 - [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 - [Questions?](#questions)
+
+<!-- END_TOC -->
 
 # How can I check if a merchant or sale unit is active?
 

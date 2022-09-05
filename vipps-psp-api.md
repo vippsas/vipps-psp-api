@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: API Guide
+sidebar_position: 20
+---
+END_METADATA -->
+
 # Vipps PSP API v3
 
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
@@ -34,6 +41,8 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 API version: 3.0
 
 Document version 3.1.14.
+
+<!-- START_TOC -->
 
 # Table of Contents
 
@@ -81,6 +90,8 @@ Document version 3.1.14.
 - [Proposals](#proposals)
   - [Recurring 3DS Update Card](#recurring-3ds-update-card)
   - [Questions?](#questions-1)
+
+<!-- END_TOC -->
 
 
 # Differences from previous versions

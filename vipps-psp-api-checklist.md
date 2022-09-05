@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: Checklist
+sidebar_position: 35
+---
+END_METADATA -->
+
 # Vipps PSP API Checklist
 
 Document version 2.1.0
