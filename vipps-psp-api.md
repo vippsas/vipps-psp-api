@@ -40,7 +40,7 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 
 API version: 3.0
 
-Document version 3.1.14.
+Document version 3.1.15.
 
 <!-- START_TOC -->
 
@@ -56,6 +56,7 @@ Document version 3.1.14.
     - [Skip landing page](#skip-landing-page)
     - [Payment confirmation](#payment-confirmation)
     - [makePaymentUrl](#makepaymenturl)
+    - [isApp](#isapp)
   - [EMVCo token processing](#emvco-token-processing)
     - [Scheme specific details](#scheme-specific-details)
       - [Visa](#visa)
@@ -212,6 +213,27 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 * Some users may close Vipps immediately after seeing the payment confirmation,
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
   merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
+
+### isApp
+
+If the payment is initiated in a native app, it is possible to explicitly force
+a `vipps://` URL by sending the optional `isApp` parameter in the initiate call:
+
+* `"isApp": false` (or not sent at all): The URL is `https://`, which handles
+  everything automatically for you.
+  The phone's operating system will know, through "universal linking", that
+  the `https://api.vipps.no` URL should open the Vipps app, and not the default
+  web browser.
+  **Please note:** In some cases, this requires the user to approve that
+  Vipps is opened, but this is usually only the first time.
+* `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
+  **Please note:** In our test environment (MT), the scheme is `vippsMT://`
+
+If the user does not have Vipps installed:
+* `"isApp":false` (or not sent at all): The Vipps landing page will be shown,
+   and the user can enter a phone number and pay on a device with Vipps installed.
+* `"isApp": true`: The user will get an error message saying that the link can
+  not be opened.
 
 ## EMVCo Token processing
 
@@ -547,7 +569,6 @@ the init request body could look like this.
   "makePaymentUrl": "https://example.com/yourCallbackEndpointUrl",
   "currency": "NOK",
   "merchantOrderId": "123123123",
-  "isApp": false,
   "pspTransactionId": "{{psptransactionid}}",
   "paymentText": "Order id: 213213",
   "scope": "psp_subscription",
@@ -764,7 +785,7 @@ For a json response showing all the merchants and their information, send [`GET:
 
 ## Get information about a specific merchant
 
-For information about a specific merchant, send 
+For information about a specific merchant, send
 [`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchant). Supply the MSN for a merchant in your list of merchants.
 
 ## Create a new merchant sale unit
@@ -773,7 +794,7 @@ To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.gi
 
 ## Update an existing merchant sale unit
 
-To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant). 
+To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
 
 
