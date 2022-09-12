@@ -770,7 +770,7 @@ Some details of information shown in the screenshots:
 
 The API specification is available here:
 * [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
-* [Swagger source](https://github.com/vippsas/vipps-psp-api/blob/master/docs/signup/swagger.yaml)
+* [Swagger source](./docs/signup/swagger.yaml)
 * [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
 * [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
