@@ -11,6 +11,13 @@ This repository contains developer resources for the Vipps PSP API v3.
 
 Vipps does not handle the settlements for PSP integrations. These are handled by the PSP.
 
+<!-- START_COMMENT -->
+
+💥 Preview the new documentation pages here: <https://vippsas.github.io/vipps-developer-docs/>.
+See the disclaimer: <https://vippsas.github.io/vipps-developer-docs/docs/examples/>.
+
+<!-- END_COMMENT -->
+
 ## Getting started
 
 Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md) pages for information about API keys, product activation, contact information, contribution guidelines, etc.
@@ -19,7 +26,7 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 ## PSP API
 
 * [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
-* [Swagger](https://vippsas.github.io/vipps-psp-api) or  [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html): PSP API reference documentation
+* [Swagger](https://vippsas.github.io/vipps-psp-api) or  [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp): PSP API reference documentation
 * [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
 
 ## PSP Signup API
