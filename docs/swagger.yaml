@@ -10,7 +10,7 @@ info:
     with the Vipps app. When the customer confirms the payment, Vipps enriches
     the payment data with a EMVco network token and cryptogram and hand over the
     payment processing to the PSP.
-  version: 1.0.16
+  version: 1.0.17
   title: PSP API v3
   contact:
     name: Vipps AS
@@ -725,7 +725,7 @@ components:
           description: Text to be displayed to end user
         isApp:
           type: boolean
-          example: true
+          example: false
           default: false
           description: Indicates whether payment request is triggered from a mobile app or
             a web browser
