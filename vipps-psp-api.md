@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: API Guide
+title: PSP API Guide
 sidebar_position: 20
 ---
 END_METADATA -->
@@ -30,8 +30,9 @@ cards, not the card details. If you are not able to process tokens, you should r
 `HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
 
 These OpenAPI representations may be useful to get a quick overview:
+
 * [Swagger](https://vippsas.github.io/vipps-psp-api)
-* [ReDoc](https://vippsas.github.io/vipps-psp-api/redoc.html)
+* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp)
 
 API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 [Checklist](vipps-psp-api-checklist.md),
@@ -40,16 +41,16 @@ API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 
 API version: 3.0
 
-Document version 3.1.15.
+Document version 3.2.0.
 
 <!-- START_TOC -->
 
-# Table of Contents
+## Table of Contents
 
-- [PSP payment sequence](#psp-payment-sequence)
 - [Differences from previous versions](#differences-from-previous-versions)
   - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
   - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
+- [PSP payment sequence](#psp-payment-sequence)
 - [API overview](#api-overview)
   - [Authentication](#authentication)
   - [Initiate payment](#initiate-payment)
@@ -67,7 +68,7 @@ Document version 3.1.15.
   - [Status Updates](#status-updates)
     - [Batch processing of status updates](#batch-processing-of-status-updates)
   - [Cancelling pending transactions](#cancelling-pending-transactions)
-- [Example request](#example-request)
+  - [Example request](#example-request)
   - [Example response](#example-response)
   - [Idempotency](#idempotency)
 - [PSP API implementation checklist](#psp-api-implementation-checklist)
@@ -83,21 +84,13 @@ Document version 3.1.15.
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
 - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-- [PSP Signup API](#psp-signup-api)
-- [Get all merchants](#get-all-merchants)
-- [Get information about a specific merchant](#get-information-about-a-specific-merchant)
-- [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
-- [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
-- [Proposals](#proposals)
-  - [Recurring 3DS Update Card](#recurring-3ds-update-card)
-  - [Questions?](#questions-1)
+- [Questions?](#questions)
 
 <!-- END_TOC -->
 
+## Differences from previous versions
 
-# Differences from previous versions
-
-## Differences from PSP API v2 to v3
+### Differences from PSP API v2 to v3
 
 The PSP API v3 adds functionality for network tokens and allows PSPs to use the API to
 obtain tokens from Vipps, not the actual card details.
@@ -112,14 +105,14 @@ Values for this enum have changed accordingly:
 |CANCEL| USER_CANCEL|
 |NO| USER_CANCEL|
 
-## Differences from PSP API v1 to v2
+### Differences from PSP API v1 to v2
 
 * Added support for redirection of user after payment completion in the Vipps app
 * Added support for providing the `makePaymentUrl` in the initiate payment call
 * Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
 * Improved and more consistent parameter names in the API
 
-# PSP payment sequence
+## PSP payment sequence
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
 
@@ -130,9 +123,9 @@ merchant and the PSP to _not_ base their transaction logic on the user reaching 
 For example: Check for "reserved" status with the PSP's API (not Vipps' API),
 then do "capture" when the goods have been shipped/delivered.
 
-# API overview
+## API overview
 
-## Authentication
+### Authentication
 
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
@@ -147,7 +140,7 @@ For more information about how to obtain an access token and all details around 
 in the
 [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
 
-## Initiate payment
+### Initiate payment
 
 When a user chooses Vipps as the payment method, a payment request is initiated
 by the PSP to the Vipps API. Vipps creates the payment and returns a link that does the following:
@@ -162,9 +155,9 @@ That will make it impossible for the user to reliably be redirected back to the
 merchant's website and will result in a lower success rate.
 In general, any "optimization" of the payment flow may break the Vipps payment flow - if not today, then later.
 
-### Skip landing page
+#### Skip landing page
 
-*Only available for whitelisted sale units.*
+_Only available for whitelisted sale units._
 
 If `skipLandingpage` is set to `true`, Vipps will _not_ display the landing page,
 but instead send a push notification to the phone number immediately.
@@ -177,16 +170,16 @@ will result in an error.
 If you need to be whitelisted, instructions for this can be found in the
 [FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
 
-### Payment confirmation
+#### Payment confirmation
 
 After the payment initiation, Vipps sends a push notification or redirects the user to
 the Vipps app. The user logs in, selects payment source, and confirms the payment.
 
-### makePaymentUrl
+#### makePaymentUrl
 
 Once the end user has confirmed the payment, Vipps shares the network token
 with the PSP by `POST`-ing to the `makePaymentUrl`:
-[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentV3UsingPOST).
+[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).
 
 The PSP uses the card token to process the payment through the acquirer.
 This is the PSP's responsibility.
@@ -194,7 +187,7 @@ Vipps is not involved in the actual payment, Vipps only provides the
 PSP with the card token.
 
 The PSP then sends Vipps an update on the status of the payment:
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 
 It's important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
@@ -207,6 +200,7 @@ The user receives confirmation of the payment in Vipps.
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
 **Please note:**
+
 * The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
   Vipps will mark the transaction as failed. This is a known issue with the current API.
   Future improvements to address this issue are planned.
@@ -214,7 +208,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
   merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
 
-### isApp
+#### isApp
 
 If the payment is initiated in a native app, it is possible to explicitly force
 a `vipps://` URL by sending the optional `isApp` parameter in the initiate call:
@@ -230,12 +224,13 @@ a `vipps://` URL by sending the optional `isApp` parameter in the initiate call:
   **Please note:** In our test environment (MT), the scheme is `vippsMT://`
 
 If the user does not have Vipps installed:
+
 * `"isApp":false` (or not sent at all): The Vipps landing page will be shown,
    and the user can enter a phone number and pay on a device with Vipps installed.
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
-## EMVCo Token processing
+### EMVCo Token processing
 
 In order to give the best possible payment experience, the Vipps PSP API uses
 EMVCO token based processing.
@@ -245,7 +240,7 @@ The solution requires the PSP to have support for EMVCO token processing.
 The `makePaymentUrl` call to the PSP sends the network token
 and cryptogram in the following format. This is referred to as the `makePayment` request.
 
-```
+```json
 Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
@@ -270,7 +265,7 @@ In certain cases, a legacy encrypted card request is sent in the following forma
 **Important:** This is only available for existing PSPs that are not able to handle
 tokens, and there are _very_ few left.
 
-```
+```json
 Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
@@ -284,12 +279,13 @@ Authorization: makePaymentToken
 ```
 
 Where:
+
 * `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
 * `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
 
-### Scheme specific details
+#### Scheme specific details
 
-#### Visa
+##### Visa
 
 Visa tokens must be processed with the acquirer submitting the TAVV cryptogram
 in field 126.8. The cryptogram received with the Network Token will contain the
@@ -301,7 +297,7 @@ Issuers recognise Vipps originated transactions and will not soft decline for
 DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
 The expected ECI value for VISA requests is ECI-07.
 
-#### Mastercard
+##### Mastercard
 
 A MasterCard transaction should be processed as an ecom-token in accordance with
 the acquirers instructions from Mastercard. Mastercard adds the Token Requestor ID
@@ -312,12 +308,12 @@ As the time of writing, you should expect soft declines on all MasterCard transa
 Vipps initially returns ECI-06 for Mastercard, this should be handled as "no 3DS,
 no challenge requested" in accordance with your acquirer.
 
-### Token Requestor Ids
+#### Token Requestor Ids
 
 For Visa/Mastercard, the Token Requestor ID (TRID) is an eleven digit number.
 It is added by the scheme in the processing of the payments.
 
-### 3DSecure and Network tokens
+#### 3DSecure and Network tokens
 
 In order to start a 3DS session, simply use the Network Token Number instead of
 the regular PAN. The scheme Directory Server maps the Network Token to the
@@ -328,7 +324,7 @@ Once the 3DS CAVV cryptogram is acquired from the 3DS session, both the CAVV and
 the token cryptogram must be submitted in the authorization request in the fields
 specified by the acquirer. This is necessary to perform a valid authorization.
 
-### Magic Numbers for EMVCo Tokens
+#### Magic Numbers for EMVCo Tokens
 
 Any request to the Vipps PSP API will return a Visa Token. However, this can be changed
 by setting the amount in the init request. No matter what is selected in the app,
@@ -346,22 +342,22 @@ the Token returned in the MakePayment request will be:
 | 52.00 | 5413330089010442 | 12/25 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
 | All other amounts | 4895370013193500 | 05/25 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
 
-## Status Updates
+### Status Updates
 
 To provide a consistent end user experience, it is important that Vipps is
 notified by changes to the payment status when it is captured, cancelled, or refunded:
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 
 Vipps also provides an endpoint allowing you to check the payment status:
-[`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+[`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
 
 For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
 with the v3 API on payments done with the v1 API.
 
-### Batch processing of status updates
+#### Batch processing of status updates
 
 Requests to
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 receive a `HTTP 200 OK` response if the JSON payload was valid.
 The actual _processing_ of the data is done as a batch.
 
@@ -379,7 +375,7 @@ there are some technical details preventing it from being run in the same way
 as in the production environment. The status of PSP payments will therefore
 always be in the initiated state in the test environment.
 
-## Cancelling pending transactions
+### Cancelling pending transactions
 
 A user might return to the PSP's checkout without logging in to the Vipps App,
 or they might abort the transaction in the Vipps App.
@@ -400,7 +396,7 @@ A typical flow would be:
 4. The user might end up going back to the Vipps app. If that happens and a `makePaymentUrl` request is sent,
    the PSP responds with error code 85.
 
-# Example request
+### Example request
 
 ```json
 Authorization: makePaymentToken
@@ -412,7 +408,7 @@ Authorization: makePaymentToken
 }
 ```
 
-## Example response
+### Example response
 
 ```json
 {
@@ -427,7 +423,7 @@ Authorization: makePaymentToken
 }
 ```
 
-## Idempotency
+### Idempotency
 
 Many API requests to Vipps APIs can be retried without any side effects
 by providing `Request-Id`(or `Idempotency-key`) in the header of the
@@ -437,41 +433,41 @@ generated by the merchant.
 
 For example:
 
-```
+```json
 Request-Id: slvnwdcweofjwefweklfwelf
 ```
 
-# PSP API implementation checklist
+## PSP API implementation checklist
 
 See: [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
 
-# Errors
+## Errors
 
 The PSP should return the following errorIds and errorTexts when applicable:
 
 | errorId | errorText                            | Description (should not be included in response)                                                                                  |
 | ------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| 71      | Invalid request                      | The request received from Vipps failed validation.                                                                                     |
+| 71      | Invalid request                      | The request received from Vipps failed validation.                                                                                |
 | 72      | Different texts                      | For errors that are not in this list. Please include text describing the error.                                                   |
 | 81      | No such issuer                       | The PSP were unable to identify the card issuer.                                                                                  |
 | 82      | Refused by Issuer                    | Generic response for cards that were refused by issuer, without the PSP knowing why.                                              |
 | 83      | Suspected fraud                      | Suspected fraud.                                                                                                                  |
-| 84      | Exceeds withdrawal amount limit      | The amount exceeds an amount limit. Could be per transaction limit, or for a period.                                             |
-| 85      | Response received too late            | A third party didn't respond in time for the makePayment or [Cancelling pending transactions](#Cancelling-pending-transactions).                                                      |
+| 84      | Exceeds withdrawal amount limit      | The amount exceeds an amount limit. Could be per transaction limit, or for a period.                                              |
+| 85      | Response received too late            | A third party didn't respond in time for the makePayment or [Cancelling pending transactions](#cancelling-pending-transactions).                                                      |
 | 86      | Expired card                         | Expired card.                                                                                                                     |
 | 87      | Invalid card number (no such number) | The card provided is invalid.                                                                                                     |
 | 88      | Merchant does not allow credit cards | If the PSP supports disallowing credit cards.                                                                                     |
 | 89      | Insufficient funds                   | Insufficient funds.                                                                                                               |
 | 91      | Internal error                       | Unhandled or unknown exception.                                                                                                   |
 | 92      | Unable to decrypt                    | The PSP was unable to decrypt `cardData` from the makePayment request.                                                            |
-| 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.    |
+| 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.   |
 | 93      | Status from Vipps:TIMEOUT            | Response to Vipps sending `TIMEOUT`. Caused by customer not acting on the payment.                                                |
 | 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.|
 | 94      | Unhandled soft decline               | Response to a Soft Decline from the bank that could not be processed or forwarded to the Vipps App.                               |
 
-# PSD2 Compliance and Secure Customer Authentication (SCA)
+## PSD2 Compliance and Secure Customer Authentication (SCA)
 
-## 3DSecure Fallback
+### 3DSecure Fallback
 
 In case of a soft decline (when the issuer requires 3DS), the PSP must host a
 3DSecure session and must provide the URL to Vipps.
@@ -505,7 +501,7 @@ then resend the `makePayment` request.
 For example, if a 3DSecure session succeeds, you should redirect to the
 `Operations.url` with the operation `3dssuccess`.
 
-```
+```json
 operations\":[{\"url\":\"https://www.example.com/?transactionId=xxxxx&responsecode=OK\",\"operation\":\"3dssuccess\"}"
 ```
 
@@ -525,10 +521,10 @@ Authorization: makePaymentToken
 }
 ```
 
-# Recurring payments
+## Recurring payments
 
 **Please note:** We are currently not onboarding new PSP partners to
-Passthrough Recurring Payments due to challenges with user experience under PSD2.
+Pass-through Recurring Payments due to challenges with user experience under PSD2.
 We will update this section when there is new information.
 
 The PSP API supports recurring payments, allowing the PSP to
@@ -537,7 +533,7 @@ control. This has been built as an extension to the existing PSP v3 API, and no
 existing integrations will be affected, other than the possibility to initialize
 and preform recurring payments.
 
-## Scope
+### Scope
 
 As of now, there is one possible way to perform a recurring payment: `psp_subscription`.
 This is referred to as the `scope` of the recurring agreement.
@@ -549,7 +545,7 @@ have to accept the payment on each occasion, only the first one when consenting
 to the agreement. An example of this could be a subscription to a music streaming
 service.
 
-## Initialize a recurring payment
+### Initialize a recurring payment
 
 Initializing a recurring payment works in the same way as a non-recurring payment,
 but with the inclusion of a `scope` and `agreementURL` in the init call.
@@ -577,11 +573,11 @@ the init request body could look like this.
 ```
 
 In the same way as a normal, non-recurring PSP v3 payment, the PSP will receive a
-[`POST:makePaymentURL`](https://vippsas.github.io/vipps-psp-api/#/Endpoints%20required%20by%20Vipps%20from%20the%20PSP/makePaymentSwaggerUsingPOST)
+[`POST:makePaymentURL`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
 callback.
 In the body of this callback, you will now also find a `userToken`.
 
-## The userToken
+### The userToken
 
 The user token is a token generated when the user has given a consent. This
 token is provided to the PSP in the makePayment callback when initializing or
@@ -599,10 +595,10 @@ The token also includes various useful information:
 }
 ```
 
-## Make the next recurring payment
+### Make the next recurring payment
 
 After initialisation, the next payment can be made by passing your `userToken`
-to the [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
+to the [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
 endpoint as a header with the name `User-Token`.
 
 ```json
@@ -623,6 +619,7 @@ HEADER: "
 ```
 
 Response with network token:
+
 ```json
 {
   "pspTransactionId": "7686f7788898767977",
@@ -640,6 +637,7 @@ Response with network token:
 ```
 
 Response with encryptedCard:
+
 ```json
 {
   "pspTransactionId": "7686f7788898767977",
@@ -650,16 +648,16 @@ Response with encryptedCard:
 ```
 
 Once the card data is received from
-[`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/processPaymentOnToken)
+[`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
 and the payment has been processed, the PSP must call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 to notify Vipps of the status. In this context, updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been received, the agreement will be locked from processing future payments until the update is received.
 If a recurring payment fails, you should call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 with `operationStatus: FAILED` set in the body.
 
-# URL Validation
+## URL Validation
 
 All URLs in Vipps eCommerce API are validated with the
 [Apache Commons UrlValidator](https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/routines/UrlValidator.html).
@@ -693,7 +691,7 @@ public class UrlValidate {
 }
 ```
 
-# HTTP responses
+## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
 
@@ -706,7 +704,7 @@ This API returns the following HTTP statuses in the responses:
 | `404 Not Found`     | The resource was not found  |
 | `500 Server Error`  | An internal Vipps problem                  |
 
-## Error codes
+### Error codes
 
 | errorCode        | errorMessage                               | Description |
 | ---------------- | ------------------------------------------ | ---|
@@ -724,11 +722,12 @@ This API returns the following HTTP statuses in the responses:
 | `123`        | Connected payment source not active for Agreement | The connected card is no longer active or valid |
 | `124`        | No Network token available for this Agreement | The connected card does not have a active network token available |
 
-# Recommendations regarding handling redirects
+## Recommendations regarding handling redirects
 
 Since Vipps is a mobile entity, the amount of control Vipps has over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
 
 Examples of some, but not all, factors outside of Vipps control.
+
 - Configurations set by the OS itself, for example the default browser.
 - User configurations of browsers.
 - Users closing app immediately upon purchase.
@@ -743,104 +742,6 @@ For demonstration purposes, an example that should be handled is:
 1. The Vipps app redirects the user.
 1. The OS defaults to a Safari Browser for the redirect.
 1. The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
-
-# PSP Signup API
-
-The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
-
-This API is the only way to sign up non-Norwegian merchants.
-
-The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
-
-![Payment Screen](./docs/signup/payment.png)
-
-![Receipt Screen](./docs/signup/receipt.png)
-
-Some details of information shown in the screenshots:
-
-| Item               | Description                                           |
-| ------------------ | ----------------------------------------------------- |
-| Merchant           | The name of the merchant's sale unit                  |
-| #23412             | Merchant serial number, the sale unit's id            |
-| Merchant AS        | The name of the merchant                              |
-| Product name       | The name of the product being paid for                |
-| Order ID / Description | The orderId, provided by the merchant             |
-| Transaction ID     | The internal Vipps id for the transaction             |
-| butikken.no        | Merchant website                                      |
-
-The API specification is available here:
-* [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup/)
-* [Swagger source](./docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
-
-A PSP can use their existing keys to access this APIs. They can perform the following:
-- List one or all merchants under them
-- Create a new merchant under them
-- Update an existing merchant
-
-## Get all merchants
-
-For a json response showing all the merchants and their information, send [`GET:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchants).
-
-## Get information about a specific merchant
-
-For information about a specific merchant, send
-[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchant). Supply the MSN for a merchant in your list of merchants.
-
-## Create a new merchant sale unit
-
-To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/addMerchant).
-
-## Update an existing merchant sale unit
-
-To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant).
-Provide the MSN for the merchant and update the details in the body section.
-
-
-
-
-
-
-
-
-
-
-# Proposals
-
-## Recurring 3DS Update Card
-
-The following is a proposal for triggering 3DS when a user changes the card attached to a PSP recurring agreement in the Vipps app.
-
-A new optional `updateCardUrl` property would be added to the initiate call. This callback will be triggered when the user changes card with the following request;
-
-```json
-HEADER: "
-        PSP-ID: C948DFD1546347568874C4DDC93A2E3C
-        Meerchant-Serial-Number: 123456
-        User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        "
-{
-  "agreementId": "7686f7788898767977",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
-}
-```
-
-To which the PSP should respond with a `require3DS` boolean flag which, if true, will cause a 3DS session to be hosted in the Vipps app.
-
-
-```json
-{
-  "require3DS": true,
-  "url3dSecure": "https://psp.com/3ds/123123"
-}
-```
-
-The Vipps app will the host a 3DS session from the PSP, once this session is completed
-the PSP should redirect to `https://www.vipps.no/mobileintercept`.
-
-Once the user completes the 3DS session the `updateCardUrl` will be called again.
-The PSP should then only approve or deny the request.
 
 ## Questions?
 
