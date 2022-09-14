@@ -1,7 +1,9 @@
+<!-- START_METADATA
 ---
 title: PSP Signup API Guide
 sidebar_position: 25
 ---
+END_METADATA -->
 
 # PSP Signup API
 
@@ -9,11 +11,16 @@ The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.
 
+The API specification is available here:
+
+* [OpenAPI](https://vippsas.github.io/vipps-developer-docs/api/psp-signup)
+* [Swagger source](./docs/signup/swagger.yaml)
+* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
 API version: 3.0
 
 Document version 1.0.0.
-
 
 <!-- START_TOC -->
 
@@ -49,13 +56,6 @@ Some details of information shown in the screenshots:
 | Order ID / Description | The orderId, provided by the merchant             |
 | Transaction ID     | The internal Vipps id for the transaction             |
 | butikken.no        | Merchant website                                      |
-
-The API specification is available here:
-
-* [OpenAPI](https://vippsas.github.io/vipps-developer-docs/api/psp-signup)
-* [Swagger source](./docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
 A PSP can use their existing keys to access this APIs. They can perform the following:
 
