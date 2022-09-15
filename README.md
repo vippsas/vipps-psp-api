@@ -5,7 +5,7 @@ sidebar_position: 1
 ---
 END_METADATA -->
 
-# Vipps PSP API version 3
+# Vipps PSP API
 
 This repository contains developer resources for the Vipps PSP API v3.
 
