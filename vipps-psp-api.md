@@ -5,7 +5,7 @@ sidebar_position: 20
 ---
 END_METADATA -->
 
-# Vipps PSP API v3
+# Vipps PSP API
 
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
 (eCommerce) via PSP offers functionality for payments

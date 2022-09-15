@@ -5,7 +5,7 @@ sidebar_position: 1
 ---
 END_METADATA -->
 
-# Vipps PSP API version 3
+# Vipps PSP API
 
 This repository contains developer resources for the Vipps PSP API v3.
 
@@ -24,15 +24,14 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## PSP API
 
-* [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
-* [Swagger](https://vippsas.github.io/vipps-psp-api) or  [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp): PSP API reference documentation
-* [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
+* [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
+* [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
+* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
 
 ## PSP Signup API
 
-* [PSP Signup API](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
-* [OpenAPI](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): PSP Signup API reference documentation.
-* [Swagger source](./docs/signup/swagger.yaml): OpenAPI Spec for the PSP Signup API.
+* [API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
+* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
 
 ## Examples
 
