@@ -24,15 +24,17 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## PSP API
 
-* [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
-* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp) or [Swagger UI](https://vippsas.github.io/vipps-psp-api): PSP API reference documentation
-* [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
+* [Guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
+* [Checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
+* [Specification](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
+* [Specification in Swagger](https://vippsas.github.io/vipps-psp-api): API specification displayed in Swagger UI.
 
 ## PSP Signup API
 
-* [PSP Signup API](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
-* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp-signup) or [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup): PSP Signup API reference documentation.
-* [Swagger source](./docs/signup/swagger.yaml): OpenAPI Spec for the PSP Signup API.
+* [Guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
+* [Specification](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
+* [Specification in Swagger](https://vippsas.github.io/vipps-psp-api/signup): API specification displayed in Swagger UI.
+* [Source](./docs/signup/swagger.yaml): OpenAPI specification source.
 
 ## Examples
 
