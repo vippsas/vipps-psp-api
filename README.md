@@ -25,13 +25,13 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 ## PSP API
 
 * [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
-* [Swagger](https://vippsas.github.io/vipps-psp-api) or  [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp): PSP API reference documentation
+* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp) or [Swagger UI](https://vippsas.github.io/vipps-psp-api): PSP API reference documentation
 * [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
 
 ## PSP Signup API
 
 * [PSP Signup API](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
-* [OpenAPI](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): PSP Signup API reference documentation.
+* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp-signup) or [Swagger UI](https://vippsas.github.io/vipps-psp-api/signup): PSP Signup API reference documentation.
 * [Swagger source](./docs/signup/swagger.yaml): OpenAPI Spec for the PSP Signup API.
 
 ## Examples

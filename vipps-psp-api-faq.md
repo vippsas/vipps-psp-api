@@ -38,7 +38,7 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 ## How can I check if a merchant or sale unit is active?
 
 You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
-[`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+[`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/initiatePaymentV3UsingPOST).
 
 If the merchant or sale unit is not active, you will get an error:
 "Merchant not available or active".
@@ -50,7 +50,7 @@ This is similar to the error in the eCom API. See the eCom FAQ:
 
 Every operation done to a transaction after it has been processed should be
 updated to our
-[Update status endpoint](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+[Update status endpoint](https://vippsas.github.io/vipps-psp-api/#/Vipps%20PSP%20API/updatestatusUsingPOST).
 This includes partial refunds, captures etc. This is critical for support work
 and user experience. This goes both for the single payment flow and for recurring payments.
 

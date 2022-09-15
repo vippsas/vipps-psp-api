@@ -65,20 +65,20 @@ A PSP can use their existing keys to access this APIs. They can perform the foll
 
 ## Get all merchants
 
-For a json response showing all the merchants and their information, send [`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
+For a json response showing all the merchants and their information, send [`GET:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchants).
 
 ## Get information about a specific merchant
 
 For information about a specific merchant, send
-[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant). Supply the MSN for a merchant in your list of merchants.
+[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/getMerchant). Supply the MSN for a merchant in your list of merchants.
 
 ## Create a new merchant sale unit
 
-To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
+To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/addMerchant).
 
 ## Update an existing merchant sale unit
 
-To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
+To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-psp-api/signup/#/Merchant/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
 
 ## Proposals

@@ -14,26 +14,21 @@ and [environment](./tools/vipps-psp-v3-api-postman-environment.json).
 
 ## Checklist for Full integration
 
-- [ ] Integrate _all_ the [API endpoints](https://vippsas.github.io/vipps-developer-docs/api/psp)
-    - [ ] [`POST:/v3/psppayments/init`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST)
-    - [ ] [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
-    - [ ] [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
-    - [ ] On the merchant side, be able to process EMVCo tokens: [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
-    - [ ] For recurring only(Currently on freeze pending PSD2 migration): [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
-    - [ ] For recurring only (Currently on freeze pending PSD2 migration): [`DELETE:/v3/psppayments/agreements`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/deletePSPPaymenAgreementUsingDELETE)
-- [ ] Respond with correct error information to [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST). See [error codes list](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes) for possible responses.
-- [ ] Support soft decline, or handle step ups according to our [3DS specifications](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca)
-- [ ] Avoid Integration pitfalls
-    - [ ] The PSP _must not_ rely on `pspRedirectUrl` alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
-    - [ ] The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
-    - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
+- [ ] Integrate _all_ the [API endpoints](https://vippsas.github.io/vipps-psp-api/)
+    - [ ] [`POST:/v3/psppayments/init`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/initiatePaymentV2UsingPOST)
+    - [ ] [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST)
+    - [ ] [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/getPSPPaymentDetailsUsingGET)
+    - [ ] On the merchant side, be able to process EMVCo tokens: [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST)
+    - [ ] For recurring only(Currently on freeze pending PSD2 migration): [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/processPaymentOnToken)
+    - [ ] For recurring only (Currently on freeze pending PSD2 migration): [`DELETE:/v3/psppayments/agreements`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/deletePSPPaymenAgreementUsingDELETE)
+- [ ] Respond with correct error information to [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-psp-api/#/Endpoints_required_by_Vipps_from_the_PSP/makePaymentSwaggerUsingPOST). See [error codes list](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#error-codes) for possible responses.
 
 ## Live flow
 
 1. The PSP completes all checklist items.
 2. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
-    - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
-    - A complete order including `Cancel`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+    - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
+    - A complete order including `Cancel`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-psp-api/#/Vipps_PSP_API/updatestatusUsingPOST).
     - One ID for each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#errors).
         - Some codes like 85 aren't applicable for all systems, please provide short description for why each code does not apply.
 3. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment:
