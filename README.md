@@ -24,7 +24,7 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## PSP API
 
-* [Guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
+* [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
 * [Checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
 
