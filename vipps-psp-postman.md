@@ -38,11 +38,12 @@ Import the collection by following the steps below:
    - `client_id` - Merchant key is required for getting the access token.
    - `client_secret` - Merchant key is required for getting the access token.
    - `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
-   - `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
-   - `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`
    - `customerMobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
-   - `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
+   - `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
+   - `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
    - `merchantSerialNumber` - Required for `Get Merchant by MSN`.
+   - `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
+   - `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
 
 Note that the calls in this PSP API require your PSP subscription key.
 
