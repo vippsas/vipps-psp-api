@@ -24,18 +24,16 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## PSP API
 
+* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
 * [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
 * [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
 
 ## PSP Signup API
 
-* [API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
+* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
+* [Signup API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
-
-## Examples
-
-* [Postman guide](vipps-psp-api-quick-start.md): Step-by-step guide for using the PSP API and PSP Signup API Postman collection of examples.
 
 ## Questions?
 
