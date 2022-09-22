@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: V2 Deprecation
+title: PSP V2 Deprecation
 sidebar_position: 100
 ---
 END_METADATA -->
