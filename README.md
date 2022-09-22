@@ -35,7 +35,7 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## Examples
 
-* [Postman guide](vipps-psp-postman.md): Step-by-step guide for using the PSP API and PSP Signup API Postman collection of examples.
+* [Postman guide](vipps-psp-api-quick-start.md): Step-by-step guide for using the PSP API and PSP Signup API Postman collection of examples.
 
 ## Questions?
 

@@ -37,7 +37,7 @@ These OpenAPI representations may be useful to get a quick overview:
 API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
 [Checklist](vipps-psp-api-checklist.md),
 [FAQ](vipps-psp-api-faq.md),
-[Postman Guide](vipps-psp-postman.md)
+[Postman Guide](vipps-psp-api-quick-start.md)
 
 API version: 3.0
 
