@@ -12,28 +12,29 @@ END_METADATA -->
 ## Table of Contents
 
 * [Postman](#postman)
+  * [Prerequisites](#prerequisites)
   * [Step 1: Get the Postman collection](#step-1-get-the-postman-collection)
   * [Step 2: Import the Postman environment](#step-2-import-the-postman-environment)
   * [Step 3: Set up Postman environment](#step-3-set-up-postman-environment)
 * [Make API calls](#make-api-calls)
-  * [A regular eCommerce payment](#a-regular-ecommerce-payment)
-  * [An express checkout payment (*Vipps Hurtigkasse*)](#an-express-checkout-payment-vipps-hurtigkasse)
-  * [Getting access to user info](#getting-access-to-user-info)
-  * [Generating a QR code to the Vipps landing page](#generating-a-qr-code-to-the-vipps-landing-page)
+  * [PSP Payments and details](#psp-payments-and-details)
+  * [PSP Merchant Sign up](#psp-merchant-sign-up)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
 
-Document version 1.0.2.
+Document version 1.0.3.
 
 ## Postman
 
-[Postman](https://www.getpostman.com/) is a common tool for working with REST APIs.
-We offer a [Postman Collection](https://www.getpostman.com/collection) to make development easier.
-See the [Postman documentation](https://www.getpostman.com/docs/) for more information about using Postman.
+### Prerequisites
 
-By following the steps below, you can make calls to all the
-endpoints, and see the full `request` and `response` for each call.
+* If you are not familiar with Postman, review
+[Getting started with Postman](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides#getting-started-with-postman).
+
+* You will need a merchant test account.
+If you haven't already set this up, see
+[Test Merchants](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-test-environment#test-merchants).
 
 ### Step 1: Get the Postman collection
 
@@ -76,13 +77,13 @@ See the
 [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp)
 for details about the calls.
 
-### PSP Payment tests
+### PSP Payments and details
 
 1. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
 2. Send request  `Get Details` for details about the transaction. See [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET).
 3. Send request `Update Status`. This is an example of what the PSP sends Vipps to update on the status of the payment. See [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
 
-### PSP Merchant Signup tests
+### PSP Merchant Sign up
 
 1. Send `Get all Merchants` for a json response showing all the merchants and their information. See [`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
 2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants. See [`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant).
