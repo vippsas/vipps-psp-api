@@ -7,49 +7,16 @@ END_METADATA -->
 
 # Vipps PSP API
 
-[Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
-(eCommerce) via PSP offers functionality for payments
-where the end user simply enters their Norwegian mobile number
-to complete a payment in the Vipps app.
-
-In the Vipps app, the user selects a payment card (a payment source).
-Vipps then gives the PSP a token for that card so the PSP can process the payment.
-
-The PSP processes the payment, provides feedback to merchant,
-and sends Vipps an update of the payment transaction success or failure.
-The user is shown the correct status for the payment in Vipps.
-
-Since January 1, 2021, all PSPs must be able to process network tokens.
-See the
-[EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
-for more information.
-
-**Important:** Cards that were added to Vipps after January 1, 2021 are only enrolled with
-Vipps' new PSP. That means Vipps is only able to provide a token for those
-cards, not the card details. If you are not able to process tokens, you should respond with
-`HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
-
-These OpenAPI representations may be useful to get a quick overview:
-
-* [Swagger](https://vippsas.github.io/vipps-psp-api)
-* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/psp)
-
-API details: [Github Repository](https://github.com/vippsas/vipps-psp-api),
-[Checklist](vipps-psp-api-checklist.md),
-[FAQ](vipps-psp-api-faq.md),
-[Postman Guide](vipps-psp-api-quick-start.md)
+Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.2.0.
+Document version 3.2.1.
 
 <!-- START_TOC -->
 
 ## Table of Contents
 
-- [Differences from previous versions](#differences-from-previous-versions)
-  - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
-  - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
 - [PSP payment sequence](#psp-payment-sequence)
 - [API overview](#api-overview)
   - [Authentication](#authentication)
@@ -84,33 +51,36 @@ Document version 3.2.0.
 - [HTTP responses](#http-responses)
   - [Error codes](#error-codes)
 - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
+- [Differences from previous versions](#differences-from-previous-versions)
+  - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
+  - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
 - [Questions?](#questions)
 
 <!-- END_TOC -->
 
-## Differences from previous versions
+## How it works
 
-### Differences from PSP API v2 to v3
+[Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett)
+(eCommerce) via PSP offers functionality for payments
+where the user simply enters their Norwegian mobile number
+to complete a payment in the Vipps app.
 
-The PSP API v3 adds functionality for network tokens and allows PSPs to use the API to
-obtain tokens from Vipps, not the actual card details.
+In the Vipps app, the user selects a payment card (a payment source).
+Vipps then gives the PSP a token for that card so the PSP can process the payment.
 
-Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
+The PSP processes the payment, provides feedback to merchant,
+and sends Vipps an update of the payment transaction success or failure.
+The user is shown the correct status for the payment in Vipps.
 
-Values for this enum have changed accordingly:
-| Old Value | New Value |
-|-----------|-----------|
-| Yes | ACCEPTED |
-|TIMEOUT| TIMEOUT|
-|CANCEL| USER_CANCEL|
-|NO| USER_CANCEL|
+All PSPs must be able to process network tokens.
+See the
+[EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
+for more information.
 
-### Differences from PSP API v1 to v2
-
-* Added support for redirection of user after payment completion in the Vipps app
-* Added support for providing the `makePaymentUrl` in the initiate payment call
-* Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
-* Improved and more consistent parameter names in the API
+**Important:** Cards that were added to Vipps after January 1, 2021 are only enrolled with
+Vipps' new PSP. That means Vipps is only able to provide a token for those
+cards, not the card details. If you are not able to process tokens, you should respond with
+`HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
 
 ## PSP payment sequence
 
@@ -742,6 +712,32 @@ For demonstration purposes, an example that should be handled is:
 1. The Vipps app redirects the user.
 1. The OS defaults to a Safari Browser for the redirect.
 1. The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
+
+
+## Differences from previous versions
+
+### Differences from PSP API v2 to v3
+
+The PSP API v3 adds functionality for network tokens and allows PSPs to use the API to
+obtain tokens from Vipps, not the actual card details.
+
+Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePaymentRequest.paymentState`
+
+Values for this enum have changed accordingly:
+
+| Old Value | New Value |
+|-----------|-----------|
+| Yes | ACCEPTED |
+|TIMEOUT| TIMEOUT|
+|CANCEL| USER_CANCEL|
+|NO| USER_CANCEL|
+
+### Differences from PSP API v1 to v2
+
+* Added support for redirection of user after payment completion in the Vipps app
+* Added support for providing the `makePaymentUrl` in the initiate payment call
+* Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
+* Improved and more consistent parameter names in the API
 
 ## Questions?
 

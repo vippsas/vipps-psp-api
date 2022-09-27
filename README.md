@@ -7,9 +7,8 @@ END_METADATA -->
 
 # Vipps PSP API
 
-This repository contains developer resources for the Vipps PSP API v3.
-
-Vipps does not handle the settlements for PSP integrations. These are handled by the PSP.
+Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments, get details about PSP payments, or update their status.
+In addition, you can use the PSP Signup API to get information about merchant sale units or create new sale units.
 
 <!-- START_COMMENT -->
 
