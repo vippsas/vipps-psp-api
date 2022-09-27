@@ -53,15 +53,15 @@ Save the following files to your computer:
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
 3. Fill in the `Current Value` for the following fields to get started.
-   - `client_id` - Merchant key is required for getting the access token.
-   - `client_secret` - Merchant key is required for getting the access token.
-   - `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
-   - `customerMobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
-   - `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
-   - `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
-   - `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
-   - `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
-   - `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
+   * `client_id` - Merchant key is required for getting the access token.
+   * `client_secret` - Merchant key is required for getting the access token.
+   * `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
+   * `customerMobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
+   * `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
+   * `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
+   * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
+   * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
+   * `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
 
 Note that the calls in this PSP API require your PSP subscription key.
 
