@@ -16,8 +16,8 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Postman collection](#step-1-get-the-postman-collection)
-  * [Step 2: Import the Postman environment](#step-2-import-the-postman-environment)
+  * [Step 1: Get the Vipps Postman collection and environment](#step-1-get-the-vipps-postman-collection-and-environment)
+  * [Step 2: Import the Vipps Postman files](#step-2-import-the-vipps-postman-files)
   * [Step 3: Set up Postman environment](#step-3-set-up-postman-environment)
 * [Make API calls](#make-api-calls)
   * [PSP Payments and details](#psp-payments-and-details)
@@ -26,30 +26,27 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 <!-- END_TOC -->
 
-Document version 1.0.3.
+Document version 1.0.4.
 
 ## Postman
 
 ### Prerequisites
 
-* If you are not familiar with Postman, review
-[Getting started with Postman](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides#getting-started-with-postman).
+Review
+[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides) for information about getting your test environment set up.
 
-* You will need a merchant test account.
-If you haven't already set this up, see
-[Test Merchants](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-test-environment#test-merchants).
+### Step 1: Get the Vipps Postman collection and environment
 
-### Step 1: Get the Postman collection
+Save the following files to your computer:
 
-Import the collection by following the steps below:
+* [Vipps PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [Vipps PSP API Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
 
-1. Click `Import` in the upper-left corner.
-2. Import the [vipps-psp-v3-api-postman-collection.json](./tools/vipps-psp-v3-api-postman-collection.json) file.
+### Step 2: Import the Vipps Postman files
 
-### Step 2: Import the Postman environment
-
-1. Click `Import` in the upper-left corner.
-2. Import the [vipps-psp-v3-api.postman_environment.json](./tools/vipps-psp-v3-api-postman-environment.json) file.
+1. In Postman, click *Import* in the upper-left corner.
+1. In the dialog that opens, with *File* selected, click *Upload Files*.
+1. Select the two files you have just downloaded and click *Import*.
 
 ### Step 3: Set up Postman environment
 
@@ -60,9 +57,9 @@ Import the collection by following the steps below:
    - `client_secret` - Merchant key is required for getting the access token.
    - `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
    - `customerMobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
+   - `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
    - `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
    - `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
-   - `merchantSerialNumber` - Required for `Get Merchant by MSN`.
    - `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
    - `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
 
