@@ -7,6 +7,9 @@ END_METADATA -->
 
 # Quick start
 
+Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
+Use the PSP Merchant Signup API to get information about merchants, create a new sale unit, or update the sale unit details.
+
 <!-- START_TOC -->
 
 ## Table of Contents
@@ -70,9 +73,7 @@ Note that the calls in this PSP API require your PSP subscription key.
 For all of the following, you will start by sending request `Get Access Token`.
 This provides you with access to the API.
 
-   The access token is valid for 1 hour in the test environment
-   and 24 hours in the production environment.
-
+The access token is valid for 1 hour in the test environment and 24 hours in the production environment.
 See the
 [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp)
 for details about the calls.
