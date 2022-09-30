@@ -26,14 +26,14 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 <!-- END_TOC -->
 
-Document version 1.0.4.
+Document version 1.0.5.
 
 ## Postman
 
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides) for information about getting your test environment set up.
+[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md) for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment
 
@@ -56,7 +56,7 @@ Save the following files to your computer:
    * `client_id` - Merchant key is required for getting the access token.
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
-   * `customerMobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
+   * `mobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
    * `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
    * `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
    * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
