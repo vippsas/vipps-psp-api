@@ -31,7 +31,7 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
 ## Live flow
 
 1. The PSP completes all checklist items.
-2. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
+2. The PSP [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md), showing that all checklist items have been fulfilled.
     - A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
     - A complete order including `Cancel`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
     - One ID for each of the [error codes](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#errors).
