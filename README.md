@@ -2,6 +2,7 @@
 ---
 title: Introduction
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 END_METADATA -->
 
@@ -9,6 +10,9 @@ END_METADATA -->
 
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 In addition, you can use the PSP Signup API to get information about merchant sale units or create new sale units.
+
+For product information in Norwegian, see
+[Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
 <!-- START_COMMENT -->
 
@@ -26,6 +30,7 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 * [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
 * [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
 * [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
+* [API FAQ](vipps-psp-api-faq.md): Questions and answers.
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
 
 ## PSP Signup API
@@ -35,12 +40,6 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
 
 ## Questions?
-
-For more information, see:
-
-* [Frequently Asked Questions](vipps-psp-api-faq.md): Questions and answers.
-
-* [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2): Product information, in Norwegian.
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
