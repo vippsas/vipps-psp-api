@@ -11,16 +11,12 @@ The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.
 
-The API specification is available here:
-
-* [OpenAPI](https://vippsas.github.io/vipps-developer-docs/api/psp-signup)
-* [Swagger source](./docs/signup/swagger.yaml)
-* [Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Postman environment](tools/vipps-psp-v3-api-postman-environment.json)
+The API specification is available at:
+[PSP Signup API Reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup).
 
 API version: 3.0
 
-Document version 1.0.0.
+Document version 1.0.1.
 
 <!-- START_TOC -->
 
