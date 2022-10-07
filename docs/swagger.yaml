@@ -1,7 +1,6 @@
 openapi: 3.0.0
 info:
   description: |
-
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. See the
     [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/)
@@ -10,7 +9,7 @@ info:
   title: PSP API v3
   contact:
     name: Vipps AS
-    url: https://github.com/vippsas/vipps-developers
+    url: https://vippsas.github.io/vipps-developer-docs/
 tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
@@ -381,7 +380,7 @@ components:
       required: true
       schema:
         type: string
-        default: eyJhbGciOiJSUzI1NiIsInR5cCI6I <truncated>
+        default: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
       name: Merchant-Serial-Number
       in: header
       description: >-
@@ -429,7 +428,7 @@ components:
       required: true
       schema:
         type: string
-        default: eyJhbGciOiJSUzI1NiIsInR5cCI6I <truncated>
+        default: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
@@ -578,7 +577,7 @@ components:
         userToken:
           description: JWT-TOKEN
           type: string
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6I <truncated>
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
         binNumber:
           description: Bin number for the card
           type: string

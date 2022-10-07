@@ -1,12 +1,12 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.1.4"
+  version: "1.1.5"
   description: >
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
     name: Vipps AS
-    url: 'https://github.com/vippsas/vipps-developers'
+    url: 'https://vippsas.github.io/vipps-developer-docs/'
 tags:
   - name: Merchant
     description: Merchants
@@ -172,24 +172,28 @@ parameters:
     minLength: 5
     maxLength: 6
     pattern: '^\d{5,6}$'
+    example: 123456
   auth:
     name: Authorization
     in: header
     required: true
     description: Bearer 'auth token'
     type: string
+    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
   apimKey:
     name: Ocp-Apim-Subscription-Key
     in: header
     description: Subscription key for the PSP Signup API
     required: true
     type: string
+    example: 0f14ebcab0ec4b29ae0cb90d91b4a84a
   idempotency:
     name: Idempotency-Key
     in: header
     description: Unique key for idempotent operation
     required: true
     type: string
+    example: you-can-choose-this
 definitions:
   Merchant:
     description: Details of a merchant
@@ -334,7 +338,7 @@ definitions:
           Square images are recommended.
           The longest side can not be more than 1000 pixels.
           The minimum size is 100 x 100 pixels.
-        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
