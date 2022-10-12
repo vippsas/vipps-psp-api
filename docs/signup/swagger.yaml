@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.1.5"
+  version: "1.1.6"
   description: >
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
@@ -211,7 +211,15 @@ definitions:
         maxLength: 50
         x-order: 1
         example: "123456789"
-        description: "Organization number of the merchant, in the corret format for the organization's country. For Norway: 9 digits without spaces."
+        description: >-
+          Organization number of the merchant, in the corret format for the
+          organization's country.
+          For Norway: The orgno must be 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
+          and the orgno must be for the main entity ("hovedenhet"),
+          not a sub entity ("underenhet").
+          For other countries: The orgno, address, etc is validated as much
+          as practically possible.
       companyName:
         type: string
         x-order: 2
@@ -312,7 +320,15 @@ definitions:
         maxLength: 50
         x-order: 1
         example: "123456789"
-        description: "Organization number of the merchant, in the corret format for the organization's country. For Norway: 9 digits without spaces."
+        description: >-
+          Organization number of the merchant, in the corret format for the
+          organization's country.
+          For Norway: The orgno must be 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
+          and the orgno must be for the main entity ("hovedenhet"),
+          not a sub entity ("underenhet").
+          For other countries: The orgno, address, etc is validated as much
+          as practically possible.
       name:
         type: string
         maxLength: 200
