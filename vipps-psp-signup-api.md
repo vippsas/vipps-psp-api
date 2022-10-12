@@ -64,11 +64,63 @@ A PSP can use its existing keys to access this API, and perform the following:
 For a JSON response showing all the merchants and their information, send
 [`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
 
+Example response (see the API specification for details):
+
+```json
+{
+   "merchants":[
+      {
+         "organizationNumber":"123456789",
+         "companyName":"Vipps AS",
+         "companyEmail":"user@example.com",
+         "merchantSerialNumber":"123456",
+         "name":"Example AS",
+         "mccCode":"5411",
+         "status":"ACTIVE",
+         "logoUrl":"https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png",
+         "email":"user@example.com",
+         "website":"https://example.com",
+         "createdAt":"2019-01-01T00:00:00Z",
+         "updatedAt":"2019-01-01T00:00:00Z",
+         "address":{
+
+         }
+      }
+   ]
+}
+```
+
 ## Get information about a specific merchant
 
 For information about a specific merchant, send
 [`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant).
 Supply the MSN for a merchant in your list of merchants.
+
+Example response (see the API specification for details):
+
+```json
+{
+   "organizationNumber":"123456789",
+   "companyName":"Vipps AS",
+   "companyEmail":"user@example.com",
+   "merchantSerialNumber":"123456",
+   "name":"Example AS",
+   "mccCode":"5411",
+   "status":"ACTIVE",
+   "logoUrl":"https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png",
+   "email":"user@example.com",
+   "website":"https://example.com",
+   "createdAt":"2019-01-01T00:00:00Z",
+   "updatedAt":"2019-01-01T00:00:00Z",
+   "address":{
+      "addressLine1":"Robert Levins gate 5",
+      "addressLine2":"Att: Rune Garborg",
+      "city":"Oslo",
+      "postCode":"0154",
+      "country":"NO"
+   }
+}
+```
 
 ## Create a new merchant sale unit
 
@@ -81,6 +133,28 @@ and the orgno must be for the main entity ("hovedenhet"),
 not a sub entity ("underenhet").
 For other countries: The orgno, address, etc is validated as much
 as practically possible.
+
+Example request (see the API specification for details):
+
+```json
+{
+   "organizationNumber":"123456789",
+   "name":"Example AS",
+   "mccCode":"5411",
+   "logo":"VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)",
+   "email":"user@example.com",
+   "website":"https://example.com",
+   "address":{
+      "addressLine1":"Robert Levins gate 5",
+      "addressLine2":"Att: Rune Garborg",
+      "city":"Oslo",
+      "postCode":"0154",
+      "country":"NO"
+   },
+   "companyName":"Vipps AS",
+   "companyEmail":"user@example.com"
+}
+```
 
 ## Update an existing merchant sale unit
 
