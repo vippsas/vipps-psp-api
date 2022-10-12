@@ -16,7 +16,7 @@ The API specification is available at:
 
 API version: 3.0
 
-Document version 1.0.1.
+Document version 1.0.2.
 
 <!-- START_TOC -->
 
@@ -71,6 +71,10 @@ For information about a specific merchant, send
 ## Create a new merchant sale unit
 
 To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
+
+The merchant must be active in
+[Brønnøysundregistrene](https://www.brreg.no)
+and the orgno. must be for the main entity ("hovedenhet"), not a sub entity ("underenhet").
 
 ## Update an existing merchant sale unit
 
