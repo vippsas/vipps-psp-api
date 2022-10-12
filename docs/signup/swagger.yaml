@@ -213,9 +213,9 @@ definitions:
         example: "123456789"
         description: >-
           Organization number of the merchant, in the corret format for the
-          organization's country. For Norway: 9 digits without spaces.
-          The merchant must be active in
-          [Brønnøysundregistrene](https://www.brreg.no)
+          organization's country.
+          For Norway: The orgno is 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
           and the orgno. must be for the main entity ("hovedenhet"),
           not a sub entity ("underenhet").
       companyName:
@@ -320,9 +320,9 @@ definitions:
         example: "123456789"
         description: >-
           Organization number of the merchant, in the corret format for the
-          organization's country. For Norway: 9 digits without spaces.
-          The merchant must be active in
-          [Brønnøysundregistrene](https://www.brreg.no)
+          organization's country.
+          For Norway: The orgno is 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
           and the orgno. must be for the main entity ("hovedenhet"),
           not a sub entity ("underenhet").
       name:
