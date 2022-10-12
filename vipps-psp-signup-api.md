@@ -72,9 +72,12 @@ For information about a specific merchant, send
 
 To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
 
-The merchant must be active in
-[Brønnøysundregistrene](https://www.brreg.no)
-and the orgno. must be for the main entity ("hovedenhet"), not a sub entity ("underenhet").
+For Norway: The orgno must be 9 digits without spaces, the merchant
+must be active in [Brønnøysundregistrene](https://www.brreg.no)
+and the orgno must be for the main entity ("hovedenhet"),
+not a sub entity ("underenhet").
+For other countries: The orgno, address, etc is validated as much
+as practically possible.
 
 ## Update an existing merchant sale unit
 
