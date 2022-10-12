@@ -53,24 +53,27 @@ Some details of information shown in the screenshots:
 | Transaction ID     | The internal Vipps id for the transaction             |
 | butikken.no        | Merchant website                                      |
 
-A PSP can use their existing keys to access this APIs. They can perform the following:
+A PSP can use its existing keys to access this API, and perform the following:
 
-- List one or all merchants under them
-- Create a new merchant under them
-- Update an existing merchant
+* List one or all merchants under them
+* Create a new merchant under them
+* Update an existing merchant
 
 ## Get all merchants
 
-For a json response showing all the merchants and their information, send [`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
+For a JSON response showing all the merchants and their information, send
+[`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
 
 ## Get information about a specific merchant
 
 For information about a specific merchant, send
-[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant). Supply the MSN for a merchant in your list of merchants.
+[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant).
+Supply the MSN for a merchant in your list of merchants.
 
 ## Create a new merchant sale unit
 
-To create new merchant sale unit, send [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
+To create new merchant sale unit, send
+[`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
 
 For Norway: The orgno must be 9 digits without spaces, the merchant
 must be active in [Brønnøysundregistrene](https://www.brreg.no)
@@ -81,7 +84,8 @@ as practically possible.
 
 ## Update an existing merchant sale unit
 
-To update a merchant sale unit, send [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
+To update a merchant sale unit, send
+[`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
 
 ## Proposals
@@ -90,21 +94,28 @@ Provide the MSN for the merchant and update the details in the body section.
 
 The following is a proposal for triggering 3DS when a user changes the card attached to a PSP recurring agreement in the Vipps app.
 
-A new optional `updateCardUrl` property would be added to the initiate call. This callback will be triggered when the user changes card with the following request;
+A new optional `updateCardUrl` property would be added to the initiate call.
+This callback will be triggered when the user changes card with the following request;
+
+HTTP headers:
+
+```
+PSP-ID: C948DFD1546347568874C4DDC93A2E3C
+Merchant-Serial-Number: 123456
+User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+Request body:
 
 ```json
-HEADER: "
-        PSP-ID: C948DFD1546347568874C4DDC93A2E3C
-        Merchant-Serial-Number: 123456
-        User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        "
 {
   "agreementId": "7686f7788898767977",
   "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
 }
 ```
 
-To which the PSP should respond with a `require3DS` boolean flag which, if true, will cause a 3DS session to be hosted in the Vipps app.
+To which the PSP should respond with a `require3DS` boolean flag which, if true,
+will cause a 3DS session to be hosted in the Vipps app.
 
 ```json
 {
