@@ -22,26 +22,47 @@ Document version 1.0.2.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Get all merchants](#get-all-merchants)
-- [Get information about a specific merchant](#get-information-about-a-specific-merchant)
-- [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
-- [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
-- [Proposals](#proposals)
-  - [Recurring 3DS Update Card](#recurring-3ds-update-card)
-- [Questions?](#questions)
+* [Introduction](#introduction)
+* [Information shown in Vipps](#information-shown-in-vipps)
+  * [The payment screen](#the-payment-screen)
+  * [The recept screen](#the-recept-screen)
+  * [Details about each item](#details-about-each-item)
+* [Get all merchants](#get-all-merchants)
+* [Get information about a specific merchant](#get-information-about-a-specific-merchant)
+* [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
+* [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
+* [Proposals](#proposals)
+  * [Recurring 3DS Update Card](#recurring-3ds-update-card)
+* [Questions?](#questions)
 
 <!-- END_TOC -->
 
 ## Introduction
 
-The following are the screens in the Vipps app, where the information about the merchant that was provided by the PSP is rendered to the end user.
+A PSP can use its existing API keys to access this API, and perform the following:
+
+* List one or all merchants under them
+* Create a new merchant under them
+* Update an existing merchant
+
+See the
+[PSP API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-api)
+for more.
+
+## Information shown in Vipps
+
+The following are the screens in the Vipps app, where the information about
+the merchant that was provided by the PSP is rendered to the end user.
+
+### The payment screen
 
 ![Payment Screen](./docs/signup/payment.png)
 
+### The recept screen
+
 ![Receipt Screen](./docs/signup/receipt.png)
 
-Some details of information shown in the screenshots:
+### Details about each item
 
 | Item               | Description                                           |
 | ------------------ | ----------------------------------------------------- |
@@ -52,12 +73,6 @@ Some details of information shown in the screenshots:
 | Order ID / Description | The orderId, provided by the merchant             |
 | Transaction ID     | The internal Vipps id for the transaction             |
 | butikken.no        | Merchant website                                      |
-
-A PSP can use its existing keys to access this API, and perform the following:
-
-* List one or all merchants under them
-* Create a new merchant under them
-* Update an existing merchant
 
 ## Get all merchants
 

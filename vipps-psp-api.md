@@ -1,4 +1,4 @@
-## <!-- START_METADATA
+<!-- START_METADATA
 
 title: PSP API Guide
 sidebar_position: 20
