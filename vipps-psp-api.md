@@ -1,10 +1,8 @@
 <!-- START_METADATA
-
+---
 title: PSP API Guide
 sidebar_position: 20
-
 ---
-
 END_METADATA -->
 
 # Vipps PSP API
