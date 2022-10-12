@@ -16,7 +16,7 @@ The API specification is available at:
 
 API version: 3.0
 
-Document version 1.0.2.
+Document version 1.0.3.
 
 <!-- START_TOC -->
 
@@ -26,7 +26,6 @@ Document version 1.0.2.
 * [Information shown in Vipps](#information-shown-in-vipps)
   * [The payment screen](#the-payment-screen)
   * [The recept screen](#the-recept-screen)
-  * [Details about each item](#details-about-each-item)
 * [Get all merchants](#get-all-merchants)
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
 * [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
@@ -54,16 +53,6 @@ for more.
 The following are the screens in the Vipps app, where the information about
 the merchant that was provided by the PSP is rendered to the end user.
 
-### The payment screen
-
-![Payment Screen](./docs/signup/payment.png)
-
-### The recept screen
-
-![Receipt Screen](./docs/signup/receipt.png)
-
-### Details about each item
-
 | Item               | Description                                           |
 | ------------------ | ----------------------------------------------------- |
 | Merchant           | The name of the merchant's sale unit                  |
@@ -73,6 +62,14 @@ the merchant that was provided by the PSP is rendered to the end user.
 | Order ID / Description | The orderId, provided by the merchant             |
 | Transaction ID     | The internal Vipps id for the transaction             |
 | butikken.no        | Merchant website                                      |
+
+### The payment screen
+
+![Payment Screen](./docs/signup/payment.png)
+
+### The recept screen
+
+![Receipt Screen](./docs/signup/receipt.png)
 
 ## Get all merchants
 
