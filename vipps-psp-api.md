@@ -1,8 +1,10 @@
-<!-- START_METADATA
----
+## <!-- START_METADATA
+
 title: PSP API Guide
 sidebar_position: 20
+
 ---
+
 END_METADATA -->
 
 # Vipps PSP API
@@ -100,10 +102,10 @@ then do "capture" when the goods have been shipped/delivered.
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
 
-| Header Name | Header Value | Description |
-| ----------- | ------------ | ----------- |
-| `Authorization` | `Bearer <JWT access token>` | Type: Authorization token. This is available on [portal.vipps.no](https://portal.vipps.no). |
-| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
+| Header Name                 | Header Value                | Description                                                                                         |
+| --------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------- |
+| `Authorization`             | `Bearer <JWT access token>` | Type: Authorization token. This is available on [portal.vipps.no](https://portal.vipps.no).         |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string      | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
 
 For more information about how to obtain an access token and all details around this, please see:
 [Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
@@ -115,8 +117,8 @@ in the
 When a user chooses Vipps as the payment method, a payment request is initiated
 by the PSP to the Vipps API. Vipps creates the payment and returns a link that does the following:
 
-* For users on a mobile device, the Vipps app is opened.
-* For other users, the Vipps landing page is opened in a browser.  The user can then enter their phone number and continue in the Vipps app on their phone.
+- For users on a mobile device, the Vipps app is opened.
+- For other users, the Vipps landing page is opened in a browser. The user can then enter their phone number and continue in the Vipps app on their phone.
 
 The user then confirms the payment in Vipps.
 
@@ -171,10 +173,10 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 
 **Please note:**
 
-* The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
+- The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
   Vipps will mark the transaction as failed. This is a known issue with the current API.
   Future improvements to address this issue are planned.
-* Some users may close Vipps immediately after seeing the payment confirmation,
+- Some users may close Vipps immediately after seeing the payment confirmation,
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
   merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
 
@@ -183,21 +185,21 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 If the payment is initiated in a native app, it is possible to explicitly force
 a `vipps://` URL by sending the optional `isApp` parameter in the initiate call:
 
-* `"isApp": false` (or not sent at all): The URL is `https://`, which handles
+- `"isApp": false` (or not sent at all): The URL is `https://`, which handles
   everything automatically for you.
   The phone's operating system will know, through "universal linking", that
   the `https://api.vipps.no` URL should open the Vipps app, and not the default
   web browser.
   **Please note:** In some cases, this requires the user to approve that
   Vipps is opened, but this is usually only the first time.
-* `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
+- `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
   **Please note:** In our test environment (MT), the scheme is `vippsMT://`
 
 If the user does not have Vipps installed:
 
-* `"isApp":false` (or not sent at all): The Vipps landing page will be shown,
-   and the user can enter a phone number and pay on a device with Vipps installed.
-* `"isApp": true`: The user will get an error message saying that the link can
+- `"isApp":false` (or not sent at all): The Vipps landing page will be shown,
+  and the user can enter a phone number and pay on a device with Vipps installed.
+- `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
 ### EMVCo Token processing
@@ -250,8 +252,8 @@ Authorization: makePaymentToken
 
 Where:
 
-* `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
-* `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
+- `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
+- `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
 
 #### Scheme specific details
 
@@ -300,17 +302,17 @@ Any request to the Vipps PSP API will return a Visa Token. However, this can be 
 by setting the amount in the init request. No matter what is selected in the app,
 the Token returned in the MakePayment request will be:
 
-| Amount Value | Token Number | Expiry | Cryptogram
-|-----------|-----------|-----|-----|
-| 22.00 | 5226603115488031 | 05/25 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
-| 31.00 | Emulates Card not eligible |
-| 32.00 | 4111111111111111 | 03/30 | uxToh3Ep6gsR8AAkvZALN19Iz34=
-| 42.00 | 4895370013193500 | 03/30 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
-| 43.00 | 5226603115488031 | 03/30 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
-| 44.00 | 4895370012792682 | 12/22 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
-| 51.00 | 4268270087302871 | 09/24 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
-| 52.00 | 5413330089010442 | 12/25 | AgAAAAAAAIR8CQrXSohbQAAAAAA=
-| All other amounts | 4895370013193500 | 05/25 | AlhlvxmN2ZKuAAESNFZ4GoABFA==
+| Amount Value      | Token Number               | Expiry | Cryptogram                   |
+| ----------------- | -------------------------- | ------ | ---------------------------- |
+| 22.00             | 5226603115488031           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 31.00             | Emulates Card not eligible |
+| 32.00             | 4111111111111111           | 03/30  | uxToh3Ep6gsR8AAkvZALN19Iz34= |
+| 42.00             | 4895370013193500           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 43.00             | 5226603115488031           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 44.00             | 4895370012792682           | 12/22  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| 51.00             | 4268270087302871           | 09/24  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| 52.00             | 5413330089010442           | 12/25  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| All other amounts | 4895370013193500           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
 
 ### Status Updates
 
@@ -415,25 +417,25 @@ See: [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
 
 The PSP should return the following errorIds and errorTexts when applicable:
 
-| errorId | errorText                            | Description (should not be included in response)                                                                                  |
-| ------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| 71      | Invalid request                      | The request received from Vipps failed validation.                                                                                |
-| 72      | Different texts                      | For errors that are not in this list. Please include text describing the error.                                                   |
-| 81      | No such issuer                       | The PSP were unable to identify the card issuer.                                                                                  |
-| 82      | Refused by Issuer                    | Generic response for cards that were refused by issuer, without the PSP knowing why.                                              |
-| 83      | Suspected fraud                      | Suspected fraud.                                                                                                                  |
-| 84      | Exceeds withdrawal amount limit      | The amount exceeds an amount limit. Could be per transaction limit, or for a period.                                              |
-| 85      | Response received too late            | A third party didn't respond in time for the makePayment or [Cancelling pending transactions](#cancelling-pending-transactions).                                                      |
-| 86      | Expired card                         | Expired card.                                                                                                                     |
-| 87      | Invalid card number (no such number) | The card provided is invalid.                                                                                                     |
-| 88      | Merchant does not allow credit cards | If the PSP supports disallowing credit cards.                                                                                     |
-| 89      | Insufficient funds                   | Insufficient funds.                                                                                                               |
-| 91      | Internal error                       | Unhandled or unknown exception.                                                                                                   |
-| 92      | Unable to decrypt                    | The PSP was unable to decrypt `cardData` from the makePayment request.                                                            |
-| 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.   |
-| 93      | Status from Vipps:TIMEOUT            | Response to Vipps sending `TIMEOUT`. Caused by customer not acting on the payment.                                                |
-| 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.|
-| 94      | Unhandled soft decline               | Response to a Soft Decline from the bank that could not be processed or forwarded to the Vipps App.                               |
+| errorId | errorText                            | Description (should not be included in response)                                                                                                                                                                                  |
+| ------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 71      | Invalid request                      | The request received from Vipps failed validation.                                                                                                                                                                                |
+| 72      | Different texts                      | For errors that are not in this list. Please include text describing the error.                                                                                                                                                   |
+| 81      | No such issuer                       | The PSP were unable to identify the card issuer.                                                                                                                                                                                  |
+| 82      | Refused by Issuer                    | Generic response for cards that were refused by issuer, without the PSP knowing why.                                                                                                                                              |
+| 83      | Suspected fraud                      | Suspected fraud.                                                                                                                                                                                                                  |
+| 84      | Exceeds withdrawal amount limit      | The amount exceeds an amount limit. Could be per transaction limit, or for a period.                                                                                                                                              |
+| 85      | Response received too late           | A third party didn't respond in time for the makePayment or [Cancelling pending transactions](#cancelling-pending-transactions).                                                                                                  |
+| 86      | Expired card                         | Expired card.                                                                                                                                                                                                                     |
+| 87      | Invalid card number (no such number) | The card provided is invalid.                                                                                                                                                                                                     |
+| 88      | Merchant does not allow credit cards | If the PSP supports disallowing credit cards.                                                                                                                                                                                     |
+| 89      | Insufficient funds                   | Insufficient funds.                                                                                                                                                                                                               |
+| 91      | Internal error                       | Unhandled or unknown exception.                                                                                                                                                                                                   |
+| 92      | Unable to decrypt                    | The PSP was unable to decrypt `cardData` from the makePayment request.                                                                                                                                                            |
+| 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.                                                                                                   |
+| 93      | Status from Vipps:TIMEOUT            | Response to Vipps sending `TIMEOUT`. Caused by customer not acting on the payment. This will happen within 5-10 minutes of the customer not acting. Vipps immediatiely processes and sends the `TIMEOUT` notificiation to the PSP |
+| 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.                                                                                                |
+| 94      | Unhandled soft decline               | Response to a Soft Decline from the bank that could not be processed or forwarded to the Vipps App.                                                                                                                               |
 
 ## PSD2 Compliance and Secure Customer Authentication (SCA)
 
@@ -520,7 +522,7 @@ service.
 Initializing a recurring payment works in the same way as a non-recurring payment,
 but with the inclusion of a `scope` and `agreementURL` in the init call.
 
-At that time, the `scope` can be set to  `psp_subscription`.
+At that time, the `scope` can be set to `psp_subscription`.
 The `agreementURL` should be a link to where the user can click to manage the agreement.
 
 To start the initialization, create a standard /init call with the addition of
@@ -613,7 +615,7 @@ Response with encryptedCard:
   "pspTransactionId": "7686f7788898767977",
   "merchantOrderId": "8874C4DDC93A2E3C",
   "paymentInstrument": "ENCRYPTEDCARD",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
+  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
 }
 ```
 
@@ -665,32 +667,32 @@ public class UrlValidate {
 
 This API returns the following HTTP statuses in the responses:
 
-| HTTP status         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `200 OK`            | Request successful                          |
-| `400 Bad Request`   | Invalid request, see the error for details  |
-| `401 Unauthorized`  | Invalid credentials                         |
-| `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
-| `404 Not Found`     | The resource was not found  |
-| `500 Server Error`  | An internal Vipps problem                  |
+| HTTP status        | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| `200 OK`           | Request successful                                     |
+| `400 Bad Request`  | Invalid request, see the error for details             |
+| `401 Unauthorized` | Invalid credentials                                    |
+| `403 Forbidden`    | Authentication ok, but credentials lacks authorization |
+| `404 Not Found`    | The resource was not found                             |
+| `500 Server Error` | An internal Vipps problem                              |
 
 ### Error codes
 
-| errorCode        | errorMessage                               | Description |
-| ---------------- | ------------------------------------------ | ---|
-| `21`             | Merchant not available or active           | |
-| `42`             | Invalid payment model type                 | |
-| `44`             | PSP Transaction id already exists          | |
-| `51`             | Invalid request                            | |
-| `51`             | Invalid pspRedirectUrl                     | |
-| `99`             | OrderId already exists                     | |
-| `amount`         | amount.less.than.one                       | |
-| `currency`       | transaction.currency.invalid               | |
-| `makePaymentUrl` | Invalid makePaymentUrl                     | |
-| `121`        | Agreement not found | The agreement does not exist |
-| `122`        | Agreement not active | The agreement has been deactivated via the Delete agreement endpoint |
-| `123`        | Connected payment source not active for Agreement | The connected card is no longer active or valid |
-| `124`        | No Network token available for this Agreement | The connected card does not have a active network token available |
+| errorCode        | errorMessage                                      | Description                                                          |
+| ---------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
+| `21`             | Merchant not available or active                  |                                                                      |
+| `42`             | Invalid payment model type                        |                                                                      |
+| `44`             | PSP Transaction id already exists                 |                                                                      |
+| `51`             | Invalid request                                   |                                                                      |
+| `51`             | Invalid pspRedirectUrl                            |                                                                      |
+| `99`             | OrderId already exists                            |                                                                      |
+| `amount`         | amount.less.than.one                              |                                                                      |
+| `currency`       | transaction.currency.invalid                      |                                                                      |
+| `makePaymentUrl` | Invalid makePaymentUrl                            |                                                                      |
+| `121`            | Agreement not found                               | The agreement does not exist                                         |
+| `122`            | Agreement not active                              | The agreement has been deactivated via the Delete agreement endpoint |
+| `123`            | Connected payment source not active for Agreement | The connected card is no longer active or valid                      |
+| `124`            | No Network token available for this Agreement     | The connected card does not have a active network token available    |
 
 ## Recommendations regarding handling redirects
 
@@ -713,7 +715,6 @@ For demonstration purposes, an example that should be handled is:
 1. The OS defaults to a Safari Browser for the redirect.
 1. The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
 
-
 ## Differences from previous versions
 
 ### Differences from PSP API v2 to v3
@@ -725,19 +726,19 @@ Additionally `$.makePaymentRequest.confirmed` has been renamed to `$.makePayment
 
 Values for this enum have changed accordingly:
 
-| Old Value | New Value |
-|-----------|-----------|
-| Yes | ACCEPTED |
-|TIMEOUT| TIMEOUT|
-|CANCEL| USER_CANCEL|
-|NO| USER_CANCEL|
+| Old Value | New Value   |
+| --------- | ----------- |
+| Yes       | ACCEPTED    |
+| TIMEOUT   | TIMEOUT     |
+| CANCEL    | USER_CANCEL |
+| NO        | USER_CANCEL |
 
 ### Differences from PSP API v1 to v2
 
-* Added support for redirection of user after payment completion in the Vipps app
-* Added support for providing the `makePaymentUrl` in the initiate payment call
-* Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
-* Improved and more consistent parameter names in the API
+- Added support for redirection of user after payment completion in the Vipps app
+- Added support for providing the `makePaymentUrl` in the initiate payment call
+- Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
+- Improved and more consistent parameter names in the API
 
 ## Questions?
 
