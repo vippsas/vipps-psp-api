@@ -61,7 +61,7 @@ the merchant that was provided by the PSP is rendered to the end user.
 | Product name       | The name of the product being paid for                |
 | Order ID / Description | The orderId, provided by the merchant             |
 | Transaction ID     | The internal Vipps id for the transaction             |
-| butikken.no        | Merchant website                                      |
+| butikken.no        | The merchant's website                                |
 
 ### The payment screen
 
