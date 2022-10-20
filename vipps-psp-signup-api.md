@@ -196,7 +196,16 @@ Request body:
 ```json
 {
   "agreementId": "7686f7788898767977",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
+  "paymentInstrument": "TOKEN",
+  "binNumber": "492556",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "cryptogram": "aFgdgjdkfgjdFDF=",
+    "tokenType": "VISA",
+    "expiryYear": "2025",
+    "eci": "07"
+  }
 }
 ```
 

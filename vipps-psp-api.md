@@ -218,7 +218,6 @@ Authorization: makePaymentToken
   "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
   "paymentInstrument": "TOKEN",
   "binNumber": "492556",
-  "cardData": null,
   "networkToken": {
     "number": "12345678901234",
     "expiryMonth": "12",
@@ -227,24 +226,6 @@ Authorization: makePaymentToken
     "expiryYear": "2025",
     "eci": "07"
   }
-}
-```
-
-In certain cases, a legacy encrypted card request is sent in the following format.
-
-**Important:** This is only available for existing PSPs that are not able to handle
-tokens, and there are _very_ few left.
-
-```json
-Authorization: makePaymentToken
-{
-  "pspTransactionId": "7686f7788898767977",
-  "merchantSerialNumber": "123456",
-  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
-  "paymentInstrument" : "ENCRYPTEDCARD",
-  "binNumber": "492556",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "networkToken": null
 }
 ```
 
@@ -373,8 +354,17 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL"
+  "paymentState": "ACCEPTED/TIMEOUT/USER_CANCEL",
+  "paymentInstrument": "TOKEN",
+  "binNumber": "492556",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "cryptogram": "aFgdgjdkfgjdFDF=",
+    "tokenType": "VISA",
+    "expiryYear": "2025",
+    "eci": "07"
+  }
 }
 ```
 
@@ -425,10 +415,9 @@ The PSP should return the following errorIds and errorTexts when applicable:
 | 88      | Merchant does not allow credit cards | If the PSP supports disallowing credit cards.                                                                                                                                                                                     |
 | 89      | Insufficient funds                   | Insufficient funds.                                                                                                                                                                                                               |
 | 91      | Internal error                       | Unhandled or unknown exception.                                                                                                                                                                                                   |
-| 92      | Unable to decrypt                    | The PSP was unable to decrypt `cardData` from the makePayment request.                                                                                                                                                            |
 | 93      | Status from Vipps:CANCEL             | Response to Vipps sending `CANCEL`. Caused by customer cancelling the payment from the Vipps App, or in the Vipps landing page.                                                                                                   |
 | 93      | Status from Vipps:TIMEOUT            | Response to Vipps sending `TIMEOUT`. Caused by customer not acting on the payment. This will happen within 5-10 minutes of the customer not acting. Vipps immediatiely processes and sends the `TIMEOUT` notificiation to the PSP |
-| 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `cardData`.                                                                                                |
+| 93      | Status from Vipps:NO                 | Response to Vipps sending `NO`. Something failed during payment approval. Often caused by failure to retrieve and send `networkToken`.                                                                                                |
 | 94      | Unhandled soft decline               | Response to a Soft Decline from the bank that could not be processed or forwarded to the Vipps App.                                                                                                                               |
 
 ## PSD2 Compliance and Secure Customer Authentication (SCA)
@@ -482,8 +471,17 @@ Authorization: makePaymentToken
 {
   "pspTransactionId": "7686f7788898767977",
   "merchantSerialNumber": "123456",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2",
-  "confirmed": "YES/TIMEOUT/CANCEL"
+  "confirmed": "YES/TIMEOUT/CANCEL",
+  "paymentInstrument": "TOKEN",
+  "binNumber": "492556",
+  "networkToken": {
+    "number": "12345678901234",
+    "expiryMonth": "12",
+    "cryptogram": "aFgdgjdkfgjdFDF=",
+    "tokenType": "VISA",
+    "expiryYear": "2025",
+    "eci": "07"
+  }
 }
 ```
 
@@ -599,17 +597,6 @@ Response with network token:
     "expiryYear": "2025",
     "eci": "07"
   }
-}
-```
-
-Response with encryptedCard:
-
-```json
-{
-  "pspTransactionId": "7686f7788898767977",
-  "merchantOrderId": "8874C4DDC93A2E3C",
-  "paymentInstrument": "ENCRYPTEDCARD",
-  "cardData": "f0a29801b4#d4ff30e221fa2980ff30e2"
 }
 ```
 
