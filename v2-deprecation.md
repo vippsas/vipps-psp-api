@@ -17,7 +17,7 @@ The v3 API messages will contain a network token, a cryptogram (aka. TAVV) and V
 * [EMVco token processing](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#emvco-token-processing)
 
 As EBA and national authorities have mandated, SCA will come into effect January 1st 2021, and Vipps is working towards this deadline. We expect all raw PAN-processing to cause 3D Secure step-ups from this date. Please
-[contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md)
+[contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you have any questions or want a meeting, and we will find a time to meet up.
 
 ## Scheme specific details
