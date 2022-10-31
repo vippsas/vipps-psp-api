@@ -16,7 +16,7 @@ The API specification is available at:
 
 API version: 3.0
 
-Document version 1.0.3.
+Document version 1.1.0.
 
 <!-- START_TOC -->
 
@@ -30,8 +30,6 @@ Document version 1.0.3.
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
 * [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
 * [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
-* [Proposals](#proposals)
-  * [Recurring 3DS Update Card](#recurring-3ds-update-card)
 * [Questions?](#questions)
 
 <!-- END_TOC -->
@@ -173,57 +171,6 @@ Example request (see the API specification for details):
 To update a merchant sale unit, send
 [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
-
-## Proposals
-
-### Recurring 3DS Update Card
-
-The following is a proposal for triggering 3DS when a user changes the card attached to a PSP recurring agreement in the Vipps app.
-
-A new optional `updateCardUrl` property would be added to the initiate call.
-This callback will be triggered when the user changes card with the following request;
-
-HTTP headers:
-
-```
-PSP-ID: C948DFD1546347568874C4DDC93A2E3C
-Merchant-Serial-Number: 123456
-User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-```
-
-Request body:
-
-```json
-{
-  "agreementId": "7686f7788898767977",
-  "paymentInstrument": "TOKEN",
-  "binNumber": "492556",
-  "networkToken": {
-    "number": "12345678901234",
-    "expiryMonth": "12",
-    "cryptogram": "aFgdgjdkfgjdFDF=",
-    "tokenType": "VISA",
-    "expiryYear": "2025",
-    "eci": "07"
-  }
-}
-```
-
-To which the PSP should respond with a `require3DS` boolean flag which, if true,
-will cause a 3DS session to be hosted in the Vipps app.
-
-```json
-{
-  "require3DS": true,
-  "url3dSecure": "https://psp.com/3ds/123123"
-}
-```
-
-The Vipps app will the host a 3DS session from the PSP, once this session is completed
-the PSP should redirect to `https://www.vipps.no/mobileintercept`.
-
-Once the user completes the 3DS session the `updateCardUrl` will be called again.
-The PSP should then only approve or deny the request.
 
 ## Questions?
 
