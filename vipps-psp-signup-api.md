@@ -25,7 +25,7 @@ Document version 1.0.3.
 * [Introduction](#introduction)
 * [Information shown in Vipps](#information-shown-in-vipps)
   * [The payment screen](#the-payment-screen)
-  * [The recept screen](#the-recept-screen)
+  * [The receipt screen](#the-receipt-screen)
 * [Get all merchants](#get-all-merchants)
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
 * [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
@@ -67,7 +67,7 @@ the merchant that was provided by the PSP is rendered to the end user.
 
 ![Payment Screen](./docs/signup/payment.png)
 
-### The recept screen
+### The receipt screen
 
 ![Receipt Screen](./docs/signup/receipt.png)
 
