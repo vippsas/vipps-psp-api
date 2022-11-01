@@ -43,8 +43,8 @@ You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
 If the merchant or sale unit is not active, you will get an error:
 "Merchant not available or active".
 
-This is similar to the error in the eCom API. See the eCom FAQ:
-[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
+See the Vipps FAQ:
+[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://github.com/vippsas/vipps-developers/blob/master/faqs/common-errors-faq.md#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
 
 ## How do we update a transaction?
 
@@ -56,7 +56,7 @@ and user experience. This goes both for the single payment flow and for recurrin
 
 Note that you do not need to send an update for the _reservation_ part of the
 single payment flow, since that is handled by the synchronous response to the
-Makepayment call. But you must send it for the Recurring flow.
+`Makepayment` call. But you must send it for the Recurring flow.
 
 ## What is a network token?
 
@@ -110,12 +110,9 @@ Yes.
 ## Is it possible to skip the landing page?
 
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
-See the details in the
-[skip landing page section](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#skip-landing-page)
-in the eCom API guide.
 
-See the eCom FAQ for more details:
-[Is it possible to skip the landing page?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#is-it-possible-to-skip-the-landing-page)
+See the FAQ for more details:
+[Is it possible to skip the landing page?](https://github.com/vippsas/vipps-developers/blob/master/faqs/vipps-landing-page-faq.md#is-it-possible-to-skip-the-landing-page)
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
