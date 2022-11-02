@@ -102,8 +102,8 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#vipps-http-headers)
-in the Getting started guide, for details.
+See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
+in the Common topics, for details.
 
 ### Authentication
 
@@ -392,7 +392,7 @@ by providing `Request-Id`(or `Idempotency-key`) in the header of the
 request.
 
 See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
+[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
 for more details.
 
 ## PSP API implementation checklist
