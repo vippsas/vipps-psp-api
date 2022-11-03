@@ -182,25 +182,9 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 
 #### isApp
 
-If the payment is initiated in a native app, it is possible to explicitly force
-a `vipps://` URL by sending the optional `isApp` parameter in the initiate call:
-
-- `"isApp": false` (or not sent at all): The URL is `https://`, which handles
-  everything automatically for you.
-  The phone's operating system will know, through "universal linking", that
-  the `https://api.vipps.no` URL should open the Vipps app, and not the default
-  web browser.
-  **Please note:** In some cases, this requires the user to approve that
-  Vipps is opened, but this is usually only the first time.
-- `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
-  **Please note:** In our test environment (MT), the scheme is `vippsMT://`
-
-If the user does not have Vipps installed:
-
-- `"isApp":false` (or not sent at all): The Vipps landing page will be shown,
-  and the user can enter a phone number and pay on a device with Vipps installed.
-- `"isApp": true`: The user will get an error message saying that the link can
-  not be opened.
+See
+[isApp](https://github.com/vippsas/vipps-developers/blob/master/common-topics/isApp.md)
+in Common topics.
 
 ### EMVCo Token processing
 
