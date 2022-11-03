@@ -122,25 +122,17 @@ by the PSP to the Vipps API. Vipps creates the payment and returns a link that d
 
 The user then confirms the payment in Vipps.
 
-**Important:** Never show the Vipps landing page inside an iframe.
-That will make it impossible for the user to reliably be redirected back to the
-merchant's website and will result in a lower success rate.
-In general, any "optimization" of the payment flow may break the Vipps payment flow - if not today, then later.
+See
+[Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
+in the Common  topics area, for more details.
 
 #### Skip landing page
 
 _Only available for whitelisted sale units._
 
-If `skipLandingpage` is set to `true`, Vipps will _not_ display the landing page,
-but instead send a push notification to the phone number immediately.
-This must only be used when the payment does not start on the user's device and
-when there is no customer-facing display available.
-
-If the sale unit is not whitelisted for `skipLandingpage`, an attempt to use it
-will result in an error.
-
-If you need to be whitelisted, instructions for this can be found in the
-[FAQ](https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api-faq.md#can-i-skip-the-landing-page).
+See
+[Skip landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md#skip-landing-page)
+for more details.
 
 #### Payment confirmation
 
