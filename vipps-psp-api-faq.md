@@ -7,14 +7,25 @@ END_METADATA -->
 
 # Vipps PSP API FAQ
 
-API version: 3.
+<!-- START_COMMENT -->
 
-Document version 1.2.2.
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
-See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
+See the [Vipps PSP API guide](vipps-psp-api.md) for all the details.
+
+For more common Vipps questions, see:
+
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+
+API version: 3.
+
+Document version 1.2.3.
 
 <!-- START_TOC -->
 
@@ -23,7 +34,7 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for more details.
 - [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
 - [How do we update a transaction?](#how-do-we-update-a-transaction)
 - [What is a network token?](#what-is-a-network-token)
-- [How can I view the card data?](#how-can-i-view-the-card-data)
+- [Why do I get No network token available for this Agreement or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
 - [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
 - [Do we have a test environment?](#do-we-have-a-test-environment)
 - [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment-service-call-in-case-field-confirmed-has-value-timeout-or-cancel)
@@ -99,9 +110,9 @@ If field "Confirmed" has value: `TimeOut` or `Cancel` -> `paymentInfo.status` = 
 
 From the `makePayment` specification:
 
-| Name | Type | Size | Optional | Values |
-| ---- | ---- | ---- | -------- | ------ |
-| confirmed	| String | 7 | No | YES/TIMEOUT/CANCEL |
+| Name      | Type   | Size | Optional | Values             |
+| --------- | ------ | ---- | -------- | ------------------ |
+| confirmed | String |  7   | No       | YES/TIMEOUT/CANCEL |
 
 ## Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?
 
