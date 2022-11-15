@@ -31,18 +31,18 @@ Document version 1.2.3.
 
 ## Table of Contents
 
-- [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
-- [How do we update a transaction?](#how-do-we-update-a-transaction)
-- [What is a network token?](#what-is-a-network-token)
-- [Why do I get No network token available for this Agreement or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
-- [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
-- [Do we have a test environment?](#do-we-have-a-test-environment)
-- [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment-service-call-in-case-field-confirmed-has-value-timeout-or-cancel)
-- [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
-- [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
-- [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
-- [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
-- [Questions?](#questions)
+* [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
+* [How do we update a transaction?](#how-do-we-update-a-transaction)
+* [What is a network token?](#what-is-a-network-token)
+* [Why do I get No network token available for this Agreement or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
+* [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
+* [Do we have a test environment?](#do-we-have-a-test-environment)
+* [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment-service-call-in-case-field-confirmed-has-value-timeout-or-cancel)
+* [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
+* [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
+* [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
+* [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
+* [Questions?](#questions)
 
 <!-- END_TOC -->
 
@@ -55,7 +55,7 @@ If the merchant or sale unit is not active, you will get an error:
 "Merchant not available or active".
 
 See the Vipps FAQ:
-[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://github.com/vippsas/vipps-developers/blob/master/faqs/common-errors-faq.md#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
+[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/common-errors-faq#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
 
 ## How do we update a transaction?
 
@@ -94,7 +94,7 @@ No, the PSP ID is unique for the PSP and used for all the PSP's merchants.
 
 ## Do we have a test environment?
 
-Yes, please see: [The Vipps test environment (MT)](https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md).
+Yes, please see: [The Vipps test environment (MT)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment).
 
 ## What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
 
@@ -123,12 +123,12 @@ Yes.
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
 
 See the FAQ for more details:
-[Is it possible to skip the landing page?](https://github.com/vippsas/vipps-developers/blob/master/faqs/vipps-landing-page-faq.md#is-it-possible-to-skip-the-landing-page)
+[Is it possible to skip the landing page?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/vipps-landing-page-faq#is-it-possible-to-skip-the-landing-page)
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
 See the
-[Vipps eCom API FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
+[Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/other-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
 
 ## Questions?
 
