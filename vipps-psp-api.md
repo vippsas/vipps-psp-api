@@ -496,7 +496,6 @@ Initializing a recurring payment works in the same way as a non-recurring paymen
 but with the inclusion of a `scope` and `agreementURL` in the init call.
 
 At that time, the `scope` can be set to `psp_subscription`.
-
 The `agreementURL` should be a link to where the user can click to manage the agreement.
 
 To start the initialization, create a standard /init call with the addition of
