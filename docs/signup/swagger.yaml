@@ -1,19 +1,16 @@
 swagger: "2.0"
 info:
   title: "PSP Signup API"
-  version: "1.1.0"
+  version: "1.1.6"
   description: >
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
     name: Vipps AS
-    email: integration@vipps.no
-    url: https://vipps.no/
+    url: 'https://vippsas.github.io/vipps-developer-docs/'
 tags:
   - name: Merchant
     description: Merchants
-  - name: SaleUnit
-    description: Merchant Sale Units
-host: api.vipps.no
+host: apitest.vipps.no
 basePath: /merchant-management/psp
 schemes:
   - "https"
@@ -52,6 +49,7 @@ paths:
       tags:
         - Merchant
       parameters:
+        - $ref: "#/parameters/idempotency"
         - name: "merchant"
           in: "body"
           description: "merchant"
@@ -71,6 +69,8 @@ paths:
           $ref: "#/responses/403"
         "405":
           $ref: "#/responses/405"
+        "409":
+          $ref: "#/responses/409"
         "415":
           $ref: "#/responses/415"
         "500":
@@ -150,6 +150,10 @@ responses:
     description: Request method not supported
     schema:
       $ref: "#/definitions/Error"
+  "409":
+    description: Idempotent conflict
+    schema:
+      $ref: "#/definitions/Error"
   "415":
     description: Unsupported media type
     schema:
@@ -165,9 +169,9 @@ parameters:
     in: path
     required: true
     description: The Vipps merchant serial number
-    minLength: 6
+    minLength: 5
     maxLength: 6
-    pattern: '^\d{6}$'
+    pattern: '^\d{5,6}$'
   auth:
     name: Authorization
     in: header
@@ -180,6 +184,12 @@ parameters:
     description: Subscription key for the PSP Signup API
     required: true
     type: string
+  idempotency:
+    name: Idempotency-Key
+    in: header
+    description: Unique key for idempotent operation
+    required: true
+    type: string
 definitions:
   Merchant:
     description: Details of a merchant
@@ -188,6 +198,7 @@ definitions:
       - name
       - address
       - logo
+      - logoUrl
       - status
       - organizationNumber
       - companyName
@@ -196,12 +207,19 @@ definitions:
     properties:
       organizationNumber:
         type: string
-        pattern: '^\d{9}$'
-        minLength: 9
-        maxLength: 9
+        minLength: 1
+        maxLength: 50
         x-order: 1
         example: "123456789"
-        description: Norwegian organization number of the merchant
+        description: >-
+          Organization number of the merchant, in the corret format for the
+          organization's country.
+          For Norway: The orgno must be 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
+          and the orgno must be for the main entity ("hovedenhet"),
+          not a sub entity ("underenhet").
+          For other countries: The orgno, address, etc is validated as much
+          as practically possible.
       companyName:
         type: string
         x-order: 2
@@ -216,9 +234,9 @@ definitions:
       merchantSerialNumber:
         type: string
         description: Vipps merchant serial number
-        minLength: 6
+        minLength: 5
         maxLength: 6
-        pattern: '^\d{6}$'
+        pattern: '^\d{5,6}$'
         x-order: 4
         example: "123456"
       name:
@@ -243,44 +261,45 @@ definitions:
           - PENDING
         default: PENDING
         x-order: 7
-      logo:
+      logoUrl:
         type: string
-        format: byte
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        format: uri
+        description: An URL of the merchant's logo stored in Vipps' system.
         x-isnullable: true
-        x-order: 8
+        x-order: 9
+        example: "https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png"
       email:
         type: string
         description: "Contact email for the merchant. Can be the same as `companyEmail`."
         format: email
         x-isnullable: true
-        x-order: 9
+        x-order: 10
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
         format: uri
         x-isnullable: true
-        x-order: 10
+        x-order: 11
         example: "https://example.com"
       createdAt:
         type: string
         description: Date-time when the merchant was created in Vipps
         format: date-time
         x-isnullable: true
-        x-order: 11
+        x-order: 12
         example: 2019-01-01T00:00:00Z
       updatedAt:
         type: string
         description: Date-time when the merchant was last updated in Vipps
         format: date-time
         x-isnullable: true
-        x-order: 12
+        x-order: 13
         example: 2019-01-01T00:00:00Z
       address:
         description: "The merchant's address"
         $ref: "#/definitions/Address"
-        x-order: 13
+        x-order: 14
   GetMerchantsResponse:
     type: object
     description: Response of successful getMerchants operation
@@ -297,11 +316,19 @@ definitions:
     properties:
       organizationNumber:
         type: string
-        pattern: '^\d{9}$'
-        minLength: 9
-        maxLength: 9
+        minLength: 1
+        maxLength: 50
+        x-order: 1
         example: "123456789"
-        description: Norwegian organization number of the merchant
+        description: >-
+          Organization number of the merchant, in the corret format for the
+          organization's country.
+          For Norway: The orgno must be 9 digits without spaces, the merchant
+          must be active in [Brønnøysundregistrene](https://www.brreg.no)
+          and the orgno must be for the main entity ("hovedenhet"),
+          not a sub entity ("underenhet").
+          For other countries: The orgno, address, etc is validated as much
+          as practically possible.
       name:
         type: string
         maxLength: 200
@@ -316,16 +343,25 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        description:
+          Base64 encoded string of the logo of the merchant.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
+          The logo must be in PNG (Portable Network Graphics) format.
+          Square images are recommended.
+          The longest side can not be more than 1000 pixels.
+          The minimum size is 100 x 100 pixels.
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
         format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
+        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
         format: uri
         maxLength: 255
         example: "https://example.com"
@@ -339,6 +375,8 @@ definitions:
         description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
       companyEmail:
         type: string
+        format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
         description: "The merchant's email address"
@@ -370,17 +408,26 @@ definitions:
         example: "5411"
       logo:
         type: string
-        description: Base64 encoded string of the logo of the merchant. The logo will be displayed in the Vipps app. Resolution is recommended to be a square, approx 192x192 pixels
+        description:
+          Base64 encoded string of the logo of the merchant.
+          The logo will be displayed in the Vipps app, both when paying and on receipts.
+          The logo must be in PNG (Portable Network Graphics) format.
+          Square images are recommended.
+          The longest side can not be more than 1000 pixels.
+          The minimum size is 100 x 100 pixels.
+        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
       email:
         type: string
         description: Contact email for the merchant. Can be same as companyEmail
         format: email
+        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
         maxLength: 255
         example: "user@example.com"
       website:
         type: string
         description: "The URL for the merchant's website"
         format: uri
+        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
         maxLength: 255
         example: "https://example.com"
       address:
@@ -394,9 +441,10 @@ definitions:
       merchantSerialNumber:
         type: string
         description: The Vipps saleunit's merchant serial number
-        minLength: 6
+        minLength: 5
         maxLength: 6
-        pattern: '^\d{6}$'
+        pattern: '^\d{5,6}$'
+        example: 123456
   Address:
     type: object
     description: "The merchant's address"
@@ -428,9 +476,9 @@ definitions:
       postCode:
         type: string
         description: Postcode
-        pattern: '^\d{4}$'
-        minLength: 4
-        maxLength: 4
+        minLength: 0
+        maxLength: 10
+        pattern: "^[A-Za-z0-9 ]+$"
         example: "0154"
         x-order: 4
       country:
@@ -441,8 +489,6 @@ definitions:
         maxLength: 2
         example: "NO"
         default: "NO"
-        enum:
-          - "NO"
         x-order: 5
   Error:
     type: object

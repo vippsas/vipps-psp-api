@@ -1,47 +1,52 @@
-# Vipps PSP API version 3
+<!-- START_METADATA
+---
+title: Introduction
+sidebar_position: 1
+hide_table_of_contents: true
+pagination_next: null
+pagination_prev: null
+---
+END_METADATA -->
 
-This repository contains developer resources for the Vipps PSP API v3.
+# Vipps PSP API
 
-For more information about this product, please see
+Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments, get details about PSP payments, or update their status.
+In addition, you can use the PSP Signup API to get information about merchant sale units or create new sale units.
+
+For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
-* [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
-* [Vipps PSP API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
-* [Vipps PSP API Checklist](vipps-psp-api-checklist.md): For PSP integrations.
-* [Frequently Asked Questions](vipps-psp-api-faq.md): Questions and answers.
-* [Postman collection](tools/): Collection and environment for testing using Postman.
+<!-- START_COMMENT -->
 
-You can peruse the API reference documentation as:
-* [Swagger](https://vippsas.github.io/vipps-psp-api)
+💥 Please see the new documentation pages here: [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-Vipps do not handle the settlements for PSP integrations. These are handled by the PSP.
+<!-- END_COMMENT -->
 
-See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
-for contact information, contribution guidelines, etc.
+## Getting started
 
-## Differences between v2 and v3
+See
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+for information about API keys, product activation, how to make API calls, etc.
 
-The PSP API v3 adds functionality for network tokens: PSPs use the API to
-obtain tokens, not the actual card details.
-From January 1 2021 all PSPs must be able to process network tokens.
+## PSP API
 
-Except for the network token functionality, v3 works the same way as v2.
-We have decided to change the major version to signify the fundamental way
-of performing payments: From card details to network tokens.
+* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
+* [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
+* [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
+* [API FAQ](vipps-psp-api-faq.md): Questions and answers.
+* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
 
-See the
-[EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
-for more information.
+## PSP Signup API
 
-The deprecation notice for v2 is here: [v2-deprecation.md](v2-deprecation.md).
+* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
+* [Signup API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
+* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
 
-The PSP API v2 has been archived here: https://github.com/vippsas/vipps-psp-api-v2
-
-# Questions?
+## Questions?
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
 a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
