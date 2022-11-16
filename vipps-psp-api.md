@@ -117,7 +117,6 @@ in the Getting started guide, for details.
 When a user chooses Vipps as the payment method, a payment request is initiated
 by the PSP to the Vipps API. Vipps creates the payment and returns a link that does the following:
 
-
 - For users on a mobile device, the Vipps app is opened.
 - For other users, the Vipps landing page is opened in a browser. The user can then enter their phone number and continue in the Vipps app on their phone.
 
