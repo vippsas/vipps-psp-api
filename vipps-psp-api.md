@@ -102,14 +102,14 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
+See [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
 in the Common topics, for details.
 
 ### Authentication
 
 All Vipps API calls are authenticated with an access token and an API subscription key.
 See
-[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token)
 in the Getting started guide, for details.
 
 ### Initiate payment
@@ -123,7 +123,7 @@ by the PSP to the Vipps API. Vipps creates the payment and returns a link that d
 The user then confirms the payment in Vipps.
 
 See
-[Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
+[Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
 in the Common  topics area, for more details.
 
 #### Skip landing page
@@ -131,7 +131,7 @@ in the Common  topics area, for more details.
 _Only available for whitelisted sale units._
 
 See
-[Skip landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md#skip-landing-page)
+[Skip landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page#skip-landing-page)
 for more details.
 
 #### Payment confirmation
@@ -175,7 +175,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 #### isApp
 
 See
-[isApp](https://github.com/vippsas/vipps-developers/blob/master/common-topics/isApp.md)
+[isApp](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/isApp)
 in Common topics.
 
 ### EMVCo Token processing
@@ -368,7 +368,7 @@ by providing `Request-Id`(or `Idempotency-key`) in the header of the
 request.
 
 See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
+[Idempotency header](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers#idempotency)
 for more details.
 
 ## PSP API implementation checklist
