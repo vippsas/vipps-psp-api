@@ -18,7 +18,7 @@ For product information in Norwegian, see
 
 <!-- START_COMMENT -->
 
-💥 Please see the new documentation pages here: <https://vippsas.github.io/vipps-developer-docs/>.
+💥 Please see the new documentation pages here: [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
 
