@@ -232,7 +232,7 @@ paths:
         Valid requests get a HTTP 200 response, but the actual update is done in
         a batch job during the night. See the API guide for more details:
 
-        https://github.com/vippsas/vipps-psp-api/blob/master/vipps-psp-api.md#batch-processing-of-status-updates
+        https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-api#batch-processing-of-status-updates
       operationId: updatestatusUsingPOST
       parameters:
         - $ref: "#/components/parameters/Authorization"
