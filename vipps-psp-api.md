@@ -11,7 +11,7 @@ Settlements for Payment Service Provider (PSP) integrations are handled by the P
 
 API version: 3.0
 
-Document version 3.4.0.
+Document version 3.4.1.
 
 <!-- START_TOC -->
 
@@ -129,6 +129,9 @@ in the Common  topics area, for more details.
 #### Skip landing page
 
 _Only available for whitelisted sale units._
+
+**Please note:** This feature has to be enabled by Vipps for eligible sale units. The sale units must be whitelisted by Vipps.
+Skipping the landing page is typically used at physical points of sale where there is no display available.
 
 See
 [Skip landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page#skip-landing-page)
