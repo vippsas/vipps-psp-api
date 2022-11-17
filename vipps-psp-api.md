@@ -159,7 +159,7 @@ The process of POST-ing to the `makePaymentUrl` is synchronous, and while Vipps
 is waiting for a response from the PSP, the user will see a "spinner" in the
 Vipps app.
 
-After Vipps´ successful POST to he `makePaymentUrl`,
+After Vipps´ successful POST to the `makePaymentUrl`,
 the PSP uses the card token to process the payment through the acquirer.
 This is the PSP's responsibility.
 Vipps is not involved in the actual payment, Vipps only provides the
