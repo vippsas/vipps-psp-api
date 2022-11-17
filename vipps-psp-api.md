@@ -11,7 +11,7 @@ Settlements for Payment Service Provider (PSP) integrations are handled by the P
 
 API version: 3.0
 
-Document version 3.4.1.
+Document version 3.4.2.
 
 <!-- START_TOC -->
 
@@ -148,7 +148,19 @@ Once the end user has confirmed the payment, Vipps shares the network token
 with the PSP by `POST`-ing to the `makePaymentUrl`:
 [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).
 
-The PSP uses the card token to process the payment through the acquirer.
+Vipps requires a `HTTP 200 OK` response
+and a response body with `"paymentInfo.status": "OK"`
+for the POST request to the `makePaymentUrl`.
+Vipps then sets the payment's status to `RESERVED`.
+
+If Vipps does not receive the expected response, the payment's status will be `FAILED`.
+
+The process of POST-ing to the `makePaymentUrl` is synchronous, and while Vipps
+is waiting for a response from the PSP, the user will see a "spinner" in the
+Vipps app.
+
+After Vipps´ successful POST to he `makePaymentUrl`,
+the PSP uses the card token to process the payment through the acquirer.
 This is the PSP's responsibility.
 Vipps is not involved in the actual payment, Vipps only provides the
 PSP with the card token.
