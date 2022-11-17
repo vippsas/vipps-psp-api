@@ -7,11 +7,12 @@ END_METADATA -->
 
 # Vipps PSP API
 
-Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments.
+Settlements for Payment Service Provider (PSP) integrations are handled by the PSP,
+but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.2.
+Document version 3.4.3.
 
 <!-- START_TOC -->
 
@@ -85,6 +86,10 @@ Vipps' new PSP. That means Vipps is only able to provide a token for those
 cards, not the card details. If you are not able to process tokens, you should respond with
 `HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
 
+There are some differences between Vipps payments done through a PSP and
+payments done through direct integration. See:
+[What functionality is included in the eCom API, but not the PSP API?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
+
 ## PSP payment sequence
 
 ![PSP API sequence diagram](images/psp-sequence-diagram.png)
@@ -144,7 +149,7 @@ the Vipps app. The user logs in, selects payment source, and confirms the paymen
 
 #### makePaymentUrl
 
-Once the end user has confirmed the payment, Vipps shares the network token
+Once the Vipps user has confirmed the payment in the Vipps app, Vipps shares the network token
 with the PSP by `POST`-ing to the `makePaymentUrl`:
 [`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).
 
@@ -164,6 +169,7 @@ the PSP uses the card token to process the payment through the acquirer.
 This is the PSP's responsibility.
 Vipps is not involved in the actual payment, Vipps only provides the
 PSP with the card token.
+Vipps does not have any information about the actual payment at this point.
 
 The PSP then sends Vipps an update on the status of the payment:
 [`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
@@ -171,17 +177,17 @@ The PSP then sends Vipps an update on the status of the payment:
 It's important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
 Without a status update from the PSP, the user will see an incorrect status.
-
 Payment updates are processed in batches.
 See: [Batch processing of status updates](#batch-processing-of-status-updates).
 
-The user receives confirmation of the payment in Vipps.
+The Vipps user receives confirmation of the payment in Vipps, and
 Vipps redirects the end user to the `redirectUrl` provided during payment initiation.
 
 **Please note:**
 
-- The `makePaymentUrl` has a timeout of 15 seconds. If no response is received within this period
-  Vipps will mark the transaction as failed. This is a known issue with the current API.
+- The `makePaymentUrl` has a timeout of _**15 seconds**_.
+  If no response is received within this period Vipps will mark the transaction as `FAILED`.
+  This is a known issue with the current API.
   Future improvements to address this issue are planned.
 - Some users may close Vipps immediately after seeing the payment confirmation,
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
