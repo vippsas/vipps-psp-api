@@ -24,7 +24,7 @@ if you have any questions or want a meeting, and we will find a time to meet up.
 
 ### Visa
 
-Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the network token will contain the information for Delegated Authentication (DA) and the SCA factors used. The Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way, issuers recognise Vipps-originated transactions and not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
+Visa tokens must be processed with the acquirer submitting the TAVV cryptogram in field 126.8. The cryptogram received with the network token will contain the information for Delegated Authentication (DA) and the SCA factors used. The Visa Token Service will during detokenization populate a flag for DA in field 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way, issuers recognize Vipps-originated transactions and not soft decline for 3DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
 
 ### MasterCard
 
