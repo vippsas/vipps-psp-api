@@ -94,7 +94,7 @@ No, the PSP ID is unique for the PSP and used for all the PSP's merchants.
 
 ## Do we have a test environment?
 
-Yes, please see: [The Vipps test environment (MT)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment).
+Yes, please see: [The Vipps test environment (MT)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment).
 
 ## What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
 
