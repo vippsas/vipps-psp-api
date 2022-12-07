@@ -12,7 +12,7 @@ but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.3.
+Document version 3.4.4.
 
 <!-- START_TOC -->
 
@@ -539,6 +539,9 @@ In the same way as a normal, non-recurring PSP v3 payment, the PSP will receive 
 [`POST:makePaymentURL`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
 callback.
 In the body of this callback, you will now also find a `userToken`.
+
+For `merchantOrderId`: See
+[orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid).
 
 ### The userToken
 
