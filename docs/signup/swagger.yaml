@@ -212,7 +212,7 @@ definitions:
         x-order: 1
         example: "123456789"
         description: >-
-          Organization number of the merchant, in the corret format for the
+          Organization number of the merchant, in the correct format for the
           organization's country.
           For Norway: The orgno must be 9 digits without spaces, the merchant
           must be active in [Brønnøysundregistrene](https://www.brreg.no)
@@ -227,7 +227,7 @@ definitions:
         description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
       companyEmail:
         type: string
-        x-isisnullable: true
+        x-isnullable: true
         x-order: 3
         example: "user@example.com"
         description: "The merchant's email address"
@@ -321,7 +321,7 @@ definitions:
         x-order: 1
         example: "123456789"
         description: >-
-          Organization number of the merchant, in the corret format for the
+          Organization number of the merchant, in the correct format for the
           organization's country.
           For Norway: The orgno must be 9 digits without spaces, the merchant
           must be active in [Brønnøysundregistrene](https://www.brreg.no)
@@ -389,7 +389,7 @@ definitions:
       - companyEmail
       - mccCode
   UpdateMerchantRequest:
-    description: Request for patchMerchant operation. Atleast one of the properties is required
+    description: Request for patchMerchant operation. At least one of the properties is required.
     properties:
       deactivate:
         type: boolean

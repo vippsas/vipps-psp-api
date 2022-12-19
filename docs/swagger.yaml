@@ -849,7 +849,7 @@ components:
           type: string
           example: SUCCESS
           default: SUCCESS
-          description: The operation result for the status performed (ie imforming a
+          description: The operation result for the status performed (ie informing a
             reserve failed for recurring processing)
           enum:
             - FAILED
@@ -941,7 +941,7 @@ components:
           pattern: ^\d{8}$
         token:
           type: string
-          description: The token value recieved in the `url` property in the Initiate
+          description: The token value received in the `url` property in the Initiate
             response
           example: eyJraWQiOiJqd3R
       title: ForceApproveRequest
