@@ -12,7 +12,7 @@ but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.4.
+Document version 3.4.5.
 
 <!-- START_TOC -->
 
@@ -103,7 +103,7 @@ then do "capture" when the goods have been shipped/delivered.
 
 ## API overview
 
-## Vipps HTTP headers
+### Vipps HTTP headers
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
