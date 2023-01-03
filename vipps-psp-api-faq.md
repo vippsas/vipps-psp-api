@@ -35,6 +35,7 @@ Document version 2.0.0.
 * [Why do I get an `Invalid MSN` error?](#why-do-i-get-an-invalid-msn-error)
 * [How can I update the status of a payment?](#how-can-i-update-the-status-of-a-payment)
 * [What is a network token?](#what-is-a-network-token)
+* [What is a PAN?](#what-is-a-pan)
 * [Why do I get `No network token available for this Agreement` or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
 * [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
 * [Does Vipps have a test environment?](#does-vipps-have-a-test-environment)
@@ -92,6 +93,13 @@ The EMVco token is not considered
 See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more.
+
+## What is a PAN?
+
+The PAN (Primary account numbers) is the 15- or 16-digit number found on all
+credit or debit cards. Since PANs are accepted for online payments, anyone with
+access to the PAN may be able to make payments without the physical card.
+A PAN is unique per card, but may be shared between businesses.
 
 ## Why do I get `No network token available for this Agreement` or similar?
 
