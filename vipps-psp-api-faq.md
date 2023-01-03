@@ -67,8 +67,8 @@ Invalid MSN: 123456. This MSN is not valid for the provided PSP id.
 Check that you are using the correct credentials for the right environment.
 ```
 
-This happens if the MSN is created with one PSP is and you attempt to initiate a
-payment with a different PSP id.
+This happens if the MSN is created with one PSP ID and you attempt to initiate a
+payment with a different PSP ID.
 
 ## How can I update the status of a payment?
 
