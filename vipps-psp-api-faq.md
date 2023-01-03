@@ -69,8 +69,6 @@ Check that you are using the correct credentials for the right environment.
 This happens if the MSN is created with one PSP is and you attempt to initiate a
 payment with a different PSP id.
 
-
-
 ## How can I update the status of a payment?
 
 When the PSP has new information about a payment, it is important to send the
@@ -85,9 +83,12 @@ See:
 
 ## What is a network token?
 
-A token is a "representative card number" for performing card payments, without using the actual
-card details. The EMVco token number is not considered PCI DSS sensitive.
+Network tokens are payment credentials that replace the card details for online
+payments. Every merchant gets a unique token for the card, so a network token
+can not be shared between businesses.
 
+The EMVco token is not considered
+[PCI DSS sensitive](https://www.pcisecuritystandards.org/document_library/?document=pci_dss).
 See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more.
@@ -133,7 +134,6 @@ From the `makePayment` specification:
 | Name      | Type   | Size | Optional | Values             |
 | --------- | ------ | ---- | -------- | ------------------ |
 | confirmed | String |  7   | No       | YES/TIMEOUT/CANCEL |
-
 
 ## Is it possible to skip the landing page?
 
