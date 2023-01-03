@@ -25,21 +25,21 @@ For more common Vipps questions, see:
 
 API version: 3.
 
-Document version 1.2.3.
+Document version 2.0.0.
 
 <!-- START_TOC -->
 
 ## Table of Contents
 
 * [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
-* [How do we update a transaction?](#how-do-we-update-a-transaction)
+* [Why do I get an `Invalid MSN` error?](#why-do-i-get-an-invalid-msn-error)
+* [How can I update the status of a payment?](#how-can-i-update-the-status-of-a-payment)
 * [What is a network token?](#what-is-a-network-token)
-* [Why do I get No network token available for this Agreement or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
+* [Why do I get `No network token available for this Agreement` or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
 * [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
-* [Do we have a test environment?](#do-we-have-a-test-environment)
-* [What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?](#what-should-we-reply-to-makepayment-service-call-in-case-field-confirmed-has-value-timeout-or-cancel)
+* [Does Vipps have a test environment?](#does-vipps-have-a-test-environment)
+* [What is the correct response to the `MakePayment` request?](#what-is-the-correct-response-to-the-makepayment-request)
 * [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
-* [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
 * [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 * [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 * [Questions?](#questions)
@@ -57,17 +57,31 @@ If the merchant or sale unit is not active, you will get an error:
 See the Vipps FAQ:
 [`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/common-errors-faq#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
 
-## How do we update a transaction?
+## Why do I get an `Invalid MSN` error?
 
-Every operation done to a transaction after it has been processed should be
-updated to our
-[Update status endpoint](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
-This includes partial refunds, captures etc. This is critical for support work
-and user experience. This goes both for the single payment flow and for recurring payments.
+You may get an error like this:
 
-Note that you do not need to send an update for the _reservation_ part of the
-single payment flow, since that is handled by the synchronous response to the
-`Makepayment` call. But you must send it for the Recurring flow.
+```
+Invalid MSN: 123456. This MSN is not valid for the provided PSP id.
+Check that you are using the correct credentials for the right environment.
+```
+
+This happens if the MSN is created with one PSP is and you attempt to initiate a
+payment with a different PSP id.
+
+
+
+## How can I update the status of a payment?
+
+When the PSP has new information about a payment, it is important to send the
+new information to Vipps.
+
+The PSP must use the
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+endpoint to notify Vipps of changes to the payment,
+
+See:
+[Status updates](vipps-psp-api#status-updates).
 
 ## What is a network token?
 
@@ -92,11 +106,15 @@ It could also be that the user has not added his/her new card in Vipps.
 
 No, the PSP ID is unique for the PSP and used for all the PSP's merchants.
 
-## Do we have a test environment?
+## Does Vipps have a test environment?
 
 Yes, please see: [The Vipps test environment (MT)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment).
 
-## What should we reply to MakePayment() service call in case field "Confirmed" has value: TimeOut or Cancel?
+## What is the correct response to the `MakePayment` request?
+
+**TODO: This needs a rewrite by someone who knows the details.**
+
+If `Confirmed` has value `TimeOut` or `Cancel`
 
 Continued:
 Should it be: paymentInfo.status = "OK" or "FAIL"?
@@ -108,15 +126,14 @@ If field "Confirmed" has value: `TimeOut` or `Cancel` -> `paymentInfo.status` = 
 
 ## Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?
 
+**TODO: This (including the heading) needs a rewrite by someone who knows the details.**
+
 From the `makePayment` specification:
 
 | Name      | Type   | Size | Optional | Values             |
 | --------- | ------ | ---- | -------- | ------------------ |
 | confirmed | String |  7   | No       | YES/TIMEOUT/CANCEL |
 
-## Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?
-
-Yes.
 
 ## Is it possible to skip the landing page?
 

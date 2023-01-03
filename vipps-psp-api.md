@@ -12,7 +12,7 @@ but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.5.
+Document version 3.4.6.
 
 <!-- START_TOC -->
 
@@ -301,7 +301,12 @@ notified by changes to the payment status when it is captured, cancelled, or ref
 Vipps also provides an endpoint allowing you to check the payment status:
 [`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
 
-For customers upgrading from the PSP API v1: It is ok to call `updateStatus`
+**Please note:** For single payments you do not need to send an update for the
+reservation, since that is handled by the synchronous response to the
+`Makepayment` call. But for recurring payments you must send it.
+
+For customers upgrading from the PSP API v1: It is ok to call
+[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 with the v3 API on payments done with the v1 API.
 
 #### Batch processing of status updates
