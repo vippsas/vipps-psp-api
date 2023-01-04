@@ -2,6 +2,8 @@
 ---
 title: PSP V2 Deprecation
 sidebar_position: 100
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
