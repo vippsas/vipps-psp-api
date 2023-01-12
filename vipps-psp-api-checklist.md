@@ -7,8 +7,6 @@ END_METADATA -->
 
 # Vipps PSP API Checklist
 
-Document version 2.1.1
-
 For examples of requests and responses, see the [Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
 and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
 

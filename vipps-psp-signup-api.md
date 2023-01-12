@@ -16,9 +16,7 @@ The API specification is available at:
 
 API version: 3.0
 
-Document version 1.1.0.
-
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
@@ -32,7 +30,7 @@ Document version 1.1.0.
 * [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## Introduction
 

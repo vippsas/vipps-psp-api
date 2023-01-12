@@ -10,7 +10,7 @@ END_METADATA -->
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
 Use the PSP Merchant Signup API to get information about merchants, create a new sale unit, or update the sale unit details.
 
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
@@ -24,9 +24,7 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
   * [PSP Merchant Sign up](#psp-merchant-sign-up)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
-
-Document version 1.1.1.
+<!-- END_COMMENT -->
 
 ## Postman
 

@@ -12,9 +12,7 @@ but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.5.
-
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
@@ -60,7 +58,7 @@ Document version 3.4.5.
   - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
 - [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## How it works
 
