@@ -5,7 +5,7 @@ info:
     of their payment offerings. See the
     [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/)
     for more information.
-  version: 1.0.19
+  version: 1.0.20
   title: PSP API v3
   contact:
     name: Vipps AS
@@ -382,7 +382,7 @@ components:
         type: string
         default: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
     Merchant-Serial-Number:
-      name: Merchant Serial Number
+      name: Merchant-Serial-Number
       in: header
       description: >-
         The Merchant Serial Number (MSN) is a unique id for the sale unit
