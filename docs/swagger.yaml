@@ -3,7 +3,7 @@ info:
   description: |
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. See the
-    [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/)
+    [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api)
     for more information.
   version: 1.0.20
   title: PSP API v3

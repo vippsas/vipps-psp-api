@@ -15,7 +15,7 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for all the details.
 
 For more common Vipps questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
 API version: 3.
 
