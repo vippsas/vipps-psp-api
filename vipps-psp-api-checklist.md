@@ -10,7 +10,7 @@ END_METADATA -->
 For examples of requests and responses, see the [Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
 and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
 
-## Checklist for Full integration
+## Checklist for full integration
 
 - [ ] Integrate _all_ the [API endpoints](https://vippsas.github.io/vipps-developer-docs/api/psp)
     - [ ] [`POST:/v3/psppayments/init`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST)
