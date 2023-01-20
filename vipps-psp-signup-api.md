@@ -5,7 +5,7 @@ sidebar_position: 25
 ---
 END_METADATA -->
 
-# PSP Signup API
+# PSP Signup API guide
 
 The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
 
@@ -18,7 +18,7 @@ API version: 3.0
 
 <!-- START_COMMENT -->
 
-## Table of Contents
+## Table of contents
 
 * [Introduction](#introduction)
 * [Information shown in Vipps](#information-shown-in-vipps)

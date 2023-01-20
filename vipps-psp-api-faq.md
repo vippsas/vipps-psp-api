@@ -6,7 +6,7 @@ pagination_next: null
 ---
 END_METADATA -->
 
-# Vipps PSP API FAQ
+# FAQs
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -24,7 +24,7 @@ API version: 3.
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-## Table of Contents
+## Table of contents
 
 * [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
 * [How do we update a transaction?](#how-do-we-update-a-transaction)

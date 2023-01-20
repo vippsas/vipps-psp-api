@@ -5,7 +5,7 @@ sidebar_position: 20
 ---
 END_METADATA -->
 
-# Vipps PSP API
+# PSP API guide
 
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP,
 but you can use the Vipps PSP API to initiate PSP payments.
@@ -14,7 +14,7 @@ API version: 3.0
 
 <!-- START_COMMENT -->
 
-## Table of Contents
+## Table of contents
 
 - [PSP payment sequence](#psp-payment-sequence)
 - [API overview](#api-overview)
