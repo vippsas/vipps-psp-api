@@ -16,8 +16,8 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Vipps Postman collection and environment](#step-1-get-the-vipps-postman-collection-and-environment)
-  * [Step 2: Import the Vipps Postman files](#step-2-import-the-vipps-postman-files)
+  * [Step 1: Get the Postman collection and environment](#step-1-get-the-postman-collection-and-environment)
+  * [Step 2: Import the Postman files](#step-2-import-the-postman-files)
   * [Step 3: Set up Postman environment](#step-3-set-up-postman-environment)
 * [Make API calls](#make-api-calls)
   * [PSP Payments and details](#psp-payments-and-details)
@@ -33,14 +33,14 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 Review
 [Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides) for information about getting your test environment set up.
 
-### Step 1: Get the Vipps Postman collection and environment
+### Step 1: Get the Postman collection and environment
 
 Save the following files to your computer:
 
-* [Vipps PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
-### Step 2: Import the Vipps Postman files
+### Step 2: Import the Postman files
 
 1. In Postman, click *Import* in the upper-left corner.
 1. In the dialog that opens, with *File* selected, click *Upload Files*.
