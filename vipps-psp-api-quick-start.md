@@ -22,7 +22,6 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 * [Make API calls](#make-api-calls)
   * [PSP Payments and details](#psp-payments-and-details)
   * [PSP Merchant Sign up](#psp-merchant-sign-up)
-* [Questions?](#questions)
 
 <!-- END_COMMENT -->
 

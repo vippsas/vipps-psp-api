@@ -28,7 +28,6 @@ API version: 3.0
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
 * [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
 * [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
-* [Questions?](#questions)
 
 <!-- END_COMMENT -->
 

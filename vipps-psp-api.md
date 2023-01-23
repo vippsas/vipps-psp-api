@@ -56,7 +56,6 @@ API version: 3.0
 - [Differences from previous versions](#differences-from-previous-versions)
   - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
   - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
-- [Questions?](#questions)
 
 <!-- END_COMMENT -->
 

@@ -37,7 +37,6 @@ API version: 3.
 * [Would it be correct to say that by responding to makePayment() we are informing Vipps about Authorization status and transactionStatusUpdate() informs Vipps about further actions with payment, like Capture/Void/Refund?](#would-it-be-correct-to-say-that-by-responding-to-makepayment-we-are-informing-vipps-about-authorization-status-and-transactionstatusupdate-informs-vipps-about-further-actions-with-payment-like-capturevoidrefund)
 * [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 * [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
-* [Questions?](#questions)
 
 <!-- END_COMMENT -->
 
