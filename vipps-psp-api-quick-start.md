@@ -87,13 +87,3 @@ for details about the calls.
 4. Open `Update Merchant Sale Unit`. Use MSN for the new merchant and update the body before sending the request.
    Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
     See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

@@ -40,4 +40,3 @@ This is described in [PSD2 Compliance and Secure Customer Authentication (SCA)](
 ### Exemptions
 
 We encourage any exemptions to be applied when marking the transaction by the PSP/Acquirer that is applicable, for example low value exemptions.
-
