@@ -34,6 +34,7 @@ API version: 3.0.0.
 * [Does Vipps have a test environment?](#does-vipps-have-a-test-environment)
 * [What will be sent in the `makePayment()` request if the customer declines the payment, or it times out?](#what-will-be-sent-in-the-makepayment-request-if-the-customer-declines-the-payment-or-it-times-out)
 * [What is the correct response to the `MakePayment` request?](#what-is-the-correct-response-to-the-makepayment-request)
+* [Can Vipps help merchants that have problems with the PSPs use of the Vipps APIs?](#can-vipps-help-merchants-that-have-problems-with-the-psps-use-of-the-vipps-apis)
 * [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 * [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 
@@ -130,6 +131,25 @@ It is suggested that you send `FAIL` in case of failure either at your end or -
 as in this case - at our end.
 
 If `Confirmed` contains `TimeOut` or `Cancel`: Set `paymentInfo.status` to `FAIL`?
+
+## Can Vipps help merchants that have problems with the PSPs use of the Vipps APIs?
+
+Nope. Merchants that use Vipps through a PSP must contact the PSP if there are
+problems. This is because Vipps only provides the payment card token to the PSP,
+and the PSP is responsible for performing the transaction and then to notify
+Vipps about how it went.
+
+Simplified:
+1. The merchant tells the PSP to do a Vipps payment
+2. The PSP uses the Vipps PSP API to initiate a payment.
+3. The user confirms the payment in Vipps.
+4. Vipps sends the user's payment card token to the PSP.
+5. The PSP uses the payment card token to perform the payment.
+6. The PSP uses the Vipps PSP API to inform Vipps about how the payment went.
+
+It is important to understand that Vipps only provides the payment card token
+to the PSP. Vipps is not involved in the payment process. If there are any
+problems with the payment, it is the PSP who has all the information about that.
 
 ## Is it possible to skip the landing page?
 
