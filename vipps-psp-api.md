@@ -5,18 +5,14 @@ sidebar_position: 20
 ---
 END_METADATA -->
 
-# Vipps PSP API
+# PSP API guide
 
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP,
 but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
-Document version 3.4.6.
-
-<!-- START_TOC -->
-
-## Table of Contents
+## Table of contents
 
 - [PSP payment sequence](#psp-payment-sequence)
 - [API overview](#api-overview)
@@ -58,9 +54,8 @@ Document version 3.4.6.
 - [Differences from previous versions](#differences-from-previous-versions)
   - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
   - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
-- [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## How it works
 
@@ -778,11 +773,3 @@ the PSP should redirect to `https://www.vipps.no/mobileintercept`.
 
 Once the user completes the 3DS session, the `updateCardUrl` will be called again.
 The PSP should then only approve or deny the request.
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

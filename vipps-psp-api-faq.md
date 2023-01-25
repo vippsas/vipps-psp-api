@@ -2,17 +2,11 @@
 ---
 title: FAQ
 sidebar_position: 40
+pagination_next: null
 ---
 END_METADATA -->
 
-# Vipps PSP API FAQ
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
+# FAQs
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
@@ -21,15 +15,14 @@ See the [Vipps PSP API guide](vipps-psp-api.md) for all the details.
 
 For more common Vipps questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/)
+* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
-API version: 3.
+API version: 3.0.0.
 
-Document version 2.0.0.
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-<!-- START_TOC -->
-
-## Table of Contents
+## Table of contents
 
 * [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
 * [Why do I get an `Invalid MSN` error?](#why-do-i-get-an-invalid-msn-error)
@@ -43,9 +36,8 @@ Document version 2.0.0.
 * [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
 * [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 * [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
-* [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## How can I check if a merchant or sale unit is active?
 
@@ -154,12 +146,3 @@ See the FAQ for more details:
 
 See the
 [Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/other-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

@@ -5,7 +5,7 @@ sidebar_position: 25
 ---
 END_METADATA -->
 
-# PSP Signup API
+# PSP Signup API guide
 
 The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
 
@@ -16,11 +16,9 @@ The API specification is available at:
 
 API version: 3.0
 
-Document version 1.1.0.
+<!-- START_COMMENT -->
 
-<!-- START_TOC -->
-
-## Table of Contents
+## Table of contents
 
 * [Introduction](#introduction)
 * [Information shown in Vipps](#information-shown-in-vipps)
@@ -30,9 +28,8 @@ Document version 1.1.0.
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
 * [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
 * [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
-* [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## Introduction
 
@@ -171,12 +168,3 @@ Example request (see the API specification for details):
 To update a merchant sale unit, send
 [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

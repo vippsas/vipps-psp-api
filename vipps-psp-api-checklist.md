@@ -7,12 +7,10 @@ END_METADATA -->
 
 # Vipps PSP API Checklist
 
-Document version 2.1.1
-
 For examples of requests and responses, see the [Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
 and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
 
-## Checklist for Full integration
+## Checklist for full integration
 
 - [ ] Integrate _all_ the [API endpoints](https://vippsas.github.io/vipps-developer-docs/api/psp)
     - [ ] [`POST:/v3/psppayments/init`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST)
@@ -40,12 +38,3 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
     - At least one IDs for orders with each of the following statuses: `Capture`, `Refund`, `Cancel`.
     - At least 3 IDs for orders with different [error codes](vipps-psp-api.md#errors).
 4. The PSP goes live 🎉
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

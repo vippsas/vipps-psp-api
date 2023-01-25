@@ -10,23 +10,20 @@ END_METADATA -->
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
 Use the PSP Merchant Signup API to get information about merchants, create a new sale unit, or update the sale unit details.
 
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Vipps Postman collection and environment](#step-1-get-the-vipps-postman-collection-and-environment)
-  * [Step 2: Import the Vipps Postman files](#step-2-import-the-vipps-postman-files)
+  * [Step 1: Get the Postman collection and environment](#step-1-get-the-postman-collection-and-environment)
+  * [Step 2: Import the Postman files](#step-2-import-the-postman-files)
   * [Step 3: Set up Postman environment](#step-3-set-up-postman-environment)
 * [Make API calls](#make-api-calls)
   * [PSP Payments and details](#psp-payments-and-details)
   * [PSP Merchant Sign up](#psp-merchant-sign-up)
-* [Questions?](#questions)
 
-<!-- END_TOC -->
-
-Document version 1.1.1.
+<!-- END_COMMENT -->
 
 ## Postman
 
@@ -35,14 +32,14 @@ Document version 1.1.1.
 Review
 [Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides) for information about getting your test environment set up.
 
-### Step 1: Get the Vipps Postman collection and environment
+### Step 1: Get the Postman collection and environment
 
 Save the following files to your computer:
 
-* [Vipps PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
-### Step 2: Import the Vipps Postman files
+### Step 2: Import the Postman files
 
 1. In Postman, click *Import* in the upper-left corner.
 1. In the dialog that opens, with *File* selected, click *Upload Files*.
@@ -89,13 +86,3 @@ for details about the calls.
 4. Open `Update Merchant Sale Unit`. Use MSN for the new merchant and update the body before sending the request.
    Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
     See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-
-Please create an [issue](https://github.com/vippsas/vipps-psp-api/issues),
-a [pull request](https://github.com/vippsas/vipps-psp-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).

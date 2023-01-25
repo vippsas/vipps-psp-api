@@ -2,6 +2,8 @@
 ---
 title: PSP V2 Deprecation
 sidebar_position: 100
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -38,4 +40,3 @@ This is described in [PSD2 Compliance and Secure Customer Authentication (SCA)](
 ### Exemptions
 
 We encourage any exemptions to be applied when marking the transaction by the PSP/Acquirer that is applicable, for example low value exemptions.
-
