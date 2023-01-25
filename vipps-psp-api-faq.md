@@ -32,8 +32,8 @@ API version: 3.0.0.
 * [Why do I get `No network token available for this Agreement` or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
 * [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
 * [Does Vipps have a test environment?](#does-vipps-have-a-test-environment)
+* [What will be sent in the `makePayment()` request if the customer declines the payment, or it times out?](#what-will-be-sent-in-the-makepayment-request-if-the-customer-declines-the-payment-or-it-times-out)
 * [What is the correct response to the `MakePayment` request?](#what-is-the-correct-response-to-the-makepayment-request)
-* [Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?](#can-you-confirm-that-vipps-will-send-makepayment-service-with-corresponding-values-in-field-confirmed-if-customer-declines-payment-transaction-or-time-out-occurs)
 * [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
 * [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
 
@@ -111,29 +111,25 @@ No, the PSP ID is unique for the PSP and used for all the PSP's merchants.
 
 Yes, please see: [The Vipps test environment (MT)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment).
 
-## What is the correct response to the `MakePayment` request?
-
-**TODO: This needs a rewrite by someone who knows the details.**
-
-If `Confirmed` has value `TimeOut` or `Cancel`
-
-Continued:
-Should it be: paymentInfo.status = "OK" or "FAIL"?
-If it is "FAIL", what error code should be returned?
-
-It is suggested that you send "FAIL" in case of failure either at your end or as in this case at our end.
-
-If field "Confirmed" has value: `TimeOut` or `Cancel` -> `paymentInfo.status` = "FAIL"?
-
-## Can you confirm that Vipps will send makePayment() service with corresponding values in field "Confirmed" if customer declines payment transaction or time-out occurs?
-
-**TODO: This (including the heading) needs a rewrite by someone who knows the details.**
+## What will be sent in the `makePayment()` request if the customer declines the payment, or it times out?
 
 From the `makePayment` specification:
 
 | Name      | Type   | Size | Optional | Values             |
 | --------- | ------ | ---- | -------- | ------------------ |
 | confirmed | String |  7   | No       | YES/TIMEOUT/CANCEL |
+
+## What is the correct response to the `MakePayment` request?
+
+Continued: "What should be the response when `Confirmed` contains `TimeOut` or `Cancel` -
+should `paymentInfo.status` be `OK` or `FAIL`? If it is `FAIL", what error code should be returned?`"
+
+Well..
+
+It is suggested that you send `FAIL` in case of failure either at your end or -
+as in this case - at our end.
+
+If `Confirmed` contains `TimeOut` or `Cancel`: Set `paymentInfo.status` to `FAIL`?
 
 ## Is it possible to skip the landing page?
 
