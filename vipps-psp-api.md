@@ -12,6 +12,8 @@ but you can use the Vipps PSP API to initiate PSP payments.
 
 API version: 3.0
 
+<!-- START_COMMENT -->
+
 ## Table of contents
 
 - [PSP payment sequence](#psp-payment-sequence)
