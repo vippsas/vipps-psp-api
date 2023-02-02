@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: PSP API Guide
+title: PSP API guide
 sidebar_position: 20
 ---
 END_METADATA -->
