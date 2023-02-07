@@ -12,7 +12,7 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 <!-- START_COMMENT -->
 
-## Table of Contents
+## Table of contents
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)

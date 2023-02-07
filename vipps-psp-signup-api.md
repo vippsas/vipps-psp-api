@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: PSP Signup API Guide
+title: PSP Signup API guide
 sidebar_position: 25
 ---
 END_METADATA -->
