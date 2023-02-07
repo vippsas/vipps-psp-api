@@ -246,7 +246,9 @@ definitions:
         example: "Example AS"
       mccCode:
         type: string
-        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        description: |-
+            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
+            (Apologies for the "MCC code" typo)
         minLength: 4
         maxLength: 4
         pattern: '^\d{4}$'
@@ -336,7 +338,9 @@ definitions:
         example: "Example AS"
       mccCode:
         type: string
-        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        description: |-
+          Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
+          (Apologies for the "MCC code" typo)
         minLength: 4
         maxLength: 4
         pattern: '^\d{4}$'
@@ -401,7 +405,9 @@ definitions:
         example: "Example AS"
       mccCode:
         type: string
-        description: Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides
+        description: |-
+          Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
+          (Apologies for the "MCC code" typo)
         minLength: 4
         maxLength: 4
         pattern: '^\d{4}$'
