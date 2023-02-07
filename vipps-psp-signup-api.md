@@ -129,6 +129,8 @@ Example response (see the API specification for details):
 }
 ```
 
+**Please note:** The `mccCode` may be returned as `null`, this is expected.
+
 ## Create a new merchant sale unit
 
 To create new merchant sale unit, send
