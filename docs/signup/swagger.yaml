@@ -1,539 +1,717 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  title: "PSP Signup API"
-  version: "1.1.7"
-  description: >
+  title: PSP Signup API
+  description: |
     The Vipps PSP Signup API allows PSPs to onboard and control their merchants.
   contact:
     name: Vipps AS
-    url: 'https://vippsas.github.io/vipps-developer-docs/'
+    url: https://vippsas.github.io/vipps-developer-docs/
+  version: 1.1.7
+servers:
+  - url: https://api.vipps.no
+    description: Production environment (uses the production API keys, the official app and live data)
+  - url: https://apitest.vipps.no
+    description: Test environment (uses the test API keys, the test app and test data)
 tags:
-  - name: Merchant
-    description: Merchants
-host: apitest.vipps.no
-basePath: /merchant-management/psp
-schemes:
-  - "https"
-consumes:
-  - application/json
-produces:
-  - application/json;charset=UTF-8
+- name: Merchant
+  description: Merchants
 paths:
-  /v1/merchants:
-    parameters:
-      - $ref: "#/parameters/auth"
-      - $ref: "#/parameters/apimKey"
+  /merchant-management/psp/v1/merchants:
     get:
-      operationId: getMerchants
+      tags:
+      - Merchant
       summary: Get all merchants
-      tags:
-        - Merchant
+      operationId: getMerchants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer 'auth token'
+        required: true
+        schema:
+          type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        description: Subscription key for the PSP Signup API
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        200:
           description: OK
-          schema:
-            $ref: "#/definitions/GetMerchantsResponse"
-        "400":
-          $ref: "#/responses/400"
-        "401":
-          $ref: "#/responses/401"
-        "403":
-          $ref: "#/responses/403"
-        "405":
-          $ref: "#/responses/405"
-        "500":
-          $ref: "#/responses/500"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/GetMerchantsResponse'
+        400:
+          description: Invalid request, check request parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Request method not supported
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
     post:
-      operationId: addMerchant
+      tags:
+      - Merchant
       summary: Create a new merchant
-      tags:
-        - Merchant
+      operationId: addMerchant
       parameters:
-        - $ref: "#/parameters/idempotency"
-        - name: "merchant"
-          in: "body"
-          description: "merchant"
-          required: true
-          schema:
-            $ref: "#/definitions/CreateMerchantRequest"
+      - name: Authorization
+        in: header
+        description: Bearer 'auth token'
+        required: true
+        schema:
+          type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        description: Subscription key for the PSP Signup API
+        required: true
+        schema:
+          type: string
+      - name: Idempotency-Key
+        in: header
+        description: Unique key for idempotent operation
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: merchant
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMerchantRequest'
+        required: true
       responses:
-        "200":
+        200:
           description: OK
-          schema:
-            $ref: "#/definitions/CreateMerchantResponse"
-        "400":
-          $ref: "#/responses/400"
-        "401":
-          $ref: "#/responses/401"
-        "403":
-          $ref: "#/responses/403"
-        "405":
-          $ref: "#/responses/405"
-        "409":
-          $ref: "#/responses/409"
-        "415":
-          $ref: "#/responses/415"
-        "500":
-          $ref: "#/responses/500"
-  /v1/merchants/{merchantSerialNumber}:
-    parameters:
-      - $ref: "#/parameters/auth"
-      - $ref: "#/parameters/apimKey"
-      - $ref: "#/parameters/merchantSerialNumber"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/CreateMerchantResponse'
+        400:
+          description: Invalid request, check request parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Request method not supported
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        409:
+          description: Idempotent conflict
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        415:
+          description: Unsupported media type
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: merchant
+  /merchant-management/psp/v1/merchants/{merchantSerialNumber}:
     get:
-      operationId: getMerchant
+      tags:
+      - Merchant
       summary: Get merchant by Id
-      tags:
-        - Merchant
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Merchant"
-        "400":
-          $ref: "#/responses/400"
-        "401":
-          $ref: "#/responses/401"
-        "403":
-          $ref: "#/responses/403"
-        "404":
-          $ref: "#/responses/404"
-        "405":
-          $ref: "#/responses/405"
-        "500":
-          $ref: "#/responses/500"
-    patch:
-      operationId: patchMerchant
-      summary: Update a merchant
-      tags:
-        - Merchant
+      operationId: getMerchant
       parameters:
-        - name: "merchant"
-          in: "body"
-          description: "merchant"
-          required: true
-          schema:
-            $ref: "#/definitions/UpdateMerchantRequest"
+      - name: Authorization
+        in: header
+        description: Bearer 'auth token'
+        required: true
+        schema:
+          type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        description: Subscription key for the PSP Signup API
+        required: true
+        schema:
+          type: string
+      - name: merchantSerialNumber
+        in: path
+        description: The Vipps merchant serial number
+        required: true
+        schema:
+          maxLength: 6
+          minLength: 5
+          pattern: ^\d{5,6}$
+          type: string
       responses:
-        "200":
+        200:
           description: OK
-        "400":
-          $ref: "#/responses/400"
-        "401":
-          $ref: "#/responses/401"
-        "403":
-          $ref: "#/responses/403"
-        "404":
-          $ref: "#/responses/404"
-        "405":
-          $ref: "#/responses/405"
-        "415":
-          $ref: "#/responses/415"
-        "500":
-          $ref: "#/responses/500"
-responses:
-  "400":
-    description: Invalid request, check request parameters
-    schema:
-      $ref: "#/definitions/Error"
-  "401":
-    description: Unauthorized
-  "403":
-    description: Forbidden
-    schema:
-      $ref: "#/definitions/Error"
-  "404":
-    description: Item does not exist
-    schema:
-      $ref: "#/definitions/Error"
-  "405":
-    description: Request method not supported
-    schema:
-      $ref: "#/definitions/Error"
-  "409":
-    description: Idempotent conflict
-    schema:
-      $ref: "#/definitions/Error"
-  "415":
-    description: Unsupported media type
-    schema:
-      $ref: "#/definitions/Error"
-  "500":
-    description: Internal server error
-    schema:
-      $ref: "#/definitions/Error"
-parameters:
-  merchantSerialNumber:
-    name: merchantSerialNumber
-    type: string
-    in: path
-    required: true
-    description: The Vipps merchant serial number
-    minLength: 5
-    maxLength: 6
-    pattern: '^\d{5,6}$'
-  auth:
-    name: Authorization
-    in: header
-    required: true
-    description: Bearer 'auth token'
-    type: string
-  apimKey:
-    name: Ocp-Apim-Subscription-Key
-    in: header
-    description: Subscription key for the PSP Signup API
-    required: true
-    type: string
-  idempotency:
-    name: Idempotency-Key
-    in: header
-    description: Unique key for idempotent operation
-    required: true
-    type: string
-definitions:
-  Merchant:
-    description: Details of a merchant
-    required:
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Merchant'
+        400:
+          description: Invalid request, check request parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Item does not exist
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Request method not supported
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - Merchant
+      summary: Update a merchant
+      operationId: patchMerchant
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer 'auth token'
+        required: true
+        schema:
+          type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        description: Subscription key for the PSP Signup API
+        required: true
+        schema:
+          type: string
+      - name: merchantSerialNumber
+        in: path
+        description: The Vipps merchant serial number
+        required: true
+        schema:
+          maxLength: 6
+          minLength: 5
+          pattern: ^\d{5,6}$
+          type: string
+      requestBody:
+        description: merchant
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMerchantRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        400:
+          description: Invalid request, check request parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Item does not exist
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Request method not supported
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        415:
+          description: Unsupported media type
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: merchant
+components:
+  schemas:
+    Merchant:
+      required:
+      - address
+      - companyEmail
+      - companyName
+      - logoUrl
+      - mccCode
       - merchantSerialNumber
       - name
-      - address
-      - logo
-      - logoUrl
-      - status
       - organizationNumber
-      - companyName
-      - companyEmail
-      - mccCode
-    properties:
-      organizationNumber:
-        type: string
-        minLength: 1
-        maxLength: 50
-        x-order: 1
-        example: "123456789"
-        description: >-
-          Organization number of the merchant, in the correct format for the
-          organization's country.
-          For Norway: The orgno must be 9 digits without spaces, the merchant
-          must be active in [Brønnøysundregistrene](https://www.brreg.no)
-          and the orgno must be for the main entity ("hovedenhet"),
-          not a sub entity ("underenhet").
-          For other countries: The orgno, address, etc is validated as much
-          as practically possible.
-      companyName:
-        type: string
-        x-order: 2
-        example: "Vipps AS"
-        description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
-      companyEmail:
-        type: string
-        x-isnullable: true
-        x-order: 3
-        example: "user@example.com"
-        description: "The merchant's email address"
-      merchantSerialNumber:
-        type: string
-        description: Vipps merchant serial number
-        minLength: 5
-        maxLength: 6
-        pattern: '^\d{5,6}$'
-        x-order: 4
-        example: "123456"
-      name:
-        type: string
-        description: "The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`."
-        x-order: 5
-        example: "Example AS"
-      mccCode:
-        type: string
-        description: |-
+      - status
+      type: object
+      properties:
+        organizationNumber:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: 'Organization number of the merchant, in the correct format
+            for the organization''s country. For Norway: The orgno must be 9 digits
+            without spaces, the merchant must be active in [Brønnøysundregistrene](https://www.brreg.no)
+            and the orgno must be for the main entity ("hovedenhet"), not a sub entity
+            ("underenhet"). For other countries: The orgno, address, etc is validated
+            as much as practically possible.'
+          example: "123456789"
+          x-order: 1
+        companyName:
+          type: string
+          description: The legal name of the organization. This may be different from
+            `name`, which is displayed in the Vipps app.
+          example: Vipps AS
+          x-order: 2
+        companyEmail:
+          type: string
+          description: The merchant's email address
+          example: user@example.com
+          x-isnullable: true
+          x-order: 3
+        merchantSerialNumber:
+          maxLength: 6
+          minLength: 5
+          pattern: ^\d{5,6}$
+          type: string
+          description: Vipps merchant serial number
+          example: "123456"
+          x-order: 4
+        name:
+          type: string
+          description: The merchant's name. This name will be displayed in the Vipps
+            app. This may be different from the legal name in `companyName`.
+          example: Example AS
+          x-order: 5
+        mccCode:
+          maxLength: 4
+          minLength: 4
+          pattern: ^\d{4}$
+          type: string
+          description: |-
             Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
             (Apologies for the "MCC code" typo)
-        minLength: 4
-        maxLength: 4
-        pattern: '^\d{4}$'
-        x-order: 6
-        example: "5411"
-      status:
-        type: string
-        description: Status of the merchant in Vipps
-        enum:
+          example: "5411"
+          x-order: 6
+        status:
+          type: string
+          description: Status of the merchant in Vipps
+          default: PENDING
+          enum:
           - ACTIVE
           - DEACTIVATED
           - PENDING
-        default: PENDING
-        x-order: 7
-      logoUrl:
-        type: string
-        format: uri
-        description: An URL of the merchant's logo stored in Vipps' system.
-        x-isnullable: true
-        x-order: 9
-        example: "https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png"
-      email:
-        type: string
-        description: "Contact email for the merchant. Can be the same as `companyEmail`."
-        format: email
-        x-isnullable: true
-        x-order: 10
-        example: "user@example.com"
-      website:
-        type: string
-        description: "The URL for the merchant's website"
-        format: uri
-        x-isnullable: true
-        x-order: 11
-        example: "https://example.com"
-      createdAt:
-        type: string
-        description: Date-time when the merchant was created in Vipps
-        format: date-time
-        x-isnullable: true
-        x-order: 12
-        example: 2019-01-01T00:00:00Z
-      updatedAt:
-        type: string
-        description: Date-time when the merchant was last updated in Vipps
-        format: date-time
-        x-isnullable: true
-        x-order: 13
-        example: 2019-01-01T00:00:00Z
-      address:
-        description: "The merchant's address"
-        $ref: "#/definitions/Address"
-        x-order: 14
-  GetMerchantsResponse:
-    type: object
-    description: Response of successful getMerchants operation
-    required:
+          x-order: 7
+        logoUrl:
+          type: string
+          description: An URL of the merchant's logo stored in Vipps' system.
+          format: uri
+          example: https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png
+          x-isnullable: true
+          x-order: 9
+        email:
+          type: string
+          description: Contact email for the merchant. Can be the same as `companyEmail`.
+          format: email
+          example: user@example.com
+          x-isnullable: true
+          x-order: 10
+        website:
+          type: string
+          description: The URL for the merchant's website
+          format: uri
+          example: https://example.com
+          x-isnullable: true
+          x-order: 11
+        createdAt:
+          type: string
+          description: Date-time when the merchant was created in Vipps
+          format: date-time
+          example: 2019-01-01T00:00:00Z
+          x-isnullable: true
+          x-order: 12
+        updatedAt:
+          type: string
+          description: Date-time when the merchant was last updated in Vipps
+          format: date-time
+          example: 2019-01-01T00:00:00Z
+          x-isnullable: true
+          x-order: 13
+        address:
+          $ref: '#/components/schemas/Address'
+      description: Details of a merchant
+    GetMerchantsResponse:
+      required:
       - merchants
-    properties:
-      merchants:
-        type: array
-        description: List of Merchants
-        items:
-          $ref: "#/definitions/Merchant"
-  CreateMerchantRequest:
-    description: Request for addMerchant operation
-    properties:
-      organizationNumber:
-        type: string
-        minLength: 1
-        maxLength: 50
-        x-order: 1
-        example: "123456789"
-        description: >-
-          Organization number of the merchant, in the correct format for the
-          organization's country.
-          For Norway: The orgno must be 9 digits without spaces, the merchant
-          must be active in [Brønnøysundregistrene](https://www.brreg.no)
-          and the orgno must be for the main entity ("hovedenhet"),
-          not a sub entity ("underenhet").
-          For other countries: The orgno, address, etc is validated as much
-          as practically possible.
-      name:
-        type: string
-        maxLength: 200
-        description: The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`.
-        example: "Example AS"
-      mccCode:
-        type: string
-        description: |-
-          Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
-          (Apologies for the "MCC code" typo)
-        minLength: 4
-        maxLength: 4
-        pattern: '^\d{4}$'
-        example: "5411"
-      logo:
-        type: string
-        description:
-          Base64 encoded string of the logo of the merchant.
-          The logo will be displayed in the Vipps app, both when paying and on receipts.
-          The logo must be in PNG (Portable Network Graphics) format.
-          Square images are recommended.
-          The longest side can not be more than 1000 pixels.
-          The minimum size is 100 x 100 pixels.
-        example: VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)
-      email:
-        type: string
-        description: Contact email for the merchant. Can be same as companyEmail
-        format: email
-        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
-        maxLength: 255
-        example: "user@example.com"
-      website:
-        type: string
-        description: "The URL for the merchant's website"
-        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
-        format: uri
-        maxLength: 255
-        example: "https://example.com"
-      address:
-        description: "The merchant's address"
-        $ref: "#/definitions/Address"
-      companyName:
-        type: string
-        maxLength: 255
-        example: "Vipps AS"
-        description: "The legal name of the organization. This may be different from `name`, which is displayed in the Vipps app."
-      companyEmail:
-        type: string
-        format: email
-        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
-        maxLength: 255
-        example: "user@example.com"
-        description: "The merchant's email address"
-    required:
-      - name
+      type: object
+      properties:
+        merchants:
+          type: array
+          description: List of Merchants
+          items:
+            $ref: '#/components/schemas/Merchant'
+      description: Response of successful getMerchants operation
+    CreateMerchantRequest:
+      required:
       - address
-      - logo
-      - organizationNumber
-      - companyName
       - companyEmail
+      - companyName
+      - logo
       - mccCode
-  UpdateMerchantRequest:
-    description: Request for patchMerchant operation. At least one of the properties is required.
-    properties:
-      deactivate:
-        type: boolean
-        description: Set as true in order to deactivate a merchant. Already deactivated merchant cannot be activated or updated through the API
-      name:
-        type: string
-        maxLength: 200
-        description: "The merchant's name. This name will be displayed in the Vipps app. This may be different from the legal name in `companyName`."
-        example: "Example AS"
-      mccCode:
-        type: string
-        description: |-
-          Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
-          (Apologies for the "MCC code" typo)
-        minLength: 4
-        maxLength: 4
-        pattern: '^\d{4}$'
-        example: "5411"
-      logo:
-        type: string
-        description:
-          Base64 encoded string of the logo of the merchant.
-          The logo will be displayed in the Vipps app, both when paying and on receipts.
-          The logo must be in PNG (Portable Network Graphics) format.
-          Square images are recommended.
-          The longest side can not be more than 1000 pixels.
-          The minimum size is 100 x 100 pixels.
-        example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
-      email:
-        type: string
-        description: Contact email for the merchant. Can be same as companyEmail
-        format: email
-        pattern: '^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
-        maxLength: 255
-        example: "user@example.com"
-      website:
-        type: string
-        description: "The URL for the merchant's website"
-        format: uri
-        pattern: '^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$'
-        maxLength: 255
-        example: "https://example.com"
-      address:
-        description: "The merchant's address"
-        $ref: "#/definitions/Address"
-  CreateMerchantResponse:
-    description: Response of successful addMerchant operation
-    required:
+      - name
+      - organizationNumber
+      type: object
+      properties:
+        organizationNumber:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: 'Organization number of the merchant, in the correct format
+            for the organization''s country. For Norway: The orgno must be 9 digits
+            without spaces, the merchant must be active in [Brønnøysundregistrene](https://www.brreg.no)
+            and the orgno must be for the main entity ("hovedenhet"), not a sub entity
+            ("underenhet"). For other countries: The orgno, address, etc is validated
+            as much as practically possible.'
+          example: "123456789"
+          x-order: 1
+        name:
+          maxLength: 200
+          type: string
+          description: The merchant's name. This name will be displayed in the Vipps
+            app. This may be different from the legal name in `companyName`.
+          example: Example AS
+        mccCode:
+          maxLength: 4
+          minLength: 4
+          pattern: ^\d{4}$
+          type: string
+          description: |-
+            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
+            (Apologies for the "MCC code" typo)
+          example: "5411"
+        logo:
+          type: string
+          description: Base64 encoded string of the logo of the merchant. The logo
+            will be displayed in the Vipps app, both when paying and on receipts.
+            The logo must be in PNG (Portable Network Graphics) format. Square images
+            are recommended. The longest side can not be more than 1000 pixels. The
+            minimum size is 100 x 100 pixels.
+          example: VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)
+        email:
+          maxLength: 255
+          pattern: ^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
+          type: string
+          description: Contact email for the merchant. Can be same as companyEmail
+          format: email
+          example: user@example.com
+        website:
+          maxLength: 255
+          pattern: ^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$
+          type: string
+          description: The URL for the merchant's website
+          format: uri
+          example: https://example.com
+        address:
+          $ref: '#/components/schemas/Address'
+        companyName:
+          maxLength: 255
+          type: string
+          description: The legal name of the organization. This may be different from
+            `name`, which is displayed in the Vipps app.
+          example: Vipps AS
+        companyEmail:
+          maxLength: 255
+          pattern: ^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
+          type: string
+          description: The merchant's email address
+          format: email
+          example: user@example.com
+      description: Request for addMerchant operation
+    UpdateMerchantRequest:
+      type: object
+      properties:
+        deactivate:
+          type: boolean
+          description: Set as true in order to deactivate a merchant. Already deactivated
+            merchant cannot be activated or updated through the API
+        name:
+          maxLength: 200
+          type: string
+          description: The merchant's name. This name will be displayed in the Vipps
+            app. This may be different from the legal name in `companyName`.
+          example: Example AS
+        mccCode:
+          maxLength: 4
+          minLength: 4
+          pattern: ^\d{4}$
+          type: string
+          description: |-
+            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
+            (Apologies for the "MCC code" typo)
+          example: "5411"
+        logo:
+          type: string
+          description: Base64 encoded string of the logo of the merchant. The logo
+            will be displayed in the Vipps app, both when paying and on receipts.
+            The logo must be in PNG (Portable Network Graphics) format. Square images
+            are recommended. The longest side can not be more than 1000 pixels. The
+            minimum size is 100 x 100 pixels.
+          example: VGhlIGltYWdlIGdvZXMgaGVyZQ==
+        email:
+          maxLength: 255
+          pattern: ^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
+          type: string
+          description: Contact email for the merchant. Can be same as companyEmail
+          format: email
+          example: user@example.com
+        website:
+          maxLength: 255
+          pattern: ^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)*$
+          type: string
+          description: The URL for the merchant's website
+          format: uri
+          example: https://example.com
+        address:
+          $ref: '#/components/schemas/Address'
+      description: Request for patchMerchant operation. At least one of the properties
+        is required.
+    CreateMerchantResponse:
+      required:
       - merchantSerialNumber
-    properties:
-      merchantSerialNumber:
-        type: string
-        description: The Vipps saleunit's merchant serial number
-        minLength: 5
-        maxLength: 6
-        pattern: '^\d{5,6}$'
-        example: 123456
-  Address:
-    type: object
-    description: "The merchant's address"
-    required:
+      type: object
+      properties:
+        merchantSerialNumber:
+          maxLength: 6
+          minLength: 5
+          pattern: ^\d{5,6}$
+          type: string
+          description: The Vipps saleunit's merchant serial number
+          example: "123456"
+      description: Response of successful addMerchant operation
+    Address:
+      required:
       - addressLine1
       - city
       - country
       - postCode
-    properties:
-      addressLine1:
-        type: string
-        description: Address Line 1
-        example: "Robert Levins gate 5"
-        maxLength: 255
-        x-order: 1
-      addressLine2:
-        type: string
-        description: Address Line 2
-        example: "Att: Rune Garborg"
-        maxLength: 255
-        x-isnullable: true
-        x-order: 2
-      city:
-        type: string
-        description: City
-        example: "Oslo"
-        maxLength: 255
-        x-order: 3
-      postCode:
-        type: string
-        description: Postcode
-        minLength: 0
-        maxLength: 10
-        pattern: "^[A-Za-z0-9 ]+$"
-        example: "0154"
-        x-order: 4
-      country:
-        type: string
-        description: Two letter country code based on ISO 3166
-        pattern: '^\w{2}$'
-        minLength: 2
-        maxLength: 2
-        example: "NO"
-        default: "NO"
-        x-order: 5
-  Error:
-    type: object
-    description: Problem details of HTTP APIs based on RFC 7807
-    required:
-      - status
-      - title
+      type: object
+      properties:
+        addressLine1:
+          maxLength: 255
+          type: string
+          description: Address Line 1
+          example: Robert Levins gate 5
+          x-order: 1
+        addressLine2:
+          maxLength: 255
+          type: string
+          description: Address Line 2
+          example: 'Att: Rune Garborg'
+          x-isnullable: true
+          x-order: 2
+        city:
+          maxLength: 255
+          type: string
+          description: City
+          example: Oslo
+          x-order: 3
+        postCode:
+          maxLength: 10
+          minLength: 0
+          pattern: ^[A-Za-z0-9 ]+$
+          type: string
+          description: Postcode
+          example: "0154"
+          x-order: 4
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^\w{2}$
+          type: string
+          description: Two letter country code based on ISO 3166
+          example: NO
+          default: NO
+          x-order: 5
+      description: The merchant's address
+    Error:
+      required:
       - detail
       - instance
-    properties:
-      type:
-        type: "string"
-        description: |
-          "A URI reference that identifies the problem type"
-        example: "https://example.net/validation-error"
-        x-order: 1
-      title:
-        type: "string"
-        description: |
-          "A short, human-readable summary of the problem type"
-        example: "Postcode validation error"
-        x-order: 2
-      status:
-        type: "number"
-        description: |
-          "The HTTP status code generated by the origin server for this occurrence of the problem"
-        example: 400
-        x-order: 3
-      detail:
-        type: "string"
-        description: |
-          "A human-readable explanation specific to this occurrence of the problem.
-          The detail member, if present, ought to focus on helping the client correct the problem,
-          rather than giving debugging information."
-        example: "Postcode must be four digits"
-        x-order: 4
-      instance:
-        type: "string"
-        description: |
-          "A URI reference that identifies the specific occurrence of the problem"
-        example: "https://example.net/validation-error/postcode"
-        x-order: 5
+      - status
+      - title
+      type: object
+      properties:
+        type:
+          type: string
+          description: |
+            "A URI reference that identifies the problem type"
+          example: https://example.net/validation-error
+          x-order: 1
+        title:
+          type: string
+          description: |
+            "A short, human-readable summary of the problem type"
+          example: Postcode validation error
+          x-order: 2
+        status:
+          type: number
+          description: |
+            "The HTTP status code generated by the origin server for this occurrence of the problem"
+          example: 400.0
+          x-order: 3
+        detail:
+          type: string
+          description: |
+            "A human-readable explanation specific to this occurrence of the problem.
+            The detail member, if present, ought to focus on helping the client correct the problem,
+            rather than giving debugging information."
+          example: Postcode must be four digits
+          x-order: 4
+        instance:
+          type: string
+          description: |
+            "A URI reference that identifies the specific occurrence of the problem"
+          example: https://example.net/validation-error/postcode
+          x-order: 5
+      description: Problem details of HTTP APIs based on RFC 7807
+  responses:
+    400:
+      description: Invalid request, check request parameters
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    401:
+      description: Unauthorized
+      content: {}
+    403:
+      description: Forbidden
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    404:
+      description: Item does not exist
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    405:
+      description: Request method not supported
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    409:
+      description: Idempotent conflict
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    415:
+      description: Unsupported media type
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500:
+      description: Internal server error
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    merchantSerialNumber:
+      name: merchantSerialNumber
+      in: path
+      description: The Vipps merchant serial number
+      required: true
+      schema:
+        maxLength: 6
+        minLength: 5
+        pattern: ^\d{5,6}$
+        type: string
+    auth:
+      name: Authorization
+      in: header
+      description: Bearer 'auth token'
+      required: true
+      schema:
+        type: string
+    apimKey:
+      name: Ocp-Apim-Subscription-Key
+      in: header
+      description: Subscription key for the PSP Signup API
+      required: true
+      schema:
+        type: string
+    idempotency:
+      name: Idempotency-Key
+      in: header
+      description: Unique key for idempotent operation
+      required: true
+      schema:
+        type: string
