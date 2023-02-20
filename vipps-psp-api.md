@@ -89,7 +89,43 @@ payments done through direct integration. See:
 
 ## PSP payment sequence
 
-![PSP API sequence diagram](images/psp-sequence-diagram.png)
+The following diagram illustrates the PSP payment sequence.
+
+```mermaid
+sequenceDiagram
+    participant EndUser as End user
+    participant Merchant
+    participant PSPFrontend as PSP Frontend
+    participant PSPBackend as PSP Backend
+    participant VippsBackend as Vipps Backend
+    participant VippsLandingPage as Vipps Landing Page
+    participant VippsApp as Vipps app
+    participant TSP
+    participant Acquirer
+
+    EndUser ->> Merchant: Initiate payment
+    Merchant ->> PSPFrontend: Initiate payment
+    PSPFrontend ->> PSPBackend: Initiate payment
+    PSPBackend ->> VippsBackend: Initiate payment
+    VippsBackend ->> PSPBackend: Initiate success
+    PSPBackend ->> PSPFrontend: Initiate success
+    PSPFrontend ->> EndUser: Redirect user
+    EndUser ->> VippsLandingPage: Confirm number
+    VippsLandingPage ->> VippsBackend: Confirm number
+    VippsBackend ->> VippsApp: Push notification / Deeplinking
+    VippsApp ->> EndUser: Pending payment
+    EndUser ->> VippsApp: Confirm payment request
+    VippsBackend ->> TSP: Fetch card details
+    VippsBackend ->> PSPBackend: Make payment request
+    PSPBackend ->> Acquirer: Process payment
+    PSPBackend ->> VippsBackend: Payment result
+    VippsBackend ->> VippsApp: Payment result
+    VippsApp ->> EndUser: Show result
+    VippsApp ->> PSPFrontend: Redirect end user
+    PSPFrontend ->> Merchant: Redirect end user
+    Merchant ->> EndUser: Show order confirmation
+
+```
 
 **Important:** Some users may close Vipps immediately after seeing the payment confirmation,
 therefore not being "redirected" back to the merchant. Because of this, it is important for the
@@ -427,7 +463,31 @@ The PSP should return the following errorIds and errorTexts when applicable:
 In case of a soft decline (when the issuer requires 3DS), the PSP must host a
 3DSecure session and must provide the URL to Vipps.
 
-![PSP API sequence diagram](diagrams/3DSFallbackFlow.png)
+```mermaid
+sequenceDiagram
+    participant App
+    participant VippsBackend
+    participant PSP
+    participant PSP3DSservice
+
+    App ->> VippsBackend: Approve
+    VippsBackend ->> PSP: MakePaymentRequest pspId X
+    PSP ->> PSP3DSservice: Prepare to host 3DS session
+    PSP ->> VippsBackend: PSP3DSservice url
+    VippsBackend ->> App: PSP3DSservice url
+    App ->> App : Open url in Iframe
+    App ->> PSP3DSservice : User completes 3DSecure
+    PSP3DSservice ->> PSP: Share 3DS session data
+    App ->> App : Intercepts Redirect
+    App ->> VippsBackend: Authenticate
+
+    Note right of App: Authenticate is the internal<br/>Vipps terminology for a<br/>3DS flow
+
+    VippsBackend ->> PSP: MakePaymentRequest pspId X
+    PSP ->> PSP : Process Payment with 3ds session data
+    PSP -->> VippsBackend : Payment Result
+    VippsBackend -->> App: Display result
+```
 
 The format of the `MakePaymentRequest` response provided by the PSP in case of
 a soft decline:
