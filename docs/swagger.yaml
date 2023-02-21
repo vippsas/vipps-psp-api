@@ -524,7 +524,7 @@ components:
           maxLength: 50
         vippsRedirectUrl:
           type: string
-          example: https://psp-redirect.example.com
+          example: https://example.com/psp-redirect
           description: Vipps URL where customer can enter their mobile number
       title: PaymentInitiationRepresentation
     PaymentTokenRepresentation:
@@ -684,7 +684,7 @@ components:
           description: ISO 4217 defined currency code. Vipps currently only supports NOK.
         pspRedirectUrl:
           type: string
-          example: https://psp-redirect.example.com
+          example: https://example.com/psp-redirect
           description: 'Vipps will use this URL to redirect end user after payment
             confirmation. Important: Do not rely on the user always reaching
             this URL, as some users may close Vipps immediately after seeing the
@@ -692,7 +692,7 @@ components:
             merchant.'
         makePaymentUrl:
           type: string
-          example: https://psp-makepayment.example.com
+          example: https://example.com/psp-makepayment
           description: PSP URL used by Vipps to send the card data
         makePaymentToken:
           type: string
