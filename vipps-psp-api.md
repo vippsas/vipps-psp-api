@@ -517,7 +517,7 @@ For example, if a 3DSecure session succeeds, you should redirect to the
 `Operations.url` with the operation `3dssuccess`.
 
 ```json
-operations\":[{\"url\":\"https://www.example.com/?transactionId=xxxxx&responsecode=OK\",\"operation\":\"3dssuccess\"}"
+operations\":[{\"url\":\"https://example.com/?transactionId=xxxxx&responsecode=OK\",\"operation\":\"3dssuccess\"}"
 ```
 
 Note that the `responseCode` query parameter is critical.

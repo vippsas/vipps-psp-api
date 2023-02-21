@@ -608,7 +608,7 @@ components:
           type: string
           description: |
             "A URI reference that identifies the problem type"
-          example: https://example.net/validation-error
+          example: https://example.com/validation-error
           x-order: 1
         title:
           type: string
@@ -634,7 +634,7 @@ components:
           type: string
           description: |
             "A URI reference that identifies the specific occurrence of the problem"
-          example: https://example.net/validation-error/postcode
+          example: https://example.com/validation-error/postcode
           x-order: 5
       description: Problem details of HTTP APIs based on RFC 7807
   responses:
