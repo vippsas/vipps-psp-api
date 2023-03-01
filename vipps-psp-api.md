@@ -165,9 +165,9 @@ in the Common  topics area, for more details.
 
 #### Skip landing page
 
-_Only available for whitelisted sale units._
+_Only available for whitelisted sales units._
 
-**Please note:** This feature has to be enabled by Vipps for eligible sale units. The sale units must be whitelisted by Vipps.
+**Please note:** This feature has to be enabled by Vipps for eligible sales units. The sales units must be whitelisted by Vipps.
 Skipping the landing page is typically used at physical points of sale where there is no display available.
 
 See

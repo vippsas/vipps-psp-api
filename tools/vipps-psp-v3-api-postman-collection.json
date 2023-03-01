@@ -119,7 +119,7 @@
 					"response": []
 				},
 				{
-					"name": "Create new Merchant Sale Unit",
+					"name": "Create new Merchant Sales Unit",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -184,7 +184,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Merchant Sale Unit",
+					"name": "Update Merchant Sales Unit",
 					"request": {
 						"method": "PATCH",
 						"header": [
