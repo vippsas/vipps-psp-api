@@ -387,7 +387,7 @@ components:
       name: Merchant-Serial-Number
       in: header
       description: >-
-        The Merchant Serial Number (MSN) is a unique id for the sale unit
+        The Merchant Serial Number (MSN) is a unique id for the sales unit
         that this payment is made for. The Vipps number (MSN) for the merchant's sales unit.
       required: true
       schema:
@@ -713,7 +713,7 @@ components:
           type: boolean
           example: true
           default: false
-          description: Skips the landing page for whitelisted sale units. Requires a valid
+          description: Skips the landing page for whitelisted sales units. Requires a valid
             customerMobileNumber.
         scope:
           $ref: "#/components/schemas/Scope"

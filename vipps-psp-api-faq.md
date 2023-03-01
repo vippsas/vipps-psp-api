@@ -24,7 +24,7 @@ API version: 3.0.0.
 
 ## Table of contents
 
-* [How can I check if a merchant or sale unit is active?](#how-can-i-check-if-a-merchant-or-sale-unit-is-active)
+* [How can I check if a merchant or sales unit is active?](#how-can-i-check-if-a-merchant-or-sales-unit-is-active)
 * [Why do I get an `Invalid MSN` error?](#why-do-i-get-an-invalid-msn-error)
 * [How can I update the status of a payment?](#how-can-i-update-the-status-of-a-payment)
 * [What is a network token?](#what-is-a-network-token)
@@ -40,12 +40,12 @@ API version: 3.0.0.
 
 <!-- END_COMMENT -->
 
-## How can I check if a merchant or sale unit is active?
+## How can I check if a merchant or sales unit is active?
 
 You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
 [`POST:/v3/psppayments/init/`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
 
-If the merchant or sale unit is not active, you will get an error:
+If the merchant or sales unit is not active, you will get an error:
 "Merchant not available or active".
 
 See the Vipps FAQ:

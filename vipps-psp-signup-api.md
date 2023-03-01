@@ -26,8 +26,8 @@ API version: 3.0
   * [The receipt screen](#the-receipt-screen)
 * [Get all merchants](#get-all-merchants)
 * [Get information about a specific merchant](#get-information-about-a-specific-merchant)
-* [Create a new merchant sale unit](#create-a-new-merchant-sale-unit)
-* [Update an existing merchant sale unit](#update-an-existing-merchant-sale-unit)
+* [Create a new merchant sales unit](#create-a-new-merchant-sales-unit)
+* [Update an existing merchant sales unit](#update-an-existing-merchant-sales-unit)
 
 <!-- END_COMMENT -->
 
@@ -50,8 +50,8 @@ the merchant that was provided by the PSP is rendered to the end user.
 
 | Item               | Description                                           |
 | ------------------ | ----------------------------------------------------- |
-| Merchant           | The name of the merchant's sale unit                  |
-| #23412             | Merchant serial number, the sale unit's id            |
+| Merchant           | The name of the merchant's sales unit                  |
+| #23412             | Merchant serial number, the sales unit's id            |
 | Merchant AS        | The name of the merchant                              |
 | Product name       | The name of the product being paid for                |
 | Order ID / Description | The orderId, provided by the merchant             |
@@ -131,9 +131,9 @@ Example response (see the API specification for details):
 
 **Please note:** The `mccCode` may be returned as `null`, this is expected.
 
-## Create a new merchant sale unit
+## Create a new merchant sales unit
 
-To create new merchant sale unit, send
+To create new merchant sales unit, send
 [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
 
 For Norway: The orgno must be 9 digits without spaces, the merchant
@@ -165,8 +165,8 @@ Example request (see the API specification for details):
 }
 ```
 
-## Update an existing merchant sale unit
+## Update an existing merchant sales unit
 
-To update a merchant sale unit, send
+To update a merchant sales unit, send
 [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.

@@ -8,7 +8,7 @@ END_METADATA -->
 # Quick start
 
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
-Use the PSP Merchant Signup API to get information about merchants, create a new sale unit, or update the sale unit details.
+Use the PSP Merchant Signup API to get information about merchants, create a new sales unit, or update the sales unit details.
 
 <!-- START_COMMENT -->
 
@@ -58,7 +58,7 @@ Save the following files to your computer:
    * `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
    * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
    * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
-   * `idempotency_key` - Unique request id, needed only for `Create new Merchant Sale Unit`.
+   * `idempotency_key` - Unique request id, needed only for `Create new Merchant Sales Unit`.
 
 Note that the calls in this PSP API require your PSP subscription key.
 
@@ -82,7 +82,7 @@ for details about the calls.
 
 1. Send `Get all Merchants` for a json response showing all the merchants and their information. See [`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
 2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants. See [`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant).
-3. Send `Create new Merchant Sale Unit`. Notice the merchantSerialNumber is provided back.  See [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
-4. Open `Update Merchant Sale Unit`. Use MSN for the new merchant and update the body before sending the request.
+3. Send `Create new Merchant Sales Unit`. Notice the merchantSerialNumber is provided back.  See [`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
+4. Open `Update Merchant Sales Unit`. Use MSN for the new merchant and update the body before sending the request.
    Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
     See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
