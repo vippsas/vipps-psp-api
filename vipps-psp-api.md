@@ -1,61 +1,25 @@
 <!-- START_METADATA
 ---
 title: PSP API guide
+sidebar_label: PSP API guide
 sidebar_position: 20
+description: Find technical details about integrating with the PSP API.
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
 # PSP API guide
 
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP,
-but you can use the Vipps PSP API to initiate PSP payments.
+but you can use the PSP API to initiate PSP payments.
 
 API version: 3.0
 
 <!-- START_COMMENT -->
 
-## Table of contents
-
-- [PSP payment sequence](#psp-payment-sequence)
-- [API overview](#api-overview)
-  - [Vipps HTTP headers](#vipps-http-headers)
-  - [Authentication](#authentication)
-  - [Initiate payment](#initiate-payment)
-    - [Skip landing page](#skip-landing-page)
-    - [Payment confirmation](#payment-confirmation)
-    - [makePaymentUrl](#makepaymenturl)
-    - [isApp](#isapp)
-  - [EMVCo token processing](#emvco-token-processing)
-    - [Scheme specific details](#scheme-specific-details)
-      - [Visa](#visa)
-      - [Mastercard](#mastercard)
-    - [Token Requestor Ids](#token-requestor-ids)
-    - [3DSecure and Network tokens](#3dsecure-and-network-tokens)
-    - [Magic Numbers for EMVCo Tokens](#magic-numbers-for-emvco-tokens)
-  - [Status Updates](#status-updates)
-    - [Batch processing of status updates](#batch-processing-of-status-updates)
-  - [Cancelling pending transactions](#cancelling-pending-transactions)
-  - [Example request](#example-request)
-  - [Example response](#example-response)
-  - [Idempotency](#idempotency)
-- [PSP API implementation checklist](#psp-api-implementation-checklist)
-- [Errors](#errors)
-- [PSD2 Compliance and Secure Customer Authentication (SCA)](#psd2-compliance-and-secure-customer-authentication-sca)
-  - [3DSecure Fallback](#3dsecure-fallback)
-- [Recurring payments](#recurring-payments)
-  - [Scope](#scope)
-  - [Initialize a recurring payment](#initialize-a-recurring-payment)
-  - [The userToken](#the-usertoken)
-  - [Make the next recurring payment](#make-the-next-recurring-payment)
-- [URL Validation](#url-validation)
-- [HTTP responses](#http-responses)
-  - [Error codes](#error-codes)
-- [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-- [Proposals](#proposals)
-  - [Recurring 3DS Update Card](#recurring-3ds-update-card)
-- [Differences from previous versions](#differences-from-previous-versions)
-  - [Differences from PSP API v2 to v3](#differences-from-psp-api-v2-to-v3)
-  - [Differences from PSP API v1 to v2](#differences-from-psp-api-v1-to-v2)
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 

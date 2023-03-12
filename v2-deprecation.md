@@ -1,7 +1,9 @@
 <!-- START_METADATA
 ---
 title: PSP API v2 deprecation
+sidebar_label: PSP API v2 deprecation
 sidebar_position: 100
+hide_table_of_contents: true
 pagination_next: null
 pagination_prev: null
 ---
@@ -9,7 +11,7 @@ END_METADATA -->
 
 # PSP API v2 Deprecation
 
-In order to achieve compliance with PSD2’s SCA requirements, Vipps will be processing network tokens instead of PANs going forward. The use of network tokens is Vipps' strategy to achieve Delegated Authentication. This will enable Vipps to leverage existing solutions to authenticate users; thus, maintaining the current user experience with PIN or biometric identification in payment approvals.
+In order to achieve compliance with PSD2’s SCA requirements, we will be processing network tokens instead of PANs going forward. The use of network tokens is Vipps' strategy to achieve Delegated Authentication. This will enable Vipps to leverage existing solutions to authenticate users; thus, maintaining the current user experience with PIN or biometric identification in payment approvals.
 
 This will affect Vipps' PSP/PassThrough services and we are therefore required to launch an updated version of our PSP API. The new version, that we will call v3, has the exact same workflow as our current v2 API, but the messages exchanged in the API calls contain different information. 
 

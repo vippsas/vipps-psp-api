@@ -1,42 +1,31 @@
 <!-- START_METADATA
 ---
-title: FAQs
+title: PSP API Frequently Asked Questions
+sidebar_label: FAQ
 sidebar_position: 40
+description: Frequently asked questions for the PSP API.
 pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
-# FAQs
+# Frequently asked questions
 
 Vipps Netthandel (eCommerce) via PSP offers functionality for payments on
 websites and apps (P2M).
 
-See the [Vipps PSP API guide](vipps-psp-api.md) for all the details.
+See the [PSP API guide](vipps-psp-api.md) for all the technical details.
 
-For more common Vipps questions, see:
+For more common questions, see:
 
-* [Vipps API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
+* [Common API General FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs)
 
 API version: 3.0.0.
 
+<!-- START_COMMENT -->
+
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-## Table of contents
-
-* [How can I check if a merchant or sales unit is active?](#how-can-i-check-if-a-merchant-or-sales-unit-is-active)
-* [Why do I get an `Invalid MSN` error?](#why-do-i-get-an-invalid-msn-error)
-* [How can I update the status of a payment?](#how-can-i-update-the-status-of-a-payment)
-* [What is a network token?](#what-is-a-network-token)
-* [What is a PAN?](#what-is-a-pan)
-* [Why do I get `No network token available for this Agreement` or similar?](#why-do-i-get-no-network-token-available-for-this-agreement-or-similar)
-* [Is there a unique PSP ID for all merchants?](#is-there-a-unique-psp-id-for-all-merchants)
-* [Does Vipps have a test environment?](#does-vipps-have-a-test-environment)
-* [What will be sent in the `makePayment()` request if the customer declines the payment, or it times out?](#what-will-be-sent-in-the-makepayment-request-if-the-customer-declines-the-payment-or-it-times-out)
-* [What is the correct response to the `MakePayment` request?](#what-is-the-correct-response-to-the-makepayment-request)
-* [Can Vipps help merchants that have problems with the PSPs use of the Vipps APIs?](#can-vipps-help-merchants-that-have-problems-with-the-psps-use-of-the-vipps-apis)
-* [Is it possible to skip the landing page?](#is-it-possible-to-skip-the-landing-page)
-* [What functionality is included in the eCom API, but not the PSP API?](#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api)
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 
@@ -55,7 +44,7 @@ See the Vipps FAQ:
 
 You may get an error like this:
 
-```
+```text
 Invalid MSN: 123456. This MSN is not valid for the provided PSP id.
 Check that you are using the correct credentials for the right environment.
 ```

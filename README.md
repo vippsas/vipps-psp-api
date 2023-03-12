@@ -1,16 +1,18 @@
 <!-- START_METADATA
 ---
-title: Introduction
+title: Introduction to the PSP API
+sidebar_label: Introduction
 sidebar_position: 1
 hide_table_of_contents: true
+description: use the PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 pagination_next: null
 pagination_prev: null
 ---
 END_METADATA -->
 
-# Vipps PSP API
+# PSP API
 
-Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments, get details about PSP payments, or update their status.
+Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 In addition, you can use the PSP Signup API to get information about merchant sales units or create new sales units.
 
 **Note**: If you are interested in this API, we highly recommend you get in touch with us using the following [form](https://www.vipps.no/developer/bli-partner/psp-partner/) before starting working on your implementation.
@@ -31,7 +33,7 @@ See
 [Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
-## PSP API
+## Next steps
 
 * [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
 * [API guide](vipps-psp-api.md): Developer guide for PSP API.

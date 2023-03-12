@@ -1,13 +1,17 @@
 <!-- START_METADATA
 ---
 title: PSP Signup API guide
+sidebar_label: PSP Signup API guide
 sidebar_position: 25
+description: Find technical details about integrating with the PSP Signup API.
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
 # PSP Signup API guide
 
-The Vipps PSP Signup API allows PSPs to onboard and manage their merchants.
+The PSP Signup API allows PSPs to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.
 
@@ -18,16 +22,8 @@ API version: 3.0
 
 <!-- START_COMMENT -->
 
-## Table of contents
-
-* [Introduction](#introduction)
-* [Information shown in Vipps](#information-shown-in-vipps)
-  * [The payment screen](#the-payment-screen)
-  * [The receipt screen](#the-receipt-screen)
-* [Get all merchants](#get-all-merchants)
-* [Get information about a specific merchant](#get-information-about-a-specific-merchant)
-* [Create a new merchant sales unit](#create-a-new-merchant-sales-unit)
-* [Update an existing merchant sales unit](#update-an-existing-merchant-sales-unit)
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-signup-api).
 
 <!-- END_COMMENT -->
 

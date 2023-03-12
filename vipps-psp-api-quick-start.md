@@ -1,7 +1,11 @@
 <!-- START_METADATA
 ---
-title: Quick start
+title: Quick start for the PSP API
+sidebar_label: Quick start
 sidebar_position: 15
+description: Quick start guide for the using the PSP API with Postman.
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -12,16 +16,8 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 
 <!-- START_COMMENT -->
 
-## Table of contents
-
-* [Postman](#postman)
-  * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Postman collection and environment](#step-1-get-the-postman-collection-and-environment)
-  * [Step 2: Import the Postman files](#step-2-import-the-postman-files)
-  * [Step 3: Set up Postman environment](#step-3-set-up-postman-environment)
-* [Make API calls](#make-api-calls)
-  * [PSP Payments and details](#psp-payments-and-details)
-  * [PSP Merchant Sign up](#psp-merchant-sign-up)
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 
@@ -37,7 +33,7 @@ Review
 Save the following files to your computer:
 
 * [PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
-* [API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 ### Step 2: Import the Postman files
 
