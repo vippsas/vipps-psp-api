@@ -13,14 +13,15 @@ END_METADATA -->
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the Vipps PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 In addition, you can use the PSP Signup API to get information about merchant sales units or create new sales units.
 
-**Note**: If you are interested in this API, we highly recommend you get in touch with Vipps using the following [form](https://www.vipps.no/developer/bli-partner/psp-partner/) before starting working on your implementation.
+**Note**: If you are interested in this API, we highly recommend you get in touch with us using the following [form](https://www.vipps.no/developer/bli-partner/psp-partner/) before starting working on your implementation.
 
 For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
 <!-- START_COMMENT -->
 
-💥 Please see the new documentation pages here: [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 
@@ -33,7 +34,7 @@ for information about API keys, product activation, how to make API calls, etc.
 ## PSP API
 
 * [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
-* [API guide](vipps-psp-api.md): Developer guide for Vipps PSP API.
+* [API guide](vipps-psp-api.md): Developer guide for PSP API.
 * [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
 * [API FAQ](vipps-psp-api-faq.md): Questions and answers.
 * [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
