@@ -23,12 +23,7 @@ paths:
       summary: Get all merchants
       operationId: getMerchants
       parameters:
-      - name: Authorization
-        in: header
-        description: Bearer 'auth token'
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/Authorization"
       - name: Ocp-Apim-Subscription-Key
         in: header
         description: Subscription key for the PSP Signup API
@@ -75,12 +70,7 @@ paths:
       summary: Create a new merchant
       operationId: addMerchant
       parameters:
-      - name: Authorization
-        in: header
-        description: Bearer 'auth token'
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/Authorization"
       - name: Ocp-Apim-Subscription-Key
         in: header
         description: Subscription key for the PSP Signup API
@@ -154,12 +144,7 @@ paths:
       summary: Get merchant by Id
       operationId: getMerchant
       parameters:
-      - name: Authorization
-        in: header
-        description: Bearer 'auth token'
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/Authorization"
       - name: Ocp-Apim-Subscription-Key
         in: header
         description: Subscription key for the PSP Signup API
@@ -221,12 +206,7 @@ paths:
       summary: Update a merchant
       operationId: patchMerchant
       parameters:
-      - name: Authorization
-        in: header
-        description: Bearer 'auth token'
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/Authorization"
       - name: Ocp-Apim-Subscription-Key
         in: header
         description: Subscription key for the PSP Signup API
@@ -694,13 +674,20 @@ components:
         minLength: 5
         pattern: ^\d{5,6}$
         type: string
-    auth:
-      name: Authorization
+    Authorization:
       in: header
-      description: Bearer 'auth token'
+      name: Authorization
+      description: >-
+        The access token is a base64-encoded string that is required for all API calls.
+        It is a JWT (JSON Web Token).
+        The access token is fetched from the
+        [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+        endpoint.
+        It is valid for 1 hour in the test environment and 24 hours in the production environment.
       required: true
       schema:
         type: string
+        default: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
     apimKey:
       name: Ocp-Apim-Subscription-Key
       in: header
