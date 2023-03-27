@@ -3,13 +3,13 @@ info:
   description: |
     The Vipps PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. See the
-    [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api)
+    [API Guide](https://developer.vippsmobilepay.com/docs/APIs/psp-api)
     for more information.
   version: 1.0.20
   title: PSP API v3
   contact:
     name: Vipps AS
-    url: https://vippsas.github.io/vipps-developer-docs/
+    url: https://developer.vippsmobilepay.com/
 tags:
   - name: Vipps PSP API
     description: Endpoints and operations in the PSP API
@@ -232,7 +232,7 @@ paths:
         Valid requests get a HTTP 200 response, but the actual update is done in
         a batch job during the night. See the API guide for more details:
 
-        https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-api#batch-processing-of-status-updates
+        https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api#batch-processing-of-status-updates
       operationId: updatestatusUsingPOST
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -376,7 +376,7 @@ components:
         The access token is a base64-encoded string that is required for all API calls.
         It is a JWT (JSON Web Token).
         The access token is fetched from the
-        [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+        [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
         endpoint.
         It is valid for 1 hour in the test environment and 24 hours in the production environment.
       required: true

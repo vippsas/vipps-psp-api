@@ -19,7 +19,7 @@ API version: 3.0
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 
@@ -49,7 +49,7 @@ cards, not the card details. If you are not able to process tokens, you should r
 
 There are some differences between Vipps payments done through a PSP and
 payments done through direct integration. See:
-[What functionality is included in the eCom API, but not the PSP API?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
+[What functionality is included in the eCom API, but not the PSP API?](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
 
 ## PSP payment sequence
 
@@ -104,14 +104,14 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+See [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
 in the Common topics, for details.
 
 ### Authentication
 
 All Vipps API calls are authenticated with an access token and an API subscription key.
 See
-[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/APIs/access-token-api#get-an-access-token), for details.
+[Get an access token](https://developer.vippsmobilepay.com/docs/APIs/access-token-api#get-an-access-token), for details.
 
 ### Initiate payment
 
@@ -124,7 +124,7 @@ by the PSP to the Vipps API. Vipps creates the payment and returns a link that d
 The user then confirms the payment in Vipps.
 
 See
-[Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
+[Vipps landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page)
 in the Common  topics area, for more details.
 
 #### Skip landing page
@@ -135,7 +135,7 @@ _Only available for whitelisted sales units._
 Skipping the landing page is typically used at physical points of sale where there is no display available.
 
 See
-[Skip landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page#skip-landing-page)
+[Skip landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page#skip-landing-page)
 for more details.
 
 #### Payment confirmation
@@ -147,7 +147,7 @@ the Vipps app. The user logs in, selects payment source, and confirms the paymen
 
 Once the Vipps user has confirmed the payment in the Vipps app, Vipps shares the network token
 with the PSP by `POST`-ing to the `makePaymentUrl`:
-[`POST:makePaymentUrl`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).
+[`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).
 
 Vipps requires a `HTTP 200 OK` response
 and a response body with `"paymentInfo.status": "OK"`
@@ -168,7 +168,7 @@ PSP with the card token.
 Vipps does not have any information about the actual payment at this point.
 
 The PSP then sends Vipps an update on the status of the payment:
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 
 It's important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
@@ -192,7 +192,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 #### isApp
 
 See
-[isApp](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/isApp)
+[isApp](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp)
 in Common topics.
 
 ### EMVCo Token processing
@@ -292,23 +292,23 @@ the Token returned in the MakePayment request will be:
 
 To provide a consistent end user experience, it is important that Vipps is
 notified by changes to the payment status when it is captured, cancelled, or refunded:
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 
 Vipps also provides an endpoint allowing you to check the payment status:
-[`GET:/v3/psppayments/{pspTransactionId}/details`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
+[`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
 
 **Please note:** For single payments you do not need to send an update for the
 reservation, since that is handled by the synchronous response to the
 `Makepayment` call. But for recurring payments you must send it.
 
 For customers upgrading from the PSP API v1: It is ok to call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 with the v3 API on payments done with the v1 API.
 
 #### Batch processing of status updates
 
 Requests to
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 receive a `HTTP 200 OK` response if the JSON payload was valid.
 The actual _processing_ of the data is done as a batch.
 
@@ -390,7 +390,7 @@ by providing `Request-Id`(or `Idempotency-key`) in the header of the
 request.
 
 See the
-[Idempotency header](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers#idempotency)
+[Idempotency header](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers#idempotency)
 for more details.
 
 ## PSP API implementation checklist
@@ -561,12 +561,12 @@ the init request body could look like this.
 ```
 
 In the same way as a normal, non-recurring PSP v3 payment, the PSP will receive a
-[`POST:makePaymentURL`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
+[`POST:makePaymentURL`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
 callback.
 In the body of this callback, you will now also find a `userToken`.
 
 For `merchantOrderId`: See
-[orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid).
+[orderId recommendations](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid).
 
 ### The userToken
 
@@ -589,7 +589,7 @@ The token also includes various useful information:
 ### Make the next recurring payment
 
 After initialisation, the next payment can be made by passing your `userToken`
-to the [`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
+to the [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
 endpoint as a header with the name `User-Token`.
 
 ```json
@@ -628,13 +628,13 @@ Response with network token:
 ```
 
 Once the card data is received from
-[`POST:/v3/psppayments/payments`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
+[`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
 and the payment has been processed, the PSP must call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 to notify Vipps of the status. In this context, updateStatus accepts a `RESERVED` status.
 If the status for the previous payment has not been received, the agreement will be locked from processing future payments until the update is received.
 If a recurring payment fails, you should call
-[`POST:/v3/psppayments/updatestatus`](https://vippsas.github.io/vipps-developer-docs/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 with `operationStatus: FAILED` set in the body.
 
 ## URL Validation
