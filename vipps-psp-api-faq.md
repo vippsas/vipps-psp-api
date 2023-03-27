@@ -162,4 +162,4 @@ See the FAQ for more details:
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
-See [Common topics: Benefits of direct integration](../common-topics/direct-vs-psp.md#benefits-of-direct-integration).
+See [Common topics: Benefits of direct integration](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/direct-vs-psp#benefits-of-direct-integration).
