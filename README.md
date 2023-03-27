@@ -23,14 +23,14 @@ For product information in Norwegian, see
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
 
 <!-- END_COMMENT -->
 
 ## Getting started
 
 See
-[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
+[Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 ## Next steps
@@ -39,10 +39,10 @@ for information about API keys, product activation, how to make API calls, etc.
 * [API guide](vipps-psp-api.md): Developer guide for PSP API.
 * [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
 * [API FAQ](vipps-psp-api-faq.md): Questions and answers.
-* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp): API specification.
+* [API reference](https://developer.vippsmobilepay.com/api/psp): API specification.
 
 ## PSP Signup API
 
 * [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
 * [Signup API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
-* [API reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup): API specification.
+* [API reference](https://developer.vippsmobilepay.com/api/psp-signup): API specification.

@@ -16,14 +16,14 @@ The PSP Signup API allows PSPs to onboard and manage their merchants.
 This API is the only way to sign up non-Norwegian merchants.
 
 The API specification is available at:
-[PSP Signup API Reference](https://vippsas.github.io/vipps-developer-docs/api/psp-signup).
+[PSP Signup API Reference](https://developer.vippsmobilepay.com/api/psp-signup).
 
 API version: 3.0
 
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-signup-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-signup-api).
 
 <!-- END_COMMENT -->
 
@@ -36,7 +36,7 @@ A PSP can use its existing API keys to access this API, and perform the followin
 * Update an existing merchant
 
 See the
-[PSP API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/psp-api/vipps-psp-api)
+[PSP API Guide](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api)
 for more.
 
 ## Information shown in Vipps
@@ -65,7 +65,7 @@ the merchant that was provided by the PSP is rendered to the end user.
 ## Get all merchants
 
 For a JSON response showing all the merchants and their information, send
-[`GET:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchants).
+[`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
 
 Example response (see the API specification for details):
 
@@ -96,7 +96,7 @@ Example response (see the API specification for details):
 ## Get information about a specific merchant
 
 For information about a specific merchant, send
-[`GET:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/getMerchant).
+[`GET:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant).
 Supply the MSN for a merchant in your list of merchants.
 
 Example response (see the API specification for details):
@@ -130,7 +130,7 @@ Example response (see the API specification for details):
 ## Create a new merchant sales unit
 
 To create new merchant sales unit, send
-[`POST:/v1/merchants`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/addMerchant).
+[`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
 
 For Norway: The orgno must be 9 digits without spaces, the merchant
 must be active in [Brønnøysundregistrene](https://www.brreg.no)
@@ -164,5 +164,5 @@ Example request (see the API specification for details):
 ## Update an existing merchant sales unit
 
 To update a merchant sales unit, send
-[`PATCH:/v1/merchants/:merchantSerialNumber`](https://vippsas.github.io/vipps-developer-docs/api/psp-signup#tag/Merchant/operation/patchMerchant).
+[`PATCH:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/patchMerchant).
 Provide the MSN for the merchant and update the details in the body section.
