@@ -28,7 +28,7 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
 - [ ] Avoid Integration pitfalls
     - [ ] The PSP _must not_ rely on `pspRedirectUrl` alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
     - [ ] The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
-    - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
+    - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines)
 
 ## Live flow
 
