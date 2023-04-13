@@ -588,7 +588,7 @@ The token also includes various useful information:
 
 ### Make the next recurring payment
 
-After initialisation, the next payment can be made by passing your `userToken`
+After initialization, the next payment can be made by passing your `userToken`
 to the [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
 endpoint as a header with the name `User-Token`.
 
