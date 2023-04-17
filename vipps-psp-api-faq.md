@@ -64,7 +64,7 @@ The PSP must use the
 endpoint to notify Vipps of changes to the payment,
 
 See:
-[Status updates](vipps-psp-api#status-updates).
+[Status updates](vipps-psp-api.md#status-updates).
 
 ## What is a network token?
 
