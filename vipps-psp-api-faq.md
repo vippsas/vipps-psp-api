@@ -71,7 +71,7 @@ endpoint to notify Vipps of changes to the payment,
 With the PSP API, the PSP gets network tokens from Vipps
 (see [What is a network token?](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api-faq/#what-is-a-network-token)).
 
-The PSP uses the token to process the payment, and then send Vipps information about
+The PSP uses the token to process the payment, and then sends Vipps information about
 how it went with
 [`POST:/psppayments/updatestatus](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
 
