@@ -68,7 +68,7 @@ endpoint to notify Vipps of changes to the payment,
 
 ## How can I get details for a payment?
 
-With the PSP API the PSP gets network tokens from Vipps
+With the PSP API, the PSP gets network tokens from Vipps
 (see [What is a network token?](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api-faq/#what-is-a-network-token)).
 
 The PSP uses the token to process the payment, and then send Vipps information about
