@@ -63,7 +63,26 @@ The PSP must use the
 [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 endpoint to notify Vipps of changes to the payment,
 
-See:
+**Please note:** Vipps proceses the information in daily batches. See:
+[Status updates](vipps-psp-api.md#status-updates).
+
+## How can I get details for a payment?
+
+With the PSP API, the PSP gets network tokens from Vipps
+(see [What is a network token?](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api-faq/#what-is-a-network-token)).
+
+The PSP uses the token to process the payment, and then sends Vipps information about
+how it went with
+[`POST:/psppayments/updatestatus](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+
+Vipps does not have other information about the payment than what the PSP has sent.
+
+The PSP can use
+[`GET:/psppayments/{pspTransactionId}/details](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
+to get the details of a payment, but this will of course be the same
+information that the PSP has sent earlier.
+
+**Please note:** Vipps proceses the information in daily batches. See:
 [Status updates](vipps-psp-api.md#status-updates).
 
 ## What is a network token?
