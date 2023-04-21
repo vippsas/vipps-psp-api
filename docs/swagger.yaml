@@ -710,7 +710,7 @@ components:
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
-            (trnsactionText is similar to paymentText).
+            (transactionText is similar to paymentText).
         isApp:
           type: boolean
           example: false
@@ -801,7 +801,7 @@ components:
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
-            (trnsactionText is similar to paymentText).
+            (transactionText is similar to paymentText).
       title: ProcessPaymentOnToken
     PaymentTransactionDetails:
       type: object
@@ -819,7 +819,7 @@ components:
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
-            (trnsactionText is similar to paymentText).
+            (transactionText is similar to paymentText).
         timeStamp:
           type: string
           example: 2018-06-13T18:34:25-07:00
@@ -876,7 +876,7 @@ components:
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
-            (trnsactionText is similar to paymentText).
+            (transactionText is similar to paymentText).
         operationStatus:
           type: string
           example: SUCCESS
