@@ -178,17 +178,13 @@ paths:
         Used by Vipps to send the card network token from the Vipps token
         requestor service to the PSP to complete the initialized transaction.
 
-
-
         The PSP will use the token to process the payment and then
-
         send the outcome (`RESERVE`, `CAPTURE` or `REJECT`) to Vipps
-
         using the `POST:/updatestatus` endpoint.
 
         Communication security is established by using 1-way SSL and `makePaymentToken`.
 
-        The response must use content-type `application/json`.
+        The response must use Content-Type `application/json`.
       operationId: makePaymentV3UsingPOST
       parameters:
         - name: Authorization
@@ -224,12 +220,9 @@ paths:
       description: >
         Since Vipps doesn't process the PSP transactions, updates on payment
         status are required in order to deliver expected customer experience. That means
-
-
-
         that PSP has to inform Vipps about any PSP payment status change through this endpoint.
 
-        Valid requests get a HTTP 200 response, but the actual update is done in
+        Valid requests get a `HTTP 200 OK` response, but the actual update is done in
         a batch job during the night. See the API guide for more details:
 
         https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api#batch-processing-of-status-updates
@@ -332,6 +325,7 @@ paths:
         and will fail. Important: All test users must manually approve at least
         one payment in Vipps (using the app) before this endpoint can be used
         for that user.
+        See: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/
       operationId: integrationTestApprovePayment
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -408,7 +402,8 @@ components:
       name: Psp-Id
       description: >-
         PSP id is provided by Vipps. This is the PSP's id, and the same for
-        all the PSP's merchants. GUID value for PSPs created after start of 2021.
+        all the PSP's merchants. 
+        This is a GUID value for PSPs created after 2020.
       required: true
       schema:
         type: string
@@ -434,7 +429,9 @@ components:
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
-      description: The name of the ecommerce solution. One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce solution. One word in lowercase letters is good.
+        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -442,7 +439,9 @@ components:
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
-      description: The version number of the ecommerce solution.
+      description: |-
+        The version number of the ecommerce solution.
+        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -450,7 +449,9 @@ components:
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
       in: header
-      description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -458,7 +459,9 @@ components:
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
       in: header
-      description: The version number of the ecommerce plugin (if applicable).
+      description: |-
+        The version number of the ecommerce plugin (if applicable).
+        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -583,7 +586,7 @@ components:
           type: string
           example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni (truncated)
         binNumber:
-          description: Bin number for the card
+          description: BIN number for the card
           type: string
           example: "492556"
         operations:
@@ -703,12 +706,16 @@ components:
         makePaymentUrl:
           type: string
           example: https://example.com/psp-makepayment
-          description: PSP URL used by Vipps to send the card data
+          description: |-
+            PSP URL used by Vipps to send the network token.
+            See: https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-api/#makepaymenturl
         makePaymentToken:
           type: string
           example: lfkhwef3op48yufpcno3fh34qp8fyncpf83hy4
           maxLength: 255
-          description: Authorization header for MakePayment call
+          description: |-
+            PSP-specified `Authorization` HTTP header tu use foer the request to the
+            PSP's `makePaymentUrl`.
         paymentText:
           type: string
           example: One pair of Vipps socks
@@ -830,12 +837,17 @@ components:
             (transactionText is similar to paymentText).
         timeStamp:
           type: string
-          example: 2018-06-13T18:34:25-07:00
+          example: "2018-06-13T18:34:25-07:00"
           description: Timestamp in ISO-8601 representing when Vipps did the payment
         operation:
           type: string
-          example: REFUNDED
           description: Transaction Status
+          enum:
+            - RESERVED
+            - CAPTURED
+            - CANCELLED
+            - REFUNDED
+          example: CAPTURED
         operationSuccess:
           type: boolean
           example: false
@@ -860,7 +872,7 @@ components:
         status:
           type: string
           example: CAPTURED
-          description: PSP Transaction Status to be updated in Vipps
+          description: PSP transaction status to be updated in Vipps
           enum:
             - RESERVED
             - CAPTURED
