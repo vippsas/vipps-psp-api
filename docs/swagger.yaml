@@ -521,8 +521,10 @@ components:
         merchantOrderId:
           type: string
           description: |
-            Id which uniquely identifies a payment. Maximum length is 50
-            alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            Id which uniquely identifies a payment.
+            Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
           maxLength: 50
@@ -541,8 +543,10 @@ components:
         merchantOrderId:
           type: string
           description: |
-            Id which uniquely identifies a payment. Maximum length is 50
-            alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            Id which uniquely identifies a payment.
+            Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
           maxLength: 50
@@ -663,8 +667,10 @@ components:
         merchantOrderId:
           type: string
           description: |
-            Id which uniquely identifies a payment. Maximum length is 50
-            alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            Id which uniquely identifies a payment.
+            Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
           maxLength: 50
@@ -758,6 +764,7 @@ components:
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
           maxLength: 50
@@ -781,6 +788,7 @@ components:
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
             See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
           maxLength: 50
