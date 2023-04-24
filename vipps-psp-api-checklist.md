@@ -11,7 +11,7 @@ END_METADATA -->
 
 # Checklist
 
-For examples of requests and responses, see the [Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
+For examples of requests and responses, see the [Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
 and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
 
 ## Checklist for full integration
