@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: PSP API guide
 sidebar_label: PSP API guide
@@ -7,7 +6,6 @@ description: Find technical details about integrating with the PSP API.
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # PSP API guide
 
@@ -16,12 +14,6 @@ but you can use the PSP API to initiate PSP payments.
 
 API version: 3.0
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
-
-<!-- END_COMMENT -->
 
 ## How it works
 
