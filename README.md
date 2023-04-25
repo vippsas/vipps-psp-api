@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Introduction to the PSP API
 sidebar_label: Introduction
@@ -8,7 +7,6 @@ description: use the PSP API to initiate PSP payments, get details about PSP pay
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # PSP API
 
@@ -19,13 +17,6 @@ In addition, you can use the PSP Signup API to get information about merchant sa
 
 For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
-
-<!-- END_COMMENT -->
 
 ## Getting started
 

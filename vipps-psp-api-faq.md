@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: PSP API Frequently Asked Questions
 sidebar_label: FAQ
@@ -7,7 +6,6 @@ description: Frequently asked questions for the PSP API.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Frequently asked questions
 
@@ -22,12 +20,6 @@ For more common questions, see:
 
 API version: 3.0.0.
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
-
-<!-- END_COMMENT -->
 
 ## How can I check if a merchant or sales unit is active?
 

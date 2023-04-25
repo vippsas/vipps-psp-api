@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Quick start for the PSP API
 sidebar_label: Quick start
@@ -7,19 +6,12 @@ description: Quick start guide for the using the PSP API with Postman.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Quick start
 
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
 Use the PSP Merchant Signup API to get information about merchants, create a new sales unit, or update the sales unit details.
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api).
-
-<!-- END_COMMENT -->
 
 ## Postman
 

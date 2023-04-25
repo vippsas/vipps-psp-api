@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: PSP API v2 deprecation
 sidebar_label: PSP API v2 deprecation
@@ -7,7 +6,6 @@ hide_table_of_contents: true
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # PSP API v2 Deprecation
 
