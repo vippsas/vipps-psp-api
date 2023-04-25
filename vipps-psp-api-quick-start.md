@@ -32,7 +32,7 @@ Review
 
 Save the following files to your computer:
 
-* [PSP API Postman collection](tools/vipps-psp-v3-api-postman-collection.json)
+* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
 * [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 ### Step 2: Import the Postman files
