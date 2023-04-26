@@ -435,7 +435,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: woocommerce
+        example: Acme Commerce
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
@@ -445,27 +445,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: "5.4"
-    Vipps-System-Plugin-Name:
-      name: Vipps-System-Plugin-Name
-      in: header
-      description: |-
-        The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
-        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
-      schema:
-        type: string
-        maxLength: 30
-        example: "vipps-woocommerce"
-    Vipps-System-Plugin-Version:
-      name: Vipps-System-Plugin-Version
-      in: header
-      description: |-
-        The version number of the ecommerce plugin (if applicable).
-        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
-      schema:
-        type: string
-        maxLength: 30
-        example: "1.2.1"
+        example: "1.7"
   schemas:
     ErrorDetails:
       type: object
