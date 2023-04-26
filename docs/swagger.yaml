@@ -435,7 +435,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: woocommerce
+        example: Acme Commerce
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
@@ -445,7 +445,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: "5.4"
+        example: "1.7"
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
       in: header
@@ -455,7 +455,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: "vipps-woocommerce"
+        example: "acme-webshop"
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
       in: header
@@ -465,7 +465,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: "1.2.1"
+        example: "4.3"
   schemas:
     ErrorDetails:
       type: object
