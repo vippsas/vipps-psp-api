@@ -29,8 +29,6 @@ paths:
         - $ref: "#/components/parameters/Psp-Id"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -84,8 +82,6 @@ paths:
         - $ref: "#/components/parameters/User-Token"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
@@ -127,8 +123,6 @@ paths:
         - $ref: "#/components/parameters/User-Token"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -234,8 +228,6 @@ paths:
         - $ref: "#/components/parameters/Psp-Id"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json:
@@ -287,8 +279,6 @@ paths:
         - $ref: "#/components/parameters/pspTransactionId"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
@@ -335,8 +325,6 @@ paths:
         - $ref: "#/components/parameters/pspTransactionId"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
