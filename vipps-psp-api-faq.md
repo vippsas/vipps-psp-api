@@ -65,12 +65,12 @@ With the PSP API, the PSP gets network tokens from Vipps
 
 The PSP uses the token to process the payment, and then sends Vipps information about
 how it went with
-[`POST:/psppayments/updatestatus](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+[`POST:/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
 
 Vipps does not have other information about the payment than what the PSP has sent.
 
 The PSP can use
-[`GET:/psppayments/{pspTransactionId}/details](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
+[`GET:/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
 to get the details of a payment, but this will of course be the same
 information that the PSP has sent earlier.
 
