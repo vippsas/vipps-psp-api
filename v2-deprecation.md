@@ -11,7 +11,7 @@ pagination_prev: null
 
 In order to achieve compliance with PSD2’s SCA requirements, we will be processing network tokens instead of PANs going forward. The use of network tokens is Vipps' strategy to achieve Delegated Authentication. This will enable Vipps to leverage existing solutions to authenticate users; thus, maintaining the current user experience with PIN or biometric identification in payment approvals.
 
-This will affect Vipps' PSP/PassThrough services and we are therefore required to launch an updated version of our PSP API. The new version, that we will call v3, has the exact same workflow as our current v2 API, but the messages exchanged in the API calls contain different information. 
+This will affect Vipps' PSP/PassThrough services, and we are therefore required to launch an updated version of our PSP API. The new version, that we will call v3, has the exact same workflow as our current v2 API, but the messages exchanged in the API calls contain different information.
 
 The v3 API messages will contain a network token, a cryptogram (aka. TAVV) and Vipps' Token Requestor ID (TRID). The PSP API v3 will require that you have the capabilities to process Network Tokens instead of raw PANs. This is described in technical detail below and is live in our test environment:
 
@@ -34,7 +34,7 @@ Vipps is in dialogue with Mastercard regarding flagging delegated authentication
 
 ## Soft decline
 
-While Vipps is doing it’s utmost to achieve delegated SCA in all scenarios we are not in full control of all  the factors. Therefore it is critical that you support soft decline step-ups for all payment flows.
+While Vipps is doing it’s utmost to achieve delegated SCA in all scenarios we are not in full control of all  the factors. Therefore, it is critical that you support soft decline step-ups for all payment flows.
 This is described in [PSD2 Compliance and Secure Customer Authentication (SCA)](vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca).
 
 ### Exemptions

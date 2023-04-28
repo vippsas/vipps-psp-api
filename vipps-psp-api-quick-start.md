@@ -46,7 +46,7 @@ Save the following files to your computer:
    * `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
    * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
    * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
-   * `idempotency_key` - Unique request id, needed only for `Create new Merchant Sales Unit`.
+   * `idempotency_key` - Unique request ID, needed only for `Create new Merchant Sales Unit`.
 
 Note that the calls in this PSP API require your PSP subscription key.
 
@@ -62,15 +62,15 @@ for details about the calls.
 
 ### PSP Payments and details
 
-1. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+1. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears, and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
 2. Send request  `Get Details` for details about the transaction. See [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET).
 3. Send request `Update Status`. This is an example of what the PSP sends Vipps to update on the status of the payment. See [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
 
 ### PSP Merchant Sign up
 
-1. Send `Get all Merchants` for a json response showing all the merchants and their information. See [`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
+1. Send `Get all Merchants` for a JSON response showing all the merchants and their information. See [`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
 2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants. See [`GET:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant).
-3. Send `Create new Merchant Sales Unit`. Notice the merchantSerialNumber is provided back.  See [`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
+3. Send `Create new Merchant Sales Unit`. Notice the `merchantSerialNumber` is provided back.  See [`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
 4. Open `Update Merchant Sales Unit`. Use MSN for the new merchant and update the body before sending the request.
    Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
     See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/patchMerchant).
