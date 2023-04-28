@@ -231,7 +231,7 @@ information for Delegated Authentication (DA) and the SCA factors used.
 
 The Visa Token Service will during detokenization populate a flag for DA in field
 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way,
-Issuers recognize Vipps originated transactions and will not soft-decline for
+Issuers recognize Vipps originated transactions and will not softdecline for
 DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
 The expected ECI value for VISA requests is ECI-07.
 
