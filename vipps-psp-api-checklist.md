@@ -9,24 +9,30 @@ pagination_prev: null
 
 # Checklist
 
-For examples of requests and responses, see the [Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
+## Endpoints to integrate
+
+Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp). For examples of requests and responses, see the [Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
 and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
 
-## Checklist for full integration
+| Endpoint | Comment |
+|----------|---------|
+| Initiate a PSP payment | [`POST:/v3/psppayments/init`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST) |
+| Update the status of the PSP transaction | [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST) |
+| Get the details of the PSP payment | [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) |
+| On the merchant side, be able to process EMVCo tokens | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST) |
+| Delete a payment agreement. For recurring only(Currently on freeze pending PSD2 migration) | [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3) |
+| Get card data to process a payment with token. For recurring only (Currently on freeze pending PSD2 migration) | [`DELETE:/v3/psppayments/agreements`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/deletePSPPaymenAgreementUsingDELETE) |
+| Respond with correct error information  | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).  See [error codes list](vipps-psp-api.md#error-codes) for possible responses.|
 
-- [ ] Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp)
-    - [ ] [`POST:/v3/psppayments/init`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST)
-    - [ ] [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
-    - [ ] [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
-    - [ ] On the merchant side, be able to process EMVCo tokens: [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST)
-    - [ ] For recurring only(Currently on freeze pending PSD2 migration): [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3)
-    - [ ] For recurring only (Currently on freeze pending PSD2 migration): [`DELETE:/v3/psppayments/agreements`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/deletePSPPaymenAgreementUsingDELETE)
-- [ ] Respond with correct error information to [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST). See [error codes list](vipps-psp-api.md#error-codes) for possible responses.
-- [ ] Support soft decline, or handle step ups according to our [3DS specifications](vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca)
-- [ ] Avoid Integration pitfalls
-    - [ ] The PSP _must not_ rely on `pspRedirectUrl` alone, see [PSP Payment Sequence](vipps-psp-api.md#summary)
-    - [ ] The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`)
-    - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines)
+
+## Avoid integration pitfalls
+
+| Action | Comment   |
+|--------|-----------|
+| Support soft decline step-ups according to [3DS specifications](vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |  In case of a soft decline (when the issuer requires 3DS), the PSP must host a 3DSecure session and must provide the URL to Vipps. See [PSD2 Compliance and Secure Customer Authentication (SCA)](./vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |
+| Do not rely on `pspRedirectUrl`  |  Some users may close Vipps immediately after seeing the payment confirmation, therefore not being "redirected" back to the merchant. Because of this, it is important for the merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`. See [PSP Payment Sequence](vipps-psp-api.md#psp-payment-sequence). |
+| Provide reserve, capture, and refund information to Vipps | The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`) |
+| Follow design guidelines     | The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines).|
 
 ## Live flow
 
