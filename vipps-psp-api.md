@@ -174,7 +174,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 **Please note:**
 
 - The normal
-  [Timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
+  [timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
   apply to the PSP API, and the PSP will get a request to the `makePaymentUrl`
   after 10 minutes if the user has not acted on the payment request.
 - The `makePaymentUrl` has a timeout of _**15 seconds**_.
