@@ -162,7 +162,7 @@ Vipps does not have any information about the actual payment at this point.
 The PSP then sends Vipps an update on the status of the payment:
 [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 
-It's important that the PSP sends this update, so the user can see the
+It is important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
 Without a status update from the PSP, the user will see an incorrect status.
 Payment updates are processed in batches.
@@ -175,10 +175,10 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 
 - The normal
   [timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
-  apply to the PSP API. The PSP will get a request to the `makePaymentUrl`
-  after 10 minutes if the user has not acted on the payment request.
+  apply to the PSP API. If the user does not act on the payment request within 10 minutes,
+  Vipps will make a POST request towards the `makePaymentUrl` with a status of `timeout`.
 - The `makePaymentUrl` has a timeout of _**15 seconds**_.
-  If no response is received within this period Vipps will mark the transaction as `FAILED`.
+  If no response is received within this period, Vipps will mark the transaction as `FAILED`.
   This is a known issue with the current API.
   Future improvements to address this issue are planned.
 - Some users may close Vipps immediately after seeing the payment confirmation,
