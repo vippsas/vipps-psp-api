@@ -110,8 +110,8 @@ See
 When a user chooses Vipps as the payment method, a payment request is initiated
 by the PSP to the Vipps API. Vipps creates the payment and returns a link that does the following:
 
-- For users on a mobile device, the Vipps app is opened.
-- For other users, the Vipps landing page is opened in a browser. The user can then enter their phone number and continue in the Vipps app on their phone.
+* For users on a mobile device, the Vipps app is opened.
+* For other users, the Vipps landing page is opened in a browser. The user can then enter their phone number and continue in the Vipps app on their phone.
 
 The user then confirms the payment in Vipps.
 
@@ -173,15 +173,15 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 
 **Please note:**
 
-- The normal
+* The normal
   [timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
   apply to the PSP API. If the user does not act on the payment request within 10 minutes,
   Vipps will make a POST request towards the `makePaymentUrl` with a status of `timeout`.
-- The `makePaymentUrl` has a timeout of _**15 seconds**_.
+* The `makePaymentUrl` has a timeout of _**15 seconds**_.
   If no response is received within this period, Vipps will mark the transaction as `FAILED`.
   This is a known issue with the current API.
   Future improvements to address this issue are planned.
-- Some users may close Vipps immediately after seeing the payment confirmation,
+* Some users may close Vipps immediately after seeing the payment confirmation,
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
   merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
 
@@ -222,8 +222,8 @@ Authorization: makePaymentToken
 
 Where:
 
-- `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
-- `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
+* `paymentInstrument` is as an indicator that can be used to differentiate the two alternatives.
+* `networkToken` is the Network token of the card, up to 16-19 digits. A full replacement of the PAN.
 
 #### Scheme specific details
 
@@ -704,9 +704,9 @@ Since Vipps is a mobile entity, the amount of control Vipps has over the redirec
 
 Examples of some, but not all, factors outside Vipps' control.
 
-- Configurations set by the OS itself, for example the default browser.
-- User configurations of browsers.
-- Users closing app immediately upon purchase.
+* Configurations set by the OS itself, for example the default browser.
+* User configurations of browsers.
+* Users closing app immediately upon purchase.
 
 Therefore, Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would be a polling-based result handling from a value in the redirect URL.
 
@@ -739,10 +739,10 @@ Values for this enum have changed accordingly:
 
 ### Differences from PSP API v1 to v2
 
-- Added support for redirection of user after payment completion in the Vipps app
-- Added support for providing the `makePaymentUrl` in the initiate payment call
-- Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
-- Improved and more consistent parameter names in the API
+* Added support for redirection of user after payment completion in the Vipps app
+* Added support for providing the `makePaymentUrl` in the initiate payment call
+* Improved authorization of the `makePaymentUrl` call by adding the `Authorization` header value
+* Improved and more consistent parameter names in the API
 
 ## Proposals
 
