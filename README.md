@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: Introduction to the PSP API
 sidebar_label: Introduction
@@ -7,6 +8,7 @@ description: use the PSP API to initiate PSP payments, get details about PSP pay
 pagination_next: null
 pagination_prev: null
 ---
+END_METADATA -->
 
 # PSP API
 

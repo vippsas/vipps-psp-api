@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: Quick start for the PSP API
 sidebar_label: Quick start
@@ -6,12 +7,12 @@ description: Quick start guide for the using the PSP API with Postman.
 pagination_next: null
 pagination_prev: null
 ---
+END_METADATA -->
 
 # Quick start
 
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
 Use the PSP Merchant Signup API to get information about merchants, create a new sales unit, or update the sales unit details.
-
 
 ## Postman
 
@@ -52,7 +53,7 @@ Note that the calls in this PSP API require your PSP subscription key.
 
 ## Make API calls
 
-For all of the following, you will start by sending request `Get Access Token`.
+For all the following, you will start by sending request `Get Access Token`.
 This provides you with access to the API.
 
 The access token is valid for 1 hour in the test environment and 24 hours in the production environment.

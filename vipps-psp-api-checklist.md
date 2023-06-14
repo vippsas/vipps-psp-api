@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: eCom API checklist
 sidebar_label: Checklist
@@ -6,6 +7,7 @@ description: Checklist for full integration with the PSP API.
 pagination_next: null
 pagination_prev: null
 ---
+END_METADATA -->
 
 # Checklist
 
@@ -23,7 +25,6 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
 | Delete a payment agreement. For recurring only(Currently on freeze pending PSD2 migration) | [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3) |
 | Get card data to process a payment with token. For recurring only (Currently on freeze pending PSD2 migration) | [`DELETE:/v3/psppayments/agreements`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/deletePSPPaymenAgreementUsingDELETE) |
 | Respond with correct error information  | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).  See [error codes list](vipps-psp-api.md#error-codes) for possible responses.|
-
 
 ## Avoid integration pitfalls
 

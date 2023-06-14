@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: PSP API Frequently Asked Questions
 sidebar_label: FAQ
@@ -6,6 +7,7 @@ description: Frequently asked questions for the PSP API.
 pagination_next: null
 pagination_prev: null
 ---
+END_METADATA -->
 
 # Frequently asked questions
 
@@ -19,7 +21,6 @@ For more common questions, see:
 * [Common API General FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
 
 API version: 3.0.0.
-
 
 ## How can I check if a merchant or sales unit is active?
 
@@ -135,8 +136,6 @@ specification:
 
 Continued: "What should be the response when `Confirmed` contains `TimeOut` or `Cancel` -
 should `paymentInfo.status` be `OK` or `FAIL`? If it is `FAIL", what error code should be returned?`"
-
-Well..
 
 It is suggested that you send `FAIL` in case of failure either at your end or -
 as in this case - at our end.

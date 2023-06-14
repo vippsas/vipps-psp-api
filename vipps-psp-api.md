@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: PSP API guide
 sidebar_label: PSP API guide
@@ -6,6 +7,7 @@ description: Find technical details about integrating with the PSP API.
 pagination_prev: Null
 pagination_next: Null
 ---
+END_METADATA -->
 
 # PSP API guide
 
@@ -13,7 +15,6 @@ Settlements for Payment Service Provider (PSP) integrations are handled by the P
 but you can use the PSP API to initiate PSP payments.
 
 API version: 3.0
-
 
 ## How it works
 
@@ -148,7 +149,7 @@ Vipps then sets the payment's status to `RESERVED`.
 
 If Vipps does not receive the expected response, the payment's status will be `FAILED`.
 
-The process of POST-ing to the `makePaymentUrl` is synchronous, and while Vipps
+The process of using POST to the `makePaymentUrl` is synchronous, and while Vipps
 is waiting for a response from the PSP, the user will see a "spinner" in the
 Vipps app.
 
@@ -235,7 +236,7 @@ information for Delegated Authentication (DA) and the SCA factors used.
 
 The Visa Token Service will during detokenization populate a flag for DA in field
 34 to issuers and the Vipps TRID in field 123 Usage 2 Tag 03. In this way,
-Issuers recognize Vipps originated transactions and will not soft decline for
+Issuers recognize Vipps originated transactions and will not soft-decline for
 DS step-up unless the issuing bank has opted out of the Visa D-SCA program.
 The expected ECI value for VISA requests is ECI-07.
 
@@ -470,7 +471,7 @@ The Vipps App will then open the URL in a web view, letting the user complete
 the 3DSecure flow. The PSP must host and retrieve any necessary data
 from the session. Once the session is completed, the PSP must finish with a
 redirect according to the `Operations.url` object sent in the initial
-`makePayment` request, where upon the app will close the iframe. Vipps will
+`makePayment` request, whereupon the app will close the iframe. Vipps will
 then resend the `makePayment` request.
 
 For example, if a 3DSecure session succeeds, you should redirect to the
@@ -755,7 +756,7 @@ This callback will be triggered when the user changes card with the following re
 
 HTTP headers:
 
-```
+```http
 PSP-ID: C948DFD1546347568874C4DDC93A2E3C
 Merchant-Serial-Number: 123456
 User-Token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9

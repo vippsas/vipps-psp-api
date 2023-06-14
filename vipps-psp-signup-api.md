@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 title: PSP Signup API guide
 sidebar_label: PSP Signup API guide
@@ -6,6 +7,7 @@ description: Find technical details about integrating with the PSP Signup API.
 pagination_prev: Null
 pagination_next: Null
 ---
+END_METADATA -->
 
 # PSP Signup API guide
 
@@ -127,7 +129,7 @@ For Norway: The orgno must be 9 digits without spaces, the merchant
 must be active in [Brønnøysundregistrene](https://www.brreg.no)
 and the orgno must be for the main entity ("hovedenhet"),
 not a sub entity ("underenhet").
-For other countries: The orgno, address, etc. is validated as much
+For other countries: The orgno, address, and other information are validated as much
 as practically possible.
 
 Example request (see the API specification for details):
