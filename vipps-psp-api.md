@@ -86,7 +86,7 @@ sequenceDiagram
 
 **Important:** Some users may close Vipps immediately after seeing the payment confirmation,
 therefore not being "redirected" back to the merchant. Because of this, it is important for the
-merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
+merchant and the PSP to *not* base their transaction logic on the user reaching the `pspRedirectUrl`.
 
 For example: Check for "reserved" status with the PSP's API (not Vipps' API),
 then do "capture" when the goods have been shipped/delivered.
@@ -122,7 +122,7 @@ in the Common  topics area, for more details.
 
 #### Skip landing page
 
-_Only available for whitelisted sales units._
+*Only available for whitelisted sales units.*
 
 **Please note:** This feature has to be enabled by Vipps for eligible sales units. The sales units must be whitelisted by Vipps.
 Skipping the landing page is typically used at physical points of sale where there is no display available.
@@ -178,13 +178,13 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
   [timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
   apply to the PSP API. If the user does not act on the payment request within 10 minutes,
   Vipps will make a POST request towards the `makePaymentUrl` with a status of `timeout`.
-* The `makePaymentUrl` has a timeout of _**15 seconds**_.
+* The `makePaymentUrl` has a timeout of **15 seconds**.
   If no response is received within this period, Vipps will mark the transaction as `FAILED`.
   This is a known issue with the current API.
   Future improvements to address this issue are planned.
 * Some users may close Vipps immediately after seeing the payment confirmation,
   therefore not being "redirected" back to the merchant. Because of this, it is important for the
-  merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`.
+  merchant and the PSP to *not* base their transaction logic on the user reaching the `pspRedirectUrl`.
 
 #### isApp
 
@@ -307,7 +307,7 @@ with the v3 API on payments done with the v1 API.
 Requests to
 [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
 receive a `HTTP 200 OK` response if the JSON payload was valid.
-The actual _processing_ of the data is done as a batch.
+The actual *processing* of the data is done as a batch.
 
 The reason for this is that some PSPs send Vipps all their status updates once
 a day. Based on this, we created a service that can handle thousands of
@@ -318,7 +318,7 @@ resulting performance hit, we chose to defer these into a nightly batch job.
 
 Because of this, the updated status is only visible in Vipps the next day.
 
-**Please note:** The batch update is _not_ run in the test environment, as
+**Please note:** The batch update is *not* run in the test environment, as
 there are some technical details preventing it from being run in the same way
 as in the production environment. The status of PSP payments will therefore
 always be in the initiated state in the test environment.
