@@ -563,7 +563,7 @@ callback.
 In the body of this callback, you will now also find a `userToken`.
 
 For `merchantOrderId`: See
-[orderId recommendations](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid).
+[Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid).
 
 ### The user token
 
