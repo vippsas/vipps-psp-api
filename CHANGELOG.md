@@ -28,4 +28,4 @@ additional payment source format. There are also minor changes to naming of
 properties to bring the API in line with Vipps' API standards.
 
 Encrypted cards will still be sent for our users cards that have not yet been
-migrated. Please see our [migration guide](https://developer.vippsmobilepay.com/docs/APIs/psp-api/v2-deprecation).
+migrated. Please see our [migration guide](v2-deprecation.md).
