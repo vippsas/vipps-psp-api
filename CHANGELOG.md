@@ -5,7 +5,6 @@ sidebar_label: Changelog
 sidebar_position: 200
 pagination_next: null
 pagination_prev: null
-draft: true
 ---
 END_METADATA -->
 
