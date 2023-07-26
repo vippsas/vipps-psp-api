@@ -117,7 +117,7 @@ by the PSP to the Vipps API. Vipps creates the payment and returns a link that d
 The user then confirms the payment in Vipps.
 
 See
-[Vipps landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page)
+[landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
 in the Common  topics area, for more details.
 
 #### Skip landing page
@@ -128,7 +128,7 @@ in the Common  topics area, for more details.
 Skipping the landing page is typically used at physical points of sale where there is no display available.
 
 See
-[Skip landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page#skip-landing-page)
+[Skip landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page#skip-landing-page)
 for more details.
 
 #### Payment confirmation
