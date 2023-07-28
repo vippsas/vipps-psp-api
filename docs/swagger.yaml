@@ -708,7 +708,7 @@ components:
             Optional parameter.
             Skips the landing page for whitelisted sales units.
             Requires a valid `customerMobileNumber`.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page/
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page/
         scope:
           $ref: "#/components/schemas/Scope"
         merchantAgreementUrl:
