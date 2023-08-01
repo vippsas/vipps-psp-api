@@ -315,7 +315,7 @@ paths:
         and will fail. Important: All test users must manually approve at least
         one payment in Vipps (using the app) before this endpoint can be used
         for that user.
-        See: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/
+        See: https://developer.vippsmobilepay.com/docs/test-environment/
       operationId: integrationTestApprovePayment
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -419,7 +419,7 @@ components:
       in: header
       description: |-
         The name of the ecommerce solution. One word in lowercase letters is good.
-        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
+        See: https://developer.vippsmobilepay.com/docs/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -429,7 +429,7 @@ components:
       in: header
       description: |-
         The version number of the ecommerce solution.
-        See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers/
+        See: https://developer.vippsmobilepay.com/docs/common-topics/http-headers/
       schema:
         type: string
         maxLength: 30
@@ -494,7 +494,7 @@ components:
           description: |
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
@@ -516,7 +516,7 @@ components:
           description: |
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
@@ -640,7 +640,7 @@ components:
           description: |
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
@@ -690,7 +690,7 @@ components:
           description: |-
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/transactiontext/
             (transactionText is similar to paymentText).
         isApp:
           type: boolean
@@ -699,7 +699,7 @@ components:
           description: |-
             Optional parameter.
             Indicates whether payment request is triggered from a mobile app or a web browser.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/isApp/
         skipLandingPage:
           type: boolean
           example: false
@@ -708,7 +708,7 @@ components:
             Optional parameter.
             Skips the landing page for whitelisted sales units.
             Requires a valid `customerMobileNumber`.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page/
         scope:
           $ref: "#/components/schemas/Scope"
         merchantAgreementUrl:
@@ -738,7 +738,7 @@ components:
           description: |-
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
@@ -762,7 +762,7 @@ components:
           description: |
             Id which uniquely identifies a payment.
             Maximum length is 50 alphanumeric characters: a-z, A-Z, 0-9 and '-'.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             (merchantOrderId is similar to orderId).
           example: acme-shop-123-order123abc
           pattern: ^[a-zA-Z0-9-]{1,50}$
@@ -783,7 +783,7 @@ components:
           description: |-
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/transactiontext/
             (transactionText is similar to paymentText).
       title: ProcessPaymentOnToken
     PaymentTransactionDetails:
@@ -801,7 +801,7 @@ components:
           description: |-
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/transactiontext/
             (transactionText is similar to paymentText).
         timeStamp:
           type: string
@@ -863,7 +863,7 @@ components:
           description: |-
             Text to be displayed to end user. 
             The text should be as user-friendly and informative as possible.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/transactiontext/
+            See: https://developer.vippsmobilepay.com/docs/common-topics/transactiontext/
             (transactionText is similar to paymentText).
         operationStatus:
           type: string

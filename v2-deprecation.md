@@ -29,7 +29,7 @@ This is described in technical detail below and is live in our test environment:
 
 As EBA and national authorities have mandated, SCA will come into effect January 1st 2021, and Vipps is working towards this deadline.
 We expect all raw PAN-processing to cause 3D Secure step-ups from this date. Please
-[contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact)
+[contact us](https://developer.vippsmobilepay.com/docs/contact)
 if you have any questions or want a meeting, and we will find a time to meet up.
 
 ## Scheme specific details
