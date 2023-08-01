@@ -33,7 +33,7 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
 | Support soft decline step-ups according to [3DS specifications](vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |  In case of a soft decline (when the issuer requires 3DS), the PSP must host a 3DSecure session and must provide the URL to Vipps. See [PSD2 Compliance and Secure Customer Authentication (SCA)](./vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |
 | Do not rely on `pspRedirectUrl`  |  Some users may close Vipps immediately after seeing the payment confirmation, therefore not being "redirected" back to the merchant. Because of this, it is important for the merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`. See [PSP Payment Sequence](vipps-psp-api.md#psp-payment-sequence). |
 | Provide reserve, capture, and refund information to Vipps | The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`) |
-| Follow design guidelines     | The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines).|
+| Follow design guidelines     | The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/design-guidelines).|
 
 ## Live flow
 
