@@ -97,7 +97,7 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
+See [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
 in the Common topics, for details.
 
 ### Authentication
@@ -117,7 +117,7 @@ by the PSP to the Vipps API. Vipps creates the payment and returns a link that d
 The user then confirms the payment in Vipps.
 
 See
-[landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
+[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
 in the Common  topics area, for more details.
 
 #### Skip landing page
@@ -128,7 +128,7 @@ in the Common  topics area, for more details.
 Skipping the landing page is typically used at physical points of sale where there is no display available.
 
 See
-[Skip landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page#skip-landing-page)
+[Skip landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page#skip-landing-page)
 for more details.
 
 #### Payment confirmation
@@ -175,7 +175,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 **Please note:**
 
 * The normal
-  [timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts/)
+  [timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts/)
   apply to the PSP API. If the user does not act on the payment request within 10 minutes,
   Vipps will make a POST request towards the `makePaymentUrl` with a status of `timeout`.
 * The `makePaymentUrl` has a timeout of **15 seconds**.
@@ -189,7 +189,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 #### isApp
 
 See
-[isApp](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp)
+[isApp](https://developer.vippsmobilepay.com/docs/common-topics/isApp)
 in Common topics.
 
 ### EMVCo Token processing
@@ -387,7 +387,7 @@ by providing `Request-Id`(or `Idempotency-key`) in the header of the
 request.
 
 See the
-[Idempotency header](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers#idempotency)
+[Idempotency header](https://developer.vippsmobilepay.com/docs/common-topics/http-headers#idempotency)
 for more details.
 
 ## PSP API implementation checklist
@@ -563,7 +563,7 @@ callback.
 In the body of this callback, you will now also find a `userToken`.
 
 For `merchantOrderId`: See
-[Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid).
+[Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/common-topics/orderid).
 
 ### The user token
 

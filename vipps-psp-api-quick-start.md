@@ -19,7 +19,7 @@ Use the PSP Merchant Signup API to get information about merchants, create a new
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/vipps-developers/quick-start-guides) for information about getting your test environment set up.
+[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides) for information about getting your test environment set up.
 
 ### Step 1: Get the Postman collection and environment
 

@@ -18,7 +18,7 @@ See the [PSP API guide](vipps-psp-api.md) for all the technical details.
 
 For more common questions, see:
 
-* [Common API General FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+* [Common API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 
 API version: 3.0.0.
 
@@ -31,7 +31,7 @@ If the merchant or sales unit is not active, you will get an error:
 "Merchant not available or active".
 
 See the Vipps FAQ:
-[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
+[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
 
 ## Why do I get an `Invalid MSN` error?
 
@@ -120,7 +120,7 @@ No, the PSP ID is unique for the PSP and used for all the PSP's merchants.
 
 ## Does Vipps have a test environment?
 
-Yes, please see: [The Vipps test environment (MT)](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment).
+Yes, please see: [The Vipps test environment (MT)](https://developer.vippsmobilepay.com/docs/test-environment).
 
 ## What will be sent in the `makePayment()` request if the customer declines the payment, or it times out?
 
@@ -168,8 +168,8 @@ problems with the payment, it is the PSP that has all the information about that
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
 
 See the FAQ for more details:
-[Is it possible to skip the landing page?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/landing-page-faq#is-it-possible-to-skip-the-landing-page)
+[Is it possible to skip the landing page?](https://developer.vippsmobilepay.com/docs/faqs/landing-page-faq#is-it-possible-to-skip-the-landing-page)
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
-See [Common topics: Benefits of direct integration](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/direct-vs-psp#benefits-of-direct-integration).
+See [Common topics: Benefits of direct integration](https://developer.vippsmobilepay.com/docs/common-topics/direct-vs-psp#benefits-of-direct-integration).

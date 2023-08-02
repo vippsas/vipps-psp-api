@@ -33,17 +33,17 @@ and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/
 | Support soft decline step-ups according to [3DS specifications](vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |  In case of a soft decline (when the issuer requires 3DS), the PSP must host a 3DSecure session and must provide the URL to Vipps. See [PSD2 Compliance and Secure Customer Authentication (SCA)](./vipps-psp-api.md#psd2-compliance-and-secure-customer-authentication-sca). |
 | Do not rely on `pspRedirectUrl`  |  Some users may close Vipps immediately after seeing the payment confirmation, therefore not being "redirected" back to the merchant. Because of this, it is important for the merchant and the PSP to _not_ base their transaction logic on the user reaching the `pspRedirectUrl`. See [PSP Payment Sequence](vipps-psp-api.md#psp-payment-sequence). |
 | Provide reserve, capture, and refund information to Vipps | The PSP provides information of every `capture` and `refund` to Vipps (not just `reserve`) |
-| Follow design guidelines     | The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines).|
+| Follow design guidelines     | The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/design-guidelines).|
 
 ## Live flow
 
 1. The PSP completes all checklist items.
-2. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/vipps-developers/contact) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment), showing that all checklist items have been fulfilled.
+2. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/contact) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://developer.vippsmobilepay.com/docs/test-environment), showing that all checklist items have been fulfilled.
    * A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
    * A complete order including `Cancel`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
    * One ID for each of the [error codes](vipps-psp-api.md#errors).
        * Some codes like 85 aren't applicable for all systems, please provide short description for why each code does not apply.
-3. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/vipps-developers/contact) to verify the integration in the production environment:
+3. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/contact) to verify the integration in the production environment:
    * At least one IDs for orders with each of the following statuses: `Capture`, `Refund`, `Cancel`.
    * At least 3 IDs for orders with different [error codes](vipps-psp-api.md#errors).
 4. The PSP goes live 🎉
