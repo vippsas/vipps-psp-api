@@ -20,22 +20,16 @@ In addition, you can use the PSP Signup API to get information about merchant sa
 For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
-## Getting started
-
-See
-[Getting Started](https://developer.vippsmobilepay.com/docs/getting-started)
-for information about API keys, product activation, how to make API calls, etc.
-
 ## Next steps
 
-* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
-* [API guide](vipps-psp-api.md): Developer guide for PSP API.
-* [API checklist](vipps-psp-api-checklist.md): Checklist for PSP integrations.
-* [API FAQ](vipps-psp-api-faq.md): Questions and answers.
-* [API reference](https://developer.vippsmobilepay.com/api/psp): API specification.
+* [API quick start](vipps-psp-api-quick-start.md): Run the basic PSP API examples in Postman.
+* [API guide](vipps-psp-api.md): Learn about the PSP API features.
+* [API checklist](vipps-psp-api-checklist.md): Complete the checklist for PSP integration.
+* [API FAQ](vipps-psp-api-faq.md): Look for your question among those people have asked before.
+* [API reference](https://developer.vippsmobilepay.com/api/psp): Go to the PSP API specifications.
 
 ## PSP Signup API
 
-* [API Quick Start](vipps-psp-api-quick-start.md):  Quick start.
-* [Signup API guide](vipps-psp-signup-api.md): Developer guide for PSP Signup API.
-* [API reference](https://developer.vippsmobilepay.com/api/psp-signup): API specification.
+* [Signup API quick start](vipps-psp-api-quick-start.md):  Run the basic PSP Signup API examples in Postman.
+* [Signup API guide](vipps-psp-signup-api.md): Learn about the PSP Signup API.
+* [Signup API reference](https://developer.vippsmobilepay.com/api/psp-signup): Go to the PSP Signup API specifications.
