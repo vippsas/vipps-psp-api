@@ -3,7 +3,7 @@
 title: Quick start for the PSP API
 sidebar_label: Quick start
 sidebar_position: 15
-description: Quick start guide for the using the PSP API with Postman.
+description: Quick steps for getting started with the PSP API.
 pagination_next: null
 pagination_prev: null
 ---
@@ -12,66 +12,304 @@ END_METADATA -->
 # Quick start
 
 Use the PSP API to initiate a PSP payment and get details or update the status of this payment.
-Use the PSP Merchant Signup API to get information about merchants, create a new sales unit, or update the sales unit details.
 
-## Postman
+## Before you begin
 
-### Prerequisites
+This document covers the quick steps for getting started with the PSP API.
+You must have already signed up as an organization with Vipps MobilePay and have
+your test credentials from the merchant portal, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
 
-Review
-[Vipps quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides) for information about getting your test environment set up.
+**Important:** The examples use standard example values that you must change to
+use *your* values. This includes API keys, HTTP headers, reference, etc.
 
-### Step 1: Get the Postman collection and environment
+## Your first Payment
 
-Save the following files to your computer:
+### Step 1 - Setup
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+**Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
+
+If you wish to use Postman, import the following files:
 
 * [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
-* [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
-### Step 2: Import the Postman files
+In Postman, tweak the environment with your own values (see
+[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
 
-1. In Postman, click *Import* in the upper-left corner.
-1. In the dialog that opens, with *File* selected, click *Upload Files*.
-1. Select the two files you have just downloaded and click *Import*.
+* `client_id` - Merchant key is required for getting the access token.
+* `client_secret` - Merchant key is required for getting the access token.
+* `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
+* `mobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
+* `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
+* `makePaymentUrl` - PSP URL used by Vipps to send the card data.
+* `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
+* `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
 
-### Step 3: Set up Postman environment
+</TabItem>
+<TabItem value="curl">
 
-1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
-2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started.
-   * `client_id` - Merchant key is required for getting the access token.
-   * `client_secret` - Merchant key is required for getting the access token.
-   * `Ocp-Apim-Subscription-Key-PSP` - PSP subscription key is required for all requests.
-   * `mobileNumber` - Test mobile number, needed only for `Initiate a PSP Payment`.
-   * `merchantSerialNumber` - Required only for `Get Merchant by MSN`.
-   * `makePaymentUrl` - PSP URL used by Vipps to send the card data, needed only for `Initiate a PSP Payment`.
-   * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
-   * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
-   * `idempotency_key` - Unique request ID, needed only for `Create new Merchant Sales Unit`.
+No setup needed :)
 
-Note that the calls in this PSP API require your PSP subscription key.
+</TabItem>
+</Tabs>
 
-## Make API calls
+Note that the requests in this PSP API require your PSP subscription key.
 
-For all the following, you will start by sending request `Get Access Token`.
+### Step 2 - Authentication
+
+For all the following, you will need an `access_token` from the
+[Access token API](https://developer.vippsmobilepay.com/docs/APIs/access-token-api):
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
 This provides you with access to the API.
 
-The access token is valid for 1 hour in the test environment and 24 hours in the production environment.
-See the
-[API reference](https://developer.vippsmobilepay.com/api/psp)
-for details about the calls.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-### PSP Payments and details
+```bash
+Send request Get Access Token
+```
 
-1. Send request `Initiate a PSP Payment`. Ctrl+click on the link that appears, and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically. See [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
-2. Send request  `Get Details` for details about the transaction. See [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET).
-3. Send request `Update Status`. This is an example of what the PSP sends Vipps to update on the status of the payment. See [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+</TabItem>
+<TabItem value="curl">
 
-### PSP Merchant Sign up
+```bash
+curl https://apitest.vipps.no/accessToken/get \
+-H "client_id: YOUR-CLIENT-ID" \
+-H "client_secret: YOUR-CLIENT-SECRET" \
+-H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+--data ''
+```
 
-1. Send `Get all Merchants` for a JSON response showing all the merchants and their information. See [`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
-2. Send `Get Merchant by MSN` for information about a specific merchant. Supply the MSN for a merchant in the list of all merchants. See [`GET:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant).
-3. Send `Create new Merchant Sales Unit`. Notice the `merchantSerialNumber` is provided back.  See [`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
-4. Open `Update Merchant Sales Unit`. Use MSN for the new merchant and update the body before sending the request.
-   Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
-    See [`PATCH:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/patchMerchant).
+</TabItem>
+</Tabs>
+
+The property `access_token` should be used for all other API requests in the `Authorization` header as the Bearer token.
+
+### Step 3 - A simple payment
+
+Initiate a payment with: [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Initiate a PSP Payment
+```
+*Ctrl+click* on the link that appears, and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically.
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
+-H 'Content-Type: application/json' \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+   "pspTransactionId": "428FY3JTWGZW",
+  "merchantOrderId": "8WG39VI9GSAN",
+  "customerMobileNumber": "96574209",
+  "amount": "49900",
+  "currency": "NOK",
+  "pspRedirectUrl": "<Vipps will use this URL to redirect end user after payment confirmation>",
+  "makePaymentUrl": "<PSP URL used by Vipps to send the card data>",
+  "makePaymentToken": "OHRB6W5AFSX4",
+  "paymentText": "Transaction initiated through Postman",
+  "isApp": false,
+  "skipLandingPage": false
+}'
+```
+
+</TabItem>
+</Tabs>
+
+
+### Step 4 - A simple payment
+
+Initiate a payment with: [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Initiate a PSP Payment
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
+-H 'Content-Type: application/json' \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
+-H 'PSP-ID: <Provided by Vipps>' \
+-H "MERCHANT-SERIAL-NUMBER: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+   "pspTransactionId": "428FY3JTWGZW",
+  "merchantOrderId": "8WG39VI9GSAN",
+  "customerMobileNumber": "96574209",
+  "amount": "49900",
+  "currency": "NOK",
+  "pspRedirectUrl": "<Vipps will use this URL to redirect end user after payment confirmation>",
+  "makePaymentUrl": "<PSP URL used by Vipps to send the card data>",
+  "makePaymentToken": "OHRB6W5AFSX4",
+  "paymentText": "Transaction initiated through Postman",
+  "isApp": false,
+  "skipLandingPage": false
+}'
+```
+
+</TabItem>
+</Tabs>
+
+### Step 4 - Completing the payment
+
+*Ctrl+click* (*Command-click* on macOS) on the link that appears, and it will take you to the
+[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
+The phone number of your test user should already be filled in, so you only have to click *Next*.
+You will be presented with the payment in the app, where you can complete or reject the payment.
+Once you have acted upon the payment, you will be redirected back to the specified `pspRedirectUrl` URL under a "best effort" policy.
+
+:::note
+We cannot guarantee the user will be redirected back to the same browser or session, or that they will at all be redirected back. User interaction can be unpredictable, and the user may choose to fully close the app or browser.
+:::
+
+### Step 5 - Getting the status of the payment
+
+To see the details about the transaction, run the
+[`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) request.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Get Details
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/psp/v3/psppayments/UNIQUE-PAYMENT-REFERENCE/details \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
+-H 'PSP-ID: <Provided by Vipps>' \
+-H "MERCHANT-SERIAL-NUMBER: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X GET
+```
+
+</TabItem>
+</Tabs>
+
+### Step 6 (Optional): Update the payment
+
+You can update the payment with the
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST) endpoint.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Update Status
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/psp/v3/psppayments/updateStatus \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
+-H 'PSP-ID: <Provided by Vipps>' \
+-H "MERCHANT-SERIAL-NUMBER: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+  "transactions": [
+   {
+      "pspTransactionId": "428FY3JTWGZW",
+      "status": "CAPTURED",
+      "amount": "49900",
+      "currency": "NOK",
+      "paymentText": "Transaction updated through Postman"
+   }
+  ]
+}'
+```
+
+</TabItem>
+</Tabs>
+
+
+## Next steps
+
+See the [PSP API guide](vipps-psp-api.md) to read about the concepts and details.
