@@ -682,7 +682,7 @@ components:
           example: lfkhwef3op48yufpcno3fh34qp8fyncpf83hy4
           maxLength: 255
           description: |-
-            PSP-specified `Authorization` HTTP header tu use foer the request to the
+            PSP-specified `Authorization` HTTP header to use for the request to the
             PSP's `makePaymentUrl`.
         paymentText:
           type: string
