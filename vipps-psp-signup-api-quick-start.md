@@ -1,13 +1,12 @@
 <!-- START_METADATA
 ---
 title: Quick start for the PSP Merchant Sign up
-sidebar_label: Quick start
-sidebar_position: 15
-description: Quick steps for getting started with the PSP Merchant Sign up.
+sidebar_label: Signup Quick start
+sidebar_position: 50
+description: Quick steps for getting started with the PSP Merchant Signup.
 pagination_next: null
 pagination_prev: null
 ---
-
 
 import ApiSchema from '@theme/ApiSchema';
 import Tabs from '@theme/Tabs';
@@ -15,9 +14,7 @@ import TabItem from '@theme/TabItem';
 
 END_METADATA -->
 
-# Quick start for PSP Merchant Sign up
-
-Use the PSP Merchant Signup API to get information about merchants, create a new sales unit, or update the sales unit details.
+# Quick start for PSP Merchant Signup
 
 ## Before you begin
 
@@ -46,7 +43,7 @@ values={[
 
 If you wish to use Postman, import the following files:
 
-* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
+* [PSP API Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
 * [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 In Postman, tweak the environment with your own values (see
@@ -271,4 +268,4 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSeri
 
 ## Next steps
 
-See the [PSP Signup API guide](vipps-psp-signup-api.md) to read about the concepts and details.
+See the [PSP Signup API guide](.) to read about the concepts and details.

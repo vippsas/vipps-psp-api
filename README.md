@@ -22,6 +22,8 @@ before starting working on your implementation.
 For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
 
+PSPs can onboard and manage merchants through the [PSP Signup API guide](vipps-psp-signup-api.md).
+
 ## Next steps
 
 * [API quick start](vipps-psp-api-quick-start.md): Run the basic PSP API examples in curl and Postman.
