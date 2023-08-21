@@ -138,14 +138,14 @@ curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
 -H "Merchant-Serial-Number: 123456" \
 -X POST \
 -d '{
-  "pspTransactionId": "428FY3JTWGZW",
-  "merchantOrderId": "8WG39VI9GSAN",
+  "pspTransactionId": "428FY3Zmeyc",
+  "merchantOrderId": "8WG39VI9hywg",
   "customerMobileNumber": "96574209",
   "amount": "49900",
   "currency": "NOK",
   "pspRedirectUrl": "https://example.com",
   "makePaymentUrl": "https://example.com",
-  "makePaymentToken": "OHRB6W5AFSX4",
+  "makePaymentToken": "WCAG6W5HYWGg4",
   "paymentText": "Transaction initiated through Postman",
   "isApp": false,
   "skipLandingPage": false
@@ -233,7 +233,7 @@ curl https://apitest.vipps.no/psp/v3/psppayments/updateStatus \
 -d '{
   "transactions": [
    {
-      "pspTransactionId": "428FY3JTWGZW",
+      "pspTransactionId": "428FY3Zmeyc",
       "status": "CAPTURED",
       "amount": "49900",
       "currency": "NOK",
