@@ -43,7 +43,7 @@ values={[
 
 If you wish to use Postman, import the following files:
 
-* [PSP API Postman collection](./tools/vipps-psp-v3-api-postman-collection.json)
+* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
 * [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 In Postman, tweak the environment with your own values (see
