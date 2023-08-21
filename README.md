@@ -15,7 +15,9 @@ END_METADATA -->
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 In addition, you can use the PSP Signup API to get information about merchant sales units or create new sales units.
 
-**Note**: If you are interested in this API, we highly recommend you get in touch with us using the following [form](https://www.vipps.no/developer/bli-partner/psp-partner/) before starting working on your implementation.
+**Note**: If you are interested in this API, we highly recommend you get in touch with us using the
+[PSP partner form](https://www.vipps.no/developer/bli-partner/psp-partner/)
+before starting working on your implementation.
 
 For product information in Norwegian, see
 [Vipps på Nett via PSP](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/#kom-i-gang-med-vipps-pa-nett-category-2).
