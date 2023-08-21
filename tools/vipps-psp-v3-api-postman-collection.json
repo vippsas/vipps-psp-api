@@ -299,18 +299,8 @@
 						"value": "{{PSP-ID}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
-					},
-					{
-						"key": "Vipps-System-Name",
-						"value": "{{vipps_system_name}}",
-						"type": "default"
-					},
-					{
-						"key": "Vipps-System-Version",
-						"value": "{{vipps_system_version}}",
-						"type": "default"
 					}
 				],
 				"body": {
@@ -342,7 +332,7 @@
 						"value": "Bearer {{access_token}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
 					},
 					{
@@ -358,16 +348,6 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "Vipps-System-Name",
-						"value": "{{vipps_system_name}}",
-						"type": "default"
-					},
-					{
-						"key": "Vipps-System-Version",
-						"value": "{{vipps_system_version}}",
-						"type": "default"
 					}
 				],
 				"body": {
@@ -399,7 +379,7 @@
 						"value": "Bearer {{access_token}}"
 					},
 					{
-						"key": "MERCHANT-SERIAL-NUMBER",
+						"key": "Merchant-Serial-Number",
 						"value": "{{merchantSerialNumber}}"
 					},
 					{
@@ -409,16 +389,6 @@
 					{
 						"key": "PSP-ID",
 						"value": "{{PSP-ID}}"
-					},
-					{
-						"key": "Vipps-System-Name",
-						"value": "{{vipps_system_name}}",
-						"type": "default"
-					},
-					{
-						"key": "Vipps-System-Version",
-						"value": "{{vipps_system_version}}",
-						"type": "default"
 					}
 				],
 				"url": {
