@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: eCom API checklist
+title: PSP API checklist
 sidebar_label: Checklist
 sidebar_position: 35
 description: Checklist for full integration with the PSP API.
