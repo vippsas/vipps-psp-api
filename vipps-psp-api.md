@@ -35,11 +35,6 @@ See the
 [EMVco documentation](https://www.emvco.com/emv-technologies/payment-tokenisation/)
 for more information.
 
-**Important:** Cards that were added to Vipps after January 1, 2021 are only enrolled with
-Vipps' new PSP. That means Vipps is only able to provide a token for those
-cards, not the card details. If you are not able to process tokens, you should respond with
-`HTTP 403 Forbidden`, as that gives the best (least bad) customer experience in Vipps.
-
 There are some differences between Vipps payments done through a PSP and
 payments done through direct integration. See:
 [What functionality is included in the eCom API, but not the PSP API?](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api-faq#what-functionality-is-included-in-the-ecom-api-but-not-the-psp-api).
@@ -275,14 +270,14 @@ the token returned by the `MakePayment` request will be:
 
 | Amount Value      | Token Number               | Expiry | Cryptogram                   |
 | ----------------- | -------------------------- | ------ | ---------------------------- |
-| 22.00             | 5226603115488031           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
-| 31.00             | Emulates Card not eligible |
-| 32.00             | 4111111111111111           | 03/30  | uxToh3Ep6gsR8AAkvZALN19Iz34= |
-| 42.00             | 4895370013193500           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
-| 43.00             | 5226603115488031           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
-| 44.00             | 4895370012792682           | 12/22  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
-| 51.00             | 4268270087302871           | 09/24  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
-| 52.00             | 5413330089010442           | 12/25  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| 2200             | 5226603115488031           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 3100             | Emulates Card not eligible |
+| 3200             | 4111111111111111           | 03/30  | uxToh3Ep6gsR8AAkvZALN19Iz34= |
+| 4200             | 4895370013193500           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 4300             | 5226603115488031           | 03/30  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
+| 4400             | 4895370012792682           | 12/22  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| 5100             | 4268270087302871           | 09/24  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
+| 5200             | 5413330089010442           | 12/25  | AgAAAAAAAIR8CQrXSohbQAAAAAA= |
 | All other amounts | 4895370013193500           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
 
 ### Status Updates
