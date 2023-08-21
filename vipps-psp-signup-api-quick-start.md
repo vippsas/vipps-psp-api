@@ -97,9 +97,6 @@ curl https://apitest.vipps.no/accessToken/get \
 -H "client_id: YOUR-CLIENT-ID" \
 -H "client_secret: YOUR-CLIENT-SECRET" \
 -H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
--H "Merchant-Serial-Number: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
 -X POST \
 --data ''
 ```
@@ -165,7 +162,7 @@ Send request Get Merchant by MSN
 <TabItem value="curl">
 
 ```bash
-curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{orgno} \
+curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSerialNumber} \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
@@ -224,7 +221,7 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
 </TabItem>
 </Tabs>
 
-### Step 6 - Update Merchant Sales Unit
+### Step 6 - (Optional) Update Merchant Sales Unit
 
 To update the merchant's sales unit, send the
 [`PATCH:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/patchMerchant)

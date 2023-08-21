@@ -98,11 +98,6 @@ curl https://apitest.vipps.no/accessToken/get \
 -H "client_id: YOUR-CLIENT-ID" \
 -H "client_secret: YOUR-CLIENT-SECRET" \
 -H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
--H "Merchant-Serial-Number: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
 -X POST \
 --data ''
 ```
@@ -116,7 +111,6 @@ The property `access_token` should be used for all other API requests in the `Au
 
 Initiate a payment with: [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
 
-
 <Tabs
 defaultValue="curl"
 groupId="sdk-choice"
@@ -129,58 +123,8 @@ values={[
 ```bash
 Send request Initiate a PSP Payment
 ```
-*Ctrl+click* on the link that appears, and it will take you to the website where you can enter your test phone number and complete the payment authorization in the Vipps app in your mobile test environment. The `pspTransactionId` in the environment is updated automatically.
 
-</TabItem>
-<TabItem value="curl">
-
-```bash
-curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
--H 'Content-Type: application/json' \
--H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
--H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
--X POST \
--d '{
-   "pspTransactionId": "428FY3JTWGZW",
-  "merchantOrderId": "8WG39VI9GSAN",
-  "customerMobileNumber": "96574209",
-  "amount": "49900",
-  "currency": "NOK",
-  "pspRedirectUrl": "<Vipps will use this URL to redirect end user after payment confirmation>",
-  "makePaymentUrl": "<PSP URL used by Vipps to send the card data>",
-  "makePaymentToken": "OHRB6W5AFSX4",
-  "paymentText": "Transaction initiated through Postman",
-  "isApp": false,
-  "skipLandingPage": false
-}'
-```
-
-</TabItem>
-</Tabs>
-
-
-### Step 4 - A simple payment
-
-Initiate a payment with: [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
-
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Initiate a PSP Payment
-```
+The `pspTransactionId` should be added to the environment automatically.
 
 </TabItem>
 <TabItem value="curl">
@@ -191,20 +135,16 @@ curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
 -H 'PSP-ID: <Provided by Vipps>' \
--H "MERCHANT-SERIAL-NUMBER: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
+-H "Merchant-Serial-Number: 123456" \
 -X POST \
 -d '{
-   "pspTransactionId": "428FY3JTWGZW",
+  "pspTransactionId": "428FY3JTWGZW",
   "merchantOrderId": "8WG39VI9GSAN",
   "customerMobileNumber": "96574209",
   "amount": "49900",
   "currency": "NOK",
-  "pspRedirectUrl": "<Vipps will use this URL to redirect end user after payment confirmation>",
-  "makePaymentUrl": "<PSP URL used by Vipps to send the card data>",
+  "pspRedirectUrl": "https://example.com",
+  "makePaymentUrl": "https://example.com",
   "makePaymentToken": "OHRB6W5AFSX4",
   "paymentText": "Transaction initiated through Postman",
   "isApp": false,
@@ -249,16 +189,12 @@ Send request Get Details
 <TabItem value="curl">
 
 ```bash
-curl https://apitest.vipps.no/psp/v3/psppayments/UNIQUE-PAYMENT-REFERENCE/details \
+curl https://apitest.vipps.no/psp/v3/psppayments/{pspTransactionId}/details \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
 -H 'PSP-ID: <Provided by Vipps>' \
--H "MERCHANT-SERIAL-NUMBER: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
+-H "Merchant-Serial-Number: 123456" \
 -X GET
 ```
 
@@ -292,11 +228,7 @@ curl https://apitest.vipps.no/psp/v3/psppayments/updateStatus \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: <This is the PSP's key, and is the same for all the PSP's merchants. Keep it secret.>" \
 -H 'PSP-ID: <Provided by Vipps>' \
--H "MERCHANT-SERIAL-NUMBER: 123456" \
--H "Vipps-System-Name: acme" \
--H "Vipps-System-Version: 3.1.2" \
--H "Vipps-System-Plugin-Name: acme-webshop" \
--H "Vipps-System-Plugin-Version: 4.5.6" \
+-H "Merchant-Serial-Number: 123456" \
 -X POST \
 -d '{
   "transactions": [
