@@ -268,7 +268,7 @@ Any request to the Vipps PSP API will return a Visa Token. However, this can be 
 by setting the amount in the `init` request. No matter what is selected in the app,
 the token returned by the `MakePayment` request will be:
 
-| Amount Value      | Token Number               | Expiry | Cryptogram                   |
+| Amount Value (minor currency unit)     | Token Number               | Expiry | Cryptogram                   |
 | ----------------- | -------------------------- | ------ | ---------------------------- |
 | 2200             | 5226603115488031           | 05/25  | AlhlvxmN2ZKuAAESNFZ4GoABFA== |
 | 3100             | Emulates Card not eligible |
