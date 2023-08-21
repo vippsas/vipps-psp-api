@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: PSP API guide
-sidebar_label: PSP API guide
+sidebar_label: API guide
 sidebar_position: 20
 description: Find technical details about integrating with the PSP API.
 pagination_prev: Null

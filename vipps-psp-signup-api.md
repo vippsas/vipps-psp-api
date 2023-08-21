@@ -1,8 +1,8 @@
 <!-- START_METADATA
 ---
 title: PSP Signup API guide
-sidebar_label: PSP Signup API guide
-sidebar_position: 25
+sidebar_label: Signup API guide
+sidebar_position: 55
 description: Find technical details about integrating with the PSP Signup API.
 pagination_prev: Null
 pagination_next: Null
@@ -11,7 +11,7 @@ END_METADATA -->
 
 # PSP Signup API guide
 
-The PSP Signup API allows PSPs to onboard and manage their merchants.
+The PSP Signup API allows Payment Service Providers (PSPs) to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.
 
