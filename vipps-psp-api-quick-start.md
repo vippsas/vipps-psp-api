@@ -7,6 +7,11 @@ description: Quick steps for getting started with the PSP API.
 pagination_next: null
 pagination_prev: null
 ---
+
+import ApiSchema from '@theme/ApiSchema';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 END_METADATA -->
 
 # Quick start
