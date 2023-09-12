@@ -539,7 +539,7 @@ the `init` request body could look like this.
 
 ```json
 {
-  "pspRedirectUrl": "https://example.com/yourRedirectUrl",
+  "pspRedirectUrl": "https://example.com/youredirectUrl",
   "amount": 1337,
   "makePaymentToken": "tokenGoesHerenco3rt8y34obcwierunnw3oirtycbvwo",
   "makePaymentUrl": "https://example.com/yourCallbackEndpointUrl",
