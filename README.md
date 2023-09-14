@@ -12,6 +12,11 @@ END_METADATA -->
 
 # PSP API
 
+<!-- START_COMMENT -->
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/psp-api/).
+<!-- END_COMMENT -->
+
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP, but you can use the PSP API to initiate PSP payments, get details about PSP payments, or update their status.
 In addition, you can use the PSP Signup API to get information about merchant sales units or create new sales units.
 
