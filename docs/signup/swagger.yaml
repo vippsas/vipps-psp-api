@@ -280,8 +280,6 @@ components:
       - address
       - companyEmail
       - companyName
-      - logoUrl
-      - mccCode
       - merchantSerialNumber
       - name
       - organizationNumber
@@ -326,16 +324,6 @@ components:
             app. This may be different from the legal name in `companyName`.
           example: Example AS
           x-order: 5
-        mccCode:
-          maxLength: 4
-          minLength: 4
-          pattern: ^\d{4}$
-          type: string
-          description: |-
-            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
-            (Apologies for the "MCC code" typo)
-          example: "5411"
-          x-order: 6
         status:
           type: string
           description: Status of the merchant in Vipps
@@ -345,13 +333,6 @@ components:
           - DEACTIVATED
           - PENDING
           x-order: 7
-        logoUrl:
-          type: string
-          description: An URL of the merchant's logo stored in Vipps' system.
-          format: uri
-          example: https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png
-          x-isnullable: true
-          x-order: 9
         email:
           type: string
           description: Contact email for the merchant. Can be the same as `companyEmail`.
@@ -399,8 +380,6 @@ components:
       - address
       - companyEmail
       - companyName
-      - logo
-      - mccCode
       - name
       - organizationNumber
       type: object
@@ -423,23 +402,6 @@ components:
           description: The merchant's name. This name will be displayed in the Vipps
             app. This may be different from the legal name in `companyName`.
           example: Example AS
-        mccCode:
-          maxLength: 4
-          minLength: 4
-          pattern: ^\d{4}$
-          type: string
-          description: |-
-            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
-            (Apologies for the "MCC code" typo)
-          example: "5411"
-        logo:
-          type: string
-          description: Base64 encoded string of the logo of the merchant. The logo
-            will be displayed in the Vipps app, both when paying and on receipts.
-            The logo must be in PNG (Portable Network Graphics) format. Square images
-            are recommended. The longest side can not be more than 1000 pixels. The
-            minimum size is 100 x 100 pixels.
-          example: VGhlIGltYWdlIGdvZXMgaGVyZQ== (truncated)
         email:
           maxLength: 255
           pattern: ^[a-zA-Z0-9.!#$%&*+\/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
