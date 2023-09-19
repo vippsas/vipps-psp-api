@@ -280,8 +280,6 @@ components:
       - address
       - companyEmail
       - companyName
-      - logoUrl
-      - mccCode
       - merchantSerialNumber
       - name
       - organizationNumber
@@ -326,16 +324,6 @@ components:
             app. This may be different from the legal name in `companyName`.
           example: Example AS
           x-order: 5
-        mccCode:
-          maxLength: 4
-          minLength: 4
-          pattern: ^\d{4}$
-          type: string
-          description: |-
-            Four-digit number listed in ISO 18245 for retail financial services, used to classify a business by the types of goods or services it provides.
-            (Apologies for the "MCC code" typo)
-          example: "5411"
-          x-order: 6
         status:
           type: string
           description: Status of the merchant in Vipps
@@ -345,13 +333,6 @@ components:
           - DEACTIVATED
           - PENDING
           x-order: 7
-        logoUrl:
-          type: string
-          description: An URL of the merchant's logo stored in Vipps' system.
-          format: uri
-          example: https://product-logos.vipps.no/product-logos/896bed0e-fc0d-4edf-952c-aeb710581c4e.png
-          x-isnullable: true
-          x-order: 9
         email:
           type: string
           description: Contact email for the merchant. Can be the same as `companyEmail`.
