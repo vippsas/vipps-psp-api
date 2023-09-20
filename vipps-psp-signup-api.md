@@ -11,6 +11,8 @@ END_METADATA -->
 
 # PSP Signup API guide
 
+![Vipps](./images/vipps.png) *Only available for Vipps.*
+
 The PSP Signup API allows Payment Service Providers (PSPs) to onboard and manage their merchants.
 
 This API is the only way to sign up non-Norwegian merchants.

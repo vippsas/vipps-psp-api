@@ -11,6 +11,8 @@ END_METADATA -->
 
 # PSP API guide
 
+![Vipps](./images/vipps.png) *Only available for Vipps.*
+
 Settlements for Payment Service Provider (PSP) integrations are handled by the PSP,
 but you can use the PSP API to initiate PSP payments.
 
