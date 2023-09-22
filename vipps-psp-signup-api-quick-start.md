@@ -18,36 +18,18 @@ END_METADATA -->
 
 ## Before you begin
 
-This document covers the quick steps for getting started with the PSP API.
-You must have already signed up as an organization with Vipps MobilePay and have
-your test credentials from the merchant portal, as described in the
-[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
-
-**Important:** The examples use standard example values that you must change to
+The examples use standard example values that you must change to
 use *your* values. This includes API keys, HTTP headers, reference, etc.
 
-## Your first Payment
+## Sign up your first merchant
 
 ### Step 1 - Setup
 
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
+You must have already signed up as an organization with Vipps MobilePay and have
+your test credentials from the merchant portal.
 
-**Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
-
-If you wish to use Postman, import the following files:
-
-* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
-* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
-
-In Postman, tweak the environment with your own values (see
-[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
+You will need the following values, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started):
 
 * `client_id` - Merchant key is required for getting the access token.
 * `client_secret` - Merchant key is required for getting the access token.
@@ -59,10 +41,30 @@ In Postman, tweak the environment with your own values (see
 * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
 * `idempotency_key` - Unique request ID, needed only for `Create new Merchant Sales Unit`.
 
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+In Postman, import the following files:
+
+* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
+* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
+
+🔥 **Do not use production keys in Postman.** 🔥
+
+Update the *Current Value* field in your Postman environment with your **Merchant Test** keys.
+Use *Current Value* field for added security, as these values are not synced to the cloud.
+
 </TabItem>
 <TabItem value="curl">
 
-No setup needed :)
+No additional setup needed :)
 
 </TabItem>
 </Tabs>
