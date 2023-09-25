@@ -20,8 +20,8 @@ Use the PSP API to initiate a PSP payment and get details or update the status o
 
 ## Before you begin
 
-The examples use standard example values that you must change to
-use *your* values. This includes API keys, HTTP headers, reference, etc.
+The provided example values in this guide must be changed with the values for your test sales unit and user.
+This applies for API keys, HTTP headers, reference, phone number, etc.
 Note that any currency amount must be an Integer value minimum 100 in øre.
 
 ## Your first Payment
