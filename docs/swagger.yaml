@@ -378,7 +378,7 @@ components:
       in: header
       name: Ocp-Apim-Subscription-Key
       description: >-
-        The subscription key for your API product is available on portal.vipps.no, under the *Utvikler* tab.
+        The subscription key for your API product is available on portal.vipps.no, in the *Utvikler* section.
         This is the PSP's key, and is the same for all the PSP's merchants.
         Keep it secret.
       required: true
