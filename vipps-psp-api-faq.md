@@ -30,8 +30,37 @@ You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
 If the merchant or sales unit is not active, you will get an error:
 "Merchant not available or active".
 
-See the Vipps FAQ:
-[`Why do I get errorCode 37 "Merchant not available or deactivated or blocked"?`](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq#why-do-i-get-errorcode-37-merchant-not-available-or-deactivated-or-blocked).
+## Why do I get `errorCode 37 "Merchant not available or deactivated or blocked"`?
+
+Or: `Merchant not available or active`.
+
+Please check that the merchant's organization number is still active in
+[Brønnøysundregistrene](https://www.brreg.no). We automatically deactivate
+merchants (companies) when they are deleted from Brønnøysundregistrene.
+This can also happen if a merchant changes organization type, for instance
+from *ENK* to *AS*.
+
+Merchants can log in on
+[portal.vipps.no](https://portal.vipps.no)
+and deactivate their sales units. This is sometimes done "by accident", without being
+aware of the consequences. If a sales unit has been incorrectly deactivated,
+the merchant can reactivate it again.
+
+**Please note:** We require BankID for deactivation and reactivation,
+and cannot help with this based on email requests.
+
+Deactivation can also happen if the test merchant is not being used for a
+*very long* time. Please
+[contact customer service](https://vipps.no/kontakt-oss/),
+and we will reactivate the merchant.
+
+Partners that use
+[partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
+can also get this error if the partner itself is deactivated, even though
+the sales unit (that it is acting on behalf of) is active.
+
+**Please note:** We no longer automatically deactivate test merchants.
+Merchants can [create new test sales units](https://developer.vippsmobilepay.com/docs/developer-resources/portal#how-to-create-a-test-sales-unit).
 
 ## Why do I get an `Invalid MSN` error?
 
