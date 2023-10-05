@@ -191,7 +191,7 @@ in Common topics.
 
 ### EMVCo Token processing
 
-In order to give the best possible payment experience, the Vipps PSP API uses
+In order to give the best possible payment experience, the PSP API uses
 EMVCO token based processing.
 
 The solution requires the PSP to have support for EMVCO token processing.
@@ -266,7 +266,7 @@ specified by the acquirer. This is necessary to perform a valid authorization.
 
 #### Magic Numbers for EMVCo Tokens
 
-Any request to the Vipps PSP API will return a Visa Token. However, this can be changed
+Any request to the PSP API will return a Visa Token. However, this can be changed
 by setting the amount in the `init` request. No matter what is selected in the app,
 the token returned by the `MakePayment` request will be:
 
@@ -389,7 +389,7 @@ for more details.
 
 ## PSP API implementation checklist
 
-See: [Vipps PSP API Checklist](vipps-psp-api-checklist.md).
+See: [PSP API Checklist](vipps-psp-api-checklist.md).
 
 ## Errors
 

@@ -142,25 +142,25 @@ as in this case - at our end.
 
 If `Confirmed` contains `TimeOut` or `Cancel`: Set `paymentInfo.status` to `FAIL`?
 
-## Can Vipps help merchants that have problems with the PSP's use of the Vipps PSP API?
+## Can you help merchants that have problems with the PSP's use of the PSP API?
 
-Nope. Merchants that use Vipps through a PSP must contact the PSP if there are
-problems. This is because Vipps only provides the payment card token to the PSP,
+Merchants that use Vipps through a PSP must contact the PSP if there are
+problems. This is because we only provides the payment card token to the PSP,
 and the PSP is responsible for performing the transaction and then to notify
 Vipps about how it went.
 
 Simplified flow when using Vipps through a PSP:
 
 1. The user selects to pay with Vipps at the merchant.
-2. The PSP uses the Vipps PSP API to initiate a payment.
+2. The PSP uses the PSP API to initiate a payment.
 3. The user confirms the payment in Vipps.
-4. Vipps sends the user's payment card token to the PSP.
+4. We send the user's payment card token to the PSP.
 5. The PSP uses the payment card token to perform the payment.
-6. The PSP uses the Vipps PSP API to inform Vipps about how the payment went.
-7. The user gets a confirmation in Vipps.
+6. The PSP uses the PSP API to inform us about how the payment went.
+7. The user gets a confirmation in their Vipps app.
 
-It is important to understand that Vipps only provides the payment card token
-to the PSP. Vipps is not involved in the payment process. If there are any
+It is important to understand that we only provide the payment card token
+to the PSP. We are not involved in the payment process. If there are any
 problems with the payment, it is the PSP that has all the information about that.
 
 ## Is it possible to skip the landing page?

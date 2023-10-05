@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: |
-    The Vipps PSP API allows PSPs to process Vipps payments as a part
+    The PSP API allows PSPs to process Vipps payments as a part
     of their payment offerings. See the
     [API Guide](https://developer.vippsmobilepay.com/docs/APIs/psp-api)
     for more information.
@@ -11,7 +11,7 @@ info:
     name: Vipps AS
     url: https://developer.vippsmobilepay.com/
 tags:
-  - name: Vipps PSP API
+  - name: PSP API
     description: Endpoints and operations in the PSP API
   - name: Endpoints required by Vipps from the PSP
     description: Calls from Vipps to the PSP
@@ -19,7 +19,7 @@ paths:
   /v3/psppayments/init:
     post:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Initiate a PSP payment
       operationId: initiatePaymentV3UsingPOST
       parameters:
@@ -70,7 +70,7 @@ paths:
   /v3/psppayments/agreements:
     delete:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Delete a payment agreement
       operationId: deletePSPPaymenAgreementUsingDELETE
       parameters:
@@ -112,7 +112,7 @@ paths:
   /v3/psppayments/payments:
     post:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Get card data to process a payment with token
       operationId: processPaymentOnTokenV3
       parameters:
@@ -209,7 +209,7 @@ paths:
   /v3/psppayments/updatestatus:
     post:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Update the status of the PSP transaction.
       description: >
         Since Vipps doesn't process the PSP transactions, updates on payment
@@ -268,7 +268,7 @@ paths:
   "/v3/psppayments/{pspTransactionId}/details":
     get:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Get the details of the PSP payment
       operationId: getPSPPaymentDetailsUsingGET
       parameters:
@@ -305,11 +305,11 @@ paths:
   "/v3/integration-test/psppayments/{pspTransactionId}/approve":
     post:
       tags:
-        - Vipps PSP API
+        - PSP API
       summary: Force Approve Payment
       description: >
         This endpoint allows developers to approve a psp payment through the
-        Vipps PSP API without the use of the Vipps app. This is useful for
+        PSP API without the use of the Vipps app. This is useful for
         automated testing. The endpoint is only available in our Test
         environment. Attempted use of the endpoint in production is not allowed,
         and will fail. Important: All test users must manually approve at least
