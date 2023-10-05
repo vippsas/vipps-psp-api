@@ -633,7 +633,7 @@ with `operationStatus: FAILED` set in the body.
 
 ## URL Validation
 
-All URLs in Vipps eCommerce API are validated with the
+All URLs in eCom API are validated with the
 [Apache Commons UrlValidator](https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/routines/UrlValidator.html).
 
 If `isApp` is true, any `pspRedirectUrl` is not validated with Apache Commons UrlValidator,
