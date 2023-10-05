@@ -196,8 +196,8 @@ problems with the payment, it is the PSP that has all the information about that
 
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
 
-See the FAQ for more details:
-[Is it possible to skip the landing page?](https://developer.vippsmobilepay.com/docs/faqs/landing-page-faq#is-it-possible-to-skip-the-landing-page)
+For more details, see
+[Common topics: Skip the landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/#skip-landing-page)
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
