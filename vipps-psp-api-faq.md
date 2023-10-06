@@ -76,6 +76,20 @@ payment with a different PSP ID. Although Vipps can help figure this out, it is
 a time-consuming manual task, and we must ask the PSP to try to solve this
 on its own.
 
+## Why do I get `Invalid MSN: 654321. This MSN is not valid for the provided PSP id.`?
+
+The full error message text is:
+
+"Invalid MSN: 654321. This MSN is not valid for the provided PSP ID. Check that you are
+using the correct credentials for the right environment."
+
+In addition to what the error message says, this error can occur if a PSP attempts to initiate
+payments for an MSN that was created by a different PSP.
+PSP's can only initiate payments for MSNs that are connected to them.
+
+The solution is to create a new MSN with the
+[PSP Signup API](https://developer.vippsmobilepay.com/docs/APIs/psp-api/vipps-psp-signup-api/).
+
 ## How can I update the status of a payment?
 
 When the PSP has new information about a payment, it is important to send the
