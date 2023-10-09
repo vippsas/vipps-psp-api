@@ -8,10 +8,6 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import ApiSchema from '@theme/ApiSchema';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 END_METADATA -->
 
 # Quick start
@@ -43,57 +39,12 @@ You will need the following values, as described in the
 * `pspRedirectUrl` - Redirect URL which the user is redirected to after approving/rejecting the payment.
 * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
 
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-In Postman, import the following files:
-
-* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
-* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
-
-🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
-
-Update the *Current Value* field in your Postman environment with your **Merchant Test** keys.
-Use *Current Value* field for added security, as these values are not synced to the cloud.
-
-</TabItem>
-<TabItem value="curl">
-
-No additional setup needed :)
-
-</TabItem>
-</Tabs>
-
 Note that the requests in this PSP API require your PSP subscription key.
 
 ### Step 2 - Authentication
 
-For all the following, you will need an `access_token` from the
-[Access token API](https://developer.vippsmobilepay.com/docs/APIs/access-token-api):
+For all the following, you will need an `access_token` from:
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
-This provides you with access to the API.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Get Access Token
-```
-
-</TabItem>
-<TabItem value="curl">
 
 ```bash
 curl https://apitest.vipps.no/accessToken/get \
@@ -104,32 +55,12 @@ curl https://apitest.vipps.no/accessToken/get \
 --data ''
 ```
 
-</TabItem>
-</Tabs>
-
 The property `access_token` should be used for all other API requests in the `Authorization` header as the Bearer token.
 
 ### Step 3 - A simple payment
 
-Initiate a payment with: [`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Initiate a PSP Payment
-```
-
-The `pspTransactionId` should be added to the environment automatically.
-
-</TabItem>
-<TabItem value="curl">
+Initiate a payment with:
+[`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
 
 ```bash
 curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
@@ -148,14 +79,11 @@ curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
   "pspRedirectUrl": "https://example.com",
   "makePaymentUrl": "https://example.com",
   "makePaymentToken": "WCAG6W5HYWGg4",
-  "paymentText": "Transaction initiated through Postman",
+  "paymentText": "Transaction initiated.",
   "isApp": false,
   "skipLandingPage": false
 }'
 ```
-
-</TabItem>
-</Tabs>
 
 ### Step 4 - Completing the payment
 
@@ -174,22 +102,6 @@ We cannot guarantee the user will be redirected back to the same browser or sess
 To see the details about the transaction, run the
 [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) request.
 
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Get Details
-```
-
-</TabItem>
-<TabItem value="curl">
-
 ```bash
 curl https://apitest.vipps.no/psp/v3/psppayments/{pspTransactionId}/details \
 -H "Content-Type: application/json" \
@@ -200,29 +112,11 @@ curl https://apitest.vipps.no/psp/v3/psppayments/{pspTransactionId}/details \
 -X GET
 ```
 
-</TabItem>
-</Tabs>
-
 ### Step 6 (Optional): Update the payment
 
 You can update the payment with the
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST) endpoint.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Update Status
-```
-
-</TabItem>
-<TabItem value="curl">
+[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+endpoint.
 
 ```bash
 curl https://apitest.vipps.no/psp/v3/psppayments/updateStatus \
@@ -239,15 +133,11 @@ curl https://apitest.vipps.no/psp/v3/psppayments/updateStatus \
       "status": "CAPTURED",
       "amount": "49900",
       "currency": "NOK",
-      "paymentText": "Transaction updated through Postman"
+      "paymentText": "Transaction updated"
    }
   ]
 }'
 ```
-
-</TabItem>
-</Tabs>
-
 
 ## Next steps
 

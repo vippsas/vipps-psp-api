@@ -8,10 +8,6 @@ pagination_next: null
 pagination_prev: null
 ---
 
-import ApiSchema from '@theme/ApiSchema';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 END_METADATA -->
 
 # Quick start for PSP Merchant Signup
@@ -41,58 +37,13 @@ You will need the following values, as described in the
 * `PSP-ID` - PSP ID provided by Vipps, needed for `Initiate a PSP Payment`, `Update Status`, and `Get Details`.
 * `idempotency_key` - Unique request ID, needed only for `Create new Merchant Sales Unit`.
 
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-In Postman, import the following files:
-
-* [PSP API Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
-* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
-
-🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
-
-Update the *Current Value* field in your Postman environment with your **Merchant Test** keys.
-Use *Current Value* field for added security, as these values are not synced to the cloud.
-
-</TabItem>
-<TabItem value="curl">
-
-No additional setup needed :)
-
-</TabItem>
-</Tabs>
-
 Note that the requests in this PSP API require your PSP subscription key.
 
 ### Step 2 - Authentication
 
-For all the following, you will need an `access_token` from the
-[Access token API](https://developer.vippsmobilepay.com/docs/APIs/access-token-api):
+For all the following, you will need an `access_token` from:
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
 This provides you with access to the API.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Get Access Token
-```
-
-</TabItem>
-<TabItem value="curl">
 
 ```bash
 curl https://apitest.vipps.no/accessToken/get \
@@ -103,9 +54,6 @@ curl https://apitest.vipps.no/accessToken/get \
 --data ''
 ```
 
-</TabItem>
-</Tabs>
-
 The property `access_token` should be used for all other API requests in the `Authorization` header as the Bearer token.
 
 ### Step 3 - Get all merchants
@@ -113,22 +61,6 @@ The property `access_token` should be used for all other API requests in the `Au
 Send
 [`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants)
 for a JSON response showing all the merchants and their information.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Get all Merchants
-```
-
-</TabItem>
-<TabItem value="curl">
 
 ```bash
 curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
@@ -138,30 +70,11 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
 -X GET
 ```
 
-</TabItem>
-</Tabs>
-
 ### Step 4 - Get Merchant by MSN
 
 Use
 [`GET:/v1/merchants/{merchantSerialNumber}`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant)
 for information about a specific merchant. Supply the MSN.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Get Merchant by MSN
-```
-
-</TabItem>
-<TabItem value="curl">
 
 ```bash
 curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSerialNumber} \
@@ -171,28 +84,11 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSeri
 -X GET
 ```
 
-</TabItem>
-</Tabs>
-
 ### Step 5 - Create new Merchant Sales Unit
 
-Send [`POST:`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant). Notice the `merchantSerialNumber` is returned.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-```bash
-Send request Create new Merchant Sales Unit
-```
-
-</TabItem>
-<TabItem value="curl">
+Send
+[`POST:`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
+Notice the `merchantSerialNumber` is returned.
 
 ```bash
 curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
@@ -220,34 +116,11 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
 }'
 ```
 
-</TabItem>
-</Tabs>
-
 ### Step 6 - (Optional) Update Merchant Sales Unit
 
 To update the merchant's sales unit, send the
 [`PATCH:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/patchMerchant)
 request. Provide the Merchant Serial Number and the properties to be updated.
-
-<Tabs
-defaultValue="curl"
-groupId="sdk-choice"
-values={[
-{label: 'curl', value: 'curl'},
-{label: 'Postman', value: 'postman'},
-]}>
-<TabItem value="postman">
-
-Use MSN for the new merchant and update the body in `Update Merchant Sales Unit` before sending the request.
-
-```bash
-Send request Update Merchant Sales Unit
-```
-
-Then, you can update the `Get Merchant by MSN` request with the new MSN and see if the changes were implemented.
-
-</TabItem>
-<TabItem value="curl">
 
 ```bash
 curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSerialNumber} \
@@ -262,9 +135,6 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants/{merchantSeri
     }'
 ```
 
-</TabItem>
-</Tabs>
-
 ## Next steps
 
-See the [PSP Signup API guide](.) to read about the concepts and details.
+See the [PSP Signup API guide](vipps-psp-signup-api.md) to read about the concepts and details.
