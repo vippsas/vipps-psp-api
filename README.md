@@ -33,7 +33,7 @@ PSPs can onboard and manage merchants through the [PSP Signup API guide](vipps-p
 
 ## Next steps
 
-* [API quick start](vipps-psp-api-quick-start.md): Run the basic PSP API examples in curl and Postman.
+* [API quick start](vipps-psp-api-quick-start.md): Run the basic PSP API examples in curl.
 * [API guide](vipps-psp-api.md): Learn about the PSP API features.
 * [API checklist](vipps-psp-api-checklist.md): Complete the checklist for PSP integration.
 * [API FAQ](vipps-psp-api-faq.md): Look for your question among those people have asked before.
@@ -41,6 +41,6 @@ PSPs can onboard and manage merchants through the [PSP Signup API guide](vipps-p
 
 ## PSP Signup API
 
-* [Signup API quick start](vipps-psp-signup-api-quick-start.md):  Run the basic PSP Signup API examples in curl and Postman.
+* [Signup API quick start](vipps-psp-signup-api-quick-start.md):  Run the basic PSP Signup API examples in curl.
 * [Signup API guide](vipps-psp-signup-api.md): Learn about the PSP Signup API.
 * [Signup API reference](https://developer.vippsmobilepay.com/api/psp-signup): Go to the PSP Signup API specifications.

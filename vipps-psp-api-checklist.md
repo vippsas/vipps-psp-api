@@ -13,8 +13,7 @@ END_METADATA -->
 
 ## Endpoints to integrate
 
-Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp). For examples of requests and responses, see the [Postman collection](/tools/vipps-psp-v3-api-postman-collection.json)
-and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
+Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp).
 
 | Endpoint | Comment |
 |----------|---------|
