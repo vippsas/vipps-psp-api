@@ -5,10 +5,10 @@ info:
     of their payment offerings. See the
     [API Guide](https://developer.vippsmobilepay.com/docs/APIs/psp-api)
     for more information.
-  version: 1.0.20
+  version: 1.0.21
   title: PSP API v3
   contact:
-    name: Vipps AS
+    name: Vipps MobilePay AS
     url: https://developer.vippsmobilepay.com/
 tags:
   - name: PSP API
