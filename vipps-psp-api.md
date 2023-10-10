@@ -94,7 +94,7 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
+See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
 in the Knowledge base, for details.
 
 ### Authentication
