@@ -572,8 +572,6 @@ components:
             Skips the landing page for whitelisted sales units.
             Requires a valid `customerMobileNumber`.
             See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page/
-        scope:
-          $ref: "#/components/schemas/Scope"
         merchantAgreementUrl:
           type: string
           description: |-
