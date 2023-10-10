@@ -68,60 +68,6 @@ paths:
       deprecated: false
       description: Initiate a payment
 
-  /v3/psppayments/payments:
-    post:
-      tags:
-        - PSP API
-      summary: Get card data to process a payment with token
-      operationId: processPaymentOnTokenV3
-      parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Psp-Id"
-        - $ref: "#/components/parameters/Merchant-Serial-Number"
-        - $ref: "#/components/parameters/User-Token"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-      requestBody:
-        content:
-          application/json;charset=UTF-8:
-            schema:
-              $ref: "#/components/schemas/ProcessPaymentOnToken"
-        description: ProcessPaymentOnToken
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                $ref: "#/components/schemas/PaymentTokenRepresentation"
-        "400":
-          description: Bad Request
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ErrorDetails"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ErrorDetails"
-        "503":
-          description: Service unavailable
-        "504":
-          description: Gateway Timeout
-      deprecated: false
-      description: Request a MIT payment for a recurring agreement, provides card details
-        for processing. A updatestatus call should be made afterwards with the
-        result of the authorisation.
   "[ makePaymentUrl ]":
     post:
       tags:
