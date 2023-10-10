@@ -94,8 +94,8 @@ then do "capture" when the goods have been shipped/delivered.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
-in the Common topics, for details.
+See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
+in the Knowledge base, for details.
 
 ### Authentication
 
@@ -187,7 +187,7 @@ Vipps redirects the end user to the `redirectUrl` provided during payment initia
 
 See
 [isApp](https://developer.vippsmobilepay.com/docs/common-topics/isApp)
-in Common topics.
+in the Knowledge base.
 
 ### EMVCo Token processing
 
