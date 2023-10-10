@@ -67,48 +67,7 @@ paths:
           description: Gateway Timeout
       deprecated: false
       description: Initiate a payment
-  /v3/psppayments/agreements:
-    delete:
-      tags:
-        - PSP API
-      summary: Delete a payment agreement
-      operationId: deletePSPPaymenAgreementUsingDELETE
-      parameters:
 
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Merchant-Serial-Number"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Psp-Id"
-        - $ref: "#/components/parameters/User-Token"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ErrorDetails"
-        "401":
-          description: Unauthorized
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ErrorDetails"
-        "503":
-          description: Service unavailable
-        "504":
-          description: Gateway Timeout
-      deprecated: false
-      description: Used to cancel a recurring agreement
   /v3/psppayments/payments:
     post:
       tags:
