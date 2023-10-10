@@ -21,8 +21,6 @@ Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp
 | Update the status of the PSP transaction | [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST) |
 | Get the details of the PSP payment | [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) |
 | On the merchant side, be able to process EMVCo tokens | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST) |
-| Delete a payment agreement. For recurring only(Currently on freeze pending PSD2 migration) | [`POST:/v3/psppayments/payments`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/processPaymentOnTokenV3) |
-| Get card data to process a payment with token. For recurring only (Currently on freeze pending PSD2 migration) | [`DELETE:/v3/psppayments/agreements`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/deletePSPPaymenAgreementUsingDELETE) |
 | Respond with correct error information  | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).  See [error codes list](vipps-psp-api.md#error-codes) for possible responses.|
 
 ## Avoid integration pitfalls
