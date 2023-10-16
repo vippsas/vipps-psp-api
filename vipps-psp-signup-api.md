@@ -124,7 +124,7 @@ To create new merchant sales unit, send
 [`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
 
 For Norway: The orgno must be 9 digits without spaces, the merchant
-must be active in [Brønnøysundregistrene](https://www.brreg.no)
+must be active in the [Brønnøysund Register](https://www.brreg.no)
 and the orgno must be for the main entity ("hovedenhet"),
 not a sub entity ("underenhet").
 For other countries: The orgno, address, and other information are validated as much

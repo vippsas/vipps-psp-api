@@ -34,8 +34,8 @@ If the merchant or sales unit is not active, you will get an error:
 
 Or: `Merchant not available or active`.
 
-Please check that the merchant's organization number is still active in
-[Brønnøysundregistrene](https://www.brreg.no). We automatically deactivate
+Please check that the merchant's organization number is still active in the
+[Brønnøysund Register](https://www.brreg.no). We automatically deactivate
 merchants (companies) when they are deleted from Brønnøysundregistrene.
 This can also happen if a merchant changes organization type, for instance
 from *ENK* to *AS*.
