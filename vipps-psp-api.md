@@ -158,7 +158,7 @@ PSP with the card token.
 Vipps does not have any information about the actual payment at this point.
 
 The PSP then sends Vipps an update on the status of the payment:
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 
 It is important that the PSP sends this update, so the user can see the
 correct status of the payment in Vipps.
@@ -286,22 +286,22 @@ the token returned by the `MakePayment` request will be:
 
 To provide a consistent end user experience, it is important that Vipps is
 notified by changes to the payment status when it is captured, cancelled, or refunded:
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 
 Vipps also provides an endpoint allowing you to check the payment status:
-[`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
+[`GET:/psp/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/getPSPPaymentDetailsUsingGET)
 
 **Please note:** For single payments you do not need to send an update for the
 reservation, since that is handled by the synchronous response to the
 `Makepayment` call.
 For customers upgrading from the PSP API v1: It is ok to call
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 with the v3 API on payments done with the v1 API.
 
 #### Batch processing of status updates
 
 Requests to
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 receive a `HTTP 200 OK` response if the JSON payload was valid.
 The actual *processing* of the data is done as a batch.
 

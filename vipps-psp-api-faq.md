@@ -25,7 +25,7 @@ API version: 3.0.0.
 ## How can I check if a merchant or sales unit is active?
 
 You can try to initiate payment, specifying the `Merchant-Serial-Number` header:
-[`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+[`POST:/psp/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/initiatePaymentV3UsingPOST).
 
 If the merchant or sales unit is not active, you will get an error:
 "Merchant not available or active".
@@ -96,7 +96,7 @@ When the PSP has new information about a payment, it is important to send the
 new information to Vipps, so the user sees the correct status in Vipps.
 
 The PSP must use the
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 endpoint to notify Vipps of changes to the payment,
 
 **Please note:** Vipps processes the information in daily batches. See:
@@ -109,12 +109,12 @@ With the PSP API, the PSP gets network tokens from Vipps
 
 The PSP uses the token to process the payment, and then sends Vipps information about
 how it went with
-[`POST:/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp/#tag/PSP-API/operation/updatestatusUsingPOST).
 
 Vipps does not have other information about the payment than what the PSP has sent.
 
 The PSP can use
-[`GET:/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp/#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET)
+[`GET:/psp/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp/#tag/PSP-API/operation/getPSPPaymentDetailsUsingGET)
 to get the details of a payment, but this will of course be the same
 information that the PSP has sent earlier.
 

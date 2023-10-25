@@ -60,7 +60,7 @@ the merchant that was provided by the PSP is rendered to the end user.
 ## Get all merchants
 
 For a JSON response showing all the merchants and their information, send
-[`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
+[`GET:/merchant-management/psp/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants).
 
 Example response (see the API specification for details):
 
@@ -89,7 +89,7 @@ Example response (see the API specification for details):
 ## Get information about a specific merchant
 
 For information about a specific merchant, send
-[`GET:/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant).
+[`GET:/merchant-management/psp/v1/merchants/:merchantSerialNumber`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant).
 Supply the MSN for a merchant in your list of merchants.
 
 Example response (see the API specification for details):
@@ -121,7 +121,7 @@ Example response (see the API specification for details):
 ## Create a new merchant sales unit
 
 To create new merchant sales unit, send
-[`POST:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
+[`POST:/merchant-management/psp/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/addMerchant).
 
 For Norway: The orgno must be 9 digits without spaces, the merchant
 must be active in the [Brønnøysund Register](https://www.brreg.no)

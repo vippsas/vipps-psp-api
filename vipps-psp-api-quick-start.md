@@ -60,7 +60,7 @@ The property `access_token` should be used for all other API requests in the `Au
 ### Step 3 - A simple payment
 
 Initiate a payment with:
-[`POST:/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST).
+[`POST:/psp/v3/psppayments/init/`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/initiatePaymentV3UsingPOST).
 
 ```bash
 curl --location 'https://apitest.vipps.no/psp/v3/psppayments/init' \
@@ -100,7 +100,7 @@ We cannot guarantee the user will be redirected back to the same browser or sess
 ### Step 5 - Getting the status of the payment
 
 To see the details about the transaction, run the
-[`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) request.
+[`GET:/psp/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/getPSPPaymentDetailsUsingGET) request.
 
 ```bash
 curl https://apitest.vipps.no/psp/v3/psppayments/{pspTransactionId}/details \
@@ -115,7 +115,7 @@ curl https://apitest.vipps.no/psp/v3/psppayments/{pspTransactionId}/details \
 ### Step 6 (Optional): Update the payment
 
 You can update the payment with the
-[`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST)
+[`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST)
 endpoint.
 
 ```bash

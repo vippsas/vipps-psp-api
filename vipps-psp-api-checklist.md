@@ -17,9 +17,9 @@ Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp
 
 | Endpoint | Comment |
 |----------|---------|
-| Initiate a PSP payment | [`POST:/v3/psppayments/init`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/initiatePaymentV3UsingPOST) |
-| Update the status of the PSP transaction | [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST) |
-| Get the details of the PSP payment | [`GET:/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/getPSPPaymentDetailsUsingGET) |
+| Initiate a PSP payment | [`POST:/psp/v3/psppayments/init`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/initiatePaymentV3UsingPOST) |
+| Update the status of the PSP transaction | [`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST) |
+| Get the details of the PSP payment | [`GET:/psp/v3/psppayments/{pspTransactionId}/details`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/getPSPPaymentDetailsUsingGET) |
 | On the merchant side, be able to process EMVCo tokens | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST) |
 | Respond with correct error information  | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).  See [error codes list](vipps-psp-api.md#error-codes) for possible responses.|
 
@@ -36,8 +36,8 @@ Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp
 
 1. The PSP completes all checklist items.
 2. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/contact) with test IDs (`pspTransactionId`, `merchantOrderId`) in the [Vipps test environment](https://developer.vippsmobilepay.com/docs/test-environment), showing that all checklist items have been fulfilled.
-   * A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
-   * A complete order including `Cancel`, that has been updated with [`POST:/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/Vipps-PSP-API/operation/updatestatusUsingPOST).
+   * A complete order including `Reserve`, `Capture` and `Refund`, that has been updated with [`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST).
+   * A complete order including `Cancel`, that has been updated with [`POST:/psp/v3/psppayments/updatestatus`](https://developer.vippsmobilepay.com/api/psp#tag/PSP-API/operation/updatestatusUsingPOST).
    * One ID for each of the [error codes](vipps-psp-api.md#errors).
        * Some codes like 85 aren't applicable for all systems, please provide short description for why each code does not apply.
 3. The PSP [contacts Vipps](https://developer.vippsmobilepay.com/docs/contact) to verify the integration in the production environment:

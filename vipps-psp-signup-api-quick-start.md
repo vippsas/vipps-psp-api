@@ -59,7 +59,7 @@ The property `access_token` should be used for all other API requests in the `Au
 ### Step 3 - Get all merchants
 
 Send
-[`GET:/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants)
+[`GET:/merchant-management/psp/v1/merchants`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchants)
 for a JSON response showing all the merchants and their information.
 
 ```bash
@@ -73,7 +73,7 @@ curl https://apitest.vipps.no/merchant-management/psp/v1/merchants \
 ### Step 4 - Get Merchant by MSN
 
 Use
-[`GET:/v1/merchants/{merchantSerialNumber}`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant)
+[`GET:/merchant-management/psp/v1/merchants/{merchantSerialNumber}`](https://developer.vippsmobilepay.com/api/psp-signup#tag/Merchant/operation/getMerchant)
 for information about a specific merchant. Supply the MSN.
 
 ```bash
