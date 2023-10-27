@@ -16,9 +16,8 @@ websites and apps (P2M).
 
 See the [PSP API guide](vipps-psp-api.md) for all the technical details.
 
-For more common questions, see:
-
-* [Common API General FAQ](https://developer.vippsmobilepay.com/docs/faqs)
+For general information and questions, please check in the
+[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
 
 API version: 3.0.0.
 
