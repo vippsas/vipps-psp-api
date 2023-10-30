@@ -17,7 +17,7 @@ websites and apps (P2M).
 See the [PSP API guide](vipps-psp-api.md) for all the technical details.
 
 For general information and questions, please check in the
-[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
+[Knowledge base](https://developer.vippsmobilepay.com/docs/knowledge-base/).
 
 API version: 3.0.0.
 
@@ -210,8 +210,8 @@ problems with the payment, it is the PSP that has all the information about that
 Skipping the landing page is reserved for special cases, where displaying it is not possible.
 
 For more details, see
-[Knowledge base: Skip the landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/#skip-landing-page)
+[Knowledge base: Skip the landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page/#skip-landing-page)
 
 ## What functionality is included in the eCom API, but not the PSP API?
 
-See [Knowledge base: Benefits of direct integration](https://developer.vippsmobilepay.com/docs/common-topics/direct-vs-psp#benefits-of-direct-integration).
+See [Knowledge base: Benefits of direct integration](https://developer.vippsmobilepay.com/docs/knowledge-base/direct-vs-psp#benefits-of-direct-integration).
