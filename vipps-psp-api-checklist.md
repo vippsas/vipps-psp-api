@@ -23,6 +23,13 @@ Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/psp
 | On the merchant side, be able to process EMVCo tokens | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST) |
 | Respond with correct error information  | [`POST:makePaymentUrl`](https://developer.vippsmobilepay.com/api/psp#tag/Endpoints-required-by-Vipps-from-the-PSP/operation/makePaymentV3UsingPOST).  See [error codes list](vipps-psp-api.md#error-codes) for possible responses.|
 
+When the checklist is completed, notify Vipps MobilePay Integration Service
+at [developer@vippsmobilepay.com](mailto:developer@vippsmobilepay.com).
+Include examples from the test environment, pilot customer info, and a description of the implemented solution.
+
+We will verify the integration and contact you.
+After the checklist is approved, we'll send you the information you need to get started.
+
 ## Avoid integration pitfalls
 
 | Action | Comment   |
