@@ -292,7 +292,7 @@ components:
           type: string
           description: 'Organization number of the merchant, in the correct format
             for the organization''s country. For Norway: The orgno must be 9 digits
-            without spaces, the merchant must be active in the [Brønnøysund Register](https://www.brreg.no)
+            without spaces, the merchant must be active in the [Norwegian business registry](https://www.brreg.no)
             and the orgno must be for the main entity ("hovedenhet"), not a sub entity
             ("underenhet"). For other countries: The orgno, address, etc is validated
             as much as practically possible.'
@@ -392,7 +392,7 @@ components:
           type: string
           description: 'Organization number of the merchant, in the correct format
             for the organization''s country. For Norway: The orgno must be 9 digits
-            without spaces, the merchant must be active in the [Brønnøysund Register](https://www.brreg.no)
+            without spaces, the merchant must be active in the [Norwegian business registry](https://www.brreg.no)
             and the orgno must be for the main entity ("hovedenhet"), not a sub entity
             ("underenhet"). For other countries: The orgno, address, etc is validated
             as much as practically possible.'
